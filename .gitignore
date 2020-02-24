@@ -2,3 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+*.log
+*.aux
+*.blg
+figurasR/unnamed-*.pdf
+capitulo05.pdf

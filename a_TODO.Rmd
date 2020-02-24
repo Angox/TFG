@@ -15,10 +15,3 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # TODO o tareas por realizar
 
--Explicar el metodo de votacion en España
--Distintos metodos de votacion mayoritaria
--Explorar metodos de votacion en otros paises
--Metodo de votacion por metodo uninominal
--Nuevos metodos de votacion
--Votacion en paises comunistas Corea
--No tenemos porque tener las votaciones por secciones censales para empezar a delimitar
