@@ -36,7 +36,6 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
                       echo = FALSE, warning = FALSE, message = FALSE,
                       fig.pos="H",fig.align="center",out.width="95%",
                       cache=FALSE)
-
 ```
 
 
@@ -74,4 +73,4 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
 
 ## Primera sección
 
-Las
+Las pruebas
