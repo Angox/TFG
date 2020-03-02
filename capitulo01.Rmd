@@ -75,11 +75,11 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
 
 ### Origen
 
-Según la Real Academia de la lengua Española votar proviene de la palabra latina votare (hacer votos, hacer ofrendas religiosas), es un verbo formado a partir del latín votum, originalmente una ofrenda religiosa o promesa a los dioses con objeto de lograr algo deseado, que luego pasaría a significar un deseo expreso. Tiempo después pasó al terreno político, en latín propiamente el voto político se denomina suffragium. Votum es un nombre a partir del verbo vovere ( hacer un exvoto u ofrenda religiosa). De este verbo latino se derivan tambien votivo, exvoto, devoto y devoción.
+Según la Real Academia de la Lengua Española votar proviene de la palabra latina votare (hacer votos, hacer ofrendas religiosas), es un verbo formado a partir del latín votum, originalmente una ofrenda religiosa o promesa a los dioses con objeto de lograr algo deseado, que luego pasaría a significar un deseo expreso. Tiempo después pasó al terreno político, en latín propiamente el voto político se denomina suffragium. Votum es un nombre a partir del verbo vovere ( hacer un exvoto u ofrenda religiosa). De este verbo latino se derivan tambien votivo, exvoto, devoto y devoción.
 
 ### Significado
 
-En su primera acepcion en el diccionario de la Real Academia de la lengua Española define votar como: "Dicho de una persona: Dar su voto o decir su dictamen en una reunión o cuerpo deliberante, o en una elección de personas." 
+En su primera acepcion en el diccionario de la Real Academia de la Lengua Española define votar como: "Dicho de una persona: Dar su voto o decir su dictamen en una reunión o cuerpo deliberante, o en una elección de personas." 
 
 Para terminar de definir mejor el término buscamos la definición en el diccionario del español jurídico, en el cual en la primera acepcion nos resulta útil para la delimitación del término que queremos definir, en su primera acepción lo define como: "Dicho de una persona: Dar su voto o decir su dictamen en una reunión o cuerpo deliberante, o en una elección de personas." 
 
@@ -100,7 +100,9 @@ Ya en la constitución de 1812 se reguló todo el proceso electoral en los artí
 
 Formalmente las leyes que regulan el derecho de sufragio se remontan a 1837, estableciéndose en el año 1869 el sufragio universal consolidado en 1907 por ley.
 
-### 
+### Sistema electoral de la constitución de 1978
+
+El sistema actual español se rige bajo tres normas, en primer lugar la misma constitución de 1978, y mas tarde la Ley Orgánica del Régimen Electoral Central 5/1985, de 19 de Junio, en donde se regula las elecciones al Parlamento Europeo, al Congreso y Senado y las elecciones de los municipiosy la del 2/2011, del 28 de Enero en donde se modifica la anterior Ley Orgánica. 
 
 
 
