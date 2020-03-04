@@ -69,7 +69,11 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
 \renewcommand{\footrulewidth}{0.4pt}
 
 
-# Estado del arte
+# Introducción
+
+## Objetivos
+
+Rev-El objetivo del presente trabajo será analizar los distintos sistemas de votación que existen en la actualidad que puedan ser aplicados actualmente en España, aplicar estos sistemas a España, indicando sus ventajas e inconvenientes y proponer nuevos sistemas de votación o reparto para una eventual reforma de la Ley Orgánica del Régimen Electoral
 
 ## ¿Qué significa votar?
 
