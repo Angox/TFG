@@ -219,8 +219,21 @@ $\textrm{Cociente} = \frac{V}{1.4}$
 
 
 ### Método Huntington-Hill
-
 ### Cuota Hagenbach-Bischoff
+
+Fórmula utilizada en los sistemas de representación proporcional para un sistema de listas electorales. Su nombre proviene del inventor suizo, profesor de física y matemáticas Eduard Hagenbach-Bischoff (1833–1910). 
+
+### Reparto
+
+La fórmula de reparto es: 
+
+$\textrm{Cociente} = \frac{Total Votos}{Total Escaños+1}$  donde:  
+
+*Total votos*: Representa el número total de votos válidos.  
+
+*Total escaños*: Total de escaños a repartir.  
+
+
 ### Método de cifra repartidora
 ### Método de Condorcet
 ### Método de promedios mayores

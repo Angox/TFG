@@ -19,16 +19,17 @@
 \contentsline {subsection}{\numberline {1.4.2}Método Sainte-Laguë}{7}{subsection.1.4.2}%
 \contentsline {subsubsection}{\numberline {1.4.2.1}Reparto}{7}{subsubsection.1.4.2.1}%
 \contentsline {subsubsection}{\numberline {1.4.2.2}Método modificado}{7}{subsubsection.1.4.2.2}%
-\contentsline {subsection}{\numberline {1.4.3}Método Huntington-Hill}{8}{subsection.1.4.3}%
-\contentsline {subsection}{\numberline {1.4.4}Cuota Hagenbach-Bischoff}{8}{subsection.1.4.4}%
-\contentsline {subsection}{\numberline {1.4.5}Método de cifra repartidora}{8}{subsection.1.4.5}%
-\contentsline {subsection}{\numberline {1.4.6}Método de Condorcet}{8}{subsection.1.4.6}%
-\contentsline {subsection}{\numberline {1.4.7}Método de promedios mayores}{8}{subsection.1.4.7}%
-\contentsline {subsection}{\numberline {1.4.8}Método del resto mayor}{8}{subsection.1.4.8}%
-\contentsline {subsubsection}{\numberline {1.4.8.1}Cociente Hare}{8}{subsubsection.1.4.8.1}%
-\contentsline {subsubsection}{\numberline {1.4.8.2}Cociente Droop}{8}{subsubsection.1.4.8.2}%
-\contentsline {subsubsection}{\numberline {1.4.8.3}Cociente Imperiali}{8}{subsubsection.1.4.8.3}%
-\contentsline {subsection}{\numberline {1.4.9}Método Schulze}{8}{subsection.1.4.9}%
-\contentsline {subsection}{\numberline {1.4.10}Regla de Hamilton}{8}{subsection.1.4.10}%
-\contentsline {subsection}{\numberline {1.4.11}Representación proporcional de la lista de partidos}{8}{subsection.1.4.11}%
-\contentsline {chapter}{Bibliografía}{8}{subsection.1.4.11}%
+\contentsline {subsection}{\numberline {1.4.3}Método Huntington-Hill}{7}{subsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.4.4}Cuota Hagenbach-Bischoff}{7}{subsection.1.4.4}%
+\contentsline {subsection}{\numberline {1.4.5}Reparto}{7}{subsection.1.4.5}%
+\contentsline {subsection}{\numberline {1.4.6}Método de cifra repartidora}{8}{subsection.1.4.6}%
+\contentsline {subsection}{\numberline {1.4.7}Método de Condorcet}{8}{subsection.1.4.7}%
+\contentsline {subsection}{\numberline {1.4.8}Método de promedios mayores}{8}{subsection.1.4.8}%
+\contentsline {subsection}{\numberline {1.4.9}Método del resto mayor}{8}{subsection.1.4.9}%
+\contentsline {subsubsection}{\numberline {1.4.9.1}Cociente Hare}{8}{subsubsection.1.4.9.1}%
+\contentsline {subsubsection}{\numberline {1.4.9.2}Cociente Droop}{8}{subsubsection.1.4.9.2}%
+\contentsline {subsubsection}{\numberline {1.4.9.3}Cociente Imperiali}{8}{subsubsection.1.4.9.3}%
+\contentsline {subsection}{\numberline {1.4.10}Método Schulze}{8}{subsection.1.4.10}%
+\contentsline {subsection}{\numberline {1.4.11}Regla de Hamilton}{8}{subsection.1.4.11}%
+\contentsline {subsection}{\numberline {1.4.12}Representación proporcional de la lista de partidos}{8}{subsection.1.4.12}%
+\contentsline {chapter}{Bibliografía}{8}{subsection.1.4.12}%
