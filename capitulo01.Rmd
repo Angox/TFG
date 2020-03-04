@@ -192,9 +192,32 @@ $s$: Representa el número de escaños que cada lista se ha llevado de momento, 
 El número de votos recibidos por cada lista se divide primero por 1, después por 2, 3, hasta el número total de escaños para ese distrito.
 
 
-
-
 ### Método Sainte-Laguë
+
+Método también conocido como método Webster, creado por el matemático francés André Sainte-Laguë en 1832, similar al método D`Hont. Es un método de promedios mayores, utilizado en sistemas de votación proporcional por listas.   
+El método de Sainte-Laguë es utilizado en una gran cantidad de países en los que en la actualidad [^4.2] se encuentran, entre otros, estados como Noruega, Iraq y Nueva Zelanda.  
+ 
+[^4.2]: Cierto a la fecha de realización del trabajo.
+
+#### Reparto 
+
+Una vez escrutados la totalidad de los votos, se calculan cocientes según la fórmula:  
+
+$\textrm{Cociente} = \frac{V}{2s+1}$  donde:  
+
+$V$: Representa el número total de votos recibidos por la lista.  
+
+$s$: Representa el número de escaños que cada lista se ha llevado de momento, inicialmente 0 para cada lista.  
+
+El número de votos recibidos por cada lista se divide sucesivamente por cada uno de los valores que da la fórmula 2s+1 cuando s es igual a 0, 1, 2, 3, etc.; lo que supone dividir por 1, 3, 5, 7, etc. (es decir, la sucesión de números impares). La asignación de escaños se hace ordenando los cocientes de mayor a menor y asignando a cada uno un escaño hasta que estos se agoten. A diferencia de otros sistemas, el número total de votos no interviene en el cómputo.
+
+#### Método modificado
+
+Consiste en utilizar una fórmula distinta para el primer escaño y a partir del segundo utilizar el método habitual. La forma para el primer escaño es:
+
+$\textrm{Cociente} = \frac{V}{1.4}$
+
+
 ### Método Huntington-Hill
 
 ### Cuota Hagenbach-Bischoff
