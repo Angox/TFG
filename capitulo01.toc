@@ -9,5 +9,8 @@
 \contentsline {subsection}{\numberline {1.3.1}Orígenes}{4}{subsection.1.3.1}%
 \contentsline {subsection}{\numberline {1.3.2}Sistema electoral de la constitución de 1978}{4}{subsection.1.3.2}%
 \contentsline {subsection}{\numberline {1.3.3}Descripción del sistema Electoral Español}{4}{subsection.1.3.3}%
-\contentsline {section}{\numberline {1.4}Congreso}{5}{section.1.4}%
-\contentsline {chapter}{Bibliografía}{5}{Item.3}%
+\contentsline {subsection}{\numberline {1.3.4}Congreso}{5}{subsection.1.3.4}%
+\contentsline {subsubsection}{\numberline {1.3.4.1}Número diputados}{5}{subsubsection.1.3.4.1}%
+\contentsline {subsubsection}{\numberline {1.3.4.2}Reparto de Escaños}{5}{subsubsection.1.3.4.2}%
+\contentsline {subsection}{\numberline {1.3.5}Senado}{5}{subsection.1.3.5}%
+\contentsline {chapter}{Bibliografía}{6}{Item.5}%

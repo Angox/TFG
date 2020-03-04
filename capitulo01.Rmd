@@ -114,9 +114,9 @@ La descripción del sistema Electoral Español se encuentra el la LOREG (Ley Org
 En el caso de España debemos diferenciar la elección de Diputados y Senadores, cada provincia es considerada como una circunscripción electoral. Como excepción a la regla las ciudades de Ceuta y Melilla son consideradas cada una de ellas como una circusncripción electoral.
 En el artículo 161.2 se nos añade otra excepción para la elección de Senadores en donde se consideran circunscripciones las siguientes islas o agrupaciones de islas: Mallorca, Menorca, Ibiza-Formentera, Gran Canaria, Fuerteventura, Lanzarote, Tenerife, Hierro, Gomera y La Palma.
 
-## Congreso
+### Congreso
 
-### Número diputados
+#### Número diputados
 
 - El congreso está formado por un número fijo de diputados, 350.
 - Cada una de las provincias les corresponden inicialmente al menos dos diputados, excepto las excepciones anteriormente anunciadas, donde Ceuta y Melilla están representadas por un diputado cada una de ellas.
@@ -132,7 +132,7 @@ En el artículo 161.2 se nos añade otra excepción para la elección de Senador
     3. Diputados Restantes = 348 - Número Diputados paso 2  
        Diputados Totales = Diputados + Restantes, uno a cada una de las provincias cuyo cociente, obtenido conforme al punto anterior, tenga una fracción decimal mayor. 
 
-### Reparto de Escaños
+#### Reparto de Escaños
 
 - Se aplica la llamada ley D´Hont
 
@@ -148,8 +148,21 @@ En el artículo 161.2 se nos añade otra excepción para la elección de Senador
 
 - En las circunscripciones de Ceuta y Melilla será proclamado electo el candidato que mayor número de votos hubiese obtenido.
 
-## Senado
+### Senado
 
+- En cada circunscripción provincial se eligen cuatro Senadores.
+
+- En cada circunscripción insular se elige el siguiente número de Senadores: tres en Gran Canaria, Mallorca y Tenerife; uno en Ibiza-Formentera, Menorca, Fuerteventura, Gomera, Hierro, Lanzarote y La Palma.
+
+- Las Poblaciones de Ceuta y Melilla eligen cada una de ellas dos Senadores.
+
+-  Las Comunidades Autónomas designan además un Senador y otro más para cada millón de habitantes de su respectivo territorio. La designación corresponde a la Asamblea Legislativa de la Comunidad Autónoma, de acuerdo con lo que establezcan sus Estatutos, que aseguran, en todo caso, la adecuada representación proporcional. A efectos de dicha designación el número concreto de Senadores que corresponda a cada Comunidad Autónoma se determinará tomando como referencia el censo de población de derecho vigente en el momento de celebrarse las últimas elecciones generales al Senado.
+
+- La elección directa de los Senadores en las circunscripciones provinciales, insulares y en Ceuta y Melilla se rige por lo dispuesto en los apartados siguientes:
+
+    a) Los electores pueden dar su voto a un máximo de tres candidatos en las circunscripciones provinciales, dos en Gran Canaria, Mallorca, Tenerife, Ceuta y Melilla, y uno en las restantes circunscripciones insulares.
+
+    b) Serán proclamados electos aquellos candidatos que obtengan mayor número de votos hasta complementar el de Senadores asignados a la circunscripción.
 
 
 
