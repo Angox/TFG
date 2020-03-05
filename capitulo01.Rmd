@@ -303,6 +303,26 @@ $Cociente = \frac{Total Votos}{Total Escaños}$
   
 ### Cociente Droop
 
+Algunos países que lo emplean son por ejemplo Irlanda, Malta o Australia, entre otros.
+Es más favorable a los partidos mayoritarios que el obtenido mediante el sistema Hare, aunque no favorece tanto como el sistema Imperiali.
+
+
+Si se eligen ${\displaystyle n}$ escaños para un cuerpo colegiado, y se emiten ${\displaystyle m}$ votos válidos, se establece un cociente ${\displaystyle q}$ el cual servirá para repartir los votos. Este cociente se calcula mediante la fórmula:
+
+${\displaystyle q=1+{\frac {m}{n+1}}}$  con $q$ aproximado al entero más próximo.
+
+Si la i-ésima lista de I listas inscritas obtiene ${\displaystyle m_{i}}$ votos, esta lista tendrá ${\displaystyle e_{i}}$ escaños por cociente y ${\displaystyle r_{i}}$ votos por residuo mediante la fórmula: ${\displaystyle m_{i}=qe_{i}+r_{i}}$
+
+${\displaystyle e_{i}=\left\lfloor {\frac {m_{i}}{q}}\right\rfloor ,r_{i}=m_{i}-qe_{i}}$
+
+Sea k el número de escaños que no son obtenidos por cociente:
+
+${\displaystyle k=n-\sum _{i=1}^{I}e_{i}}$
+
+Estos k escaños son repartidos entre los mejores k residuos ${\displaystyle r_{i}}$.
+
+De esta forma, el número total de escaños del i-ésimo partido será ${\displaystyle p_{i}=e_{i}}$ o ${\displaystyle p_{i}=e_{i}+1}$.
+
 
 ### Cociente Imperiali
 
