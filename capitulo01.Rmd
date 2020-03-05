@@ -294,7 +294,16 @@ El método del resto mayor requiere que el número de votos de cada partido se d
 Hay distintos modelos para calcular el cociente, los más utilizados son el cociente Hare, Droop e Imperiali.
 
 ### Cociente Hare
+
+La fórmula del cociente Hare es la fórmula más simple que puede utilizarse en unas elecciones según un sistema de voto transferible único, también se utiliza en sistemas de representación proporcional por listas. En comparación con algunos métodos similares, la utilización del método del cociente de Hare con el método de resto mayor tiende a favorecer a las partes más pequeñas a expensas de las más grandes. 
+
+- Fórmula:
+
+$Cociente = \frac{Total Votos}{Total Escaños}$ 
+  
 ### Cociente Droop
+
+
 ### Cociente Imperiali
 
 ## Método Schulze
