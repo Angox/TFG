@@ -1,6 +1,6 @@
 ---
-author: "Nombre Completo Autor"
-date: "27/10/2017"
+author: "Angel Gonzalez Rizo"
+date: "2020"
 documentclass: book
 forprint: true  # true: imprime a dos caras, false: libro digital
 fontsize: 12pt # 10pt,11pt
@@ -67,6 +67,7 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
 \fi
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
+
 
 
 # Introducción
@@ -341,6 +342,7 @@ ${\displaystyle e_{i}=\left\lfloor {\frac {m_{i}}{q}}\right\rfloor ,r_{i}=m_{i}-
 
 ## Método Schulze
 ## Regla de Hamilton
+
 
 
 
