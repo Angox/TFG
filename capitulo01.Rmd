@@ -79,13 +79,13 @@ Rev-El objetivo del presente trabajo será analizar los distintos sistemas de vo
 
 ### Origen
 
-Según la Real Academia de la Lengua Española votar proviene de la palabra latina votare (hacer votos, hacer ofrendas religiosas), es un verbo formado a partir del latín votum, originalmente una ofrenda religiosa o promesa a los dioses con objeto de lograr algo deseado, que luego pasaría a significar un deseo expreso. Tiempo después pasó al terreno político, en latín propiamente el voto político se denomina suffragium. Votum es un nombre a partir del verbo vovere ( hacer un exvoto u ofrenda religiosa). De este verbo latino se derivan tambien votivo, exvoto, devoto y devoción.
+Según la Real Academia de la Lengua Española votar proviene de la palabra latina votare (hacer votos, hacer ofrendas religiosas), es un verbo formado a partir del latín votum, originalmente una ofrenda religiosa o promesa a los dioses con objeto de lograr algo deseado, que luego pasaría a significar un deseo expreso. Tiempo después pasó al terreno político, en latín propiamente el voto político se denomina suffragium. Votum es un nombre a partir del verbo vovere ( hacer un exvoto u ofrenda religiosa). De este verbo latino se derivan también votivo, exvoto, devoto y devoción.
 
 ### Significado
 
-En su primera acepcion en el diccionario de la Real Academia de la Lengua Española define votar como: "Dicho de una persona: Dar su voto o decir su dictamen en una reunión o cuerpo deliberante, o en una elección de personas." 
+En su primera acepción en el diccionario de la Real Academia de la Lengua Española define votar como: "Dicho de una persona: Dar su voto o decir su dictamen en una reunión o cuerpo deliberante, o en una elección de personas." 
 
--Rev-es la misma def--Para terminar de definir mejor el término buscamos la definición en el diccionario del español jurídico, en el cual en la primera acepcion nos resulta útil para la delimitación del término que queremos definir, en su primera acepción lo define como: "Dicho de una persona: Dar su voto o decir su dictamen en una reunión o cuerpo deliberante, o en una elección de personas." 
+-Rev-es la misma def--Para terminar de definir mejor el término buscamos la definición en el diccionario del español jurídico, en el cual en la primera acepción nos resulta útil para la delimitación del término que queremos definir, en su primera acepción lo define como: "Dicho de una persona: Dar su voto o decir su dictamen en una reunión o cuerpo deliberante, o en una elección de personas." 
 
 ### ¿Votación o sufragio?
 
@@ -99,14 +99,14 @@ A lo largo del trabajo trataremos indistintamente ambos términos.
 
 El origen de el sistema electoral español se remonta a principios del siglo XIX, en una España invadida por el ejército de Napoleón. El vacío de poder facilitó la convocatoria de una asamblea nacional, las cortes, en la ciudad de Cádiz con diputados venidos de todas las regiones tanto de la península como de ultramar. La asamblea concluyó con la promulgación de la constitución de 1812.
 
-En la instruccion de 1810 comienzan a a parecer los mecanismos para elegir a los representantes tanto parroquiales, de partido y de provincia. La fórmula electoral escogida fué la mayoritaria. El sufragio es masculino universal e indirecto, aunque se requería que los electores ejerciesen algún tipo de industria.
-Ya en la constitución de 1812 se reguló todo el proceso electoral en los artículos 27 a 103, se determinó una distrubución de 1 diputado por cada 70.000 personas.
+En la instrucción de 1810 comienzan a a parecer los mecanismos para elegir a los representantes tanto parroquiales, de partido y de provincia. La fórmula electoral escogida fue la mayoritaria. El sufragio es masculino universal e indirecto, aunque se requería que los electores ejerciesen algún tipo de industria.
+Ya en la constitución de 1812 se reguló todo el proceso electoral en los artículos 27 a 103, se determinó una distribución de 1 diputado por cada 70.000 personas.
 
 Formalmente las leyes que regulan el derecho de sufragio se remontan a 1837, estableciéndose en el año 1869 el sufragio universal consolidado en 1907 por ley.
 
 ### Sistema electoral de la constitución de 1978
 
-El sistema actual español se rige bajo tres normas, en primer lugar la misma constitución de 1978, y mas tarde la Ley Orgánica del Régimen Electoral Central 5/1985, de 19 de Junio, en donde se regula las elecciones al Parlamento Europeo, al Congreso y Senado y las elecciones de los municipiosy la del 2/2011, del 28 de Enero en donde se modifica la anterior Ley Orgánica. 
+El sistema actual español se rige bajo tres normas, en primer lugar la misma constitución de 1978, y mas tarde la Ley Orgánica del Régimen Electoral Central 5/1985, de 19 de Junio, en donde se regula las elecciones al Parlamento Europeo, al Congreso y Senado y las elecciones de los municipios y la del 2/2011, del 28 de Enero en donde se modifica la anterior Ley Orgánica. 
 
 ### Descripción del sistema Electoral Español
 
@@ -169,13 +169,13 @@ En el artículo 161.2 se nos añade otra excepción para la elección de Senador
 
 A continuación presentaremos los distintos métodos de reparto de escaños
 
--Paquete R estadistico Electoral-
+-Paquete R estadístico Electoral-
 
 ## Método de cifra repartidora
 
 Sistema utilizado para repartir los escaños de manera no puramente proporcional a el número de votos obtenidos por las diferentes candidaturas. El método trata de asignar los escaños proporcionalmente al número de votos recibidos, es un sistema que permite a partidos con pocos votos estar representados.
 
-Existen dos métodos basados en la cifra repartidora que son habitualmente utilizados, éstos son el método D`Hont y el Método Sainte-Laguë.
+Existen dos métodos basados en la cifra repartidora que son habitualmente utilizados, y que se encuentran también dentro de los llamados métodos de los restos mayores, éstos son el método D`Hont y el Método Sainte-Laguë.
 
 ### Ley D´Hont
 
@@ -274,19 +274,25 @@ Puede que no siempre exista un ganador del premio Condorcet en una elección par
 
 ### Procedimiento
 
-- Voto
+- Voto  
   En una elección según el método de Condorcet el votante rellena la lista de candidatos por orden de preferencia. 
 
-- Vencedor
+- Vencedor  
   El recuento se realiza contrastando a cada candidato contra todos los demás candidatos en una serie de hipotéticos enfrentamientos uno a uno. El ganador de cada pareja es el candidato preferido por la mayoría de los votantes. Se considera que el candidato preferido por cada votante es el que está más alto en su papeleta de votación. Cuando se han considerado todos los emparejamientos posibles de candidatos, si un candidato vence a todos los demás candidatos en estos concursos, entonces se le declara ganador de Condorcet. Como se ha señalado anteriormente, si no hay un ganador de Condorcet debe utilizarse otro método para encontrar el ganador de la elección, y este mecanismo varía de un método de Condorcet a otro.
   
-- Recuento de votos mediante matrices
+- Recuento de votos mediante matrices  
   Se utiliza para los resultados una matriz en donde cada fila es el candidato como "contendiente" y en cada columna se sitúa el candidato como "oponente".
   
   En el caso de que un candidato gane a todos los restantes, será el ganador de Condorcet. Cuando no hay un ganador Condorcet se utilizan métodos alternativos de Condorcet, como el método Minimax y el método Schulze, que utilizan la información contenida en la matriz para elegir un ganador.
+  
 
-## Método de promedios mayores
 ## Método del resto mayor
+
+Es un método para distribuir los escaños proporcionalmente para un sistema de listas de partidos. Son una alternativa a los métodos de promedio mayor. 
+
+El método del resto mayor requiere que el número de votos de cada partido se divida por una cuota que represente el número de votos necesarios para un escaño (es decir, normalmente el número total de votos emitidos dividido por el número de escaños, o alguna fórmula similar). El resultado para cada partido consistirá normalmente en la parte entera más un resto  A cada partido se le asigna primero un número de escaños igual a su número entero. Esto generalmente dejará algunos escaños sin asignar: los partidos se clasificarán entonces sobre la base de los restos, y a los partidos con los restos más grandes se les asigna cada uno un escaño adicional hasta que se hayan asignado todos los escaños. De ahí el nombre del método.
+Hay distintos modelos para calcular el cociente, los más utilizados son el cociente Hare, Droop e Imperiali.
+
 ### Cociente Hare
 ### Cociente Droop
 ### Cociente Imperiali
