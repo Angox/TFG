@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.2.24)  5 MAR 2020 12:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.2.24)  5 MAR 2020 12:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1301,30 +1301,30 @@ LaTeX Info: Redefining \. on input line 986.
 LaTeX Info: Redefining \% on input line 986.
 [10]
 No file capitulo01.bbl.
-LaTeX Info: Redefining \. on input line 1032.
-LaTeX Info: Redefining \% on input line 1032.
-LaTeX Info: Redefining \. on input line 1032.
-LaTeX Info: Redefining \% on input line 1032.
+LaTeX Info: Redefining \. on input line 1057.
+LaTeX Info: Redefining \% on input line 1057.
+LaTeX Info: Redefining \. on input line 1057.
+LaTeX Info: Redefining \% on input line 1057.
 [11]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1032.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1032.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1057.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1057.
 (./capitulo01.aux
 LaTeX Info: Redefining \. on input line 22.
 LaTeX Info: Redefining \% on input line 22.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1032.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1032.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1057.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1057.
 
 Package rerunfilecheck Info: File `capitulo01.out' has not changed.
 (rerunfilecheck)             Checksum: D3D392DB15449E63DD8B74050CC65696;5387.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1032.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1057.
  ) 
 Here is how much of TeX's memory you used:
- 31244 strings out of 481228
- 557788 string characters out of 5921397
+ 31242 strings out of 481228
+ 557766 string characters out of 5921397
  963799 words of memory out of 5000000
  45680 multiletter control sequences out of 15000+600000
- 609931 words of font info for 123 fonts, out of 8000000 for 9000
+ 609840 words of font info for 122 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,12n,75p,973b,500s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/texlive/2019
@@ -1341,7 +1341,7 @@ mr12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/texlive
 ts/type1/public/lm/lmri10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm
 /lmri12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmro8.pfb><c:/tex
 live/2019/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on capitulo01.pdf (11 pages, 255659 bytes).
+Output written on capitulo01.pdf (11 pages, 256299 bytes).
 PDF statistics:
  361 PDF objects out of 1000 (max. 8388607)
  332 compressed objects within 4 object streams

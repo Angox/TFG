@@ -281,7 +281,7 @@ Puede que no siempre exista un ganador del premio Condorcet en una elección par
   El recuento se realiza contrastando a cada candidato contra todos los demás candidatos en una serie de hipotéticos enfrentamientos uno a uno. El ganador de cada pareja es el candidato preferido por la mayoría de los votantes. Se considera que el candidato preferido por cada votante es el que está más alto en su papeleta de votación. Cuando se han considerado todos los emparejamientos posibles de candidatos, si un candidato vence a todos los demás candidatos en estos concursos, entonces se le declara ganador de Condorcet. Como se ha señalado anteriormente, si no hay un ganador de Condorcet debe utilizarse otro método para encontrar el ganador de la elección, y este mecanismo varía de un método de Condorcet a otro.
   
 - Recuento de votos mediante matrices  
-  Se utiliza para los resultados una matriz en donde cada fila es el candidato como "contendiente" y en cada columna se sitúa el candidato como "oponente".
+  Se utiliza para los resultados una matriz en donde cada fila es el elemento como "contendiente" y en cada columna el elemento como "oponente".
   
   En el caso de que un candidato gane a todos los restantes, será el ganador de Condorcet. Cuando no hay un ganador Condorcet se utilizan métodos alternativos de Condorcet, como el método Minimax y el método Schulze, que utilizan la información contenida en la matriz para elegir un ganador.
   
@@ -303,11 +303,11 @@ $Cociente = \frac{Total Votos}{Total Escaños}$
   
 ### Cociente Droop
 
-Algunos países que lo emplean son por ejemplo Irlanda, Malta o Australia, entre otros.
+Algunos países emplean en cociente son Australia Irlanda o Malta, entre otros.
 Es más favorable a los partidos mayoritarios que el obtenido mediante el sistema Hare, aunque no favorece tanto como el sistema Imperiali.
 
 
-Si se eligen ${\displaystyle n}$ escaños para un cuerpo colegiado, y se emiten ${\displaystyle m}$ votos válidos, se establece un cociente ${\displaystyle q}$ el cual servirá para repartir los votos. Este cociente se calcula mediante la fórmula:
+Si se eligen ${\displaystyle n}$ escaños para un cuerpo colegiado, y se emiten ${\displaystyle m}$ votos válidos, se establece un cociente ${\displaystyle q}$ el cual utilizaremos para repartir los votos. Este cociente se calcula mediante la fórmula:
 
 ${\displaystyle q=1+{\frac {m}{n+1}}}$  con $q$ aproximado al entero más próximo.
 
@@ -315,7 +315,7 @@ Si la i-ésima lista de I listas inscritas obtiene ${\displaystyle m_{i}}$ votos
 
 ${\displaystyle e_{i}=\left\lfloor {\frac {m_{i}}{q}}\right\rfloor ,r_{i}=m_{i}-qe_{i}}$
 
-Sea k el número de escaños que no son obtenidos por cociente:
+Definimos k como el número de escaños restantes no son obtenidos por el cociente:
 
 ${\displaystyle k=n-\sum _{i=1}^{I}e_{i}}$
 
@@ -326,9 +326,21 @@ De esta forma, el número total de escaños del i-ésimo partido será ${\displa
 
 ### Cociente Imperiali
 
+El reparto es más favorable a los partidos mayoritarios que el que se pueda obtener mediante los métodos de Hare o Droop.
+
+- Reparto
+
+Si se eligen n escaños para un cuerpo colegiado, y se emiten m votos válidos, se establece un cociente q el cual servirá para repartir los votos. Este cociente se calcula mediante la fórmula:
+
+${\displaystyle q={\frac {m}{n+2}}.}$
+con q aproximado al entero más próximo.
+
+Si lai-ésima lista de I listas inscritas obtiene ${\displaystyle m_{i}}$ votos, esta lista tendrá ${\displaystyle e_{i}}$ escaños por cociente y ${\displaystyle r_{i}}$ votos por residuo mediante la fórmula: ${\displaystyle m_{i}=qe_{i}+r_{i}}$.
+
+${\displaystyle e_{i}=\left\lfloor {\frac {m_{i}}{q}}\right\rfloor ,r_{i}=m_{i}-qe_{i}}$
+
 ## Método Schulze
 ## Regla de Hamilton
-## Representación proporcional de la lista de partidos
 
 
 
