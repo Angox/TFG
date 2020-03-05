@@ -85,7 +85,7 @@ Según la Real Academia de la Lengua Española votar proviene de la palabra lati
 
 En su primera acepcion en el diccionario de la Real Academia de la Lengua Española define votar como: "Dicho de una persona: Dar su voto o decir su dictamen en una reunión o cuerpo deliberante, o en una elección de personas." 
 
-Para terminar de definir mejor el término buscamos la definición en el diccionario del español jurídico, en el cual en la primera acepcion nos resulta útil para la delimitación del término que queremos definir, en su primera acepción lo define como: "Dicho de una persona: Dar su voto o decir su dictamen en una reunión o cuerpo deliberante, o en una elección de personas." 
+-Rev-es la misma def--Para terminar de definir mejor el término buscamos la definición en el diccionario del español jurídico, en el cual en la primera acepcion nos resulta útil para la delimitación del término que queremos definir, en su primera acepción lo define como: "Dicho de una persona: Dar su voto o decir su dictamen en una reunión o cuerpo deliberante, o en una elección de personas." 
 
 ### ¿Votación o sufragio?
 
@@ -165,10 +165,17 @@ En el artículo 161.2 se nos añade otra excepción para la elección de Senador
     b) Serán proclamados electos aquellos candidatos que obtengan mayor número de votos hasta complementar el de Senadores asignados a la circunscripción.
 
 
-## Métodos de reparto de escaños
+# Métodos de reparto de escaños
 
 A continuación presentaremos los distintos métodos de reparto de escaños
-Paquete Electoral
+
+-Paquete R estadistico Electoral-
+
+## Método de cifra repartidora
+
+Sistema utilizado para repartir los escaños de manera no puramente proporcional a el número de votos obtenidos por las diferentes candidaturas. El método trata de asignar los escaños proporcionalmente al número de votos recibidos, es un sistema que permite a partidos con pocos votos estar representados.
+
+Existen dos métodos basados en la cifra repartidora que son habitualmente utilizados, éstos son el método D`Hont y el Método Sainte-Laguë.
 
 ### Ley D´Hont
 
@@ -218,18 +225,18 @@ Consiste en utilizar una fórmula distinta para el primer escaño y a partir del
 $\textrm{Cociente} = \frac{V}{1.4}$
 
 
-### Método Huntington-Hill
+## Método Huntington-Hill
 
 Método creado en 1920 por Joseph Hill y corregido por el compañero de escuela de Hill, Edward Huntington. Es un método en el que se elige el tamaño de la cámara.  
 El objetivo es mantener la relación de "una persona un voto" lo más cercana posible a 1.
 
-#### Método
+### Método
 
 $\textrm{D} = \frac{Población Total}{NúmeroTotalDiputados}$
 
 Calcular la cuota de diputados por estado:  
 
-$\textrm{CoutaEstado} = \frac{Población Estado}{D}$
+$CoutaEstado = \frac{Población Estado}{D}$
 
 Redondeamos la cuota a la parte entera.  
 
@@ -241,7 +248,7 @@ Si $\begin{cases}CuotaEstado>MediaGeométrica & Representantes = n+1\\\textrm{Ca
 
 Ajustar D para que el número de asientos totales coincida con el número total de asientos designados.
 
-### Cuota Hagenbach-Bischoff
+## Cuota Hagenbach-Bischoff
 
 Fórmula utilizada en los sistemas de representación proporcional para un sistema de listas electorales. Su nombre proviene del inventor suizo, profesor de física y matemáticas Eduard Hagenbach-Bischoff (1833–1910). 
 
@@ -256,17 +263,37 @@ $\textrm{Cociente} = \frac{Total Votos}{Total Escaños+1}$  donde:
 *Total escaños*: Total de escaños a repartir.  
 
 
-### Método de cifra repartidora
-### Método de Condorcet
-### Método de promedios mayores
-### Método del resto mayor
-#### Cociente Hare
-#### Cociente Droop
-#### Cociente Imperiali
 
-### Método Schulze
-### Regla de Hamilton
-### Representación proporcional de la lista de partidos
+## Método de Condorcet
+
+El método de Condorcet lleva el nombre del matemático y filósofo francés del siglo XVIII Marie Jean Antoine Nicolas Caritat, marqués de Condorcet, aunque anteriormente Ramón Llull en 1299 creó un método similar que cumple el criterio de Condorcet pero en un diseño iterativo.
+
+Es uno de los métodos en los que se elige al candidato que gana la mayoría de los votos en cada par de elecciones frente a cada uno de los otros candidatos, es decir, un candidato preferido por más votantes que cualquier otro, siempre que exista tal candidato. Un candidato con esta propiedad, el campeón de la pareja o el ganador de la victoria, se llama formalmente el ganador de Condorcet.
+
+Puede que no siempre exista un ganador del premio Condorcet en una elección particular porque la preferencia de un grupo de votantes que seleccionan entre más de dos opciones puede ser cíclica, es decir, es posible (pero muy raro) que cada candidato tenga un oponente que le derrote en una contienda entre dos candidatos. La posibilidad de tales preferencias cíclicas en un grupo de votantes se conoce como la paradoja de Condorcet. 
+
+### Procedimiento
+
+- Voto
+  En una elección según el método de Condorcet el votante rellena la lista de candidatos por orden de preferencia. 
+
+- Vencedor
+  El recuento se realiza contrastando a cada candidato contra todos los demás candidatos en una serie de hipotéticos enfrentamientos uno a uno. El ganador de cada pareja es el candidato preferido por la mayoría de los votantes. Se considera que el candidato preferido por cada votante es el que está más alto en su papeleta de votación. Cuando se han considerado todos los emparejamientos posibles de candidatos, si un candidato vence a todos los demás candidatos en estos concursos, entonces se le declara ganador de Condorcet. Como se ha señalado anteriormente, si no hay un ganador de Condorcet debe utilizarse otro método para encontrar el ganador de la elección, y este mecanismo varía de un método de Condorcet a otro.
+  
+- Recuento de votos mediante matrices
+  Se utiliza para los resultados una matriz en donde cada fila es el candidato como "contendiente" y en cada columna se sitúa el candidato como "oponente".
+  
+  En el caso de que un candidato gane a todos los restantes, será el ganador de Condorcet. Cuando no hay un ganador Condorcet se utilizan métodos alternativos de Condorcet, como el método Minimax y el método Schulze, que utilizan la información contenida en la matriz para elegir un ganador.
+
+## Método de promedios mayores
+## Método del resto mayor
+### Cociente Hare
+### Cociente Droop
+### Cociente Imperiali
+
+## Método Schulze
+## Regla de Hamilton
+## Representación proporcional de la lista de partidos
 
 
 

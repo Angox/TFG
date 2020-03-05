@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.2.24)  4 MAR 2020 18:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.2.24)  5 MAR 2020 10:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1218,7 +1218,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-7.
+8.
 (c:/texlive/2019/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ))
@@ -1249,68 +1249,90 @@ LaTeX Info: Redefining \% on input line 718.
 LaTeX Info: Redefining \. on input line 718.
 LaTeX Info: Redefining \% on input line 718.
 [5]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 752.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 752.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 752.
-LaTeX Info: Redefining \. on input line 787.
-LaTeX Info: Redefining \% on input line 787.
-LaTeX Info: Redefining \. on input line 787.
-LaTeX Info: Redefining \% on input line 787.
+LaTeX Info: Redefining \. on input line 738.
+LaTeX Info: Redefining \% on input line 738.
+LaTeX Info: Redefining \. on input line 738.
+LaTeX Info: Redefining \% on input line 738.
 [6]
+Cap\'{\i }tulo 2.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 767.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 767.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 767.
+[7
 
-LaTeX Warning: Command \~ invalid in math mode on input line 833.
+]
 
-No file capitulo01.bbl.
-LaTeX Info: Redefining \. on input line 878.
-LaTeX Info: Redefining \% on input line 878.
-LaTeX Info: Redefining \. on input line 878.
-LaTeX Info: Redefining \% on input line 878.
-[7]
-LaTeX Info: Redefining \. on input line 878.
-LaTeX Info: Redefining \% on input line 878.
-LaTeX Info: Redefining \. on input line 878.
-LaTeX Info: Redefining \% on input line 878.
+LaTeX Warning: Command \' invalid in math mode on input line 845.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 845.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 849.
+
+LaTeX Info: Redefining \. on input line 858.
+LaTeX Info: Redefining \% on input line 858.
+LaTeX Info: Redefining \. on input line 858.
+LaTeX Info: Redefining \% on input line 858.
 [8]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 878.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 878.
+
+LaTeX Warning: Command \' invalid in math mode on input line 859.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 876.
+
+LaTeX Info: Redefining \. on input line 925.
+LaTeX Info: Redefining \% on input line 925.
+LaTeX Info: Redefining \. on input line 925.
+LaTeX Info: Redefining \% on input line 925.
+[9]
+No file capitulo01.bbl.
+LaTeX Info: Redefining \. on input line 968.
+LaTeX Info: Redefining \% on input line 968.
+LaTeX Info: Redefining \. on input line 968.
+LaTeX Info: Redefining \% on input line 968.
+[10]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 968.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 968.
 (./capitulo01.aux
 LaTeX Info: Redefining \. on input line 22.
 LaTeX Info: Redefining \% on input line 22.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 878.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 878.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 968.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 968.
 Package rerunfilecheck Info: File `capitulo01.out' has not changed.
-(rerunfilecheck)             Checksum: EB59F48942D11A39A0A609719F4ED0F7;5480.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 878.
+(rerunfilecheck)             Checksum: 5D3239F0A7D48F90B3105BF1F958A97D;5589.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 968.
  ) 
 Here is how much of TeX's memory you used:
- 31219 strings out of 481228
- 557678 string characters out of 5921397
- 963842 words of memory out of 5000000
- 45678 multiletter control sequences out of 15000+600000
- 609112 words of font info for 114 fonts, out of 8000000 for 9000
+ 31235 strings out of 481228
+ 557741 string characters out of 5921397
+ 963855 words of memory out of 5000000
+ 45682 multiletter control sequences out of 15000+600000
+ 609385 words of font info for 117 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,11n,75p,973b,500s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/texlive/2019/tex
-mf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/texlive/2019/texmf-dist/fonts/enc/
-dvips/lm/lm-ts1.enc}{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathex.en
-c}{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}<c:/texlive/2019/tex
-mf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/texlive/2019/texmf-dist/fonts/type
-1/public/lm/lmex10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmmi12
-.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/texlive/20
-19/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/texlive/2019/texmf-dist/fonts
-/type1/public/lm/lmr12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lm
-r7.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/texlive/2
-019/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/texlive/2019/texmf-dist/fon
-ts/type1/public/lm/lmri12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm
-/lmro8.pfb>
-Output written on capitulo01.pdf (8 pages, 230207 bytes).
+ 60i,12n,75p,973b,500s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/texlive/2019
+/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/texlive/2019/texmf-dist/fonts/enc/
+dvips/lm/lm-mathit.enc}{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-ts1.en
+c}{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{c:/texlive/2019
+/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}<c:/texlive/2019/texmf-dist/fonts/type
+1/public/lm/lmbx12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmex10
+.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/texlive/2
+019/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/texlive/2019/texmf-dist/font
+s/type1/public/lm/lmr10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/l
+mr12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/texlive
+/2019/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/texlive/2019/texmf-dist/fon
+ts/type1/public/lm/lmri10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm
+/lmri12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmro8.pfb><c:/tex
+live/2019/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
+Output written on capitulo01.pdf (10 pages, 250237 bytes).
 PDF statistics:
- 337 PDF objects out of 1000 (max. 8388607)
- 312 compressed objects within 4 object streams
- 83 named destinations out of 1000 (max. 500000)
- 14621 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 363 PDF objects out of 1000 (max. 8388607)
+ 335 compressed objects within 4 object streams
+ 89 named destinations out of 1000 (max. 500000)
+ 14637 words of extra memory for PDF output out of 17280 (max. 10000000)
 
