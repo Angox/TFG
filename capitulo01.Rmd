@@ -352,4 +352,3 @@ ${\displaystyle e_{i}=\left\lfloor {\frac {m_{i}}{q}}\right\rfloor ,r_{i}=m_{i}-
 
 
 
-
