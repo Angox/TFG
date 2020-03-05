@@ -1,0 +1,36 @@
+\babel@toc {spanish}{}
+\contentsline {chapter}{\numberline {1}Introducción}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Objetivos}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2}¿Qué significa votar?}{3}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Origen}{3}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Significado}{3}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}¿Votación o sufragio?}{4}{subsection.1.2.3}%
+\contentsline {section}{\numberline {1.3}Sistema electoral en España}{4}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Orígenes}{4}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Sistema electoral de la constitución de 1978}{4}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Descripción del sistema Electoral Español}{4}{subsection.1.3.3}%
+\contentsline {subsection}{\numberline {1.3.4}Congreso}{5}{subsection.1.3.4}%
+\contentsline {subsubsection}{\numberline {1.3.4.1}Número diputados}{5}{subsubsection.1.3.4.1}%
+\contentsline {subsubsection}{\numberline {1.3.4.2}Reparto de Escaños}{5}{subsubsection.1.3.4.2}%
+\contentsline {subsection}{\numberline {1.3.5}Senado}{5}{subsection.1.3.5}%
+\contentsline {chapter}{\numberline {2}Métodos de reparto de escaños}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Método de cifra repartidora}{7}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Ley D´Hont}{7}{subsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.1.1}Reparto}{7}{subsubsection.2.1.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Método Sainte-Laguë}{8}{subsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.2.1}Reparto}{8}{subsubsection.2.1.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.2.2}Método modificado}{8}{subsubsection.2.1.2.2}%
+\contentsline {section}{\numberline {2.2}Método Huntington-Hill}{8}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Método}{8}{subsection.2.2.1}%
+\contentsline {section}{\numberline {2.3}Cuota Hagenbach-Bischoff}{9}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Reparto}{9}{subsection.2.3.1}%
+\contentsline {section}{\numberline {2.4}Método de Condorcet}{9}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Procedimiento}{9}{subsection.2.4.1}%
+\contentsline {section}{\numberline {2.5}Método del resto mayor}{10}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Cociente Hare}{10}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Cociente Droop}{11}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Cociente Imperiali}{11}{subsection.2.5.3}%
+\contentsline {section}{\numberline {2.6}Método Schulze}{11}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Regla de Hamilton}{11}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Representación proporcional de la lista de partidos}{11}{section.2.8}%
+\contentsline {chapter}{Bibliografía}{11}{section.2.8}%

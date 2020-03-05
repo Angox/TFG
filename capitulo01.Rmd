@@ -36,7 +36,6 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
                       echo = FALSE, warning = FALSE, message = FALSE,
                       fig.pos="H",fig.align="center",out.width="95%",
                       cache=FALSE)
-
 ```
 
 
@@ -70,9 +69,288 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
 \renewcommand{\footrulewidth}{0.4pt}
 
 
-# Una introduccion a los sistemas de votacion
 
-## Origenes
+# Introducción
 
-La
+## Objetivos
+
+Rev-El objetivo del presente trabajo será analizar los distintos sistemas de votación que existen en la actualidad que puedan ser aplicados actualmente en España, aplicar estos sistemas a España, indicando sus ventajas e inconvenientes y proponer nuevos sistemas de votación o reparto para una eventual reforma de la Ley Orgánica del Régimen Electoral.
+
+## ¿Qué significa votar?
+
+### Origen
+
+Según la Real Academia de la Lengua Española votar proviene de la palabra latina votare (hacer votos, hacer ofrendas religiosas), es un verbo formado a partir del latín votum, originalmente una ofrenda religiosa o promesa a los dioses con objeto de lograr algo deseado, que luego pasaría a significar un deseo expreso. Tiempo después pasó al terreno político, en latín propiamente el voto político se denomina suffragium. Votum es un nombre a partir del verbo vovere ( hacer un exvoto u ofrenda religiosa). De este verbo latino se derivan también votivo, exvoto, devoto y devoción.
+
+### Significado
+
+En su primera acepción en el diccionario de la Real Academia de la Lengua Española define votar como: "Dicho de una persona: Dar su voto o decir su dictamen en una reunión o cuerpo deliberante, o en una elección de personas." 
+
+-Rev-es la misma def--Para terminar de definir mejor el término buscamos la definición en el diccionario del español jurídico, en el cual en la primera acepción nos resulta útil para la delimitación del término que queremos definir, en su primera acepción lo define como: "Dicho de una persona: Dar su voto o decir su dictamen en una reunión o cuerpo deliberante, o en una elección de personas." 
+
+### ¿Votación o sufragio?
+
+Las dos palabras son sinónimas, aunque en la segunda acepción de la palabra sufragio según la Real Academia de la lengua: "Sistema electoral para la provisión de cargos" nos referimos más al voto como sistema, y en el voto se entiende más como referencia a la persona que realiza el acto de votar.
+A lo largo del trabajo trataremos indistintamente ambos términos.
+
+
+## Sistema electoral en España
+
+### Orígenes 
+
+El origen de el sistema electoral español se remonta a principios del siglo XIX, en una España invadida por el ejército de Napoleón. El vacío de poder facilitó la convocatoria de una asamblea nacional, las cortes, en la ciudad de Cádiz con diputados venidos de todas las regiones tanto de la península como de ultramar. La asamblea concluyó con la promulgación de la constitución de 1812.
+
+En la instrucción de 1810 comienzan a a parecer los mecanismos para elegir a los representantes tanto parroquiales, de partido y de provincia. La fórmula electoral escogida fue la mayoritaria. El sufragio es masculino universal e indirecto, aunque se requería que los electores ejerciesen algún tipo de industria.
+Ya en la constitución de 1812 se reguló todo el proceso electoral en los artículos 27 a 103, se determinó una distribución de 1 diputado por cada 70.000 personas.
+
+Formalmente las leyes que regulan el derecho de sufragio se remontan a 1837, estableciéndose en el año 1869 el sufragio universal consolidado en 1907 por ley.
+
+### Sistema electoral de la constitución de 1978
+
+El sistema actual español se rige bajo tres normas, en primer lugar la misma constitución de 1978, y mas tarde la Ley Orgánica del Régimen Electoral Central 5/1985, de 19 de Junio, en donde se regula las elecciones al Parlamento Europeo, al Congreso y Senado y las elecciones de los municipios y la del 2/2011, del 28 de Enero en donde se modifica la anterior Ley Orgánica. 
+
+### Descripción del sistema Electoral Español
+
+La descripción del sistema Electoral Español se encuentra el la LOREG (Ley Orgánica del Régimen Electoral Español)
+En el caso de España debemos diferenciar la elección de Diputados y Senadores, cada provincia es considerada como una circunscripción electoral. Como excepción a la regla las ciudades de Ceuta y Melilla son consideradas cada una de ellas como una circunscripción electoral.
+En el artículo 161.2 se nos añade otra excepción para la elección de Senadores en donde se consideran circunscripciones las siguientes islas o agrupaciones de islas: Mallorca, Menorca, Ibiza-Formentera, Gran Canaria, Fuerteventura, Lanzarote, Tenerife, Hierro, Gomera y La Palma.
+
+### Congreso
+
+#### Número diputados
+
+- El congreso está formado por un número fijo de diputados, 350.
+- Cada una de las provincias les corresponden inicialmente al menos dos diputados, excepto las excepciones anteriormente anunciadas, donde Ceuta y Melilla están representadas por un diputado cada una de ellas.
+- Los 248 diputados restantes se distribuyen entre las provincias proporcionalmente a su  población según el siguiente método:
+
+    1. $\textrm{Cuota de Reparto} = \frac{248}{\text{Total de la poblaci\'{o}n de derecho de las provincias peninsulares e insulares}}$
+      
+      
+      
+    2. $\textrm{Diputados} = \text{Entero} \left\{\frac{\text{Población de derecho provincial}}{\text{Cuota de Reparto}}\right\}$
+      
+      
+    3. Diputados Restantes = 348 - Número Diputados paso 2  
+       Diputados Totales = Diputados + Restantes, uno a cada una de las provincias cuyo cociente, obtenido conforme al punto anterior, tenga una fracción decimal mayor. 
+
+#### Reparto de Escaños
+
+- Se aplica la llamada ley D´Hont
+
+- No se tienen en cuenta aquellas candidaturas que no hubieran obtenido, al menos, el 3% de los votos válidos emitidos en la circunscripción.
+
+-  Se ordenan de mayor a menor, en una columna, las cifras de votos obtenidos por las restantes candidaturas.
+
+-  Se divide el número de votos obtenidos por cada candidatura por 1, 2, 3, etc., hasta un número igual al de escaños correspondientes a la circunscripción. Los escaños se atribuyen a las candidaturas que obtengan los cocientes mayores, atendiendo a un orden decreciente.
+
+    +  Cuando en la relación de cocientes coincidan dos correspondientes a distintas candidaturas, el escaño se atribuirá a la que mayor número total de votos hubiese obtenido.
+
+- Los escaños correspondientes a cada candidatura se adjudican a los candidatos incluidos en ella, por el orden de colocación en que aparezcan.
+
+- En las circunscripciones de Ceuta y Melilla será proclamado electo el candidato que mayor número de votos hubiese obtenido.
+
+### Senado
+
+- En cada circunscripción provincial se eligen cuatro Senadores.
+
+- En cada circunscripción insular se elige el siguiente número de Senadores: tres en Gran Canaria, Mallorca y Tenerife; uno en Ibiza-Formentera, Menorca, Fuerteventura, Gomera, Hierro, Lanzarote y La Palma.
+
+- Las Poblaciones de Ceuta y Melilla eligen cada una de ellas dos Senadores.
+
+-  Las Comunidades Autónomas designan además un Senador y otro más para cada millón de habitantes de su respectivo territorio. La designación corresponde a la Asamblea Legislativa de la Comunidad Autónoma, de acuerdo con lo que establezcan sus Estatutos, que aseguran, en todo caso, la adecuada representación proporcional. A efectos de dicha designación el número concreto de Senadores que corresponda a cada Comunidad Autónoma se determinará tomando como referencia el censo de población de derecho vigente en el momento de celebrarse las últimas elecciones generales al Senado.
+
+- La elección directa de los Senadores en las circunscripciones provinciales, insulares y en Ceuta y Melilla se rige por lo dispuesto en los apartados siguientes:
+
+    a) Los electores pueden dar su voto a un máximo de tres candidatos en las circunscripciones provinciales, dos en Gran Canaria, Mallorca, Tenerife, Ceuta y Melilla, y uno en las restantes circunscripciones insulares.
+
+    b) Serán proclamados electos aquellos candidatos que obtengan mayor número de votos hasta complementar el de Senadores asignados a la circunscripción.
+
+
+# Métodos de reparto de escaños
+
+A continuación presentaremos los distintos métodos de reparto de escaños
+
+-Paquete R estadístico Electoral-
+
+## Método de cifra repartidora
+
+Sistema utilizado para repartir los escaños de manera no puramente proporcional a el número de votos obtenidos por las diferentes candidaturas. El método trata de asignar los escaños proporcionalmente al número de votos recibidos, es un sistema que permite a partidos con pocos votos estar representados.
+
+Existen dos métodos basados en la cifra repartidora que son habitualmente utilizados, y que se encuentran también dentro de los llamados métodos de los restos mayores, éstos son el método D`Hont y el Método Sainte-Laguë.
+
+### Ley D´Hont
+
+La ley D´Hont lleva el nombre del matemático y jurista belga Victor D´Hont , el cual describió la metodología en el año 1878 en su libro *"La représentation proportionnelle des partis par un électeur"*. [^3.1]
+
+[^3.1]: Puede leerse el línea el segundo libro del autor: *"Système pratique et raisonné de représentation proportionelle"* en  http://mat.uab.cat/~xmora/bibliografia/DHondt1882.pdf
+
+Se trata de un método de promedio mayor, utilizado para asignar los escaños usualmente en sistemas de listas. Es un sistema que trata de asignar los escaños aproximados al número de votos recibidos y que incentiva las coaliciones de partidos.  
+Es el sistema más habitualmente utilizado en las democracias actuales.
+
+#### Reparto
+
+Una vez escrutados la totalidad de los votos, se calculan cocientes según la fórmula:  
+
+$\textrm{Cociente} = \frac{V}{s+1}$  donde:  
+
+$V$: Representa el número total de votos recibidos por la lista.  
+
+$s$: Representa el número de escaños que cada lista se ha llevado de momento, inicialmente 0 para cada lista.  
+
+El número de votos recibidos por cada lista se divide primero por 1, después por 2, 3, hasta el número total de escaños para ese distrito.
+
+
+### Método Sainte-Laguë
+
+Método también conocido como método Webster, creado por el matemático francés André Sainte-Laguë en 1832, similar al método D`Hont. Es un método de promedios mayores, utilizado en sistemas de votación proporcional por listas.   
+El método de Sainte-Laguë es utilizado en una gran cantidad de países en los que en la actualidad [^4.2] se encuentran, entre otros, estados como Noruega, Iraq y Nueva Zelanda.  
+ 
+[^4.2]: Cierto a la fecha de realización del trabajo.
+
+#### Reparto 
+
+Una vez escrutados la totalidad de los votos, se calculan cocientes según la fórmula:  
+
+$\textrm{Cociente} = \frac{V}{2s+1}$  donde:  
+
+$V$: Representa el número total de votos recibidos por la lista.  
+
+$s$: Representa el número de escaños que cada lista se ha llevado de momento, inicialmente 0 para cada lista.  
+
+El número de votos recibidos por cada lista se divide sucesivamente por cada uno de los valores que da la fórmula 2s+1 cuando s es igual a 0, 1, 2, 3, etc.; lo que supone dividir por 1, 3, 5, 7, etc. (es decir, la sucesión de números impares). La asignación de escaños se hace ordenando los cocientes de mayor a menor y asignando a cada uno un escaño hasta que estos se agoten. A diferencia de otros sistemas, el número total de votos no interviene en el cómputo.
+
+#### Método modificado
+
+Consiste en utilizar una fórmula distinta para el primer escaño y a partir del segundo utilizar el método habitual. La forma para el primer escaño es:
+
+$\textrm{Cociente} = \frac{V}{1.4}$
+
+
+## Método Huntington-Hill
+
+Método creado en 1920 por Joseph Hill y corregido por el compañero de escuela de Hill, Edward Huntington. Es un método en el que se elige el tamaño de la cámara.  
+El objetivo es mantener la relación de "una persona un voto" lo más cercana posible a 1.
+
+### Método
+
+$\textrm{D} = \frac{Población Total}{NúmeroTotalDiputados}$
+
+Calcular la cuota de diputados por estado:  
+
+$CoutaEstado = \frac{Población Estado}{D}$
+
+Redondeamos la cuota a la parte entera.  
+
+$\textrm{n} = ParteEntera\left\{{Cuota Estado}\right\}$
+
+Comparar la Cuota del estado con la media geométrica de $n$ y $n+1$, $\sqrt{n(n+1)}$
+
+Si $\begin{cases}CuotaEstado>MediaGeométrica & Representantes = n+1\\\textrm{Caso Contrario} & Representantes = n\end{cases}$
+
+Ajustar D para que el número de asientos totales coincida con el número total de asientos designados.
+
+## Cuota Hagenbach-Bischoff
+
+Fórmula utilizada en los sistemas de representación proporcional para un sistema de listas electorales. Su nombre proviene del inventor suizo, profesor de física y matemáticas Eduard Hagenbach-Bischoff (1833–1910). 
+
+### Reparto
+
+La fórmula de reparto es: 
+
+$\textrm{Cociente} = \frac{Total Votos}{Total Escaños+1}$  donde:  
+
+*Total votos*: Representa el número total de votos válidos.  
+
+*Total escaños*: Total de escaños a repartir.  
+
+
+
+## Método de Condorcet
+
+El método de Condorcet lleva el nombre del matemático y filósofo francés del siglo XVIII Marie Jean Antoine Nicolas Caritat, marqués de Condorcet, aunque anteriormente Ramón Llull en 1299 creó un método similar que cumple el criterio de Condorcet pero en un diseño iterativo.
+
+Es uno de los métodos en los que se elige al candidato que gana la mayoría de los votos en cada par de elecciones frente a cada uno de los otros candidatos, es decir, un candidato preferido por más votantes que cualquier otro, siempre que exista tal candidato. Un candidato con esta propiedad, el campeón de la pareja o el ganador de la victoria, se llama formalmente el ganador de Condorcet.
+
+Puede que no siempre exista un ganador del premio Condorcet en una elección particular porque la preferencia de un grupo de votantes que seleccionan entre más de dos opciones puede ser cíclica, es decir, es posible (pero muy raro) que cada candidato tenga un oponente que le derrote en una contienda entre dos candidatos. La posibilidad de tales preferencias cíclicas en un grupo de votantes se conoce como la paradoja de Condorcet. 
+
+### Procedimiento
+
+- Voto  
+  En una elección según el método de Condorcet el votante rellena la lista de candidatos por orden de preferencia. 
+
+- Vencedor  
+  El recuento se realiza contrastando a cada candidato contra todos los demás candidatos en una serie de hipotéticos enfrentamientos uno a uno. El ganador de cada pareja es el candidato preferido por la mayoría de los votantes. Se considera que el candidato preferido por cada votante es el que está más alto en su papeleta de votación. Cuando se han considerado todos los emparejamientos posibles de candidatos, si un candidato vence a todos los demás candidatos en estos concursos, entonces se le declara ganador de Condorcet. Como se ha señalado anteriormente, si no hay un ganador de Condorcet debe utilizarse otro método para encontrar el ganador de la elección, y este mecanismo varía de un método de Condorcet a otro.
+  
+- Recuento de votos mediante matrices  
+  Se utiliza para los resultados una matriz en donde cada fila es el elemento como "contendiente" y en cada columna el elemento como "oponente".
+  
+  En el caso de que un candidato gane a todos los restantes, será el ganador de Condorcet. Cuando no hay un ganador Condorcet se utilizan métodos alternativos de Condorcet, como el método Minimax y el método Schulze, que utilizan la información contenida en la matriz para elegir un ganador.
+  
+
+## Método del resto mayor
+
+Es un método para distribuir los escaños proporcionalmente para un sistema de listas de partidos. Son una alternativa a los métodos de promedio mayor. 
+
+El método del resto mayor requiere que el número de votos de cada partido se divida por una cuota que represente el número de votos necesarios para un escaño (es decir, normalmente el número total de votos emitidos dividido por el número de escaños, o alguna fórmula similar). El resultado para cada partido consistirá normalmente en la parte entera más un resto  A cada partido se le asigna primero un número de escaños igual a su número entero. Esto generalmente dejará algunos escaños sin asignar: los partidos se clasificarán entonces sobre la base de los restos, y a los partidos con los restos más grandes se les asigna cada uno un escaño adicional hasta que se hayan asignado todos los escaños. De ahí el nombre del método.
+Hay distintos modelos para calcular el cociente, los más utilizados son el cociente Hare, Droop e Imperiali.
+
+### Cociente Hare
+
+La fórmula del cociente Hare es la fórmula más simple que puede utilizarse en unas elecciones según un sistema de voto transferible único, también se utiliza en sistemas de representación proporcional por listas. En comparación con algunos métodos similares, la utilización del método del cociente de Hare con el método de resto mayor tiende a favorecer a las partes más pequeñas a expensas de las más grandes. 
+
+- Fórmula:
+
+$Cociente = \frac{Total Votos}{Total Escaños}$ 
+  
+### Cociente Droop
+
+Algunos países emplean en cociente son Australia Irlanda o Malta, entre otros.
+Es más favorable a los partidos mayoritarios que el obtenido mediante el sistema Hare, aunque no favorece tanto como el sistema Imperiali.
+
+
+Si se eligen ${\displaystyle n}$ escaños para un cuerpo colegiado, y se emiten ${\displaystyle m}$ votos válidos, se establece un cociente ${\displaystyle q}$ el cual utilizaremos para repartir los votos. Este cociente se calcula mediante la fórmula:
+
+${\displaystyle q=1+{\frac {m}{n+1}}}$  con $q$ aproximado al entero más próximo.
+
+Si la i-ésima lista de I listas inscritas obtiene ${\displaystyle m_{i}}$ votos, esta lista tendrá ${\displaystyle e_{i}}$ escaños por cociente y ${\displaystyle r_{i}}$ votos por residuo mediante la fórmula: ${\displaystyle m_{i}=qe_{i}+r_{i}}$
+
+${\displaystyle e_{i}=\left\lfloor {\frac {m_{i}}{q}}\right\rfloor ,r_{i}=m_{i}-qe_{i}}$
+
+Definimos k como el número de escaños restantes no son obtenidos por el cociente:
+
+${\displaystyle k=n-\sum _{i=1}^{I}e_{i}}$
+
+Estos k escaños son repartidos entre los mejores k residuos ${\displaystyle r_{i}}$.
+
+De esta forma, el número total de escaños del i-ésimo partido será ${\displaystyle p_{i}=e_{i}}$ o ${\displaystyle p_{i}=e_{i}+1}$.
+
+
+### Cociente Imperiali
+
+El reparto es más favorable a los partidos mayoritarios que el que se pueda obtener mediante los métodos de Hare o Droop.
+
+- Reparto
+
+Si se eligen n escaños para un cuerpo colegiado, y se emiten m votos válidos, se establece un cociente q el cual servirá para repartir los votos. Este cociente se calcula mediante la fórmula:
+
+${\displaystyle q={\frac {m}{n+2}}.}$
+con q aproximado al entero más próximo.
+
+Si lai-ésima lista de I listas inscritas obtiene ${\displaystyle m_{i}}$ votos, esta lista tendrá ${\displaystyle e_{i}}$ escaños por cociente y ${\displaystyle r_{i}}$ votos por residuo mediante la fórmula: ${\displaystyle m_{i}=qe_{i}+r_{i}}$.
+
+${\displaystyle e_{i}=\left\lfloor {\frac {m_{i}}{q}}\right\rfloor ,r_{i}=m_{i}-qe_{i}}$
+
+## Método Schulze
+## Regla de Hamilton
+
+
+
+
+
+
+
+
+
+
+
 
