@@ -359,7 +359,19 @@ $\textrm{Cuota} = \frac{Censo Distrito}{Censo Total}$
 
 
 
- 
+# Analisis de los datos 
+
+```{r}
+library(data.table)
+library(openxlsx)
+datos2019 <- fread(file = "Datos/Congreso/PROV_02_201911_1.xlsx",skip = 6,nrows = 5)
+datos2019 <- read.xlsx(xlsxFile = "Datos/Congreso/PROV_02_197706_1.xlsx")
+
+
+
+
+```
+
 
 
 
