@@ -341,7 +341,31 @@ Si lai-ésima lista de I listas inscritas obtiene ${\displaystyle m_{i}}$ votos,
 ${\displaystyle e_{i}=\left\lfloor {\frac {m_{i}}{q}}\right\rfloor ,r_{i}=m_{i}-qe_{i}}$
 
 ## Método Schulze
+
+Método por el cual se selecciona un ganador a partir de las preferencias de los votantes, fue creado en 1997 por Markus Schulze 
+
+- Método
+
+    + Averiguar el conjunto de Schwartz (el menor conjunto de candidatos que no es ganado por nadie fuera del conjunto). Si sólo hay un candidato en el conjunto, este es el ganador de Condorcet. Si hay varios miembros pero no hay derrotas entre ellos, entonces hay un empate normal entre ellos.
+    + En cualquier otro caso, eliminar la derrota más suave en el conjunto de Schwartz (es decir, aquella ganada por el menor margen). Recalcular el nuevo conjunto de Schwartz y repetir el proceso.
+
 ## Regla de Hamilton
+
+-Rev- El Método de Hamilton es un método que se emplea para repartir los escaños de un Parlamento. Se trata de un método no proporcional, ya que dependiendo de la provincia se necesitará un número diferente de votos para obtener un escaño.
+
+Para conseguir que cada estado recibiera un número de representantes lo más cercano a su cuota, Hamilton asigna a cada estado, en una primera aproximación, la parte entera de su cuota. Luego, los escaños aún no repartidos se reparten por orden de mayor a menor a los que tienen parte decimal más grande.
+
+$\textrm{Cuota} = \frac{Censo Distrito}{Censo Total}$ 
+
+
+
+ 
+
+
+
+
+
+
 
 
 
