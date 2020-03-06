@@ -361,17 +361,46 @@ $\textrm{Cuota} = \frac{Censo Distrito}{Censo Total}$
 
 # Analisis de los datos 
 
-```{r}
-library(data.table)
+```{r Leer y limpiar datos}
 library(openxlsx)
-datos2019 <- fread(file = "Datos/Congreso/PROV_02_201911_1.xlsx",skip = 6,nrows = 5)
-datos2019 <- read.xlsx(xlsxFile = "Datos/Congreso/PROV_02_197706_1.xlsx")
+library(electoral)
+datos2019 <- read.xlsx(xlsxFile = "Datos/Congreso/PROV_02_201911_1.xlsx")
+# Eliminar fila con nombres y sustituirlos por las siglas
+datos2019[3,][!is.na(datos2019[2,])] <- datos2019[2,][!is.na(datos2019[2,])]
+datos2019 <- datos2019[-nrow(datos2019),]
+colnames(datos2019) <- datos2019[3,]
+datos2019 <- datos2019[-c(1,2,3),]
+# Columnas como números
+datos2019[,4:ncol(datos2019)] <- apply(datos2019[,4:ncol(datos2019)],2,as.numeric)
+row.names(datos2019) <- NULL
+# Quedarnos con las columnas que queramos
+datos2019$asientos <- rowSums(datos2019[,(colnames(datos2019)%in%c("Diputados"))])
+datos2019 <- datos2019[,!(colnames(datos2019)%in%c("Diputados"))]
+datos2019 <- datos2019[,-grep(pattern = c("Censo"), colnames(datos2019))]
+datos2019 <- datos2019[,-grep(pattern = c("Código"), colnames(datos2019))]
+datos2019 <- datos2019[,-grep(pattern = c("CER"), colnames(datos2019))]
+datos2019 <- datos2019[,-grep(pattern = c("mesas"), colnames(datos2019))]
 
+```
+
+
+## Método D`Hont
+
+Calculamos el número de escaños obtenidos por los diferentes partidos según el método particular de votación en España, en donde si los partidos no llegan a un 3% de representación, no tendran representabilidad.
+
+
+
+```{r Método DHont}
+
+# Cota del 3%
+corte <- 100*colSums(datos2019[31,10:75])/sum(datos2019$`Votos válidos`[31])
+partidos <- colnames(datos2019[,10:75])[corte>3]
+votos <- datos2019[31,10:75][corte>3]
+asientosrepartir <- datos2019$asientos[31]
 
 
 
 ```
-
 
 
 
