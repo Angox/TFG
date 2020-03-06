@@ -135,7 +135,7 @@ En el artículo 161.2 se nos añade otra excepción para la elección de Senador
 
 #### Reparto de Escaños
 
-- Se aplica la llamada ley D´Hont
+- Se aplica la llamada ley D´Hondt
 
 - No se tienen en cuenta aquellas candidaturas que no hubieran obtenido, al menos, el 3% de los votos válidos emitidos en la circunscripción.
 
@@ -176,11 +176,11 @@ A continuación presentaremos los distintos métodos de reparto de escaños
 
 Sistema utilizado para repartir los escaños de manera no puramente proporcional a el número de votos obtenidos por las diferentes candidaturas. El método trata de asignar los escaños proporcionalmente al número de votos recibidos, es un sistema que permite a partidos con pocos votos estar representados.
 
-Existen dos métodos basados en la cifra repartidora que son habitualmente utilizados, y que se encuentran también dentro de los llamados métodos de los restos mayores, éstos son el método D`Hont y el Método Sainte-Laguë.
+Existen dos métodos basados en la cifra repartidora que son habitualmente utilizados, y que se encuentran también dentro de los llamados métodos de los restos mayores, éstos son el método D`Hondt y el Método Sainte-Laguë.
 
-### Ley D´Hont
+### Ley D´Hondt
 
-La ley D´Hont lleva el nombre del matemático y jurista belga Victor D´Hont , el cual describió la metodología en el año 1878 en su libro *"La représentation proportionnelle des partis par un électeur"*. [^3.1]
+La ley D´Hondt lleva el nombre del matemático y jurista belga Victor D´Hondt , el cual describió la metodología en el año 1878 en su libro *"La représentation proportionnelle des partis par un électeur"*. [^3.1]
 
 [^3.1]: Puede leerse el línea el segundo libro del autor: *"Système pratique et raisonné de représentation proportionelle"* en  http://mat.uab.cat/~xmora/bibliografia/DHondt1882.pdf
 
@@ -202,7 +202,7 @@ El número de votos recibidos por cada lista se divide primero por 1, después p
 
 ### Método Sainte-Laguë
 
-Método también conocido como método Webster, creado por el matemático francés André Sainte-Laguë en 1832, similar al método D`Hont. Es un método de promedios mayores, utilizado en sistemas de votación proporcional por listas.   
+Método también conocido como método Webster, creado por el matemático francés André Sainte-Laguë en 1832, similar al método D`Hondt. Es un método de promedios mayores, utilizado en sistemas de votación proporcional por listas.   
 El método de Sainte-Laguë es utilizado en una gran cantidad de países en los que en la actualidad [^4.2] se encuentran, entre otros, estados como Noruega, Iraq y Nueva Zelanda.  
  
 [^4.2]: Cierto a la fecha de realización del trabajo.
@@ -384,20 +384,51 @@ datos2019 <- datos2019[,-grep(pattern = c("mesas"), colnames(datos2019))]
 ```
 
 
-## Método D`Hont
+## Método D`Hondt
 
 Calculamos el número de escaños obtenidos por los diferentes partidos según el método particular de votación en España, en donde si los partidos no llegan a un 3% de representación, no tendran representabilidad.
 
 
 
-```{r Método DHont}
+```{r Método DHondt}
+
+library(data.table)
+borrar <- NULL 
+for (prov in 1:nrow(datos2019)) {
+  
 
 # Cota del 3%
-corte <- 100*colSums(datos2019[31,10:75])/sum(datos2019$`Votos válidos`[31])
+corte <- 100*colSums(datos2019[prov,10:75])/sum(datos2019$`Votos válidos`[prov])
 partidos <- colnames(datos2019[,10:75])[corte>3]
-votos <- datos2019[31,10:75][corte>3]
-asientosrepartir <- datos2019$asientos[31]
+votos <- datos2019[prov,10:75][corte>3]
+# Asientos por circunscripción
+n_asientos <- datos2019$asientos[prov]
+s <- 1:n_asientos
+#Creamos matriz con los datos y los dividimos
+selec <-  matrix(data = as.numeric(votos),ncol = length(votos),nrow = n_asientos,byrow = T)
+selec <- as.data.frame(selec)
+  for (i in 1:n_asientos) {
+    selec[i,] <- selec[i,]/i
+  }
+# Arreglamos los nombres y los ordenamos de mayor a menor
+colnames(selec) <- partidos
+selec <- as.data.frame(selec)
+selec <- sort(unlist(selec),decreasing = T)[1:n_asientos]
+library(stringr)
+names(selec) <- substr(names(selec), 1, nchar(names(selec))-1)
+# Presentamos el resultado
+borrar[[prov]] <- sort(table(names(selec)),decreasing = T)
 
+}
+# library(tibble)
+# library(dplyr)
+# seats_ha(parties = partidos,votes = as.numeric(votos),n_seats = n_asientos,method = "dhondt")
+borrar2 <- borrar[[1]]
+for (i in 2:length(borrar)) {
+  borrar2 <- c(borrar2,borrar[[i]])
+}
+names(borrar2)
+as.data.table(aggregate(as.numeric(borrar2),by=list(names(borrar2)),FUN=sum))[order(-x)]
 
 
 ```
