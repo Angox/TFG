@@ -361,88 +361,354 @@ $\textrm{Cuota} = \frac{Censo Distrito}{Censo Total}$
 
 # Analisis de los datos 
 
+## Año 1977
+
 ```{r Leer y limpiar datos}
 library(openxlsx)
 library(electoral)
-datos2019 <- read.xlsx(xlsxFile = "Datos/Congreso/PROV_02_201911_1.xlsx")
+datos1977 <- read.xlsx(xlsxFile = "Datos/Congreso/PROV_02_197706_1.xlsx")
 # Eliminar fila con nombres y sustituirlos por las siglas
-datos2019[3,][!is.na(datos2019[2,])] <- datos2019[2,][!is.na(datos2019[2,])]
-datos2019 <- datos2019[-nrow(datos2019),]
-colnames(datos2019) <- datos2019[3,]
-datos2019 <- datos2019[-c(1,2,3),]
+datos1977[3, ][!is.na(datos1977[2, ])] <- datos1977[2, ][!is.na(datos1977[2, ])]
+datos1977 <- datos1977[-nrow(datos1977), ]
+colnames(datos1977) <- datos1977[3, ]
+datos1977 <- datos1977[-c(1, 2, 3), ]
 # Columnas como números
-datos2019[,4:ncol(datos2019)] <- apply(datos2019[,4:ncol(datos2019)],2,as.numeric)
-row.names(datos2019) <- NULL
+datos1977[, 4:ncol(datos1977)] <- apply(datos1977[, 4:ncol(datos1977)], 2, as.numeric)
+row.names(datos1977) <- NULL
 # Quedarnos con las columnas que queramos
-datos2019$asientos <- rowSums(datos2019[,(colnames(datos2019)%in%c("Diputados"))])
-datos2019 <- datos2019[,!(colnames(datos2019)%in%c("Diputados"))]
-datos2019 <- datos2019[,-grep(pattern = c("Censo"), colnames(datos2019))]
-datos2019 <- datos2019[,-grep(pattern = c("Código"), colnames(datos2019))]
-datos2019 <- datos2019[,-grep(pattern = c("CER"), colnames(datos2019))]
-datos2019 <- datos2019[,-grep(pattern = c("mesas"), colnames(datos2019))]
+datos1977$asientos <- rowSums(datos1977[, (colnames(datos1977) %in% c("Diputados"))])
+datos1977 <- datos1977[, !(colnames(datos1977) %in% c("Diputados"))]
+datos1977 <- datos1977[, -grep(pattern = c("censo"), tolower(colnames(datos1977)))]
+datos1977 <- datos1977[, -grep(pattern = c("Código"), colnames(datos1977))]
+# datos1977 <- datos1977[, -grep(pattern = c("CER"), colnames(datos1977))]
+datos1977 <- datos1977[, -grep(pattern = c("mesas"), colnames(datos1977))]
 
 ```
 
 
-## Método D`Hondt
+### Método D`Hondt
 
-Calculamos el número de escaños obtenidos por los diferentes partidos según el método particular de votación en España, en donde si los partidos no llegan a un 3% de representación, no tendran representabilidad.
+Calculamos el número de escaños obtenidos por los diferentes partidos según el método particular de votación en España, en donde si los partidos no llegan a un 3% de representación, no tendrán representabilidad.
 
 
 
 ```{r Método DHondt}
 
 library(data.table)
-borrar <- NULL 
-for (prov in 1:nrow(datos2019)) {
-  
-
-# Cota del 3%
-corte <- 100*colSums(datos2019[prov,10:75])/sum(datos2019$`Votos válidos`[prov])
-partidos <- colnames(datos2019[,10:75])[corte>3]
-votos <- datos2019[prov,10:75][corte>3]
-# Asientos por circunscripción
-n_asientos <- datos2019$asientos[prov]
-s <- 1:n_asientos
-#Creamos matriz con los datos y los dividimos
-selec <-  matrix(data = as.numeric(votos),ncol = length(votos),nrow = n_asientos,byrow = T)
-selec <- as.data.frame(selec)
+borrar <- NULL
+for (prov in seq_len(nrow(datos1977))) {
+  # Votos tenerife Alianza Popular mal contados
+  if (prov==15) { datos1977[prov, 12] <- 23.866  }
+  #
+  desde <- 1+grep(pattern = "nulos",x = colnames(datos1977))
+  # Cota del 3%
+  corte <- 100 * colSums(datos1977[prov, desde:ncol(datos1977)]) / sum(datos1977$`Votos válidos`[prov])
+  partidos <- colnames(datos1977[, desde:ncol(datos1977)])[corte > 3]
+  votos <- datos1977[prov, desde:ncol(datos1977)][corte > 3]
+  # Asientos por circunscripción
+  n_asientos <- datos1977$asientos[prov]
+  s <- 1:n_asientos
+  # Creamos matriz con los datos y los dividimos
+  selec <- matrix(data = as.numeric(votos), ncol = length(votos), nrow = n_asientos, byrow = T)
+  selec <- as.data.frame(selec)
   for (i in 1:n_asientos) {
-    selec[i,] <- selec[i,]/i
+    selec[i, ] <- selec[i, ] / i
   }
-# Arreglamos los nombres y los ordenamos de mayor a menor
-colnames(selec) <- partidos
-selec <- as.data.frame(selec)
-selec <- sort(unlist(selec),decreasing = T)[1:n_asientos]
-library(stringr)
-names(selec) <- substr(names(selec), 1, nchar(names(selec))-1)
-# Presentamos el resultado
-borrar[[prov]] <- sort(table(names(selec)),decreasing = T)
-
+  # Arreglamos los nombres y los ordenamos de mayor a menor
+  colnames(selec) <- partidos
+  selec <- as.data.frame(selec)
+  selec <- sort(unlist(selec), decreasing = T)[1:n_asientos]
+  library(stringr)
+  names(selec) <- gsub("\\d", "", names(selec)) # substr(names(selec), 1, nchar(names(selec))-1)
+  # Presentamos el resultado
+  borrar[[prov]] <- sort(table(names(selec)), decreasing = T)
 }
 # library(tibble)
 # library(dplyr)
 # seats_ha(parties = partidos,votes = as.numeric(votos),n_seats = n_asientos,method = "dhondt")
 borrar2 <- borrar[[1]]
 for (i in 2:length(borrar)) {
-  borrar2 <- c(borrar2,borrar[[i]])
+  borrar2 <- c(borrar2, borrar[[i]])
 }
 names(borrar2)
-as.data.table(aggregate(as.numeric(borrar2),by=list(names(borrar2)),FUN=sum))[order(-x)]
-
+as.data.table(aggregate(as.numeric(borrar2), by = list(names(borrar2)), FUN = sum))[order(-x)]
 
 ```
 
 
+```{r Método Sainte-Lague }
+
+library(data.table)
+borrar <- NULL
+for (prov in seq_len(nrow(datos2019))) {
+  # Cota del 3%
+  corte <- 100 * colSums(datos2019[prov, 10:ncol(datos2019)]) / sum(datos2019$`Votos válidos`[prov])
+  partidos <- colnames(datos2019[, 10:ncol(datos2019)])[corte > 3]
+  votos <- datos2019[prov, 10:ncol(datos2019)][corte > 3]
+  # Asientos por circunscripción
+  n_asientos <- datos2019$asientos[prov]
+  s <- 1:n_asientos
+  # Creamos matriz con los datos y los dividimos
+  selec <- matrix(data = as.numeric(votos), ncol = length(votos), nrow = n_asientos, byrow = T)
+  selec <- as.data.frame(selec)
+  for (i in 1:n_asientos) {
+    selec[i, ] <- selec[i, ] / i
+  }
+  # Arreglamos los nombres y los ordenamos de mayor a menor
+  colnames(selec) <- partidos
+  selec <- as.data.frame(selec)
+  selec <- sort(unlist(selec), decreasing = T)[1:n_asientos]
+  library(stringr)
+  names(selec) <- gsub("\\d", "", names(selec)) # substr(names(selec), 1, nchar(names(selec))-1)
+  # Presentamos el resultado
+  borrar[[prov]] <- sort(table(names(selec)), decreasing = T)
+}
+# library(tibble)
+# library(dplyr)
+# seats_ha(parties = partidos,votes = as.numeric(votos),n_seats = n_asientos,method = "dhondt")
+borrar2 <- borrar[[1]]
+for (i in 2:length(borrar)) {
+  borrar2 <- c(borrar2, borrar[[i]])
+}
+names(borrar2)
+as.data.table(aggregate(as.numeric(borrar2), by = list(names(borrar2)), FUN = sum))[order(-x)]
+
+```
 
 
+```{r Método Hungtinton }
 
+library(data.table)
+borrar <- NULL
+for (prov in seq_len(nrow(datos2019))) {
+  # Cota del 3%
+  corte <- 100 * colSums(datos2019[prov, 10:ncol(datos2019)]) / sum(datos2019$`Votos válidos`[prov])
+  partidos <- colnames(datos2019[, 10:ncol(datos2019)])[corte > 3]
+  votos <- datos2019[prov, 10:ncol(datos2019)][corte > 3]
+  # Asientos por circunscripción
+  n_asientos <- datos2019$asientos[prov]
+  s <- 1:n_asientos
+  # Creamos matriz con los datos y los dividimos
+  selec <- matrix(data = as.numeric(votos), ncol = length(votos), nrow = n_asientos, byrow = T)
+  selec <- as.data.frame(selec)
+  for (i in 1:n_asientos) {
+    selec[i, ] <- selec[i, ] / i
+  }
+  # Arreglamos los nombres y los ordenamos de mayor a menor
+  colnames(selec) <- partidos
+  selec <- as.data.frame(selec)
+  selec <- sort(unlist(selec), decreasing = T)[1:n_asientos]
+  library(stringr)
+  names(selec) <- gsub("\\d", "", names(selec)) # substr(names(selec), 1, nchar(names(selec))-1)
+  # Presentamos el resultado
+  borrar[[prov]] <- sort(table(names(selec)), decreasing = T)
+}
+# library(tibble)
+# library(dplyr)
+# seats_ha(parties = partidos,votes = as.numeric(votos),n_seats = n_asientos,method = "dhondt")
+borrar2 <- borrar[[1]]
+for (i in 2:length(borrar)) {
+  borrar2 <- c(borrar2, borrar[[i]])
+}
+names(borrar2)
+as.data.table(aggregate(as.numeric(borrar2), by = list(names(borrar2)), FUN = sum))[order(-x)]
 
+```
 
+```{r Método Hagenbach }
 
+library(data.table)
+borrar <- NULL
+for (prov in seq_len(nrow(datos2019))) {
+  # Cota del 3%
+  corte <- 100 * colSums(datos2019[prov, 10:ncol(datos2019)]) / sum(datos2019$`Votos válidos`[prov])
+  partidos <- colnames(datos2019[, 10:ncol(datos2019)])[corte > 3]
+  votos <- datos2019[prov, 10:ncol(datos2019)][corte > 3]
+  # Asientos por circunscripción
+  n_asientos <- datos2019$asientos[prov]
+  s <- 1:n_asientos
+  # Creamos matriz con los datos y los dividimos
+  selec <- matrix(data = as.numeric(votos), ncol = length(votos), nrow = n_asientos, byrow = T)
+  selec <- as.data.frame(selec)
+  for (i in 1:n_asientos) {
+    selec[i, ] <- selec[i, ] / i
+  }
+  # Arreglamos los nombres y los ordenamos de mayor a menor
+  colnames(selec) <- partidos
+  selec <- as.data.frame(selec)
+  selec <- sort(unlist(selec), decreasing = T)[1:n_asientos]
+  library(stringr)
+  names(selec) <- gsub("\\d", "", names(selec)) # substr(names(selec), 1, nchar(names(selec))-1)
+  # Presentamos el resultado
+  borrar[[prov]] <- sort(table(names(selec)), decreasing = T)
+}
+# library(tibble)
+# library(dplyr)
+# seats_ha(parties = partidos,votes = as.numeric(votos),n_seats = n_asientos,method = "dhondt")
+borrar2 <- borrar[[1]]
+for (i in 2:length(borrar)) {
+  borrar2 <- c(borrar2, borrar[[i]])
+}
+names(borrar2)
+as.data.table(aggregate(as.numeric(borrar2), by = list(names(borrar2)), FUN = sum))[order(-x)]
 
+```
 
+```{r Método Concorcet }
 
+library(data.table)
+borrar <- NULL
+for (prov in seq_len(nrow(datos2019))) {
+  # Cota del 3%
+  corte <- 100 * colSums(datos2019[prov, 10:ncol(datos2019)]) / sum(datos2019$`Votos válidos`[prov])
+  partidos <- colnames(datos2019[, 10:ncol(datos2019)])[corte > 3]
+  votos <- datos2019[prov, 10:ncol(datos2019)][corte > 3]
+  # Asientos por circunscripción
+  n_asientos <- datos2019$asientos[prov]
+  s <- 1:n_asientos
+  # Creamos matriz con los datos y los dividimos
+  selec <- matrix(data = as.numeric(votos), ncol = length(votos), nrow = n_asientos, byrow = T)
+  selec <- as.data.frame(selec)
+  for (i in 1:n_asientos) {
+    selec[i, ] <- selec[i, ] / i
+  }
+  # Arreglamos los nombres y los ordenamos de mayor a menor
+  colnames(selec) <- partidos
+  selec <- as.data.frame(selec)
+  selec <- sort(unlist(selec), decreasing = T)[1:n_asientos]
+  library(stringr)
+  names(selec) <- gsub("\\d", "", names(selec)) # substr(names(selec), 1, nchar(names(selec))-1)
+  # Presentamos el resultado
+  borrar[[prov]] <- sort(table(names(selec)), decreasing = T)
+}
+# library(tibble)
+# library(dplyr)
+# seats_ha(parties = partidos,votes = as.numeric(votos),n_seats = n_asientos,method = "dhondt")
+borrar2 <- borrar[[1]]
+for (i in 2:length(borrar)) {
+  borrar2 <- c(borrar2, borrar[[i]])
+}
+names(borrar2)
+as.data.table(aggregate(as.numeric(borrar2), by = list(names(borrar2)), FUN = sum))[order(-x)]
+
+```
+
+```{r Método cociente hare }
+
+library(data.table)
+borrar <- NULL
+for (prov in seq_len(nrow(datos2019))) {
+  # Cota del 3%
+  corte <- 100 * colSums(datos2019[prov, 10:ncol(datos2019)]) / sum(datos2019$`Votos válidos`[prov])
+  partidos <- colnames(datos2019[, 10:ncol(datos2019)])[corte > 3]
+  votos <- datos2019[prov, 10:ncol(datos2019)][corte > 3]
+  # Asientos por circunscripción
+  n_asientos <- datos2019$asientos[prov]
+  s <- 1:n_asientos
+  # Creamos matriz con los datos y los dividimos
+  selec <- matrix(data = as.numeric(votos), ncol = length(votos), nrow = n_asientos, byrow = T)
+  selec <- as.data.frame(selec)
+  for (i in 1:n_asientos) {
+    selec[i, ] <- selec[i, ] / i
+  }
+  # Arreglamos los nombres y los ordenamos de mayor a menor
+  colnames(selec) <- partidos
+  selec <- as.data.frame(selec)
+  selec <- sort(unlist(selec), decreasing = T)[1:n_asientos]
+  library(stringr)
+  names(selec) <- gsub("\\d", "", names(selec)) # substr(names(selec), 1, nchar(names(selec))-1)
+  # Presentamos el resultado
+  borrar[[prov]] <- sort(table(names(selec)), decreasing = T)
+}
+# library(tibble)
+# library(dplyr)
+# seats_ha(parties = partidos,votes = as.numeric(votos),n_seats = n_asientos,method = "dhondt")
+borrar2 <- borrar[[1]]
+for (i in 2:length(borrar)) {
+  borrar2 <- c(borrar2, borrar[[i]])
+}
+names(borrar2)
+as.data.table(aggregate(as.numeric(borrar2), by = list(names(borrar2)), FUN = sum))[order(-x)]
+
+```
+
+```{r Método cociente Droop }
+
+library(data.table)
+borrar <- NULL
+for (prov in seq_len(nrow(datos2019))) {
+  # Cota del 3%
+  corte <- 100 * colSums(datos2019[prov, 10:ncol(datos2019)]) / sum(datos2019$`Votos válidos`[prov])
+  partidos <- colnames(datos2019[, 10:ncol(datos2019)])[corte > 3]
+  votos <- datos2019[prov, 10:ncol(datos2019)][corte > 3]
+  # Asientos por circunscripción
+  n_asientos <- datos2019$asientos[prov]
+  s <- 1:n_asientos
+  # Creamos matriz con los datos y los dividimos
+  selec <- matrix(data = as.numeric(votos), ncol = length(votos), nrow = n_asientos, byrow = T)
+  selec <- as.data.frame(selec)
+  for (i in 1:n_asientos) {
+    selec[i, ] <- selec[i, ] / i
+  }
+  # Arreglamos los nombres y los ordenamos de mayor a menor
+  colnames(selec) <- partidos
+  selec <- as.data.frame(selec)
+  selec <- sort(unlist(selec), decreasing = T)[1:n_asientos]
+  library(stringr)
+  names(selec) <- gsub("\\d", "", names(selec)) # substr(names(selec), 1, nchar(names(selec))-1)
+  # Presentamos el resultado
+  borrar[[prov]] <- sort(table(names(selec)), decreasing = T)
+}
+# library(tibble)
+# library(dplyr)
+# seats_ha(parties = partidos,votes = as.numeric(votos),n_seats = n_asientos,method = "dhondt")
+borrar2 <- borrar[[1]]
+for (i in 2:length(borrar)) {
+  borrar2 <- c(borrar2, borrar[[i]])
+}
+names(borrar2)
+as.data.table(aggregate(as.numeric(borrar2), by = list(names(borrar2)), FUN = sum))[order(-x)]
+
+```
+
+```{r Método cociente Imperiali }
+
+library(data.table)
+borrar <- NULL
+for (prov in seq_len(nrow(datos2019))) {
+  # Cota del 3%
+  corte <- 100 * colSums(datos2019[prov, 10:ncol(datos2019)]) / sum(datos2019$`Votos válidos`[prov])
+  partidos <- colnames(datos2019[, 10:ncol(datos2019)])[corte > 3]
+  votos <- datos2019[prov, 10:ncol(datos2019)][corte > 3]
+  # Asientos por circunscripción
+  n_asientos <- datos2019$asientos[prov]
+  s <- 1:n_asientos
+  # Creamos matriz con los datos y los dividimos
+  selec <- matrix(data = as.numeric(votos), ncol = length(votos), nrow = n_asientos, byrow = T)
+  selec <- as.data.frame(selec)
+  for (i in 1:n_asientos) {
+    selec[i, ] <- selec[i, ] / i
+  }
+  # Arreglamos los nombres y los ordenamos de mayor a menor
+  colnames(selec) <- partidos
+  selec <- as.data.frame(selec)
+  selec <- sort(unlist(selec), decreasing = T)[1:n_asientos]
+  library(stringr)
+  names(selec) <- gsub("\\d", "", names(selec)) # substr(names(selec), 1, nchar(names(selec))-1)
+  # Presentamos el resultado
+  borrar[[prov]] <- sort(table(names(selec)), decreasing = T)
+}
+# library(tibble)
+# library(dplyr)
+# seats_ha(parties = partidos,votes = as.numeric(votos),n_seats = n_asientos,method = "dhondt")
+borrar2 <- borrar[[1]]
+for (i in 2:length(borrar)) {
+  borrar2 <- c(borrar2, borrar[[i]])
+}
+names(borrar2)
+as.data.table(aggregate(as.numeric(borrar2), by = list(names(borrar2)), FUN = sum))[order(-x)]
+
+```
 
 
 
