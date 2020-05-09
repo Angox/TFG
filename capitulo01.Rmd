@@ -544,6 +544,8 @@ votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
 asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
 ####
 
+
+
 resul <- NULL
 for (prov in seq_len(nrow(datos1977))) {
   # Votos tenerife Alianza Popular mal contados
@@ -560,14 +562,91 @@ resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(res
             
 ```
 
-# Prueba fijo densidad, fijo votos, distintos escaños
+# Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
 
 ```{r}
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 5000
+votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+votos <- votos/seq_len(49)
+
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  n_escannos <- i # Variable
+  votos <- votos # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+beepr::beep(sound = 3)
+resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
+
+```
+
+# Disproporcionalidad
+
+```{r}
+disproporcionalidad <-
+function(s,v )
+    {
+        s <- as.vector(s)
+        v <- as.vector(v)
+        l_s <- length(s)
+        l_v <- length(v)
+        s_s <- sum(s)
+        s_v <- sum(v)
+        p_s <- s/s_s
+        p_v <- v/s_v
+        
+o <- (1/l_s) * sum(abs(p_s-p_v)) 
+            nm <- 'Rae'
+
+#return(list(measure=nm, value=o))
+            o}
+
+
+disproporcionalidad(s = resul1[,1],v = votos)
+
+dis <- apply(X = resul1[,1:500],MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis)
 
 ```
 
 
 
+# Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+
+```{r}
+partidos <- NULL
+for (i in seq_len(500)) {
+  partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
+}
+#partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 30
+votos <- NULL
+for (i in seq_len(500)) {
+  votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
+  votos[[i]] <- votos[[i]]/seq_len(length(partidos[[i]]))
+}
+# votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+# votos <- votos/seq_len(length(partidos))
+
+resul <- NULL
+for (i in seq_len(length(partidos))) {
+  if (i==1) {next}
+  n_escannos <- 50 # Variable
+  #votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+for (i in 3:(ncol(resul1)-2)) {
+  resul1[[i-2]][i:nrow(resul1)] <- NA
+}
 
 
+
+```
 
