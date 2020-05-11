@@ -592,14 +592,14 @@ function(s,v )
         s <- as.vector(s)
         v <- as.vector(v)
         l_s <- length(s)
-        l_v <- length(v)
+#        l_v <- length(v)
         s_s <- sum(s)
         s_v <- sum(v)
         p_s <- s/s_s
         p_v <- v/s_v
         
 o <- (1/l_s) * sum(abs(p_s-p_v)) 
-            nm <- 'Rae'
+#            nm <- 'Rae'
 
 #return(list(measure=nm, value=o))
             o}
@@ -642,11 +642,77 @@ for (i in seq_len(length(partidos))) {
 }
 
 resul1 <- as.data.table(resul)
+# Arreglar tabla poniendo NA donde se necesita
 for (i in 3:(ncol(resul1)-2)) {
   resul1[[i-2]][i:nrow(resul1)] <- NA
 }
 
+# Analizar la desproporcionalidad columna a columna
+dis <- seq_len(length(partidos))
+for (i in seq_len(length(partidos)-1)) {
+  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])),v = votos[[i+1]])
+}
+#disproporcionalidad(s = resul1[,1],v = votos)
 
+#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+dis[500] <- 0
+
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis)
+
+```
+
+
+
+# Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+
+```{r}
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 500
+# votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+
+# Modificar la densidad de los votos
+votos <- trunc(rep(x = 10e5,length(partidos)))
+expon <- seq(from=0.001,to = 1, length.out = 1000)
+vot <- NULL
+for (i in seq_len(1000)) {
+  vot[[i]] <- votos*dexp(1:length(partidos),rate = expon[i])
+}
+
+
+# 
+# ut <- (datos1977[1:nrow(datos1977),9:ncol(datos1977)])
+# ut <- as.matrix(ut)
+# lm(1:ncol(ut)~sort(ut[1,],decreasing = T))
+
+
+
+
+# Aplicarlo 
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  # n_escannos <- i # Variable
+  votos <- vot[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+
+# Analizar la desproporcionalidad columna a columna
+dis <- seq_len(ncol(resul1))
+for (i in seq_len(ncol(resul1))) {
+  dis[i] <- disproporcionalidad(s = resul1[[i]],v = vot[[i]])
+}
+#disproporcionalidad(s = resul1[,1],v = votos)
+
+#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis[500] <- 0
+
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
+      Concentración (menor a mayor)")
 
 ```
 
