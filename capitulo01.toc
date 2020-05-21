@@ -1,81 +1,76 @@
 \babel@toc {spanish}{}
-\contentsline {chapter}{\numberline {1}Introducción}{3}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Objetivos}{3}{section.1.1}%
-\contentsline {section}{\numberline {1.2}¿Qué significa votar?}{3}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Origen}{3}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Significado}{3}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}¿Votación o sufragio?}{4}{subsection.1.2.3}%
-\contentsline {section}{\numberline {1.3}Sistema electoral en España}{4}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Orígenes}{4}{subsection.1.3.1}%
-\contentsline {subsection}{\numberline {1.3.2}Sistema electoral de la constitución de 1978}{4}{subsection.1.3.2}%
-\contentsline {subsection}{\numberline {1.3.3}Descripción del sistema Electoral Español}{4}{subsection.1.3.3}%
-\contentsline {subsection}{\numberline {1.3.4}Congreso}{5}{subsection.1.3.4}%
-\contentsline {subsubsection}{\numberline {1.3.4.1}Número diputados}{5}{subsubsection.1.3.4.1}%
-\contentsline {subsubsection}{\numberline {1.3.4.2}Reparto de Escaños}{5}{subsubsection.1.3.4.2}%
-\contentsline {subsection}{\numberline {1.3.5}Senado}{5}{subsection.1.3.5}%
-\contentsline {chapter}{\numberline {2}Métodos de reparto de escaños}{7}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Método de cifra repartidora}{7}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Ley D´Hondt}{7}{subsection.2.1.1}%
-\contentsline {subsubsection}{\numberline {2.1.1.1}Reparto}{7}{subsubsection.2.1.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Método Sainte-Laguë}{8}{subsection.2.1.2}%
-\contentsline {subsubsection}{\numberline {2.1.2.1}Reparto}{8}{subsubsection.2.1.2.1}%
-\contentsline {subsubsection}{\numberline {2.1.2.2}Método modificado}{8}{subsubsection.2.1.2.2}%
-\contentsline {section}{\numberline {2.2}Método Huntington-Hill}{8}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Método}{8}{subsection.2.2.1}%
-\contentsline {section}{\numberline {2.3}Cuota Hagenbach-Bischoff}{9}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Reparto}{9}{subsection.2.3.1}%
-\contentsline {section}{\numberline {2.4}Método de Condorcet}{9}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Procedimiento}{9}{subsection.2.4.1}%
-\contentsline {section}{\numberline {2.5}Método del resto mayor}{10}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Cociente Hare}{10}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}Cociente Droop}{11}{subsection.2.5.2}%
-\contentsline {subsection}{\numberline {2.5.3}Cociente Imperiali}{11}{subsection.2.5.3}%
-\contentsline {section}{\numberline {2.6}Método Schulze}{11}{section.2.6}%
-\contentsline {section}{\numberline {2.7}Regla de Hamilton}{12}{section.2.7}%
-\contentsline {chapter}{\numberline {3}Analisis de los datos}{13}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Año 1977}{13}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Método D`Hondt}{13}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Método Sainte-Lague}{13}{subsection.3.1.2}%
-\contentsline {section}{\numberline {3.2}Año 1979}{13}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Método D`Hondt}{13}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Método Sainte-Lague}{13}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}Año 1982}{13}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Método D`Hondt}{13}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Método Sainte-Lague}{14}{subsection.3.3.2}%
-\contentsline {section}{\numberline {3.4}Año 1986}{14}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Método D`Hondt}{14}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Método Sainte-Lague}{14}{subsection.3.4.2}%
-\contentsline {section}{\numberline {3.5}Año 1989}{14}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Método D`Hondt}{14}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Método Sainte-Lague}{14}{subsection.3.5.2}%
-\contentsline {section}{\numberline {3.6}Año 1993}{14}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Método D`Hondt}{14}{subsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.6.2}Método Sainte-Lague}{14}{subsection.3.6.2}%
-\contentsline {section}{\numberline {3.7}Año 1996}{14}{section.3.7}%
-\contentsline {subsection}{\numberline {3.7.1}Método D`Hondt}{14}{subsection.3.7.1}%
-\contentsline {subsection}{\numberline {3.7.2}Método Sainte-Lague}{14}{subsection.3.7.2}%
-\contentsline {section}{\numberline {3.8}Año 2000}{14}{section.3.8}%
-\contentsline {subsection}{\numberline {3.8.1}Método D`Hondt}{14}{subsection.3.8.1}%
-\contentsline {subsection}{\numberline {3.8.2}Método Sainte-Lague}{15}{subsection.3.8.2}%
-\contentsline {section}{\numberline {3.9}Año 2004}{15}{section.3.9}%
-\contentsline {subsection}{\numberline {3.9.1}Método D`Hondt}{15}{subsection.3.9.1}%
-\contentsline {subsection}{\numberline {3.9.2}Método Sainte-Lague}{15}{subsection.3.9.2}%
-\contentsline {section}{\numberline {3.10}Año 2008}{15}{section.3.10}%
-\contentsline {subsection}{\numberline {3.10.1}Método D`Hondt}{15}{subsection.3.10.1}%
-\contentsline {subsection}{\numberline {3.10.2}Método Sainte-Lague}{15}{subsection.3.10.2}%
-\contentsline {section}{\numberline {3.11}Año 2011}{15}{section.3.11}%
-\contentsline {subsection}{\numberline {3.11.1}Método D`Hondt}{15}{subsection.3.11.1}%
-\contentsline {subsection}{\numberline {3.11.2}Método Sainte-Lague}{15}{subsection.3.11.2}%
-\contentsline {section}{\numberline {3.12}Año 2015}{15}{section.3.12}%
-\contentsline {subsection}{\numberline {3.12.1}Método D`Hondt}{15}{subsection.3.12.1}%
-\contentsline {subsection}{\numberline {3.12.2}Método Sainte-Lague}{16}{subsection.3.12.2}%
-\contentsline {section}{\numberline {3.13}Año 2016}{16}{section.3.13}%
-\contentsline {subsection}{\numberline {3.13.1}Método D`Hondt}{16}{subsection.3.13.1}%
-\contentsline {subsection}{\numberline {3.13.2}Método Sainte-Lague}{16}{subsection.3.13.2}%
-\contentsline {section}{\numberline {3.14}Año 2019\_4}{16}{section.3.14}%
-\contentsline {subsection}{\numberline {3.14.1}Método D`Hondt}{16}{subsection.3.14.1}%
-\contentsline {subsection}{\numberline {3.14.2}Método Sainte-Lague}{16}{subsection.3.14.2}%
-\contentsline {section}{\numberline {3.15}Año 2019\_11}{16}{section.3.15}%
-\contentsline {subsection}{\numberline {3.15.1}Método D`Hondt}{16}{subsection.3.15.1}%
-\contentsline {subsection}{\numberline {3.15.2}Método Sainte-Lague}{16}{subsection.3.15.2}%
-\contentsline {chapter}{Bibliografía}{16}{subsection.3.15.2}%
+\contentsline {chapter}{\numberline {1}Introducción}{5}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Objetivos}{5}{section.1.1}%
+\contentsline {section}{\numberline {1.2}¿Qué significa votar?}{5}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Origen}{5}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Significado}{5}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}¿Votación o sufragio?}{6}{subsection.1.2.3}%
+\contentsline {section}{\numberline {1.3}Sistema electoral en España}{6}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Orígenes}{6}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Sistema electoral de la constitución de 1978}{6}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Descripción del sistema Electoral Español}{6}{subsection.1.3.3}%
+\contentsline {subsection}{\numberline {1.3.4}Congreso}{7}{subsection.1.3.4}%
+\contentsline {subsubsection}{\numberline {1.3.4.1}Número diputados}{7}{subsubsection.1.3.4.1}%
+\contentsline {subsubsection}{\numberline {1.3.4.2}Reparto de Escaños}{7}{subsubsection.1.3.4.2}%
+\contentsline {subsection}{\numberline {1.3.5}Senado}{7}{subsection.1.3.5}%
+\contentsline {chapter}{\numberline {2}Métodos de reparto de escaños}{9}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Método de cifra repartidora}{9}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Ley D´Hondt}{9}{subsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.1.1}Reparto}{9}{subsubsection.2.1.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Método Sainte-Laguë}{10}{subsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.2.1}Reparto}{10}{subsubsection.2.1.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.2.2}Método modificado}{10}{subsubsection.2.1.2.2}%
+\contentsline {section}{\numberline {2.2}Método Huntington-Hill}{10}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Método}{10}{subsection.2.2.1}%
+\contentsline {section}{\numberline {2.3}Cuota Hagenbach-Bischoff}{11}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Reparto}{11}{subsection.2.3.1}%
+\contentsline {section}{\numberline {2.4}Método de Condorcet}{11}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Procedimiento}{11}{subsection.2.4.1}%
+\contentsline {section}{\numberline {2.5}Método del resto mayor}{12}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Cociente Hare}{12}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Cociente Droop}{13}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Cociente Imperiali}{13}{subsection.2.5.3}%
+\contentsline {section}{\numberline {2.6}Método Schulze}{13}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Regla de Hamilton}{14}{section.2.7}%
+\contentsline {chapter}{\numberline {3}Analisis de los datos}{15}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Año 1977}{15}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Método D`Hondt}{15}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Método Sainte-Lague}{15}{subsection.3.1.2}%
+\contentsline {chapter}{\numberline {4}Análisis empírico método reparto de escaños}{17}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Según nº partidos, densidad y nº de escaños a repartir}{17}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}D`Hondt}{17}{subsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.1.1}D`Hondt Prueba fijo densidad, fijo votos, fijo n\_partidos, distintos escaños}{17}{subsubsection.4.1.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.1.2}D`Hondt Disproporcionalidad}{17}{subsubsection.4.1.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.1.3}D`Hondt Prueba fijo densidad, fijo votos, var n\_partidos, fijo escaños}{19}{subsubsection.4.1.1.3}%
+\contentsline {subsubsection}{\numberline {4.1.1.4}D`Hondt Prueba var densidad, fijo votos, fijo n\_partidos, fijo escaños}{20}{subsubsection.4.1.1.4}%
+\contentsline {subsection}{\numberline {4.1.2}Sainte-Lague}{20}{subsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.2.1}Sainte-Lague Prueba fijo densidad, fijo votos, fijo n\_partidos, distintos escaños}{20}{subsubsection.4.1.2.1}%
+\contentsline {subsubsection}{\numberline {4.1.2.2}Sainte-Lague Disproporcionalidad}{20}{subsubsection.4.1.2.2}%
+\contentsline {subsubsection}{\numberline {4.1.2.3}Sainte-Lague Prueba fijo densidad, fijo votos, var n\_partidos, fijo escaños}{21}{subsubsection.4.1.2.3}%
+\contentsline {subsubsection}{\numberline {4.1.2.4}Sainte-Lague Prueba var densidad, fijo votos, fijo n\_partidos, fijo escaños}{22}{subsubsection.4.1.2.4}%
+\contentsline {subsection}{\numberline {4.1.3}Modified Sainte-Lague}{22}{subsection.4.1.3}%
+\contentsline {subsubsection}{\numberline {4.1.3.1}Modified Sainte-Lague Prueba fijo densidad, fijo votos, fijo n\_partidos, distintos escaños}{22}{subsubsection.4.1.3.1}%
+\contentsline {subsubsection}{\numberline {4.1.3.2}Modified Sainte-Lague Disproporcionalidad}{22}{subsubsection.4.1.3.2}%
+\contentsline {subsubsection}{\numberline {4.1.3.3}Modified Sainte-Lague Prueba fijo densidad, fijo votos, var n\_partidos, fijo escaños}{23}{subsubsection.4.1.3.3}%
+\contentsline {subsubsection}{\numberline {4.1.3.4}Modified Sainte-Lague Prueba var densidad, fijo votos, fijo n\_partidos, fijo escaños}{24}{subsubsection.4.1.3.4}%
+\contentsline {subsection}{\numberline {4.1.4}Imperiali}{24}{subsection.4.1.4}%
+\contentsline {subsubsection}{\numberline {4.1.4.1}Imperiali Prueba fijo densidad, fijo votos, fijo n\_partidos, distintos escaños}{24}{subsubsection.4.1.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.4.2}Imperiali Disproporcionalidad}{24}{subsubsection.4.1.4.2}%
+\contentsline {subsubsection}{\numberline {4.1.4.3}Imperiali Prueba fijo densidad, fijo votos, var n\_partidos, fijo escaños}{25}{subsubsection.4.1.4.3}%
+\contentsline {subsubsection}{\numberline {4.1.4.4}Imperiali Prueba var densidad, fijo votos, fijo n\_partidos, fijo escaños}{26}{subsubsection.4.1.4.4}%
+\contentsline {subsection}{\numberline {4.1.5}Huntington-Hill}{26}{subsection.4.1.5}%
+\contentsline {subsubsection}{\numberline {4.1.5.1}Huntington-Hill Prueba fijo densidad, fijo votos, fijo n\_partidos, distintos escaños}{26}{subsubsection.4.1.5.1}%
+\contentsline {subsubsection}{\numberline {4.1.5.2}Huntington-Hill Disproporcionalidad}{26}{subsubsection.4.1.5.2}%
+\contentsline {subsubsection}{\numberline {4.1.5.3}Huntington-Hill Prueba fijo densidad, fijo votos, var n\_partidos, fijo escaños}{27}{subsubsection.4.1.5.3}%
+\contentsline {subsubsection}{\numberline {4.1.5.4}Huntington-Hill Prueba var densidad, fijo votos, fijo n\_partidos, fijo escaños}{28}{subsubsection.4.1.5.4}%
+\contentsline {subsection}{\numberline {4.1.6}Adams}{28}{subsection.4.1.6}%
+\contentsline {subsubsection}{\numberline {4.1.6.1}Adams Prueba fijo densidad, fijo votos, fijo n\_partidos, distintos escaños}{28}{subsubsection.4.1.6.1}%
+\contentsline {subsubsection}{\numberline {4.1.6.2}Adams Disproporcionalidad}{28}{subsubsection.4.1.6.2}%
+\contentsline {subsubsection}{\numberline {4.1.6.3}Adams Prueba fijo densidad, fijo votos, var n\_partidos, fijo escaños}{29}{subsubsection.4.1.6.3}%
+\contentsline {subsubsection}{\numberline {4.1.6.4}Adams Prueba var densidad, fijo votos, fijo n\_partidos, fijo escaños}{30}{subsubsection.4.1.6.4}%
+\contentsline {subsection}{\numberline {4.1.7}Danish}{30}{subsection.4.1.7}%
+\contentsline {subsubsection}{\numberline {4.1.7.1}Danish Prueba fijo densidad, fijo votos, fijo n\_partidos, distintos escaños}{30}{subsubsection.4.1.7.1}%
+\contentsline {subsubsection}{\numberline {4.1.7.2}Danish Disproporcionalidad}{30}{subsubsection.4.1.7.2}%
+\contentsline {subsubsection}{\numberline {4.1.7.3}Danish Prueba fijo densidad, fijo votos, var n\_partidos, fijo escaños}{31}{subsubsection.4.1.7.3}%
+\contentsline {subsubsection}{\numberline {4.1.7.4}Danish Prueba var densidad, fijo votos, fijo n\_partidos, fijo escaños}{32}{subsubsection.4.1.7.4}%
+\contentsline {chapter}{Bibliografía}{32}{subsubsection.4.1.7.4}%

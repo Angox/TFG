@@ -508,7 +508,7 @@ n_escannos <- seq_len(50)
 
 ### D`Hondt
 ```{r}
-
+library(data.table)
 # Variables
 partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 5
@@ -535,34 +535,34 @@ asientos_dhondt <- function(partidos, votos,
 }
 
 # Modelo para España
-desde <- 1 + grep(pattern = "nulos", x = colnames(datos1977))
-partidos <- colnames(datos1977)[desde:(length(colnames(datos1977)) - 1)]
-prov <- 1
-n_escannos <- datos1977$asientos[prov]
-votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
-
-asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
+# desde <- 1 + grep(pattern = "nulos", x = colnames(datos1977))
+# partidos <- colnames(datos1977)[desde:(length(colnames(datos1977)) - 1)]
+# prov <- 1
+# n_escannos <- datos1977$asientos[prov]
+# votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
+# 
+# asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
 ####
 
 
-
-resul <- NULL
-for (prov in seq_len(nrow(datos1977))) {
-  # Votos tenerife Alianza Popular mal contados
-  if (prov == 15) {
-    datos1977[prov, 12] <- 23866
-  }
-  n_escannos <- datos1977$asientos[prov]
-  votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
-  resul[[prov]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
-}
-
-resul <- as.data.table(resul)
-resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
+# 
+# resul <- NULL
+# for (prov in seq_len(nrow(datos1977))) {
+#   # Votos tenerife Alianza Popular mal contados
+#   if (prov == 15) {
+#     datos1977[prov, 12] <- 23866
+#   }
+#   n_escannos <- datos1977$asientos[prov]
+#   votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
+#   resul[[prov]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
+# }
+# 
+# resul <- as.data.table(resul)
+# resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
             
 ```
 
-# Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+#### D`Hondt Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
 
 ```{r}
 partidos <- paste("Partido_", seq_len(49), sep = "")
@@ -578,12 +578,12 @@ for (i in seq_len(n_escannos)) {
 }
 
 resul1 <- as.data.table(resul)
-beepr::beep(sound = 3)
-resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
+# beepr::beep(sound = 3)
+# resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
 
 ```
 
-# Disproporcionalidad
+#### D`Hondt Disproporcionalidad
 
 ```{r}
 disproporcionalidad <-
@@ -610,13 +610,238 @@ disproporcionalidad(s = resul1[,1],v = votos)
 dis <- apply(X = resul1[,1:500],MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
 
 library(ggplot2)
+library(ggthemes)
+qplot(seq_len(length(dis)),dis)
+
+dis1 <- data.frame("Disproporcionalidad"=dis,"Escannos"=seq_len(length(dis)))
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(title = "Número de Escaños a repartir", subtitle = "Disproporcionalidad según D`Hondt", caption = "Angel Gonzalez",x="Número de Escaños")
+
+
+```
+
+En este caso se nos presenta la disproporcionalidad variando el número de de escaños posibles, en el presente caso se empieza por repartir un único escaño hasta los 500 posibles escaños.
+Observamos que la disproporcionalidad en el caso de un escaño es muy alta, posteriormente cuanto mayor es el número de escaños a repartir la disproporcionalidad va bajando.
+La diferencia de disproporcionalidad en los casos en los que hay pocos escaños a repartir es alta, cuantos mas escaños a repartir la diferencia de disproporcionalidad entre sucesivos escaños va reduciendose, a números altos de escaños a repartir la disproporcionalidad tiende a estabilizarse.
+
+#### D`Hondt Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+
+```{r}
+partidos <- NULL
+for (i in seq_len(500)) {
+  partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
+}
+#partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 30
+votos <- NULL
+for (i in seq_len(500)) {
+  votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
+  votos[[i]] <- votos[[i]]/seq_len(length(partidos[[i]]))
+}
+# votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+# votos <- votos/seq_len(length(partidos))
+
+resul <- NULL
+for (i in seq_len(length(partidos))) {
+  if (i==1) {next}
+  n_escannos <- 50 # Variable
+  #votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+# Arreglar tabla poniendo NA donde se necesita
+for (i in 3:(ncol(resul1)-2)) {
+  resul1[[i-2]][i:nrow(resul1)] <- NA
+}
+
+# Analizar la desproporcionalidad columna a columna
+dis <- seq_len(length(partidos))
+for (i in seq_len(length(partidos)-1)) {
+  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])),v = votos[[i+1]])
+}
+#disproporcionalidad(s = resul1[,1],v = votos)
+
+#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+dis[500] <- 0
+
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis)
+
+```
+
+En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
+Observamos que cuando se presentan 2 o 3 partidos a las elecciones la disproporcionalidad es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de disproporcionalidad con 6 partidos que se presentan a las elecciones, a partir de el séptimo partido la curva comienza a decrecer.
+Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 4 a 60 ) la disproporcionalidad es alta pero decreciente, cuanto mayor número de partidos se presentan en las elcciones menor es la disproporcionalidad que encontramos, como en el apartado anterior, la disproporcionalidad tiende a estabilizarse.
+
+
+
+#### D`Hondt Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+
+```{r}
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 500
+# votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+
+# Modificar la densidad de los votos
+votos <- trunc(rep(x = 10e5,length(partidos)))
+expon <- seq(from=0.001,to = 1, length.out = 1000)
+vot <- NULL
+for (i in seq_len(1000)) {
+  vot[[i]] <- votos*dexp(1:length(partidos),rate = expon[i])
+}
+
+
+
+# ut <- (datos1977[1:nrow(datos1977),9:ncol(datos1977)])
+# ut <- as.matrix(ut)
+# lm(1:ncol(ut)~sort(ut[1,],decreasing = T))
+
+
+
+
+# Aplicarlo 
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  # n_escannos <- i # Variable
+  votos <- vot[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+
+# Analizar la desproporcionalidad columna a columna
+dis <- seq_len(ncol(resul1))
+for (i in seq_len(ncol(resul1))) {
+  dis[i] <- disproporcionalidad(s = resul1[[i]],v = vot[[i]])
+}
+#disproporcionalidad(s = resul1[,1],v = votos)
+
+#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis[500] <- 0
+
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
+      Concentración (menor a mayor)")
+
+```
+
+### Sainte-Lague
+```{r}
+library(data.table)
+# Variables
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 5
+votos <- trunc(seq(from = 100, to = 1, length.out = length(partidos)))
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+  
+  # Escaños
+  div <- div <- 2*(1:n_escannos) - 1
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escaños" = as.numeric(o))
+}
+
+# Modelo para España
+# desde <- 1 + grep(pattern = "nulos", x = colnames(datos1977))
+# partidos <- colnames(datos1977)[desde:(length(colnames(datos1977)) - 1)]
+# prov <- 1
+# n_escannos <- datos1977$asientos[prov]
+# votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
+# 
+# asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
+####
+
+
+# 
+# resul <- NULL
+# for (prov in seq_len(nrow(datos1977))) {
+#   # Votos tenerife Alianza Popular mal contados
+#   if (prov == 15) {
+#     datos1977[prov, 12] <- 23866
+#   }
+#   n_escannos <- datos1977$asientos[prov]
+#   votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
+#   resul[[prov]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
+# }
+# 
+# resul <- as.data.table(resul)
+# resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
+
+```
+
+#### Sainte-Lague Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+
+```{r}
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 5000
+votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+votos <- votos/seq_len(49)
+
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  n_escannos <- i # Variable
+  votos <- votos # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+# beepr::beep(sound = 3)
+# resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
+
+```
+
+#### Sainte-Lague Disproporcionalidad
+
+```{r}
+disproporcionalidad <-
+  function(s,v )
+  {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    #        l_v <- length(v)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s/s_s
+    p_v <- v/s_v
+    
+    o <- (1/l_s) * sum(abs(p_s-p_v)) 
+    #            nm <- 'Rae'
+    
+    #return(list(measure=nm, value=o))
+    o}
+
+
+disproporcionalidad(s = resul1[,1],v = votos)
+
+dis <- apply(X = resul1[,1:500],MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+
+library(ggplot2)
 qplot(seq_len(length(dis)),dis)
 
 ```
 
 
 
-# Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+#### Sainte-Lague Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
 
 ```{r}
 partidos <- NULL
@@ -665,7 +890,7 @@ qplot(seq_len(length(dis)),dis)
 
 
 
-# Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+#### Sainte-Lague Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
 
 ```{r}
 partidos <- paste("Partido_", seq_len(49), sep = "")
@@ -681,7 +906,1060 @@ for (i in seq_len(1000)) {
 }
 
 
+
+# ut <- (datos1977[1:nrow(datos1977),9:ncol(datos1977)])
+# ut <- as.matrix(ut)
+# lm(1:ncol(ut)~sort(ut[1,],decreasing = T))
+
+
+
+
+# Aplicarlo 
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  # n_escannos <- i # Variable
+  votos <- vot[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+
+# Analizar la desproporcionalidad columna a columna
+dis <- seq_len(ncol(resul1))
+for (i in seq_len(ncol(resul1))) {
+  dis[i] <- disproporcionalidad(s = resul1[[i]],v = vot[[i]])
+}
+#disproporcionalidad(s = resul1[,1],v = votos)
+
+#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis[500] <- 0
+
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
+      Concentración (menor a mayor)")
+
+```
+
+### Modified Sainte-Lague
+```{r}
+library(data.table)
+# Variables
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 5
+votos <- trunc(seq(from = 100, to = 1, length.out = length(partidos)))
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+  
+  # Escaños
+  div <- div <- c(1, (10*(2:n_escannos)-5)/7)
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escaños" = as.numeric(o))
+}
+
+# Modelo para España
+# desde <- 1 + grep(pattern = "nulos", x = colnames(datos1977))
+# partidos <- colnames(datos1977)[desde:(length(colnames(datos1977)) - 1)]
+# prov <- 1
+# n_escannos <- datos1977$asientos[prov]
+# votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
 # 
+# asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
+####
+
+
+# 
+# resul <- NULL
+# for (prov in seq_len(nrow(datos1977))) {
+#   # Votos tenerife Alianza Popular mal contados
+#   if (prov == 15) {
+#     datos1977[prov, 12] <- 23866
+#   }
+#   n_escannos <- datos1977$asientos[prov]
+#   votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
+#   resul[[prov]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
+# }
+# 
+# resul <- as.data.table(resul)
+# resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
+
+```
+
+#### Modified Sainte-Lague Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+
+```{r}
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 5000
+votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+votos <- votos/seq_len(49)
+
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  n_escannos <- i # Variable
+  votos <- votos # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+# beepr::beep(sound = 3)
+# resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
+
+```
+
+#### Modified Sainte-Lague Disproporcionalidad
+
+```{r}
+disproporcionalidad <-
+  function(s,v )
+  {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    #        l_v <- length(v)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s/s_s
+    p_v <- v/s_v
+    
+    o <- (1/l_s) * sum(abs(p_s-p_v)) 
+    #            nm <- 'Rae'
+    
+    #return(list(measure=nm, value=o))
+    o}
+
+
+disproporcionalidad(s = resul1[,1],v = votos)
+
+dis <- apply(X = resul1[,1:500],MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis)
+
+```
+
+
+
+#### Modified Sainte-Lague Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+
+```{r}
+partidos <- NULL
+for (i in seq_len(500)) {
+  partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
+}
+#partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 30
+votos <- NULL
+for (i in seq_len(500)) {
+  votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
+  votos[[i]] <- votos[[i]]/seq_len(length(partidos[[i]]))
+}
+# votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+# votos <- votos/seq_len(length(partidos))
+
+resul <- NULL
+for (i in seq_len(length(partidos))) {
+  if (i==1) {next}
+  n_escannos <- 50 # Variable
+  #votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+# Arreglar tabla poniendo NA donde se necesita
+for (i in 3:(ncol(resul1)-2)) {
+  resul1[[i-2]][i:nrow(resul1)] <- NA
+}
+
+# Analizar la desproporcionalidad columna a columna
+dis <- seq_len(length(partidos))
+for (i in seq_len(length(partidos)-1)) {
+  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])),v = votos[[i+1]])
+}
+#disproporcionalidad(s = resul1[,1],v = votos)
+
+#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+dis[500] <- 0
+
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis)
+
+```
+
+
+
+#### Modified Sainte-Lague Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+
+```{r}
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 500
+# votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+
+# Modificar la densidad de los votos
+votos <- trunc(rep(x = 10e5,length(partidos)))
+expon <- seq(from=0.001,to = 1, length.out = 1000)
+vot <- NULL
+for (i in seq_len(1000)) {
+  vot[[i]] <- votos*dexp(1:length(partidos),rate = expon[i])
+}
+
+
+
+# ut <- (datos1977[1:nrow(datos1977),9:ncol(datos1977)])
+# ut <- as.matrix(ut)
+# lm(1:ncol(ut)~sort(ut[1,],decreasing = T))
+
+
+
+
+# Aplicarlo 
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  # n_escannos <- i # Variable
+  votos <- vot[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+
+# Analizar la desproporcionalidad columna a columna
+dis <- seq_len(ncol(resul1))
+for (i in seq_len(ncol(resul1))) {
+  dis[i] <- disproporcionalidad(s = resul1[[i]],v = vot[[i]])
+}
+#disproporcionalidad(s = resul1[,1],v = votos)
+
+#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis[500] <- 0
+
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
+      Concentración (menor a mayor)")
+
+```
+
+### Imperiali
+```{r}
+library(data.table)
+# Variables
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 5
+votos <- trunc(seq(from = 100, to = 1, length.out = length(partidos)))
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+  
+  # Escaños
+  div <- ((1:n_escannos)+1)/2
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escaños" = as.numeric(o))
+}
+
+# Modelo para España
+# desde <- 1 + grep(pattern = "nulos", x = colnames(datos1977))
+# partidos <- colnames(datos1977)[desde:(length(colnames(datos1977)) - 1)]
+# prov <- 1
+# n_escannos <- datos1977$asientos[prov]
+# votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
+# 
+# asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
+####
+
+
+# 
+# resul <- NULL
+# for (prov in seq_len(nrow(datos1977))) {
+#   # Votos tenerife Alianza Popular mal contados
+#   if (prov == 15) {
+#     datos1977[prov, 12] <- 23866
+#   }
+#   n_escannos <- datos1977$asientos[prov]
+#   votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
+#   resul[[prov]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
+# }
+# 
+# resul <- as.data.table(resul)
+# resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
+
+```
+
+#### Imperiali Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+
+```{r}
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 5000
+votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+votos <- votos/seq_len(49)
+
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  n_escannos <- i # Variable
+  votos <- votos # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+# beepr::beep(sound = 3)
+# resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
+
+```
+
+#### Imperiali Disproporcionalidad
+
+```{r}
+disproporcionalidad <-
+  function(s,v )
+  {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    #        l_v <- length(v)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s/s_s
+    p_v <- v/s_v
+    
+    o <- (1/l_s) * sum(abs(p_s-p_v)) 
+    #            nm <- 'Rae'
+    
+    #return(list(measure=nm, value=o))
+    o}
+
+
+disproporcionalidad(s = resul1[,1],v = votos)
+
+dis <- apply(X = resul1[,1:500],MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis)
+
+```
+
+
+
+#### Imperiali Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+
+```{r}
+partidos <- NULL
+for (i in seq_len(500)) {
+  partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
+}
+#partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 30
+votos <- NULL
+for (i in seq_len(500)) {
+  votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
+  votos[[i]] <- votos[[i]]/seq_len(length(partidos[[i]]))
+}
+# votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+# votos <- votos/seq_len(length(partidos))
+
+resul <- NULL
+for (i in seq_len(length(partidos))) {
+  if (i==1) {next}
+  n_escannos <- 50 # Variable
+  #votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+# Arreglar tabla poniendo NA donde se necesita
+for (i in 3:(ncol(resul1)-2)) {
+  resul1[[i-2]][i:nrow(resul1)] <- NA
+}
+
+# Analizar la desproporcionalidad columna a columna
+dis <- seq_len(length(partidos))
+for (i in seq_len(length(partidos)-1)) {
+  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])),v = votos[[i+1]])
+}
+#disproporcionalidad(s = resul1[,1],v = votos)
+
+#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+dis[500] <- 0
+
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis)
+
+```
+
+
+
+#### Imperiali Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+
+```{r}
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 500
+# votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+
+# Modificar la densidad de los votos
+votos <- trunc(rep(x = 10e5,length(partidos)))
+expon <- seq(from=0.001,to = 1, length.out = 1000)
+vot <- NULL
+for (i in seq_len(1000)) {
+  vot[[i]] <- votos*dexp(1:length(partidos),rate = expon[i])
+}
+
+
+
+# ut <- (datos1977[1:nrow(datos1977),9:ncol(datos1977)])
+# ut <- as.matrix(ut)
+# lm(1:ncol(ut)~sort(ut[1,],decreasing = T))
+
+
+
+
+# Aplicarlo 
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  # n_escannos <- i # Variable
+  votos <- vot[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+
+# Analizar la desproporcionalidad columna a columna
+dis <- seq_len(ncol(resul1))
+for (i in seq_len(ncol(resul1))) {
+  dis[i] <- disproporcionalidad(s = resul1[[i]],v = vot[[i]])
+}
+#disproporcionalidad(s = resul1[,1],v = votos)
+
+#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis[500] <- 0
+
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
+      Concentración (menor a mayor)")
+
+```
+
+### Huntington-Hill
+```{r}
+library(data.table)
+# Variables
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 5
+votos <- trunc(seq(from = 100, to = 1, length.out = length(partidos)))
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+  
+  # Escaños
+  div <- sqrt( (1:n_escannos) * ((1:n_escannos)-1) )
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escaños" = as.numeric(o))
+}
+
+# Modelo para España
+# desde <- 1 + grep(pattern = "nulos", x = colnames(datos1977))
+# partidos <- colnames(datos1977)[desde:(length(colnames(datos1977)) - 1)]
+# prov <- 1
+# n_escannos <- datos1977$asientos[prov]
+# votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
+# 
+# asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
+####
+
+
+# 
+# resul <- NULL
+# for (prov in seq_len(nrow(datos1977))) {
+#   # Votos tenerife Alianza Popular mal contados
+#   if (prov == 15) {
+#     datos1977[prov, 12] <- 23866
+#   }
+#   n_escannos <- datos1977$asientos[prov]
+#   votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
+#   resul[[prov]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
+# }
+# 
+# resul <- as.data.table(resul)
+# resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
+
+```
+
+#### Huntington-Hill Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+
+```{r}
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 5000
+votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+votos <- votos/seq_len(49)
+
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  n_escannos <- i # Variable
+  votos <- votos # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+# beepr::beep(sound = 3)
+# resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
+
+```
+
+#### Huntington-Hill Disproporcionalidad
+
+```{r}
+disproporcionalidad <-
+  function(s,v )
+  {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    #        l_v <- length(v)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s/s_s
+    p_v <- v/s_v
+    
+    o <- (1/l_s) * sum(abs(p_s-p_v)) 
+    #            nm <- 'Rae'
+    
+    #return(list(measure=nm, value=o))
+    o}
+
+
+disproporcionalidad(s = resul1[,1],v = votos)
+
+dis <- apply(X = resul1[,1:500],MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis)
+
+```
+
+
+
+#### Huntington-Hill Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+
+```{r}
+partidos <- NULL
+for (i in seq_len(500)) {
+  partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
+}
+#partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 30
+votos <- NULL
+for (i in seq_len(500)) {
+  votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
+  votos[[i]] <- votos[[i]]/seq_len(length(partidos[[i]]))
+}
+# votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+# votos <- votos/seq_len(length(partidos))
+
+resul <- NULL
+for (i in seq_len(length(partidos))) {
+  if (i==1) {next}
+  n_escannos <- 50 # Variable
+  #votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+# Arreglar tabla poniendo NA donde se necesita
+for (i in 3:(ncol(resul1)-2)) {
+  resul1[[i-2]][i:nrow(resul1)] <- NA
+}
+
+# Analizar la desproporcionalidad columna a columna
+dis <- seq_len(length(partidos))
+for (i in seq_len(length(partidos)-1)) {
+  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])),v = votos[[i+1]])
+}
+#disproporcionalidad(s = resul1[,1],v = votos)
+
+#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+dis[500] <- 0
+
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis)
+
+```
+
+
+
+#### Huntington-Hill Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+
+```{r}
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 500
+# votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+
+# Modificar la densidad de los votos
+votos <- trunc(rep(x = 10e5,length(partidos)))
+expon <- seq(from=0.001,to = 1, length.out = 1000)
+vot <- NULL
+for (i in seq_len(1000)) {
+  vot[[i]] <- votos*dexp(1:length(partidos),rate = expon[i])
+}
+
+
+
+# ut <- (datos1977[1:nrow(datos1977),9:ncol(datos1977)])
+# ut <- as.matrix(ut)
+# lm(1:ncol(ut)~sort(ut[1,],decreasing = T))
+
+
+
+
+# Aplicarlo 
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  # n_escannos <- i # Variable
+  votos <- vot[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+
+# Analizar la desproporcionalidad columna a columna
+dis <- seq_len(ncol(resul1))
+for (i in seq_len(ncol(resul1))) {
+  dis[i] <- disproporcionalidad(s = resul1[[i]],v = vot[[i]])
+}
+#disproporcionalidad(s = resul1[,1],v = votos)
+
+#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis[500] <- 0
+
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
+      Concentración (menor a mayor)")
+
+```
+
+
+
+### Adams
+```{r}
+library(data.table)
+# Variables
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 5
+votos <- trunc(seq(from = 100, to = 1, length.out = length(partidos)))
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+  
+  # Escaños
+  div <- 1:n_escannos - 1
+  div[is.na(div)] <- 0
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escaños" = as.numeric(o))
+}
+
+# Modelo para España
+# desde <- 1 + grep(pattern = "nulos", x = colnames(datos1977))
+# partidos <- colnames(datos1977)[desde:(length(colnames(datos1977)) - 1)]
+# prov <- 1
+# n_escannos <- datos1977$asientos[prov]
+# votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
+# 
+# asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
+####
+
+
+# 
+# resul <- NULL
+# for (prov in seq_len(nrow(datos1977))) {
+#   # Votos tenerife Alianza Popular mal contados
+#   if (prov == 15) {
+#     datos1977[prov, 12] <- 23866
+#   }
+#   n_escannos <- datos1977$asientos[prov]
+#   votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
+#   resul[[prov]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
+# }
+# 
+# resul <- as.data.table(resul)
+# resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
+
+```
+
+#### Adams Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+
+```{r}
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 5000
+votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+votos <- votos/seq_len(49)
+
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  n_escannos <- i # Variable
+  votos <- votos # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+# beepr::beep(sound = 3)
+# resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
+
+```
+
+#### Adams Disproporcionalidad
+
+```{r}
+disproporcionalidad <-
+  function(s,v )
+  {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    #        l_v <- length(v)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s/s_s
+    p_v <- v/s_v
+    
+    o <- (1/l_s) * sum(abs(p_s-p_v)) 
+    #            nm <- 'Rae'
+    
+    #return(list(measure=nm, value=o))
+    o}
+
+
+disproporcionalidad(s = resul1[,1],v = votos)
+
+dis <- apply(X = resul1[,1:500],MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis)
+
+```
+
+
+
+#### Adams Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+
+```{r}
+partidos <- NULL
+for (i in seq_len(500)) {
+  partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
+}
+#partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 30
+votos <- NULL
+for (i in seq_len(500)) {
+  votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
+  votos[[i]] <- votos[[i]]/seq_len(length(partidos[[i]]))
+}
+# votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+# votos <- votos/seq_len(length(partidos))
+
+resul <- NULL
+for (i in seq_len(length(partidos))) {
+  if (i==1) {next}
+  n_escannos <- 50 # Variable
+  #votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+# Arreglar tabla poniendo NA donde se necesita
+for (i in 3:(ncol(resul1)-2)) {
+  resul1[[i-2]][i:nrow(resul1)] <- NA
+}
+
+# Analizar la desproporcionalidad columna a columna
+dis <- seq_len(length(partidos))
+for (i in seq_len(length(partidos)-1)) {
+  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])),v = votos[[i+1]])
+}
+#disproporcionalidad(s = resul1[,1],v = votos)
+
+#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+dis[500] <- 0
+
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis)
+
+```
+
+
+
+#### Adams Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+
+```{r}
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 500
+# votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+
+# Modificar la densidad de los votos
+votos <- trunc(rep(x = 10e5,length(partidos)))
+expon <- seq(from=0.001,to = 1, length.out = 1000)
+vot <- NULL
+for (i in seq_len(1000)) {
+  vot[[i]] <- votos*dexp(1:length(partidos),rate = expon[i])
+}
+
+
+
+# ut <- (datos1977[1:nrow(datos1977),9:ncol(datos1977)])
+# ut <- as.matrix(ut)
+# lm(1:ncol(ut)~sort(ut[1,],decreasing = T))
+
+
+
+
+# Aplicarlo 
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  # n_escannos <- i # Variable
+  votos <- vot[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+
+# Analizar la desproporcionalidad columna a columna
+dis <- seq_len(ncol(resul1))
+for (i in seq_len(ncol(resul1))) {
+  dis[i] <- disproporcionalidad(s = resul1[[i]],v = vot[[i]])
+}
+#disproporcionalidad(s = resul1[,1],v = votos)
+
+#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis[500] <- 0
+
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
+      Concentración (menor a mayor)")
+
+```
+
+### Danish
+```{r}
+library(data.table)
+# Variables
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 5
+votos <- trunc(seq(from = 100, to = 1, length.out = length(partidos)))
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+  
+  # Escaños
+  div <- 3*(1:n_escannos) - 2
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escaños" = as.numeric(o))
+}
+
+# Modelo para España
+# desde <- 1 + grep(pattern = "nulos", x = colnames(datos1977))
+# partidos <- colnames(datos1977)[desde:(length(colnames(datos1977)) - 1)]
+# prov <- 1
+# n_escannos <- datos1977$asientos[prov]
+# votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
+# 
+# asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
+####
+
+
+# 
+# resul <- NULL
+# for (prov in seq_len(nrow(datos1977))) {
+#   # Votos tenerife Alianza Popular mal contados
+#   if (prov == 15) {
+#     datos1977[prov, 12] <- 23866
+#   }
+#   n_escannos <- datos1977$asientos[prov]
+#   votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
+#   resul[[prov]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
+# }
+# 
+# resul <- as.data.table(resul)
+# resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
+
+```
+
+#### Danish Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+
+```{r}
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 5000
+votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+votos <- votos/seq_len(49)
+
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  n_escannos <- i # Variable
+  votos <- votos # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+# beepr::beep(sound = 3)
+# resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
+
+```
+
+#### Danish Disproporcionalidad
+
+```{r}
+disproporcionalidad <-
+  function(s,v )
+  {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    #        l_v <- length(v)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s/s_s
+    p_v <- v/s_v
+    
+    o <- (1/l_s) * sum(abs(p_s-p_v)) 
+    #            nm <- 'Rae'
+    
+    #return(list(measure=nm, value=o))
+    o}
+
+
+disproporcionalidad(s = resul1[,1],v = votos)
+
+dis <- apply(X = resul1[,1:500],MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis)
+
+```
+
+
+
+#### Danish Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+
+```{r}
+partidos <- NULL
+for (i in seq_len(500)) {
+  partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
+}
+#partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 30
+votos <- NULL
+for (i in seq_len(500)) {
+  votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
+  votos[[i]] <- votos[[i]]/seq_len(length(partidos[[i]]))
+}
+# votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+# votos <- votos/seq_len(length(partidos))
+
+resul <- NULL
+for (i in seq_len(length(partidos))) {
+  if (i==1) {next}
+  n_escannos <- 50 # Variable
+  #votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escaños
+}
+
+resul1 <- as.data.table(resul)
+# Arreglar tabla poniendo NA donde se necesita
+for (i in 3:(ncol(resul1)-2)) {
+  resul1[[i-2]][i:nrow(resul1)] <- NA
+}
+
+# Analizar la desproporcionalidad columna a columna
+dis <- seq_len(length(partidos))
+for (i in seq_len(length(partidos)-1)) {
+  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])),v = votos[[i+1]])
+}
+#disproporcionalidad(s = resul1[,1],v = votos)
+
+#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+dis[500] <- 0
+
+
+library(ggplot2)
+qplot(seq_len(length(dis)),dis)
+
+```
+
+
+
+#### Danish Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+
+```{r}
+partidos <- paste("Partido_", seq_len(49), sep = "")
+n_escannos <- 500
+# votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
+
+# Modificar la densidad de los votos
+votos <- trunc(rep(x = 10e5,length(partidos)))
+expon <- seq(from=0.001,to = 1, length.out = 1000)
+vot <- NULL
+for (i in seq_len(1000)) {
+  vot[[i]] <- votos*dexp(1:length(partidos),rate = expon[i])
+}
+
+
+
 # ut <- (datos1977[1:nrow(datos1977),9:ncol(datos1977)])
 # ut <- as.matrix(ut)
 # lm(1:ncol(ut)~sort(ut[1,],decreasing = T))
