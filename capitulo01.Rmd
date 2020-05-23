@@ -365,7 +365,7 @@ $\textrm{Cuota} = \frac{Censo Distrito}{Censo Total}$
 
 ## Año 1977
 
-```{r Leer y limpiar datos}
+```{r Leer y limpiar datos, eval=FALSE, include=FALSE}
 library(openxlsx)
 library(electoral)
 setwd("~/Universidad/TFG/TFG_Git")
@@ -394,7 +394,7 @@ Calculamos el número de escaños obtenidos por los diferentes partidos según e
 
 
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 
 library(data.table)
 borrar <- NULL
@@ -439,7 +439,7 @@ resul_dhondt_1977 <- as.data.table(aggregate(as.numeric(borrar2), by = list(name
 
 ### Método Sainte-Lague
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 
 borrar <- NULL
 for (prov in seq_len(nrow(datos1977))) {
@@ -499,10 +499,9 @@ library(ggplot2)
 
 n_partidos <- seq_len(50)[-1]
 
-densidad <- rep(length(n_partidos),100)
+densidad <- rep(length(n_partidos), 100)
 
 n_escannos <- seq_len(50)
-
 ```
 
 
@@ -540,12 +539,12 @@ asientos_dhondt <- function(partidos, votos,
 # prov <- 1
 # n_escannos <- datos1977$asientos[prov]
 # votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
-# 
+#
 # asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
 ####
 
 
-# 
+#
 # resul <- NULL
 # for (prov in seq_len(nrow(datos1977))) {
 #   # Votos tenerife Alianza Popular mal contados
@@ -556,122 +555,130 @@ asientos_dhondt <- function(partidos, votos,
 #   votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
 #   resul[[prov]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
 # }
-# 
+#
 # resul <- as.data.table(resul)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
-            
 ```
 
-#### D`Hondt Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+#### D`Hondt variando el número de escaños
 
 ```{r}
+# D`Hondt Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
 partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 5000
 votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
-votos <- votos/seq_len(49)
+votos <- votos / seq_len(49)
 
 resul <- NULL
 for (i in seq_len(n_escannos)) {
   n_escannos <- i # Variable
   votos <- votos # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
 # beepr::beep(sound = 3)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
-
 ```
 
-#### D`Hondt Disproporcionalidad
+<!-- #### D`Hondt Disproporcionalidad -->
 
 ```{r}
 disproporcionalidad <-
-function(s,v )
-    {
-        s <- as.vector(s)
-        v <- as.vector(v)
-        l_s <- length(s)
-#        l_v <- length(v)
-        s_s <- sum(s)
-        s_v <- sum(v)
-        p_s <- s/s_s
-        p_v <- v/s_v
-        
-o <- (1/l_s) * sum(abs(p_s-p_v)) 
-#            nm <- 'Rae'
+  function(s, v) {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    #        l_v <- length(v)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s / s_s
+    p_v <- v / s_v
 
-#return(list(measure=nm, value=o))
-            o}
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
+    #            nm <- 'Rae'
+
+    # return(list(measure=nm, value=o))
+    o
+  }
 
 
-disproporcionalidad(s = resul1[,1],v = votos)
+disproporcionalidad(s = resul1[, 1], v = votos)
 
-dis <- apply(X = resul1[,1:500],MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+dis <- apply(X = resul1[, 1:500], MARGIN = 2, FUN = function(x) disproporcionalidad(s = x, v = votos))
 
 library(ggplot2)
 library(ggthemes)
-qplot(seq_len(length(dis)),dis)
+# qplot(seq_len(length(dis)),dis)
 
-dis1 <- data.frame("Disproporcionalidad"=dis,"Escannos"=seq_len(length(dis)))
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_esc_dhondt <- dis1
 
 ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
   geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
   scale_fill_gradient(low = "red", high = "yellow") +
-  labs(title = "Número de Escaños a repartir", subtitle = "Disproporcionalidad según D`Hondt", caption = "Angel Gonzalez",x="Número de Escaños")
-
-
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Disproporcionalidad según D`Hondt", caption = "Angel Gonzalez", x = "Número de Escaños")
 ```
 
 En este caso se nos presenta la disproporcionalidad variando el número de de escaños posibles, en el presente caso se empieza por repartir un único escaño hasta los 500 posibles escaños.
 Observamos que la disproporcionalidad en el caso de un escaño es muy alta, posteriormente cuanto mayor es el número de escaños a repartir la disproporcionalidad va bajando.
 La diferencia de disproporcionalidad en los casos en los que hay pocos escaños a repartir es alta, cuantos mas escaños a repartir la diferencia de disproporcionalidad entre sucesivos escaños va reduciendose, a números altos de escaños a repartir la disproporcionalidad tiende a estabilizarse.
 
-#### D`Hondt Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+#### D`Hondt variando el número de partidos
 
 ```{r}
+# D`Hondt Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
 partidos <- NULL
 for (i in seq_len(500)) {
   partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
 }
-#partidos <- paste("Partido_", seq_len(49), sep = "")
+# partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 30
 votos <- NULL
 for (i in seq_len(500)) {
   votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
-  votos[[i]] <- votos[[i]]/seq_len(length(partidos[[i]]))
+  votos[[i]] <- votos[[i]] / seq_len(length(partidos[[i]]))
 }
 # votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 # votos <- votos/seq_len(length(partidos))
 
 resul <- NULL
 for (i in seq_len(length(partidos))) {
-  if (i==1) {next}
+  if (i == 1) {
+    next
+  }
   n_escannos <- 50 # Variable
-  #votos <- votos[[i]] # Fijo
-  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escaños
+  # votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
 # Arreglar tabla poniendo NA donde se necesita
-for (i in 3:(ncol(resul1)-2)) {
-  resul1[[i-2]][i:nrow(resul1)] <- NA
+for (i in 3:(ncol(resul1) - 2)) {
+  resul1[[i - 2]][i:nrow(resul1)] <- NA
 }
 
 # Analizar la desproporcionalidad columna a columna
 dis <- seq_len(length(partidos))
-for (i in seq_len(length(partidos)-1)) {
-  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])),v = votos[[i+1]])
+for (i in seq_len(length(partidos) - 1)) {
+  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])), v = votos[[i + 1]])
 }
-#disproporcionalidad(s = resul1[,1],v = votos)
+# disproporcionalidad(s = resul1[,1],v = votos)
 
-#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
 dis[500] <- 0
 
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis)
+# qplot(seq_len(length(dis)),dis)
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_par_dhondt <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de partidos", title = "Disproporcionalidad según D`Hondt", caption = "Angel Gonzalez", x = "Número de Partidos")
 ```
 
 En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
@@ -680,19 +687,20 @@ Podemos apreciar en el gráfico que para un número bajo de partidos que se pres
 
 
 
-#### D`Hondt Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+#### D`Hondt variando la distribución de los votos
 
 ```{r}
+# D`Hondt Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
 partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 500
 # votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 
 # Modificar la densidad de los votos
-votos <- trunc(rep(x = 10e5,length(partidos)))
-expon <- seq(from=0.001,to = 1, length.out = 1000)
+votos <- trunc(rep(x = 10e5, length(partidos)))
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
 vot <- NULL
 for (i in seq_len(1000)) {
-  vot[[i]] <- votos*dexp(1:length(partidos),rate = expon[i])
+  vot[[i]] <- votos * dexp(1:length(partidos), rate = expon[i])
 }
 
 
@@ -704,12 +712,12 @@ for (i in seq_len(1000)) {
 
 
 
-# Aplicarlo 
+# Aplicarlo
 resul <- NULL
 for (i in seq_len(n_escannos)) {
   # n_escannos <- i # Variable
   votos <- vot[[i]] # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
@@ -717,19 +725,34 @@ resul1 <- as.data.table(resul)
 # Analizar la desproporcionalidad columna a columna
 dis <- seq_len(ncol(resul1))
 for (i in seq_len(ncol(resul1))) {
-  dis[i] <- disproporcionalidad(s = resul1[[i]],v = vot[[i]])
+  dis[i] <- disproporcionalidad(s = resul1[[i]], v = vot[[i]])
 }
-#disproporcionalidad(s = resul1[,1],v = votos)
+# disproporcionalidad(s = resul1[,1],v = votos)
 
-#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
 # dis[500] <- 0
 
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
-      Concentración (menor a mayor)")
+# qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
+#       Concentración (menor a mayor)")
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_dis_dhondt <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la distribución de los votos", title = "Disproporcionalidad según D`Hondt", caption = "Angel Gonzalez", x = "Concentración (menor a mayor)")
 ```
+
+En el presente gráfico variamos la distribución de los votos en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande.
+Observando el gráfico observamos que cuando la concentración del voto es muy baja la disproporcionalidad está en un nivel bajo, cuanto más concentración de voto podemos comprobar como la disproporcionalidad aumenta hasta que alcanza un punto en donde alcanza el máximo de disproporcionalidad y a partir de ese punto la disproporcionalidad va bajando.
+Así podemos concluir que el reparto de escaños según la ley D`Hondt es mejor cuanto más concentración de voto tengan unos pocos partidos con respecto a los demás.
+
+
+
+
 
 ### Sainte-Lague
 ```{r}
@@ -747,9 +770,9 @@ asientos_dhondt <- function(partidos, votos,
   vn <- votos
   vn[votos <= nv * couta_min] <- 0
   votos <- vn
-  
+
   # Escaños
-  div <- div <- 2*(1:n_escannos) - 1
+  div <- 2 * (1:n_escannos) - 1
   G <- sapply(div, function(x) votos / x)
   cuota <- G[order(G, decreasing = T)][n_escannos]
   W <- (G >= cuota)
@@ -765,12 +788,12 @@ asientos_dhondt <- function(partidos, votos,
 # prov <- 1
 # n_escannos <- datos1977$asientos[prov]
 # votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
-# 
+#
 # asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
 ####
 
 
-# 
+#
 # resul <- NULL
 # for (prov in seq_len(nrow(datos1977))) {
 #   # Votos tenerife Alianza Popular mal contados
@@ -781,128 +804,153 @@ asientos_dhondt <- function(partidos, votos,
 #   votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
 #   resul[[prov]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
 # }
-# 
+#
 # resul <- as.data.table(resul)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
-
 ```
 
-#### Sainte-Lague Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+#### Sainte-Lague variando el número de escaños
 
 ```{r}
+# Sainte-Lague Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
 partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 5000
 votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
-votos <- votos/seq_len(49)
+votos <- votos / seq_len(49)
 
 resul <- NULL
 for (i in seq_len(n_escannos)) {
   n_escannos <- i # Variable
   votos <- votos # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
 # beepr::beep(sound = 3)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
-
 ```
 
-#### Sainte-Lague Disproporcionalidad
-
+<!-- #### Sainte-Lague Disproporcionalidad -->
+  
 ```{r}
 disproporcionalidad <-
-  function(s,v )
-  {
+  function(s, v) {
     s <- as.vector(s)
     v <- as.vector(v)
     l_s <- length(s)
     #        l_v <- length(v)
     s_s <- sum(s)
     s_v <- sum(v)
-    p_s <- s/s_s
-    p_v <- v/s_v
-    
-    o <- (1/l_s) * sum(abs(p_s-p_v)) 
+    p_s <- s / s_s
+    p_v <- v / s_v
+
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
     #            nm <- 'Rae'
-    
-    #return(list(measure=nm, value=o))
-    o}
+
+    # return(list(measure=nm, value=o))
+    o
+  }
 
 
-disproporcionalidad(s = resul1[,1],v = votos)
+disproporcionalidad(s = resul1[, 1], v = votos)
 
-dis <- apply(X = resul1[,1:500],MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+dis <- apply(X = resul1[, 1:500], MARGIN = 2, FUN = function(x) disproporcionalidad(s = x, v = votos))
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis)
+library(ggthemes)
+# qplot(seq_len(length(dis)),dis)
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_esc_sl <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Disproporcionalidad según Sainte-Lague", caption = "Angel Gonzalez", x = "Número de Escaños")
 ```
 
+En este caso se nos presenta la disproporcionalidad variando el número de de escaños posibles, en el presente caso se empieza por repartir un único escaño hasta los 500 posibles escaños.
+Observamos que la disproporcionalidad en el caso de un escaño es muy alta, posteriormente cuanto mayor es el número de escaños a repartir la disproporcionalidad va bajando.
+La diferencia de disproporcionalidad en los casos en los que hay pocos escaños a repartir es alta, cuantos mas escaños a repartir la diferencia de disproporcionalidad entre sucesivos escaños va reduciendose, a números altos de escaños a repartir la disproporcionalidad tiende a estabilizarse.
 
-
-#### Sainte-Lague Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+#### Sainte-Lague variando el número de partidos
 
 ```{r}
+# Sainte-Lague Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
 partidos <- NULL
 for (i in seq_len(500)) {
   partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
 }
-#partidos <- paste("Partido_", seq_len(49), sep = "")
+# partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 30
 votos <- NULL
 for (i in seq_len(500)) {
   votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
-  votos[[i]] <- votos[[i]]/seq_len(length(partidos[[i]]))
+  votos[[i]] <- votos[[i]] / seq_len(length(partidos[[i]]))
 }
 # votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 # votos <- votos/seq_len(length(partidos))
 
 resul <- NULL
 for (i in seq_len(length(partidos))) {
-  if (i==1) {next}
+  if (i == 1) {
+    next
+  }
   n_escannos <- 50 # Variable
-  #votos <- votos[[i]] # Fijo
-  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escaños
+  # votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
 # Arreglar tabla poniendo NA donde se necesita
-for (i in 3:(ncol(resul1)-2)) {
-  resul1[[i-2]][i:nrow(resul1)] <- NA
+for (i in 3:(ncol(resul1) - 2)) {
+  resul1[[i - 2]][i:nrow(resul1)] <- NA
 }
 
 # Analizar la desproporcionalidad columna a columna
 dis <- seq_len(length(partidos))
-for (i in seq_len(length(partidos)-1)) {
-  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])),v = votos[[i+1]])
+for (i in seq_len(length(partidos) - 1)) {
+  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])), v = votos[[i + 1]])
 }
-#disproporcionalidad(s = resul1[,1],v = votos)
+# disproporcionalidad(s = resul1[,1],v = votos)
 
-#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
 dis[500] <- 0
 
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis)
+# qplot(seq_len(length(dis)),dis)
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_par_sl <- dis1
+
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de partidos", title = "Disproporcionalidad según Sainte-Lague", caption = "Angel Gonzalez", x = "Número de Partidos")
 ```
 
+En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
+Observamos que cuando se presentan 2 o 3 partidos a las elecciones la disproporcionalidad es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de disproporcionalidad con 6 partidos que se presentan a las elecciones, a partir de el séptimo partido la curva comienza a decrecer.
+Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 4 a 60 ) la disproporcionalidad es alta pero decreciente, cuanto mayor número de partidos se presentan en las elcciones menor es la disproporcionalidad que encontramos, como en el apartado anterior, la disproporcionalidad tiende a estabilizarse.
 
 
-#### Sainte-Lague Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+
+#### Sainte-Lague variando la distribución de los votos
 
 ```{r}
+# Sainte-Lague Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
 partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 500
 # votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 
 # Modificar la densidad de los votos
-votos <- trunc(rep(x = 10e5,length(partidos)))
-expon <- seq(from=0.001,to = 1, length.out = 1000)
+votos <- trunc(rep(x = 10e5, length(partidos)))
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
 vot <- NULL
 for (i in seq_len(1000)) {
-  vot[[i]] <- votos*dexp(1:length(partidos),rate = expon[i])
+  vot[[i]] <- votos * dexp(1:length(partidos), rate = expon[i])
 }
 
 
@@ -914,12 +962,12 @@ for (i in seq_len(1000)) {
 
 
 
-# Aplicarlo 
+# Aplicarlo
 resul <- NULL
 for (i in seq_len(n_escannos)) {
   # n_escannos <- i # Variable
   votos <- vot[[i]] # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
@@ -927,19 +975,31 @@ resul1 <- as.data.table(resul)
 # Analizar la desproporcionalidad columna a columna
 dis <- seq_len(ncol(resul1))
 for (i in seq_len(ncol(resul1))) {
-  dis[i] <- disproporcionalidad(s = resul1[[i]],v = vot[[i]])
+  dis[i] <- disproporcionalidad(s = resul1[[i]], v = vot[[i]])
 }
-#disproporcionalidad(s = resul1[,1],v = votos)
+# disproporcionalidad(s = resul1[,1],v = votos)
 
-#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
 # dis[500] <- 0
 
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
-      Concentración (menor a mayor)")
+# qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
+#       Concentración (menor a mayor)")
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_dis_sl <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la distribución de los votos", title = "Disproporcionalidad según Sainte-Lague", caption = "Angel Gonzalez", x = "Concentración (menor a mayor)")
 ```
+
+En el presente gráfico variamos la distribución de los votos en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande.
+Observando el gráfico observamos que cuando la concentración del voto es muy baja la disproporcionalidad está en un nivel bajo, cuanto más concentración de voto podemos comprobar como la disproporcionalidad aumenta hasta que alcanza un punto en donde alcanza el máximo de disproporcionalidad y a partir de ese punto la disproporcionalidad va bajando.
+Así podemos concluir que el reparto de escaños según la ley Sainte-Lague es mejor cuanto más concentración de voto tengan unos pocos partidos con respecto a los demás.
+
 
 ### Modified Sainte-Lague
 ```{r}
@@ -957,9 +1017,9 @@ asientos_dhondt <- function(partidos, votos,
   vn <- votos
   vn[votos <= nv * couta_min] <- 0
   votos <- vn
-  
+
   # Escaños
-  div <- div <- c(1, (10*(2:n_escannos)-5)/7)
+  div <- c(1, (10 * (2:n_escannos) - 5) / 7)
   G <- sapply(div, function(x) votos / x)
   cuota <- G[order(G, decreasing = T)][n_escannos]
   W <- (G >= cuota)
@@ -975,12 +1035,12 @@ asientos_dhondt <- function(partidos, votos,
 # prov <- 1
 # n_escannos <- datos1977$asientos[prov]
 # votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
-# 
+#
 # asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
 ####
 
 
-# 
+#
 # resul <- NULL
 # for (prov in seq_len(nrow(datos1977))) {
 #   # Votos tenerife Alianza Popular mal contados
@@ -991,128 +1051,152 @@ asientos_dhondt <- function(partidos, votos,
 #   votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
 #   resul[[prov]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
 # }
-# 
+#
 # resul <- as.data.table(resul)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
-
 ```
 
-#### Modified Sainte-Lague Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+#### Modified Sainte-Lague variando el número de escaños
 
 ```{r}
+# Modified Sainte-Lague Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
 partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 5000
 votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
-votos <- votos/seq_len(49)
+votos <- votos / seq_len(49)
 
 resul <- NULL
 for (i in seq_len(n_escannos)) {
   n_escannos <- i # Variable
   votos <- votos # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
 # beepr::beep(sound = 3)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
-
 ```
 
-#### Modified Sainte-Lague Disproporcionalidad
-
+<!-- #### Modified Sainte-Lague Disproporcionalidad -->
+  
 ```{r}
 disproporcionalidad <-
-  function(s,v )
-  {
+  function(s, v) {
     s <- as.vector(s)
     v <- as.vector(v)
     l_s <- length(s)
     #        l_v <- length(v)
     s_s <- sum(s)
     s_v <- sum(v)
-    p_s <- s/s_s
-    p_v <- v/s_v
-    
-    o <- (1/l_s) * sum(abs(p_s-p_v)) 
+    p_s <- s / s_s
+    p_v <- v / s_v
+
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
     #            nm <- 'Rae'
-    
-    #return(list(measure=nm, value=o))
-    o}
+
+    # return(list(measure=nm, value=o))
+    o
+  }
 
 
-disproporcionalidad(s = resul1[,1],v = votos)
+disproporcionalidad(s = resul1[, 1], v = votos)
 
-dis <- apply(X = resul1[,1:500],MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+dis <- apply(X = resul1[, 1:500], MARGIN = 2, FUN = function(x) disproporcionalidad(s = x, v = votos))
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis)
+library(ggthemes)
+# qplot(seq_len(length(dis)),dis)
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_esc_msl <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Disproporcionalidad según Modified Sainte-Lague", caption = "Angel Gonzalez", x = "Número de Escaños")
 ```
 
+En este caso se nos presenta la disproporcionalidad variando el número de de escaños posibles, en el presente caso se empieza por repartir un único escaño hasta los 500 posibles escaños.
+Observamos que la disproporcionalidad en el caso de un escaño es muy alta, posteriormente cuanto mayor es el número de escaños a repartir la disproporcionalidad va bajando.
+La diferencia de disproporcionalidad en los casos en los que hay pocos escaños a repartir es alta, cuantos mas escaños a repartir la diferencia de disproporcionalidad entre sucesivos escaños va reduciendose, a números altos de escaños a repartir la disproporcionalidad tiende a estabilizarse.
 
-
-#### Modified Sainte-Lague Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+#### Modified Sainte-Lague variando el número de partidos
 
 ```{r}
+# Modified Sainte-Lague Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
 partidos <- NULL
 for (i in seq_len(500)) {
   partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
 }
-#partidos <- paste("Partido_", seq_len(49), sep = "")
+# partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 30
 votos <- NULL
 for (i in seq_len(500)) {
   votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
-  votos[[i]] <- votos[[i]]/seq_len(length(partidos[[i]]))
+  votos[[i]] <- votos[[i]] / seq_len(length(partidos[[i]]))
 }
 # votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 # votos <- votos/seq_len(length(partidos))
 
 resul <- NULL
 for (i in seq_len(length(partidos))) {
-  if (i==1) {next}
+  if (i == 1) {
+    next
+  }
   n_escannos <- 50 # Variable
-  #votos <- votos[[i]] # Fijo
-  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escaños
+  # votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
 # Arreglar tabla poniendo NA donde se necesita
-for (i in 3:(ncol(resul1)-2)) {
-  resul1[[i-2]][i:nrow(resul1)] <- NA
+for (i in 3:(ncol(resul1) - 2)) {
+  resul1[[i - 2]][i:nrow(resul1)] <- NA
 }
 
 # Analizar la desproporcionalidad columna a columna
 dis <- seq_len(length(partidos))
-for (i in seq_len(length(partidos)-1)) {
-  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])),v = votos[[i+1]])
+for (i in seq_len(length(partidos) - 1)) {
+  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])), v = votos[[i + 1]])
 }
-#disproporcionalidad(s = resul1[,1],v = votos)
+# disproporcionalidad(s = resul1[,1],v = votos)
 
-#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
 dis[500] <- 0
 
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis)
+# qplot(seq_len(length(dis)),dis)
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_par_msl <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de partidos", title = "Disproporcionalidad según Modified Sainte-Lague", caption = "Angel Gonzalez", x = "Número de Partidos")
 ```
 
+En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
+Observamos que cuando se presentan 2 o 3 partidos a las elecciones la disproporcionalidad es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de disproporcionalidad con 6 partidos que se presentan a las elecciones, a partir de el séptimo partido la curva comienza a decrecer.
+Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 4 a 60 ) la disproporcionalidad es alta pero decreciente, cuanto mayor número de partidos se presentan en las elcciones menor es la disproporcionalidad que encontramos, como en el apartado anterior, la disproporcionalidad tiende a estabilizarse.
 
 
-#### Modified Sainte-Lague Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+
+#### Modified Sainte-Lague variando la distribución de los votos
 
 ```{r}
+# Modified Sainte-Lague Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
 partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 500
 # votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 
 # Modificar la densidad de los votos
-votos <- trunc(rep(x = 10e5,length(partidos)))
-expon <- seq(from=0.001,to = 1, length.out = 1000)
+votos <- trunc(rep(x = 10e5, length(partidos)))
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
 vot <- NULL
 for (i in seq_len(1000)) {
-  vot[[i]] <- votos*dexp(1:length(partidos),rate = expon[i])
+  vot[[i]] <- votos * dexp(1:length(partidos), rate = expon[i])
 }
 
 
@@ -1124,12 +1208,12 @@ for (i in seq_len(1000)) {
 
 
 
-# Aplicarlo 
+# Aplicarlo
 resul <- NULL
 for (i in seq_len(n_escannos)) {
   # n_escannos <- i # Variable
   votos <- vot[[i]] # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
@@ -1137,19 +1221,31 @@ resul1 <- as.data.table(resul)
 # Analizar la desproporcionalidad columna a columna
 dis <- seq_len(ncol(resul1))
 for (i in seq_len(ncol(resul1))) {
-  dis[i] <- disproporcionalidad(s = resul1[[i]],v = vot[[i]])
+  dis[i] <- disproporcionalidad(s = resul1[[i]], v = vot[[i]])
 }
-#disproporcionalidad(s = resul1[,1],v = votos)
+# disproporcionalidad(s = resul1[,1],v = votos)
 
-#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
 # dis[500] <- 0
 
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
-      Concentración (menor a mayor)")
+# qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
+#       Concentración (menor a mayor)")
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_dis_msl <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la distribución de los votos", title = "Disproporcionalidad según Modified Sainte-Lague", caption = "Angel Gonzalez", x = "Concentración (menor a mayor)")
 ```
+
+En el presente gráfico variamos la distribución de los votos en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande.
+Observando el gráfico observamos que cuando la concentración del voto es muy baja la disproporcionalidad está en un nivel bajo, cuanto más concentración de voto podemos comprobar como la disproporcionalidad aumenta hasta que alcanza un punto en donde alcanza el máximo de disproporcionalidad y a partir de ese punto la disproporcionalidad va bajando.
+Así podemos concluir que el reparto de escaños según la ley Modified Sainte-Lague es mejor cuanto más concentración de voto tengan unos pocos partidos con respecto a los demás.
+
 
 ### Imperiali
 ```{r}
@@ -1167,9 +1263,9 @@ asientos_dhondt <- function(partidos, votos,
   vn <- votos
   vn[votos <= nv * couta_min] <- 0
   votos <- vn
-  
+
   # Escaños
-  div <- ((1:n_escannos)+1)/2
+  div <- ((1:n_escannos) + 1) / 2
   G <- sapply(div, function(x) votos / x)
   cuota <- G[order(G, decreasing = T)][n_escannos]
   W <- (G >= cuota)
@@ -1185,12 +1281,12 @@ asientos_dhondt <- function(partidos, votos,
 # prov <- 1
 # n_escannos <- datos1977$asientos[prov]
 # votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
-# 
+#
 # asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
 ####
 
 
-# 
+#
 # resul <- NULL
 # for (prov in seq_len(nrow(datos1977))) {
 #   # Votos tenerife Alianza Popular mal contados
@@ -1201,128 +1297,152 @@ asientos_dhondt <- function(partidos, votos,
 #   votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
 #   resul[[prov]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
 # }
-# 
+#
 # resul <- as.data.table(resul)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
-
 ```
 
-#### Imperiali Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+#### Imperiali variando el número de escaños
 
 ```{r}
+# Imperiali Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
 partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 5000
 votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
-votos <- votos/seq_len(49)
+votos <- votos / seq_len(49)
 
 resul <- NULL
 for (i in seq_len(n_escannos)) {
   n_escannos <- i # Variable
   votos <- votos # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
 # beepr::beep(sound = 3)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
-
 ```
 
-#### Imperiali Disproporcionalidad
-
+<!-- #### Imperiali Disproporcionalidad -->
+  
 ```{r}
 disproporcionalidad <-
-  function(s,v )
-  {
+  function(s, v) {
     s <- as.vector(s)
     v <- as.vector(v)
     l_s <- length(s)
     #        l_v <- length(v)
     s_s <- sum(s)
     s_v <- sum(v)
-    p_s <- s/s_s
-    p_v <- v/s_v
-    
-    o <- (1/l_s) * sum(abs(p_s-p_v)) 
+    p_s <- s / s_s
+    p_v <- v / s_v
+
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
     #            nm <- 'Rae'
-    
-    #return(list(measure=nm, value=o))
-    o}
+
+    # return(list(measure=nm, value=o))
+    o
+  }
 
 
-disproporcionalidad(s = resul1[,1],v = votos)
+disproporcionalidad(s = resul1[, 1], v = votos)
 
-dis <- apply(X = resul1[,1:500],MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+dis <- apply(X = resul1[, 1:500], MARGIN = 2, FUN = function(x) disproporcionalidad(s = x, v = votos))
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis)
+library(ggthemes)
+# qplot(seq_len(length(dis)),dis)
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_esc_imp <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Disproporcionalidad según Imperiali", caption = "Angel Gonzalez", x = "Número de Escaños")
 ```
 
+En este caso se nos presenta la disproporcionalidad variando el número de de escaños posibles, en el presente caso se empieza por repartir un único escaño hasta los 500 posibles escaños.
+Observamos que la disproporcionalidad en el caso de un escaño es muy alta, posteriormente cuanto mayor es el número de escaños a repartir la disproporcionalidad va bajando.
+La diferencia de disproporcionalidad en los casos en los que hay pocos escaños a repartir es alta, cuantos mas escaños a repartir la diferencia de disproporcionalidad entre sucesivos escaños va reduciendose, a números altos de escaños a repartir la disproporcionalidad tiende a estabilizarse.
 
-
-#### Imperiali Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+#### Imperiali variando el número de partidos
 
 ```{r}
+# Imperiali Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
 partidos <- NULL
 for (i in seq_len(500)) {
   partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
 }
-#partidos <- paste("Partido_", seq_len(49), sep = "")
+# partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 30
 votos <- NULL
 for (i in seq_len(500)) {
   votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
-  votos[[i]] <- votos[[i]]/seq_len(length(partidos[[i]]))
+  votos[[i]] <- votos[[i]] / seq_len(length(partidos[[i]]))
 }
 # votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 # votos <- votos/seq_len(length(partidos))
 
 resul <- NULL
 for (i in seq_len(length(partidos))) {
-  if (i==1) {next}
+  if (i == 1) {
+    next
+  }
   n_escannos <- 50 # Variable
-  #votos <- votos[[i]] # Fijo
-  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escaños
+  # votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
 # Arreglar tabla poniendo NA donde se necesita
-for (i in 3:(ncol(resul1)-2)) {
-  resul1[[i-2]][i:nrow(resul1)] <- NA
+for (i in 3:(ncol(resul1) - 2)) {
+  resul1[[i - 2]][i:nrow(resul1)] <- NA
 }
 
 # Analizar la desproporcionalidad columna a columna
 dis <- seq_len(length(partidos))
-for (i in seq_len(length(partidos)-1)) {
-  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])),v = votos[[i+1]])
+for (i in seq_len(length(partidos) - 1)) {
+  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])), v = votos[[i + 1]])
 }
-#disproporcionalidad(s = resul1[,1],v = votos)
+# disproporcionalidad(s = resul1[,1],v = votos)
 
-#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
 dis[500] <- 0
 
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis)
+# qplot(seq_len(length(dis)),dis)
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_par_imp <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de partidos", title = "Disproporcionalidad según Imperiali", caption = "Angel Gonzalez", x = "Número de Partidos")
 ```
 
+En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
+Observamos que cuando se presentan 2 o 3 partidos a las elecciones la disproporcionalidad es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de disproporcionalidad con 6 partidos que se presentan a las elecciones, a partir de el séptimo partido la curva comienza a decrecer.
+Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 4 a 60 ) la disproporcionalidad es alta pero decreciente, cuanto mayor número de partidos se presentan en las elcciones menor es la disproporcionalidad que encontramos, como en el apartado anterior, la disproporcionalidad tiende a estabilizarse.
 
 
-#### Imperiali Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+
+#### Imperiali variando la distribución de los votos
 
 ```{r}
+# Imperiali Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
 partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 500
 # votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 
 # Modificar la densidad de los votos
-votos <- trunc(rep(x = 10e5,length(partidos)))
-expon <- seq(from=0.001,to = 1, length.out = 1000)
+votos <- trunc(rep(x = 10e5, length(partidos)))
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
 vot <- NULL
 for (i in seq_len(1000)) {
-  vot[[i]] <- votos*dexp(1:length(partidos),rate = expon[i])
+  vot[[i]] <- votos * dexp(1:length(partidos), rate = expon[i])
 }
 
 
@@ -1334,12 +1454,12 @@ for (i in seq_len(1000)) {
 
 
 
-# Aplicarlo 
+# Aplicarlo
 resul <- NULL
 for (i in seq_len(n_escannos)) {
   # n_escannos <- i # Variable
   votos <- vot[[i]] # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
@@ -1347,19 +1467,31 @@ resul1 <- as.data.table(resul)
 # Analizar la desproporcionalidad columna a columna
 dis <- seq_len(ncol(resul1))
 for (i in seq_len(ncol(resul1))) {
-  dis[i] <- disproporcionalidad(s = resul1[[i]],v = vot[[i]])
+  dis[i] <- disproporcionalidad(s = resul1[[i]], v = vot[[i]])
 }
-#disproporcionalidad(s = resul1[,1],v = votos)
+# disproporcionalidad(s = resul1[,1],v = votos)
 
-#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
 # dis[500] <- 0
 
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
-      Concentración (menor a mayor)")
+# qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
+#       Concentración (menor a mayor)")
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_dis_imp <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la distribución de los votos", title = "Disproporcionalidad según Imperiali", caption = "Angel Gonzalez", x = "Concentración (menor a mayor)")
 ```
+
+En el presente gráfico variamos la distribución de los votos en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande.
+Observando el gráfico observamos que cuando la concentración del voto es muy baja la disproporcionalidad está en un nivel bajo, cuanto más concentración de voto podemos comprobar como la disproporcionalidad aumenta hasta que alcanza un punto en donde alcanza el máximo de disproporcionalidad y a partir de ese punto la disproporcionalidad va bajando.
+Así podemos concluir que el reparto de escaños según la ley Imperiali es mejor cuanto más concentración de voto tengan unos pocos partidos con respecto a los demás.
+
 
 ### Huntington-Hill
 ```{r}
@@ -1377,9 +1509,9 @@ asientos_dhondt <- function(partidos, votos,
   vn <- votos
   vn[votos <= nv * couta_min] <- 0
   votos <- vn
-  
+
   # Escaños
-  div <- sqrt( (1:n_escannos) * ((1:n_escannos)-1) )
+  div <- sqrt((1:n_escannos) * ((1:n_escannos) - 1))
   G <- sapply(div, function(x) votos / x)
   cuota <- G[order(G, decreasing = T)][n_escannos]
   W <- (G >= cuota)
@@ -1395,12 +1527,12 @@ asientos_dhondt <- function(partidos, votos,
 # prov <- 1
 # n_escannos <- datos1977$asientos[prov]
 # votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
-# 
+#
 # asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
 ####
 
 
-# 
+#
 # resul <- NULL
 # for (prov in seq_len(nrow(datos1977))) {
 #   # Votos tenerife Alianza Popular mal contados
@@ -1411,128 +1543,152 @@ asientos_dhondt <- function(partidos, votos,
 #   votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
 #   resul[[prov]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
 # }
-# 
+#
 # resul <- as.data.table(resul)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
-
 ```
 
-#### Huntington-Hill Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+#### Huntington-Hill variando el número de escaños
 
 ```{r}
+# Huntington-Hill Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
 partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 5000
 votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
-votos <- votos/seq_len(49)
+votos <- votos / seq_len(49)
 
 resul <- NULL
 for (i in seq_len(n_escannos)) {
   n_escannos <- i # Variable
   votos <- votos # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
 # beepr::beep(sound = 3)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
-
 ```
 
-#### Huntington-Hill Disproporcionalidad
-
+<!-- #### Huntington-Hill Disproporcionalidad -->
+  
 ```{r}
 disproporcionalidad <-
-  function(s,v )
-  {
+  function(s, v) {
     s <- as.vector(s)
     v <- as.vector(v)
     l_s <- length(s)
     #        l_v <- length(v)
     s_s <- sum(s)
     s_v <- sum(v)
-    p_s <- s/s_s
-    p_v <- v/s_v
-    
-    o <- (1/l_s) * sum(abs(p_s-p_v)) 
+    p_s <- s / s_s
+    p_v <- v / s_v
+
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
     #            nm <- 'Rae'
-    
-    #return(list(measure=nm, value=o))
-    o}
+
+    # return(list(measure=nm, value=o))
+    o
+  }
 
 
-disproporcionalidad(s = resul1[,1],v = votos)
+disproporcionalidad(s = resul1[, 1], v = votos)
 
-dis <- apply(X = resul1[,1:500],MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+dis <- apply(X = resul1[, 1:500], MARGIN = 2, FUN = function(x) disproporcionalidad(s = x, v = votos))
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis)
+library(ggthemes)
+# qplot(seq_len(length(dis)),dis)
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_esc_hh <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Disproporcionalidad según Huntington-Hill", caption = "Angel Gonzalez", x = "Número de Escaños")
 ```
 
+En este caso se nos presenta la disproporcionalidad variando el número de de escaños posibles, en el presente caso se empieza por repartir un único escaño hasta los 500 posibles escaños.
+Observamos que la disproporcionalidad en el caso de un escaño es muy alta, posteriormente cuanto mayor es el número de escaños a repartir la disproporcionalidad va bajando.
+La diferencia de disproporcionalidad en los casos en los que hay pocos escaños a repartir es alta, cuantos mas escaños a repartir la diferencia de disproporcionalidad entre sucesivos escaños va reduciendose, a números altos de escaños a repartir la disproporcionalidad tiende a estabilizarse.
 
-
-#### Huntington-Hill Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+#### Huntington-Hill variando el número de partidos
 
 ```{r}
+# Huntington-Hill Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
 partidos <- NULL
 for (i in seq_len(500)) {
   partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
 }
-#partidos <- paste("Partido_", seq_len(49), sep = "")
+# partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 30
 votos <- NULL
 for (i in seq_len(500)) {
   votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
-  votos[[i]] <- votos[[i]]/seq_len(length(partidos[[i]]))
+  votos[[i]] <- votos[[i]] / seq_len(length(partidos[[i]]))
 }
 # votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 # votos <- votos/seq_len(length(partidos))
 
 resul <- NULL
 for (i in seq_len(length(partidos))) {
-  if (i==1) {next}
+  if (i == 1) {
+    next
+  }
   n_escannos <- 50 # Variable
-  #votos <- votos[[i]] # Fijo
-  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escaños
+  # votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
 # Arreglar tabla poniendo NA donde se necesita
-for (i in 3:(ncol(resul1)-2)) {
-  resul1[[i-2]][i:nrow(resul1)] <- NA
+for (i in 3:(ncol(resul1) - 2)) {
+  resul1[[i - 2]][i:nrow(resul1)] <- NA
 }
 
 # Analizar la desproporcionalidad columna a columna
 dis <- seq_len(length(partidos))
-for (i in seq_len(length(partidos)-1)) {
-  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])),v = votos[[i+1]])
+for (i in seq_len(length(partidos) - 1)) {
+  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])), v = votos[[i + 1]])
 }
-#disproporcionalidad(s = resul1[,1],v = votos)
+# disproporcionalidad(s = resul1[,1],v = votos)
 
-#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
 dis[500] <- 0
 
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis)
+# qplot(seq_len(length(dis)),dis)
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_par_hh <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de partidos", title = "Disproporcionalidad según Huntington-Hill", caption = "Angel Gonzalez", x = "Número de Partidos")
 ```
 
+En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
+Observamos que cuando se presentan 2 o 3 partidos a las elecciones la disproporcionalidad es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de disproporcionalidad con 6 partidos que se presentan a las elecciones, a partir de el séptimo partido la curva comienza a decrecer.
+Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 4 a 60 ) la disproporcionalidad es alta pero decreciente, cuanto mayor número de partidos se presentan en las elcciones menor es la disproporcionalidad que encontramos, como en el apartado anterior, la disproporcionalidad tiende a estabilizarse.
 
 
-#### Huntington-Hill Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+
+#### Huntington-Hill variando la distribución de los votos
 
 ```{r}
+# Huntington-Hill Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
 partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 500
 # votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 
 # Modificar la densidad de los votos
-votos <- trunc(rep(x = 10e5,length(partidos)))
-expon <- seq(from=0.001,to = 1, length.out = 1000)
+votos <- trunc(rep(x = 10e5, length(partidos)))
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
 vot <- NULL
 for (i in seq_len(1000)) {
-  vot[[i]] <- votos*dexp(1:length(partidos),rate = expon[i])
+  vot[[i]] <- votos * dexp(1:length(partidos), rate = expon[i])
 }
 
 
@@ -1544,12 +1700,12 @@ for (i in seq_len(1000)) {
 
 
 
-# Aplicarlo 
+# Aplicarlo
 resul <- NULL
 for (i in seq_len(n_escannos)) {
   # n_escannos <- i # Variable
   votos <- vot[[i]] # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
@@ -1557,20 +1713,30 @@ resul1 <- as.data.table(resul)
 # Analizar la desproporcionalidad columna a columna
 dis <- seq_len(ncol(resul1))
 for (i in seq_len(ncol(resul1))) {
-  dis[i] <- disproporcionalidad(s = resul1[[i]],v = vot[[i]])
+  dis[i] <- disproporcionalidad(s = resul1[[i]], v = vot[[i]])
 }
-#disproporcionalidad(s = resul1[,1],v = votos)
+# disproporcionalidad(s = resul1[,1],v = votos)
 
-#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
 # dis[500] <- 0
 
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
-      Concentración (menor a mayor)")
+# qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
+#       Concentración (menor a mayor)")
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_dis_hh <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la distribución de los votos", title = "Disproporcionalidad según Huntington-Hill", caption = "Angel Gonzalez", x = "Concentración (menor a mayor)")
 ```
 
+En el presente gráfico variamos la distribución de los votos en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande.
+Observando el gráfico observamos que cuando la concentración del voto es muy baja la disproporcionalidad está en un nivel bajo, cuanto más concentración de voto podemos comprobar como la disproporcionalidad aumenta hasta que alcanza un punto en donde alcanza el máximo de disproporcionalidad y a partir de ese punto la disproporcionalidad va bajando.
+Así podemos concluir que el reparto de escaños según la ley Huntington-Hill es mejor cuanto más concentración de voto tengan unos pocos partidos con respecto a los demás.
 
 
 ### Adams
@@ -1589,7 +1755,7 @@ asientos_dhondt <- function(partidos, votos,
   vn <- votos
   vn[votos <= nv * couta_min] <- 0
   votos <- vn
-  
+
   # Escaños
   div <- 1:n_escannos - 1
   div[is.na(div)] <- 0
@@ -1608,12 +1774,12 @@ asientos_dhondt <- function(partidos, votos,
 # prov <- 1
 # n_escannos <- datos1977$asientos[prov]
 # votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
-# 
+#
 # asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
 ####
 
 
-# 
+#
 # resul <- NULL
 # for (prov in seq_len(nrow(datos1977))) {
 #   # Votos tenerife Alianza Popular mal contados
@@ -1624,128 +1790,152 @@ asientos_dhondt <- function(partidos, votos,
 #   votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
 #   resul[[prov]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
 # }
-# 
+#
 # resul <- as.data.table(resul)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
-
 ```
 
-#### Adams Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+#### Adams variando el número de escaños
 
 ```{r}
+# Adams Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
 partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 5000
 votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
-votos <- votos/seq_len(49)
+votos <- votos / seq_len(49)
 
 resul <- NULL
 for (i in seq_len(n_escannos)) {
   n_escannos <- i # Variable
   votos <- votos # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
 # beepr::beep(sound = 3)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
-
 ```
 
-#### Adams Disproporcionalidad
+<!-- #### Adams Disproporcionalidad -->
 
 ```{r}
 disproporcionalidad <-
-  function(s,v )
-  {
+  function(s, v) {
     s <- as.vector(s)
     v <- as.vector(v)
     l_s <- length(s)
     #        l_v <- length(v)
     s_s <- sum(s)
     s_v <- sum(v)
-    p_s <- s/s_s
-    p_v <- v/s_v
-    
-    o <- (1/l_s) * sum(abs(p_s-p_v)) 
+    p_s <- s / s_s
+    p_v <- v / s_v
+
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
     #            nm <- 'Rae'
-    
-    #return(list(measure=nm, value=o))
-    o}
+
+    # return(list(measure=nm, value=o))
+    o
+  }
 
 
-disproporcionalidad(s = resul1[,1],v = votos)
+disproporcionalidad(s = resul1[, 1], v = votos)
 
-dis <- apply(X = resul1[,1:500],MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+dis <- apply(X = resul1[, 1:500], MARGIN = 2, FUN = function(x) disproporcionalidad(s = x, v = votos))
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis)
+library(ggthemes)
+# qplot(seq_len(length(dis)),dis)
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_esc_ad <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Disproporcionalidad según Adams", caption = "Angel Gonzalez", x = "Número de Escaños")
 ```
 
+En este caso se nos presenta la disproporcionalidad variando el número de de escaños posibles, en el presente caso se empieza por repartir un único escaño hasta los 500 posibles escaños.
+Observamos que la disproporcionalidad en el caso de un escaño es muy alta, posteriormente cuanto mayor es el número de escaños a repartir la disproporcionalidad va bajando.
+La diferencia de disproporcionalidad en los casos en los que hay pocos escaños a repartir es alta, cuantos mas escaños a repartir la diferencia de disproporcionalidad entre sucesivos escaños va reduciendose, a números altos de escaños a repartir la disproporcionalidad tiende a estabilizarse.
 
-
-#### Adams Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+#### Adams variando el número de partidos
 
 ```{r}
+# Adams Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
 partidos <- NULL
 for (i in seq_len(500)) {
   partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
 }
-#partidos <- paste("Partido_", seq_len(49), sep = "")
+# partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 30
 votos <- NULL
 for (i in seq_len(500)) {
   votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
-  votos[[i]] <- votos[[i]]/seq_len(length(partidos[[i]]))
+  votos[[i]] <- votos[[i]] / seq_len(length(partidos[[i]]))
 }
 # votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 # votos <- votos/seq_len(length(partidos))
 
 resul <- NULL
 for (i in seq_len(length(partidos))) {
-  if (i==1) {next}
+  if (i == 1) {
+    next
+  }
   n_escannos <- 50 # Variable
-  #votos <- votos[[i]] # Fijo
-  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escaños
+  # votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
 # Arreglar tabla poniendo NA donde se necesita
-for (i in 3:(ncol(resul1)-2)) {
-  resul1[[i-2]][i:nrow(resul1)] <- NA
+for (i in 3:(ncol(resul1) - 2)) {
+  resul1[[i - 2]][i:nrow(resul1)] <- NA
 }
 
 # Analizar la desproporcionalidad columna a columna
 dis <- seq_len(length(partidos))
-for (i in seq_len(length(partidos)-1)) {
-  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])),v = votos[[i+1]])
+for (i in seq_len(length(partidos) - 1)) {
+  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])), v = votos[[i + 1]])
 }
-#disproporcionalidad(s = resul1[,1],v = votos)
+# disproporcionalidad(s = resul1[,1],v = votos)
 
-#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
 dis[500] <- 0
 
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis)
+# qplot(seq_len(length(dis)),dis)
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_par_ad <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de partidos", title = "Disproporcionalidad según Adams", caption = "Angel Gonzalez", x = "Número de Partidos")
 ```
 
+En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
+Observamos que cuando se presentan 2 o 3 partidos a las elecciones la disproporcionalidad es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de disproporcionalidad con 6 partidos que se presentan a las elecciones, a partir de el séptimo partido la curva comienza a decrecer.
+Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 4 a 60 ) la disproporcionalidad es alta pero decreciente, cuanto mayor número de partidos se presentan en las elcciones menor es la disproporcionalidad que encontramos, como en el apartado anterior, la disproporcionalidad tiende a estabilizarse.
 
 
-#### Adams Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+
+#### Adams variando la distribución de los votos
 
 ```{r}
+# Adams Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
 partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 500
 # votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 
 # Modificar la densidad de los votos
-votos <- trunc(rep(x = 10e5,length(partidos)))
-expon <- seq(from=0.001,to = 1, length.out = 1000)
+votos <- trunc(rep(x = 10e5, length(partidos)))
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
 vot <- NULL
 for (i in seq_len(1000)) {
-  vot[[i]] <- votos*dexp(1:length(partidos),rate = expon[i])
+  vot[[i]] <- votos * dexp(1:length(partidos), rate = expon[i])
 }
 
 
@@ -1757,12 +1947,12 @@ for (i in seq_len(1000)) {
 
 
 
-# Aplicarlo 
+# Aplicarlo
 resul <- NULL
 for (i in seq_len(n_escannos)) {
   # n_escannos <- i # Variable
   votos <- vot[[i]] # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
@@ -1770,19 +1960,30 @@ resul1 <- as.data.table(resul)
 # Analizar la desproporcionalidad columna a columna
 dis <- seq_len(ncol(resul1))
 for (i in seq_len(ncol(resul1))) {
-  dis[i] <- disproporcionalidad(s = resul1[[i]],v = vot[[i]])
+  dis[i] <- disproporcionalidad(s = resul1[[i]], v = vot[[i]])
 }
-#disproporcionalidad(s = resul1[,1],v = votos)
+# disproporcionalidad(s = resul1[,1],v = votos)
 
-#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
 # dis[500] <- 0
 
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
-      Concentración (menor a mayor)")
+# qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
+#       Concentración (menor a mayor)")
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_dis_ad <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la distribución de los votos", title = "Disproporcionalidad según Adams", caption = "Angel Gonzalez", x = "Concentración (menor a mayor)")
 ```
+
+En el presente gráfico variamos la distribución de los votos en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande.
+Observando el gráfico observamos que cuando la concentración del voto es muy baja la disproporcionalidad está en un nivel bajo, cuanto más concentración de voto podemos comprobar como la disproporcionalidad aumenta hasta que alcanza un punto en donde alcanza el máximo de disproporcionalidad y a partir de ese punto la disproporcionalidad va bajando.
+Así podemos concluir que el reparto de escaños según la ley Adams es mejor cuanto más concentración de voto tengan unos pocos partidos con respecto a los demás.
 
 ### Danish
 ```{r}
@@ -1800,9 +2001,9 @@ asientos_dhondt <- function(partidos, votos,
   vn <- votos
   vn[votos <= nv * couta_min] <- 0
   votos <- vn
-  
+
   # Escaños
-  div <- 3*(1:n_escannos) - 2
+  div <- 3 * (1:n_escannos) - 2
   G <- sapply(div, function(x) votos / x)
   cuota <- G[order(G, decreasing = T)][n_escannos]
   W <- (G >= cuota)
@@ -1818,12 +2019,12 @@ asientos_dhondt <- function(partidos, votos,
 # prov <- 1
 # n_escannos <- datos1977$asientos[prov]
 # votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
-# 
+#
 # asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
 ####
 
 
-# 
+#
 # resul <- NULL
 # for (prov in seq_len(nrow(datos1977))) {
 #   # Votos tenerife Alianza Popular mal contados
@@ -1834,128 +2035,152 @@ asientos_dhondt <- function(partidos, votos,
 #   votos <- as.numeric(datos1977[prov, desde:(ncol(datos1977) - 1)])
 #   resul[[prov]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = .03)
 # }
-# 
+#
 # resul <- as.data.table(resul)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
-
 ```
 
-#### Danish Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+#### Danish variando el número de escaños
 
 ```{r}
+# Danish Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
 partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 5000
 votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
-votos <- votos/seq_len(49)
+votos <- votos / seq_len(49)
 
 resul <- NULL
 for (i in seq_len(n_escannos)) {
   n_escannos <- i # Variable
   votos <- votos # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
 # beepr::beep(sound = 3)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
-
 ```
 
-#### Danish Disproporcionalidad
-
+<!-- #### Danish Disproporcionalidad -->
+  
 ```{r}
 disproporcionalidad <-
-  function(s,v )
-  {
+  function(s, v) {
     s <- as.vector(s)
     v <- as.vector(v)
     l_s <- length(s)
     #        l_v <- length(v)
     s_s <- sum(s)
     s_v <- sum(v)
-    p_s <- s/s_s
-    p_v <- v/s_v
-    
-    o <- (1/l_s) * sum(abs(p_s-p_v)) 
+    p_s <- s / s_s
+    p_v <- v / s_v
+
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
     #            nm <- 'Rae'
-    
-    #return(list(measure=nm, value=o))
-    o}
+
+    # return(list(measure=nm, value=o))
+    o
+  }
 
 
-disproporcionalidad(s = resul1[,1],v = votos)
+disproporcionalidad(s = resul1[, 1], v = votos)
 
-dis <- apply(X = resul1[,1:500],MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+dis <- apply(X = resul1[, 1:500], MARGIN = 2, FUN = function(x) disproporcionalidad(s = x, v = votos))
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis)
+library(ggthemes)
+# qplot(seq_len(length(dis)),dis)
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_esc_dan <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Disproporcionalidad según Danish", caption = "Angel Gonzalez", x = "Número de Escaños")
 ```
 
+En este caso se nos presenta la disproporcionalidad variando el número de de escaños posibles, en el presente caso se empieza por repartir un único escaño hasta los 500 posibles escaños.
+Observamos que la disproporcionalidad en el caso de un escaño es muy alta, posteriormente cuanto mayor es el número de escaños a repartir la disproporcionalidad va bajando.
+La diferencia de disproporcionalidad en los casos en los que hay pocos escaños a repartir es alta, cuantos mas escaños a repartir la diferencia de disproporcionalidad entre sucesivos escaños va reduciendose, a números altos de escaños a repartir la disproporcionalidad tiende a estabilizarse.
 
-
-#### Danish Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+#### Danish variando el número de partidos
 
 ```{r}
+# Danish Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
 partidos <- NULL
 for (i in seq_len(500)) {
   partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
 }
-#partidos <- paste("Partido_", seq_len(49), sep = "")
+# partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 30
 votos <- NULL
 for (i in seq_len(500)) {
   votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
-  votos[[i]] <- votos[[i]]/seq_len(length(partidos[[i]]))
+  votos[[i]] <- votos[[i]] / seq_len(length(partidos[[i]]))
 }
 # votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 # votos <- votos/seq_len(length(partidos))
 
 resul <- NULL
 for (i in seq_len(length(partidos))) {
-  if (i==1) {next}
+  if (i == 1) {
+    next
+  }
   n_escannos <- 50 # Variable
-  #votos <- votos[[i]] # Fijo
-  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escaños
+  # votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
 # Arreglar tabla poniendo NA donde se necesita
-for (i in 3:(ncol(resul1)-2)) {
-  resul1[[i-2]][i:nrow(resul1)] <- NA
+for (i in 3:(ncol(resul1) - 2)) {
+  resul1[[i - 2]][i:nrow(resul1)] <- NA
 }
 
 # Analizar la desproporcionalidad columna a columna
 dis <- seq_len(length(partidos))
-for (i in seq_len(length(partidos)-1)) {
-  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])),v = votos[[i+1]])
+for (i in seq_len(length(partidos) - 1)) {
+  dis[i] <- disproporcionalidad(s = as.vector(na.omit(resul1[[i]])), v = votos[[i + 1]])
 }
-#disproporcionalidad(s = resul1[,1],v = votos)
+# disproporcionalidad(s = resul1[,1],v = votos)
 
-#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
 dis[500] <- 0
 
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis)
+# qplot(seq_len(length(dis)),dis)
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_par_dan <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de partidos", title = "Disproporcionalidad según Danish", caption = "Angel Gonzalez", x = "Número de Partidos")
 ```
 
+En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
+Observamos que cuando se presentan 2 o 3 partidos a las elecciones la disproporcionalidad es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de disproporcionalidad con 6 partidos que se presentan a las elecciones, a partir de el séptimo partido la curva comienza a decrecer.
+Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 4 a 60 ) la disproporcionalidad es alta pero decreciente, cuanto mayor número de partidos se presentan en las elcciones menor es la disproporcionalidad que encontramos, como en el apartado anterior, la disproporcionalidad tiende a estabilizarse.
 
 
-#### Danish Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+
+#### Danish variando la distribución de los votos
 
 ```{r}
+# Danish Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
 partidos <- paste("Partido_", seq_len(49), sep = "")
 n_escannos <- 500
 # votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 
 # Modificar la densidad de los votos
-votos <- trunc(rep(x = 10e5,length(partidos)))
-expon <- seq(from=0.001,to = 1, length.out = 1000)
+votos <- trunc(rep(x = 10e5, length(partidos)))
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
 vot <- NULL
 for (i in seq_len(1000)) {
-  vot[[i]] <- votos*dexp(1:length(partidos),rate = expon[i])
+  vot[[i]] <- votos * dexp(1:length(partidos), rate = expon[i])
 }
 
 
@@ -1967,12 +2192,12 @@ for (i in seq_len(1000)) {
 
 
 
-# Aplicarlo 
+# Aplicarlo
 resul <- NULL
 for (i in seq_len(n_escannos)) {
   # n_escannos <- i # Variable
   votos <- vot[[i]] # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escaños
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
 }
 
 resul1 <- as.data.table(resul)
@@ -1980,17 +2205,89 @@ resul1 <- as.data.table(resul)
 # Analizar la desproporcionalidad columna a columna
 dis <- seq_len(ncol(resul1))
 for (i in seq_len(ncol(resul1))) {
-  dis[i] <- disproporcionalidad(s = resul1[[i]],v = vot[[i]])
+  dis[i] <- disproporcionalidad(s = resul1[[i]], v = vot[[i]])
 }
-#disproporcionalidad(s = resul1[,1],v = votos)
+# disproporcionalidad(s = resul1[,1],v = votos)
 
-#dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
+# dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
 # dis[500] <- 0
 
 
 library(ggplot2)
-qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
-      Concentración (menor a mayor)")
+# qplot(seq_len(length(dis)),dis,main = "Prueba",ylab = "Disproporcionalidad",xlab = "
+#       Concentración (menor a mayor)")
 
+dis1 <- data.frame("Disproporcionalidad" = dis, "Escannos" = seq_len(length(dis)))
+var_dis_dan <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(data = dis1, mapping = aes(color = Disproporcionalidad), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la distribución de los votos", title = "Disproporcionalidad según Danish", caption = "Angel Gonzalez", x = "Concentración (menor a mayor)")
 ```
 
+En el presente gráfico variamos la distribución de los votos en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande.
+Observando el gráfico observamos que cuando la concentración del voto es muy baja la disproporcionalidad está en un nivel bajo, cuanto más concentración de voto podemos comprobar como la disproporcionalidad aumenta hasta que alcanza un punto en donde alcanza el máximo de disproporcionalidad y a partir de ese punto la disproporcionalidad va bajando.
+Así podemos concluir que el reparto de escaños según la ley Danish es mejor cuanto más concentración de voto tengan unos pocos partidos con respecto a los demás.
+
+## Comparaciones entre métodos
+
+### Variando el número de escaños
+```{r}
+var_esc_dhondt$Metodo <- "D`Hondt"
+var_esc_sl$Metodo <- "Sainte-Lague"
+var_esc_msl$Metodo <- "Modified Sainte-Lague"
+var_esc_imp$Metodo <- "Imperiali"
+var_esc_hh$Metodo <- "Huntington-Hill"
+var_esc_ad$Metodo <- "Adams"
+var_esc_dan$Metodo <- "Danish"
+
+var_esc <- rbind(var_esc_dhondt, var_esc_sl, var_esc_msl, var_esc_imp, var_esc_hh, var_esc_ad, var_esc_dan)
+
+ggplot(data = var_esc, mapping = aes(Escannos, Disproporcionalidad)) +
+  # geom_point(data = var_esc, mapping = aes(fill = "Metodo"), show.legend = F) +
+  geom_point() +
+  facet_grid(cols = vars(Metodo)) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la distribución de los votos", title = "Disproporcionalidad según Danish", caption = "Angel Gonzalez", x = "Concentración (menor a mayor)")
+```
+
+### Variando el número de partidos
+```{r}
+var_par_dhondt$Metodo <- "D`Hondt"
+var_par_sl$Metodo <- "Sainte-Lague"
+var_par_msl$Metodo <- "Modified Sainte-Lague"
+var_par_imp$Metodo <- "Imperiali"
+var_par_hh$Metodo <- "Huntington-Hill"
+var_par_ad$Metodo <- "Adams"
+var_par_dan$Metodo <- "Danish"
+
+var_par <- rbind(var_par_dhondt, var_par_sl, var_par_msl, var_par_imp, var_par_hh, var_par_ad, var_par_dan)
+
+ggplot(data = var_par, mapping = aes(Escannos, Disproporcionalidad)) +
+  # geom_point(data = var_par, mapping = aes(fill = "Metodo"), show.legend = F) +
+  geom_point() +
+  facet_grid(cols = vars(Metodo)) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de partidos", title = "Disproporcionalidad", caption = "Angel Gonzalez", x = "Número de partidos")
+```
+
+### Variando la distribución de los votos
+```{r}
+var_dis_dhondt$Metodo <- "D`Hondt"
+var_dis_sl$Metodo <- "Sainte-Lague"
+var_dis_msl$Metodo <- "Modified Sainte-Lague"
+var_dis_imp$Metodo <- "Imperiali"
+var_dis_hh$Metodo <- "Huntington-Hill"
+var_dis_ad$Metodo <- "Adams"
+var_dis_dan$Metodo <- "Danish"
+
+var_dis <- rbind(var_dis_dhondt, var_dis_sl, var_dis_msl, var_dis_imp, var_dis_hh, var_dis_ad, var_dis_dan)
+
+ggplot(data = var_dis, mapping = aes(Escannos, Disproporcionalidad)) +
+  # geom_point(data = var_dis, mapping = aes(fill = "Metodo"), show.legend = F) +
+  geom_point() +
+  facet_grid(cols = vars(Metodo)) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la distribucion de los votos", title = "Disproporcionalidad", caption = "Angel Gonzalez", x = "Concentración (menor a mayor)")
+```
