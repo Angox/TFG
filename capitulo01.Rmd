@@ -27,6 +27,8 @@ output:
       #before_body: portadas/latex_paginatitulo_modTFE.tex
       #in_header: latex/latex_preambulo.tex
       #after_body: latex/latex_antes_enddoc.tex
+editor_options: 
+  chunk_output_type: inline
 ---
 
 
@@ -383,7 +385,7 @@ datos1977$asientos <- rowSums(datos1977[, (colnames(datos1977) %in% c("Diputados
 datos1977 <- datos1977[, !(colnames(datos1977) %in% c("Diputados"))]
 datos1977 <- datos1977[, -grep(pattern = c("censo"), tolower(colnames(datos1977)))]
 datos1977 <- datos1977[, -grep(pattern = c("Código"), colnames(datos1977))]
-# datos1977 <- datos1977[, -grep(pattern = c("CER"), colnames(datos1977))]
+
 datos1977 <- datos1977[, -grep(pattern = c("mesas"), colnames(datos1977))]
 ```
 
@@ -423,12 +425,11 @@ for (prov in seq_len(nrow(datos1977))) {
   selec <- as.data.frame(selec)
   selec <- sort(unlist(selec), decreasing = T)[1:n_asientos]
   library(stringr)
-  names(selec) <- gsub("\\d", "", names(selec)) # substr(names(selec), 1, nchar(names(selec))-1)
+  names(selec) <- gsub("\\d", "", names(selec)) 
   # Presentamos el resultado
   borrar[[prov]] <- sort(table(names(selec)), decreasing = T)
 }
-# library(tibble)
-# library(dplyr)
+
 # seats_ha(parties = partidos,votes = as.numeric(votos),n_seats = n_asientos,method = "dhondt")
 borrar2 <- borrar[[1]]
 for (i in 2:length(borrar)) {
@@ -530,7 +531,7 @@ asientos_dhondt <- function(partidos, votos,
   seats <- rowSums(W)
   o <- seats
   # Resultados
-  data.frame("Partidos" = partidos, "Escaños" = as.numeric(o))
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
 
 # Modelo para España
@@ -569,13 +570,13 @@ n_escannos <- 5000
 votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 votos <- votos / seq_len(49)
 
-resul <- NULL
-for (i in seq_len(n_escannos)) {
-  n_escannos <- i # Variable
-  votos <- votos # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
-}
-
+# resul <- NULL
+# for (i in seq_len(n_escannos)) {
+#   # n_escannos <- i # Variable
+#   # votos <- votos # Fijo
+#   resul[[i]] <- asientos_dhondt(partidos, votos, i, couta_min = 0)$Escanos
+# }
+resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
 # beepr::beep(sound = 3)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
@@ -603,7 +604,7 @@ disproporcionalidad <-
   }
 
 
-disproporcionalidad(s = resul1[, 1], v = votos)
+# disproporcionalidad(s = resul1[, 1], v = votos)
 
 dis <- apply(X = resul1[, 1:500], MARGIN = 2, FUN = function(x) disproporcionalidad(s = x, v = votos))
 
@@ -700,7 +701,7 @@ votos <- trunc(rep(x = 10e5, length(partidos)))
 expon <- seq(from = 0.001, to = 1, length.out = 1000)
 vot <- NULL
 for (i in seq_len(1000)) {
-  vot[[i]] <- votos * dexp(1:length(partidos), rate = expon[i])
+  vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
 }
 
 
@@ -730,7 +731,7 @@ for (i in seq_len(ncol(resul1))) {
 # disproporcionalidad(s = resul1[,1],v = votos)
 
 # dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
-# dis[500] <- 0
+
 
 
 library(ggplot2)
@@ -779,7 +780,7 @@ asientos_dhondt <- function(partidos, votos,
   seats <- rowSums(W)
   o <- seats
   # Resultados
-  data.frame("Partidos" = partidos, "Escaños" = as.numeric(o))
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
 
 # Modelo para España
@@ -818,13 +819,13 @@ n_escannos <- 5000
 votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 votos <- votos / seq_len(49)
 
-resul <- NULL
-for (i in seq_len(n_escannos)) {
-  n_escannos <- i # Variable
-  votos <- votos # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
-}
-
+# resul <- NULL
+# for (i in seq_len(n_escannos)) {
+#   n_escannos <- i # Variable
+#   votos <- votos # Fijo
+#   resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
+# }
+resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
 # beepr::beep(sound = 3)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
@@ -932,8 +933,8 @@ ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
 ```
 
 En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
-Observamos que cuando se presentan 2 o 3 partidos a las elecciones la disproporcionalidad es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de disproporcionalidad con 6 partidos que se presentan a las elecciones, a partir de el séptimo partido la curva comienza a decrecer.
-Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 4 a 60 ) la disproporcionalidad es alta pero decreciente, cuanto mayor número de partidos se presentan en las elcciones menor es la disproporcionalidad que encontramos, como en el apartado anterior, la disproporcionalidad tiende a estabilizarse.
+Observamos que cuando se presentan 2 partidos a las elecciones la disproporcionalidad es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de disproporcionalidad con 2 partidos que se presentan a las elecciones, a partir de el séptimo partido la curva comienza a decrecer.
+Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 4 a 6 ) la disproporcionalidad es alta pero decreciente, cuanto mayor número de partidos se presentan en las elcciones menor es la disproporcionalidad que encontramos, como en el apartado anterior, la disproporcionalidad tiende a estabilizarse.
 
 
 
@@ -950,7 +951,7 @@ votos <- trunc(rep(x = 10e5, length(partidos)))
 expon <- seq(from = 0.001, to = 1, length.out = 1000)
 vot <- NULL
 for (i in seq_len(1000)) {
-  vot[[i]] <- votos * dexp(1:length(partidos), rate = expon[i])
+  vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
 }
 
 
@@ -980,7 +981,7 @@ for (i in seq_len(ncol(resul1))) {
 # disproporcionalidad(s = resul1[,1],v = votos)
 
 # dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
-# dis[500] <- 0
+
 
 
 library(ggplot2)
@@ -997,7 +998,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
 ```
 
 En el presente gráfico variamos la distribución de los votos en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande.
-Observando el gráfico observamos que cuando la concentración del voto es muy baja la disproporcionalidad está en un nivel bajo, cuanto más concentración de voto podemos comprobar como la disproporcionalidad aumenta hasta que alcanza un punto en donde alcanza el máximo de disproporcionalidad y a partir de ese punto la disproporcionalidad va bajando.
+Observando el gráfico observamos que cuando la concentración del voto es muy baja la disproporcionalidad está en un nivel alto, aumenta levemente para una concentración baja-media y a partir de ahí, donde alcanza el máximo de disproporcionalidad, la curva va decreciendo cuanto mas diferencia de votos entre partidos exista.
 Así podemos concluir que el reparto de escaños según la ley Sainte-Lague es mejor cuanto más concentración de voto tengan unos pocos partidos con respecto a los demás.
 
 
@@ -1026,7 +1027,7 @@ asientos_dhondt <- function(partidos, votos,
   seats <- rowSums(W)
   o <- seats
   # Resultados
-  data.frame("Partidos" = partidos, "Escaños" = as.numeric(o))
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
 
 # Modelo para España
@@ -1065,13 +1066,13 @@ n_escannos <- 5000
 votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 votos <- votos / seq_len(49)
 
-resul <- NULL
-for (i in seq_len(n_escannos)) {
-  n_escannos <- i # Variable
-  votos <- votos # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
-}
-
+# resul <- NULL
+# for (i in seq_len(n_escannos)) {
+#   n_escannos <- i # Variable
+#   votos <- votos # Fijo
+#   resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
+# }
+resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
 # beepr::beep(sound = 3)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
@@ -1179,7 +1180,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
 
 En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
 Observamos que cuando se presentan 2 o 3 partidos a las elecciones la disproporcionalidad es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de disproporcionalidad con 6 partidos que se presentan a las elecciones, a partir de el séptimo partido la curva comienza a decrecer.
-Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 4 a 60 ) la disproporcionalidad es alta pero decreciente, cuanto mayor número de partidos se presentan en las elcciones menor es la disproporcionalidad que encontramos, como en el apartado anterior, la disproporcionalidad tiende a estabilizarse.
+Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 2 a 6 ) la disproporcionalidad es alta pero decreciente, cuanto mayor número de partidos se presentan en las elcciones menor es la disproporcionalidad que encontramos, como en el apartado anterior, la disproporcionalidad tiende a estabilizarse.
 
 
 
@@ -1196,7 +1197,7 @@ votos <- trunc(rep(x = 10e5, length(partidos)))
 expon <- seq(from = 0.001, to = 1, length.out = 1000)
 vot <- NULL
 for (i in seq_len(1000)) {
-  vot[[i]] <- votos * dexp(1:length(partidos), rate = expon[i])
+  vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
 }
 
 
@@ -1226,7 +1227,7 @@ for (i in seq_len(ncol(resul1))) {
 # disproporcionalidad(s = resul1[,1],v = votos)
 
 # dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
-# dis[500] <- 0
+
 
 
 library(ggplot2)
@@ -1243,7 +1244,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
 ```
 
 En el presente gráfico variamos la distribución de los votos en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande.
-Observando el gráfico observamos que cuando la concentración del voto es muy baja la disproporcionalidad está en un nivel bajo, cuanto más concentración de voto podemos comprobar como la disproporcionalidad aumenta hasta que alcanza un punto en donde alcanza el máximo de disproporcionalidad y a partir de ese punto la disproporcionalidad va bajando.
+Observando el gráfico observamos que cuando la concentración del voto es muy baja la disproporcionalidad está en un nivel medio, cuanto más concentración de voto podemos comprobar como la disproporcionalidad aumenta hasta que alcanza un punto en donde alcanza el máximo de disproporcionalidad y a partir de ese punto la disproporcionalidad va bajando.
 Así podemos concluir que el reparto de escaños según la ley Modified Sainte-Lague es mejor cuanto más concentración de voto tengan unos pocos partidos con respecto a los demás.
 
 
@@ -1272,7 +1273,7 @@ asientos_dhondt <- function(partidos, votos,
   seats <- rowSums(W)
   o <- seats
   # Resultados
-  data.frame("Partidos" = partidos, "Escaños" = as.numeric(o))
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
 
 # Modelo para España
@@ -1311,13 +1312,13 @@ n_escannos <- 5000
 votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 votos <- votos / seq_len(49)
 
-resul <- NULL
-for (i in seq_len(n_escannos)) {
-  n_escannos <- i # Variable
-  votos <- votos # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
-}
-
+# resul <- NULL
+# for (i in seq_len(n_escannos)) {
+#   n_escannos <- i # Variable
+#   votos <- votos # Fijo
+#   resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
+# }
+resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
 # beepr::beep(sound = 3)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
@@ -1424,8 +1425,8 @@ ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
 ```
 
 En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
-Observamos que cuando se presentan 2 o 3 partidos a las elecciones la disproporcionalidad es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de disproporcionalidad con 6 partidos que se presentan a las elecciones, a partir de el séptimo partido la curva comienza a decrecer.
-Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 4 a 60 ) la disproporcionalidad es alta pero decreciente, cuanto mayor número de partidos se presentan en las elcciones menor es la disproporcionalidad que encontramos, como en el apartado anterior, la disproporcionalidad tiende a estabilizarse.
+Observamos que cuando se presentan 2 o 3 partidos a las elecciones la disproporcionalidad es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de disproporcionalidad con 6 partidos que se presentan a las elecciones, a partir del séptimo partido la curva comienza a decrecer.
+Entonces, según el modelo Imperiali tendremos una menor disproporcionalidad según se vayan aumentando el número de partidos.
 
 
 
@@ -1442,7 +1443,7 @@ votos <- trunc(rep(x = 10e5, length(partidos)))
 expon <- seq(from = 0.001, to = 1, length.out = 1000)
 vot <- NULL
 for (i in seq_len(1000)) {
-  vot[[i]] <- votos * dexp(1:length(partidos), rate = expon[i])
+  vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
 }
 
 
@@ -1472,7 +1473,7 @@ for (i in seq_len(ncol(resul1))) {
 # disproporcionalidad(s = resul1[,1],v = votos)
 
 # dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
-# dis[500] <- 0
+
 
 
 library(ggplot2)
@@ -1490,7 +1491,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
 
 En el presente gráfico variamos la distribución de los votos en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande.
 Observando el gráfico observamos que cuando la concentración del voto es muy baja la disproporcionalidad está en un nivel bajo, cuanto más concentración de voto podemos comprobar como la disproporcionalidad aumenta hasta que alcanza un punto en donde alcanza el máximo de disproporcionalidad y a partir de ese punto la disproporcionalidad va bajando.
-Así podemos concluir que el reparto de escaños según la ley Imperiali es mejor cuanto más concentración de voto tengan unos pocos partidos con respecto a los demás.
+Así podemos concluir que el reparto de escaños según la ley Imperiali obtiene su menor disproporcionalidad en los escenarios en donde la diferencia de votos entre los partidos sea muy baja.
 
 
 ### Huntington-Hill
@@ -1518,7 +1519,7 @@ asientos_dhondt <- function(partidos, votos,
   seats <- rowSums(W)
   o <- seats
   # Resultados
-  data.frame("Partidos" = partidos, "Escaños" = as.numeric(o))
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
 
 # Modelo para España
@@ -1557,13 +1558,13 @@ n_escannos <- 5000
 votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 votos <- votos / seq_len(49)
 
-resul <- NULL
-for (i in seq_len(n_escannos)) {
-  n_escannos <- i # Variable
-  votos <- votos # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
-}
-
+# resul <- NULL
+# for (i in seq_len(n_escannos)) {
+#   n_escannos <- i # Variable
+#   votos <- votos # Fijo
+#   resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
+# }
+resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
 # beepr::beep(sound = 3)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
@@ -1609,8 +1610,8 @@ ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
 ```
 
 En este caso se nos presenta la disproporcionalidad variando el número de de escaños posibles, en el presente caso se empieza por repartir un único escaño hasta los 500 posibles escaños.
-Observamos que la disproporcionalidad en el caso de un escaño es muy alta, posteriormente cuanto mayor es el número de escaños a repartir la disproporcionalidad va bajando.
-La diferencia de disproporcionalidad en los casos en los que hay pocos escaños a repartir es alta, cuantos mas escaños a repartir la diferencia de disproporcionalidad entre sucesivos escaños va reduciendose, a números altos de escaños a repartir la disproporcionalidad tiende a estabilizarse.
+Observamos que la disproporcionalidad en el caso de un escaño es muy alta,es interesante observar que para un número de escaños entre 1 y 50 la disproporcionalidad no cambia, es a partir de los 50 escaños y posteriores donde observamos el descenso de la disproporcionalidad, descenso rápido en los primeros escaños que tiende a estabilizarse cuanto mayor número de escaños se repartan.
+
 
 #### Huntington-Hill variando el número de partidos
 
@@ -1670,9 +1671,10 @@ ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
 ```
 
 En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
-Observamos que cuando se presentan 2 o 3 partidos a las elecciones la disproporcionalidad es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de disproporcionalidad con 6 partidos que se presentan a las elecciones, a partir de el séptimo partido la curva comienza a decrecer.
-Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 4 a 60 ) la disproporcionalidad es alta pero decreciente, cuanto mayor número de partidos se presentan en las elcciones menor es la disproporcionalidad que encontramos, como en el apartado anterior, la disproporcionalidad tiende a estabilizarse.
 
+Observamos que cuando se presentan 2 o 3 partidos a las elecciones la disproporcionalidad es media, va aumentando a medida que se presentan más partidos, alcanzando el máximo de disproporcionalidad con 50 partidos que se presentan a las elecciones, a partir de 50 partidos la curva comienza a decrecer.
+
+Lo particular de este método respecto a otros métodos es que la menor disproporcionalidad no se obtiene en el caso de que se presenten a las elecciones pocos partidos, sino que la menor disproporcionalidad se obtiene cuanto más partidos se presenten a las elecciones.
 
 
 #### Huntington-Hill variando la distribución de los votos
@@ -1688,7 +1690,7 @@ votos <- trunc(rep(x = 10e5, length(partidos)))
 expon <- seq(from = 0.001, to = 1, length.out = 1000)
 vot <- NULL
 for (i in seq_len(1000)) {
-  vot[[i]] <- votos * dexp(1:length(partidos), rate = expon[i])
+  vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
 }
 
 
@@ -1718,7 +1720,7 @@ for (i in seq_len(ncol(resul1))) {
 # disproporcionalidad(s = resul1[,1],v = votos)
 
 # dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
-# dis[500] <- 0
+
 
 
 library(ggplot2)
@@ -1735,8 +1737,10 @@ ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
 ```
 
 En el presente gráfico variamos la distribución de los votos en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande.
-Observando el gráfico observamos que cuando la concentración del voto es muy baja la disproporcionalidad está en un nivel bajo, cuanto más concentración de voto podemos comprobar como la disproporcionalidad aumenta hasta que alcanza un punto en donde alcanza el máximo de disproporcionalidad y a partir de ese punto la disproporcionalidad va bajando.
-Así podemos concluir que el reparto de escaños según la ley Huntington-Hill es mejor cuanto más concentración de voto tengan unos pocos partidos con respecto a los demás.
+
+Observando el gráfico observamos que cuando la concentración del voto es muy baja la disproporcionalidad está en un nivel bajo, disproporcionalidad que se mantiene baja cuando la concentración de los votos es baja, y que a partir de una concentración de votos medio-baja la disproporcionalidad va aumentando cuanto más diferencia de votos entre partidos se presenten.
+
+Así podemos concluir que el reparto de escaños según la ley Huntington-Hill es mejor cuanto menor concentración de voto tengan los partidos entre ellos, presenta un comportamiento diferente respecto a los otros métodos en donde cuanto mayor concentración de votos menor disproporcionalidad.
 
 
 ### Adams
@@ -1765,7 +1769,7 @@ asientos_dhondt <- function(partidos, votos,
   seats <- rowSums(W)
   o <- seats
   # Resultados
-  data.frame("Partidos" = partidos, "Escaños" = as.numeric(o))
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
 
 # Modelo para España
@@ -1804,13 +1808,13 @@ n_escannos <- 5000
 votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 votos <- votos / seq_len(49)
 
-resul <- NULL
-for (i in seq_len(n_escannos)) {
-  n_escannos <- i # Variable
-  votos <- votos # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
-}
-
+# resul <- NULL
+# for (i in seq_len(n_escannos)) {
+#   n_escannos <- i # Variable
+#   votos <- votos # Fijo
+#   resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
+# }
+resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
 # beepr::beep(sound = 3)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
@@ -1856,7 +1860,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
 ```
 
 En este caso se nos presenta la disproporcionalidad variando el número de de escaños posibles, en el presente caso se empieza por repartir un único escaño hasta los 500 posibles escaños.
-Observamos que la disproporcionalidad en el caso de un escaño es muy alta, posteriormente cuanto mayor es el número de escaños a repartir la disproporcionalidad va bajando.
+Observamos que la disproporcionalidad en el caso de un escaño es muy alta, en este método también observamos que la disproporcionalidad se mantiene en un mismo nivel hasta los 50 escaños, posteriormente cuanto mayor es el número de escaños a repartir la disproporcionalidad va bajando.
 La diferencia de disproporcionalidad en los casos en los que hay pocos escaños a repartir es alta, cuantos mas escaños a repartir la diferencia de disproporcionalidad entre sucesivos escaños va reduciendose, a números altos de escaños a repartir la disproporcionalidad tiende a estabilizarse.
 
 #### Adams variando el número de partidos
@@ -1917,9 +1921,10 @@ ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
 ```
 
 En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
-Observamos que cuando se presentan 2 o 3 partidos a las elecciones la disproporcionalidad es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de disproporcionalidad con 6 partidos que se presentan a las elecciones, a partir de el séptimo partido la curva comienza a decrecer.
-Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 4 a 60 ) la disproporcionalidad es alta pero decreciente, cuanto mayor número de partidos se presentan en las elcciones menor es la disproporcionalidad que encontramos, como en el apartado anterior, la disproporcionalidad tiende a estabilizarse.
 
+Observamos que cuando se presentan 2 o 3 partidos a las elecciones la disproporcionalidad es media, va aumentando a medida que se presentan más partidos, alcanzando el máximo de disproporcionalidad con 50 partidos que se presentan a las elecciones, a partir de los 50 partidos que se presentan a las elecciones la curva comienza a decrecer.
+
+Entonces según el método Adams obtenemos el mejor resultado cuanto mayor número de partidos  se presenten a las elecciones.
 
 
 #### Adams variando la distribución de los votos
@@ -1935,7 +1940,7 @@ votos <- trunc(rep(x = 10e5, length(partidos)))
 expon <- seq(from = 0.001, to = 1, length.out = 1000)
 vot <- NULL
 for (i in seq_len(1000)) {
-  vot[[i]] <- votos * dexp(1:length(partidos), rate = expon[i])
+  vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
 }
 
 
@@ -1965,7 +1970,7 @@ for (i in seq_len(ncol(resul1))) {
 # disproporcionalidad(s = resul1[,1],v = votos)
 
 # dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
-# dis[500] <- 0
+
 
 
 library(ggplot2)
@@ -1982,8 +1987,10 @@ ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
 ```
 
 En el presente gráfico variamos la distribución de los votos en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande.
-Observando el gráfico observamos que cuando la concentración del voto es muy baja la disproporcionalidad está en un nivel bajo, cuanto más concentración de voto podemos comprobar como la disproporcionalidad aumenta hasta que alcanza un punto en donde alcanza el máximo de disproporcionalidad y a partir de ese punto la disproporcionalidad va bajando.
-Así podemos concluir que el reparto de escaños según la ley Adams es mejor cuanto más concentración de voto tengan unos pocos partidos con respecto a los demás.
+
+Observando el gráfico observamos que cuando la concentración del voto es muy baja la disproporcionalidad está en un nivel bajo, cuanto más concentración de voto podemos comprobar como la disproporcionalidad va aumentando cada vez con una diferencia decreciente.
+
+Así podemos concluir que el reparto de escaños según la ley Adams es mejor cuanto menor concentración de voto los partidos entre ellos, y será peor cuanto mayor concentración de voto se presente.
 
 ### Danish
 ```{r}
@@ -2010,7 +2017,7 @@ asientos_dhondt <- function(partidos, votos,
   seats <- rowSums(W)
   o <- seats
   # Resultados
-  data.frame("Partidos" = partidos, "Escaños" = as.numeric(o))
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
 
 # Modelo para España
@@ -2049,13 +2056,13 @@ n_escannos <- 5000
 votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
 votos <- votos / seq_len(49)
 
-resul <- NULL
-for (i in seq_len(n_escannos)) {
-  n_escannos <- i # Variable
-  votos <- votos # Fijo
-  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
-}
-
+# resul <- NULL
+# for (i in seq_len(n_escannos)) {
+#   n_escannos <- i # Variable
+#   votos <- votos # Fijo
+#   resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
+# }
+resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
 # beepr::beep(sound = 3)
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
@@ -2163,7 +2170,9 @@ ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
 
 En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
 Observamos que cuando se presentan 2 o 3 partidos a las elecciones la disproporcionalidad es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de disproporcionalidad con 6 partidos que se presentan a las elecciones, a partir de el séptimo partido la curva comienza a decrecer.
-Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 4 a 60 ) la disproporcionalidad es alta pero decreciente, cuanto mayor número de partidos se presentan en las elcciones menor es la disproporcionalidad que encontramos, como en el apartado anterior, la disproporcionalidad tiende a estabilizarse.
+Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 4 a 6 ) la disproporcionalidad es alta pero decreciente, cuanto mayor número de partidos se presentan en las elecciones menor es la disproporcionalidad que encontramos, como en el apartado anterior, la disproporcionalidad tiende a estabilizarse.
+
+Entonces según el método Danish obtenemos el mejor resultado cuanto más partidos se presenten a las elecciones.
 
 
 
@@ -2180,7 +2189,7 @@ votos <- trunc(rep(x = 10e5, length(partidos)))
 expon <- seq(from = 0.001, to = 1, length.out = 1000)
 vot <- NULL
 for (i in seq_len(1000)) {
-  vot[[i]] <- votos * dexp(1:length(partidos), rate = expon[i])
+  vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
 }
 
 
@@ -2210,7 +2219,7 @@ for (i in seq_len(ncol(resul1))) {
 # disproporcionalidad(s = resul1[,1],v = votos)
 
 # dis <- apply(X = resul1,MARGIN = 2,FUN = function(x) disproporcionalidad(s = x,v = votos))
-# dis[500] <- 0
+
 
 
 library(ggplot2)
@@ -2227,7 +2236,9 @@ ggplot(data = dis1, mapping = aes(Escannos, Disproporcionalidad)) +
 ```
 
 En el presente gráfico variamos la distribución de los votos en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande.
-Observando el gráfico observamos que cuando la concentración del voto es muy baja la disproporcionalidad está en un nivel bajo, cuanto más concentración de voto podemos comprobar como la disproporcionalidad aumenta hasta que alcanza un punto en donde alcanza el máximo de disproporcionalidad y a partir de ese punto la disproporcionalidad va bajando.
+
+Observando el gráfico observamos que cuando la concentración del voto es muy baja la disproporcionalidad está en un nivel medio, cuanto más concentración de voto podemos comprobar como la disproporcionalidad aumenta hasta que alcanza un punto en donde alcanza el máximo de disproporcionalidad y a partir de ese punto la disproporcionalidad va bajando.
+
 Así podemos concluir que el reparto de escaños según la ley Danish es mejor cuanto más concentración de voto tengan unos pocos partidos con respecto a los demás.
 
 ## Comparaciones entre métodos
@@ -2244,13 +2255,68 @@ var_esc_dan$Metodo <- "Danish"
 
 var_esc <- rbind(var_esc_dhondt, var_esc_sl, var_esc_msl, var_esc_imp, var_esc_hh, var_esc_ad, var_esc_dan)
 
+# ggplot(data = var_esc, mapping = aes(Escannos, Disproporcionalidad)) +
+#   # geom_point(data = var_esc, mapping = aes(fill = "Metodo"), show.legend = F) +
+#   geom_point() +
+#   facet_grid(cols = vars(Metodo)) +
+#   scale_fill_gradient(low = "red", high = "yellow") +
+#   labs(subtitle = "Variando la distribución de los votos", title = "Disproporcionalidad según Danish", caption = "Angel Gonzalez", x = "Concentración (menor a mayor)")
+
 ggplot(data = var_esc, mapping = aes(Escannos, Disproporcionalidad)) +
-  # geom_point(data = var_esc, mapping = aes(fill = "Metodo"), show.legend = F) +
-  geom_point() +
-  facet_grid(cols = vars(Metodo)) +
-  scale_fill_gradient(low = "red", high = "yellow") +
-  labs(subtitle = "Variando la distribución de los votos", title = "Disproporcionalidad según Danish", caption = "Angel Gonzalez", x = "Concentración (menor a mayor)")
+  geom_point(aes(colour = factor(Metodo)))+
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Disproporcionalidad ", caption = "Angel Gonzalez", x = "Número de Escaños")+
+  # labs(title = "Variando la distribución de los votos", subtitle = "Disproporcionalidad", caption = "Angel Gonzalez", x = "Número de Escaños")+
+  guides(color=guide_legend(title="Método"))+
+  theme(
+    legend.position = c(.95, .95),
+    legend.justification = c("right", "top"),
+    legend.box.just = "right",
+    legend.margin = margin(6, 6, 6, 6)
+    )
+
 ```
+
+En el presente gráfico comparamos en un mismo lugar los métodos anteriormente analizados individualmente.
+En esta comparación podemos observar que para todos los métodos la disproporcionalidad baja cuanto mayor número de escaños a repartir, los peores métodos en este caso serían el Adams y el Imperiali, el método Adams cuando tengamos un número de escaños menor y el Imperiali a partir aproximadamente de los 100 escaños.
+Los mejores métodos en este caso serían el método de Sainte-Lague y el método Danish.
+
+
+```{r}
+var_esc_dhondt$Metodo <- "D`Hondt"
+var_esc_sl$Metodo <- "Sainte-Lague"
+var_esc_msl$Metodo <- "Modified Sainte-Lague"
+var_esc_imp$Metodo <- "Imperiali"
+var_esc_hh$Metodo <- "Huntington-Hill"
+var_esc_ad$Metodo <- "Adams"
+var_esc_dan$Metodo <- "Danish"
+
+var_esc <- rbind(var_esc_dhondt, var_esc_sl, var_esc_msl, var_esc_imp, var_esc_hh, var_esc_ad, var_esc_dan)
+
+# ggplot(data = var_esc, mapping = aes(Escannos, Disproporcionalidad)) +
+#   # geom_point(data = var_esc, mapping = aes(fill = "Metodo"), show.legend = F) +
+#   geom_point() +
+#   facet_grid(cols = vars(Metodo)) +
+#   scale_fill_gradient(low = "red", high = "yellow") +
+#   labs(subtitle = "Variando la distribución de los votos", title = "Disproporcionalidad según Danish", caption = "Angel Gonzalez", x = "Concentración (menor a mayor)")
+
+ggplot(data = var_esc[var_esc$Escannos>300&var_esc$Escannos<400,], mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(aes(colour = factor(Metodo)))+
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Disproporcionalidad ", caption = "Angel Gonzalez", x = "Número de Escaños")+guides(color=guide_legend(title="Método"))+
+  theme(
+    legend.position = c(.95, .95),
+    legend.justification = c("right", "top"),
+    legend.box.just = "right",
+    legend.margin = margin(6, 6, 6, 6)
+    )
+
+```
+
+En este gráfico nos centramos en la disproporcionalidad para un número de escaños a repartir de entre 300 y 400 diputados, actualmente en España se reparten 350 diputados.
+El peor método entre los presentados es el método Imperiali, con una diferencia significatica respecto a los demás métodos. Los mejores métodos de reparto podemos agruparlos en un grupo de tres, que son el método de Sainte-Lague en primer lugar, el método Modified Sainte-Lague y el método Danish respectivamente.
+Podemos agrupar los métodos en tres grupos,un grupo que sería el de una disproporcionalidad baja, en el que se encontrarían los métodos de Sainte-Lague, Danish y Modified Sainte-Lague.
+Un segundo grupo que sería el que presentaría una disproporcionalidad media, con los métodos Adams, Huntington-Hill y D´Hondt, finalizando con un último grupo de disproporcionalidad alta, y debido a ello no deseable en el que estaría el método Imperiali.
+
+Actualmente en España se reparten 350 escaños y se utiliza el método D´Hondt, según los datos obtenidos podemos decir que no es el mejor método que se puede utilizar, es un método que está en el grupo de dispropocionalidad media, e incluso no es el mejor método dentro de ese subgrupo, sería interesante según lo observado en la gráfica plantearse un cambio de método a otro mejor, al menos a alguno dentro del subgrupo de disproporcionalidad baja, preferentemente el mejor método que podríamos utilizar, que sería el método de Sainte-Lague sin modificar.
 
 ### Variando el número de partidos
 ```{r}
@@ -2264,13 +2330,51 @@ var_par_dan$Metodo <- "Danish"
 
 var_par <- rbind(var_par_dhondt, var_par_sl, var_par_msl, var_par_imp, var_par_hh, var_par_ad, var_par_dan)
 
-ggplot(data = var_par, mapping = aes(Escannos, Disproporcionalidad)) +
-  # geom_point(data = var_par, mapping = aes(fill = "Metodo"), show.legend = F) +
-  geom_point() +
-  facet_grid(cols = vars(Metodo)) +
-  scale_fill_gradient(low = "red", high = "yellow") +
-  labs(subtitle = "Variando el número de partidos", title = "Disproporcionalidad", caption = "Angel Gonzalez", x = "Número de partidos")
+
+  ggplot(data = var_par, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(aes(colour = factor(Metodo)))+
+  labs(subtitle = "Variando el número de partidos", title = "Disproporcionalidad", caption = "Angel Gonzalez", x = "Número de partidos") + guides(color=guide_legend(title="Método")) +
+  theme(
+    legend.position = c(.95, .95),
+    legend.justification = c("right", "top"),
+    legend.box.just = "right",
+    legend.margin = margin(6, 6, 6, 6)
+    )
 ```
+
+En el presente gráfico comparamos la disproporcionalidad variando el número de partidos en un mismo lugar con los métodos anteriormente analizados individualmente.
+
+Observamos que para un número de partidos bajo hasta los 50 partidos que se presentan a unas elecciones la disproporcionalidad es muy variable, a partir de los 50 partidos se estabiliza y podemos sacar algunas conclusiones, en primer lugar el peor método claramente en este caso es el método Adams, mientras que los demás métodos son muy similares en su disproporcionalidad, donde la menor disproporcionalidad lo podemos encontrar en el método Adams.
+
+
+```{r}
+var_par_dhondt$Metodo <- "D`Hondt"
+var_par_sl$Metodo <- "Sainte-Lague"
+var_par_msl$Metodo <- "Modified Sainte-Lague"
+var_par_imp$Metodo <- "Imperiali"
+var_par_hh$Metodo <- "Huntington-Hill"
+var_par_ad$Metodo <- "Adams"
+var_par_dan$Metodo <- "Danish"
+
+var_par <- rbind(var_par_dhondt, var_par_sl, var_par_msl, var_par_imp, var_par_hh, var_par_ad, var_par_dan)
+
+
+  ggplot(data = var_par[var_par$Escannos<50,], mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(aes(colour = factor(Metodo)))+geom_line(aes(colour = factor(Metodo)),size=1)+
+  labs(subtitle = "Variando el número de partidos", title = "Disproporcionalidad", caption = "Angel Gonzalez", x = "Número de partidos") + guides(color=guide_legend(title="Método")) +
+  theme(
+    legend.position = c(.95, .95),
+    legend.justification = c("right", "top"),
+    legend.box.just = "right",
+    legend.margin = margin(6, 6, 6, 6)
+    )
+```
+
+En este gráfico nos centramos en la disproporcionalidad para un número de partidos entre 2 y 50 partidos.
+
+Observamos que hasta los 20 partidos que se presentan a las elecciones la disproporcionalidad es muy variable entre ellos, a partir de los 20 partidos que se presentan en las elecciones podemos extraer algunas conclusiones, se ven dos grupor direfenciados, un grupo en donde la disproporcionalidad es estable e incluso decreciente  y otro grupo en el que la disproporcionalidad va aumentando, que son los métodos de Adams y Huntington-Hill.
+
+En España se utiliza el método D´Hondt, según los datos obtenidos podemos concluir que el método d´Hondt no es el mejor método entre los analizados, sería el cuarto mejor método entre siete métodos posibles, es decir, sería deseable para obtener una mayor proporcionalidad que se cambiase el método de reparto a otro mejor, en este caso observamos que el mejor método es el Saint-Lague.
 
 ### Variando la distribución de los votos
 ```{r}
@@ -2284,10 +2388,66 @@ var_dis_dan$Metodo <- "Danish"
 
 var_dis <- rbind(var_dis_dhondt, var_dis_sl, var_dis_msl, var_dis_imp, var_dis_hh, var_dis_ad, var_dis_dan)
 
-ggplot(data = var_dis, mapping = aes(Escannos, Disproporcionalidad)) +
-  # geom_point(data = var_dis, mapping = aes(fill = "Metodo"), show.legend = F) +
-  geom_point() +
-  facet_grid(cols = vars(Metodo)) +
-  scale_fill_gradient(low = "red", high = "yellow") +
-  labs(subtitle = "Variando la distribucion de los votos", title = "Disproporcionalidad", caption = "Angel Gonzalez", x = "Concentración (menor a mayor)")
+
+  ggplot(data = var_dis, mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(aes(colour = factor(Metodo)))+
+  labs(subtitle = "Variando la distribucion de los votos", title = "Disproporcionalidad", caption = "Angel Gonzalez", x = "Concentración (menor a mayor)")+guides(color=guide_legend(title="Método"))+
+  theme(
+    legend.position = c(.95, .95),
+    legend.justification = c("right", "top"),
+    legend.box.just = "right",
+    legend.margin = margin(6, 6, 6, 6)
+    )
 ```
+
+En el presente gráfico comparamos la distribución de los votos en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande. Todo ello en un mismo lugar con los métodos anteriormente analizados individualmente.
+
+Observamos que hay dos grupos diferenciados, uno de ellos en los que la disproporcionalidad es baja para una menor concentración de votos entre los partidos y que a medida que la concentración aumenta también va aumentando la disproporcionalidad, donde se encuentran los métodos de Adams y Huntington-Hill. El otro grupo se caracteriza por en cuanto la concentración del voto es muy baja la disproporcionalidad está en un nivel bajo, cuanto más concentración de voto podemos comprobar como la disproporcionalidad aumenta hasta que alcanza un punto en donde alcanza el máximo de disproporcionalidad y a partir de ese punto la disproporcionalidad va bajando alcanzando el mínimo de disproporcionalidad.
+
+```{r}
+var_dis_dhondt$Metodo <- "D`Hondt"
+var_dis_sl$Metodo <- "Sainte-Lague"
+var_dis_msl$Metodo <- "Modified Sainte-Lague"
+var_dis_imp$Metodo <- "Imperiali"
+var_dis_hh$Metodo <- "Huntington-Hill"
+var_dis_ad$Metodo <- "Adams"
+var_dis_dan$Metodo <- "Danish"
+
+var_dis <- rbind(var_dis_dhondt, var_dis_sl, var_dis_msl, var_dis_imp, var_dis_hh, var_dis_ad, var_dis_dan)
+
+
+  ggplot(data = var_dis[var_dis$Escannos>400,], mapping = aes(Escannos, Disproporcionalidad)) +
+  geom_point(aes(colour = factor(Metodo)))+
+  labs(subtitle = "Variando la distribucion de los votos", title = "Disproporcionalidad", caption = "Angel Gonzalez", x = "Concentración (menor a mayor)")+guides(color=guide_legend(title="Método"))+
+  theme(
+    legend.position = c(.95, .95),
+    legend.justification = c("right", "top"),
+    legend.box.just = "right",
+    legend.margin = margin(6, 6, 6, 6)
+    )
+```
+
+
+En este gráfico nos centramos en los casos en que hay mayor concentración de votos de unos pocos partidos, lo que suele suceder actualmente.
+Vemos que hay dos grupos diferenciados, uno en el que hay una alta disproporcionalidad, que serían los métodos Adams y Huntington-Hill y otro en el que la disproporcionalidad es baja.
+En España actualmente la concentración de voto en alta o medio-alta y se utiliza el método de D´Hondt, por lo tanto observando el gráfico podemos decir que el método utilizado en España no es el más optimo en el caso de la concentración de voto actual en España, sería conveniente realizar un cambio de método y cambiarlo preferentemente por el método Sainte-Lague, que es el mejor entre los métodos del grupo con disproporcionalidad baja.
+
+
+
+
+## Conclusiones 
+
+
+
+En general podemos concluir que una vez comparados todos los métodos tanto modificando el número de escaños a repartir, en número de partidos que se presentan a la elección y la concentración de los votos, concluimos que el mejor método es el Saint-Lague, seguido por el Modified Sainte-Lague y el Danish.
+En el caso del método utilizado actualmente en España, el método D´hondt, podemos decir que es un método que no siendo de los peores se queda en un medio que no es ni un método malo ni bueno, es decir, que no es un método que se debiese usar, puesto que no es el mejor en ninguno de las posibles modificaciones que se presentan en este estudio, siendo entonces conveniente para España cambiar el método de reparto de escaños y utilizar el método de Sainte-Lague que es el que consistentemente ha presentado los mejores resultados.
+
+
+```{r message=FALSE, warning=FALSE}
+knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
+"stringr","shiny","flexdashboard","htmlwidgets",
+"bookdown","tidyselect","tibble","scales"),
+file="bib/paquetemio.bib",
+width = 60)
+```
+

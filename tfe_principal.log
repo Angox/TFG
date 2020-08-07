@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.2.24)  24 FEB 2020 11:59
-=======
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.2.24)  24 FEB 2020 11:52
->>>>>>> e413a9b802aff757ff184867b8e5a957e4ac7663
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.2.24)  5 AUG 2020 13:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -318,63 +314,48 @@ Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 (c:/texlive/2019/texmf-dist/tex/latex/graphics/dvipsnam.def
 File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
-)) (c:/texlive/2019/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
-Package: fancyvrb 2020/01/13 v3.5 verbatim text (tvz,hv)
-\FV@CodeLineNo=\count271
-\FV@InFile=\read2
-\FV@TabBox=\box47
-\c@FancyVerbLine=\count272
-\FV@StepNumber=\count273
-\FV@OutFile=\write3
-) (c:/texlive/2019/texmf-dist/tex/latex/framed/framed.sty
-Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
-\OuterFrameSep=\skip56
-\fb@frw=\dimen157
-\fb@frh=\dimen158
-\FrameRule=\dimen159
-\FrameSep=\dimen160
-) (c:/texlive/2019/texmf-dist/tex/latex/parskip/parskip.sty
+)) (c:/texlive/2019/texmf-dist/tex/latex/parskip/parskip.sty
 Package: parskip 2020-01-22 v2.0d non-zero parskip adjustments
 (c:/texlive/2019/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count274
+\etb@tempcnta=\count271
 )) (c:/texlive/2019/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2020/02/14 3.40 The Babel package
+Package: babel 2020/02/28 3.41 The Babel package
 (c:/texlive/2019/texmf-dist/tex/generic/babel/switch.def
-File: switch.def 2020/02/14 3.40 Babel switching mechanism
+File: switch.def 2020/02/28 3.41 Babel switching mechanism
 ) (c:/texlive/2019/texmf-dist/tex/generic/babel-spanish/spanish.ldf
 Language: spanish.ldf 2016/03/03 v5.0p Spanish support from the babel system
 (c:/texlive/2019/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2020/02/14 3.40 Babel common definitions
-\babel@savecnt=\count275
-\U@D=\dimen161
+File: babel.def 2020/02/28 3.41 Babel common definitions
+\babel@savecnt=\count272
+\U@D=\dimen157
 (c:/texlive/2019/texmf-dist/tex/generic/babel/txtbabel.def)
-\bbl@readstream=\read3
-\bbl@dirlevel=\count276
+\bbl@readstream=\read2
+\bbl@dirlevel=\count273
 )
 \es@quottoks=\toks25
-\es@quotdepth=\count277
+\es@quotdepth=\count274
 )) (c:/texlive/2019/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count278
+\c@float@type=\count275
 \float@exts=\toks26
-\float@box=\box48
+\float@box=\box47
 \@float@everytoks=\toks27
-\@floatcapt=\box49
+\@floatcapt=\box48
 ) (c:/texlive/2019/texmf-dist/tex/latex/placeins/placeins.sty
 Package: placeins 2005/04/18  v 2.2
 ) (c:/texlive/2019/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footer
 s
-\f@nch@headwidth=\skip57
-\f@nch@O@elh=\skip58
-\f@nch@O@erh=\skip59
-\f@nch@O@olh=\skip60
-\f@nch@O@orh=\skip61
-\f@nch@O@elf=\skip62
-\f@nch@O@erf=\skip63
-\f@nch@O@olf=\skip64
-\f@nch@O@orf=\skip65
+\f@nch@headwidth=\skip56
+\f@nch@O@elh=\skip57
+\f@nch@O@erh=\skip58
+\f@nch@O@olh=\skip59
+\f@nch@O@orh=\skip60
+\f@nch@O@elf=\skip61
+\f@nch@O@erf=\skip62
+\f@nch@O@olf=\skip63
+\f@nch@O@orf=\skip64
 ) (c:/texlive/2019/texmf-dist/tex/latex/chngcntr/chngcntr.sty
 Package: chngcntr 2018/04/09 v1.1a change counter resetting
 ) (c:/texlive/2019/texmf-dist/tex/latex/base/fontenc.sty
@@ -385,16 +366,16 @@ Package: pdfpages 2020/01/28 v0.5q Insert pages of external PDF documents (AM)
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 ) (c:/texlive/2019/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count279
-\calc@Bcount=\count280
-\calc@Adimen=\dimen162
-\calc@Bdimen=\dimen163
-\calc@Askip=\skip66
-\calc@Bskip=\skip67
+\calc@Acount=\count276
+\calc@Bcount=\count277
+\calc@Adimen=\dimen158
+\calc@Bdimen=\dimen159
+\calc@Askip=\skip65
+\calc@Bskip=\skip66
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count281
-\calc@Cskip=\skip68
+\calc@Ccount=\count278
+\calc@Cskip=\skip67
 ) (c:/texlive/2019/texmf-dist/tex/latex/eso-pic/eso-pic.sty
 Package: eso-pic 2018/04/12 v2.0h eso-pic (RN)
 ) (c:/texlive/2019/texmf-dist/tex/latex/graphics/graphicx.sty
@@ -408,30 +389,30 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 105.
 )
-\Gin@req@height=\dimen164
-\Gin@req@width=\dimen165
+\Gin@req@height=\dimen160
+\Gin@req@width=\dimen161
 )
-\AM@pagewidth=\dimen166
-\AM@pageheight=\dimen167
+\AM@pagewidth=\dimen162
+\AM@pageheight=\dimen163
 (c:/texlive/2019/texmf-dist/tex/latex/pdfpages/pppdftex.def
 File: pppdftex.def 2020/01/28 v0.5q Pdfpages driver for pdfTeX (AM)
 )
-\AM@pagebox=\box50
+\AM@pagebox=\box49
 \AM@global@opts=\toks28
-\AM@pagecnt=\count282
+\AM@pagecnt=\count279
 \AM@toc@title=\toks29
-\c@AM@survey=\count283
-\AM@templatesizebox=\box51
+\c@AM@survey=\count280
+\AM@templatesizebox=\box50
 ) (c:/texlive/2019/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (c:/texlive/
 2019/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (c:/texlive/2019/texmf-dist/te
 x/latex/pgf/utilities/pgfrcs.sty (c:/texlive/2019/texmf-dist/tex/generic/pgf/ut
 ilities/pgfutil-common.tex
 \pgfutil@everybye=\toks30
-\pgfutil@tempdima=\dimen168
-\pgfutil@tempdimb=\dimen169
+\pgfutil@tempdima=\dimen164
+\pgfutil@tempdimb=\dimen165
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.tex)
 ) (c:/texlive/2019/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
-\pgfutil@abb=\box52
+\pgfutil@abb=\box51
 (c:/texlive/2019/texmf-dist/tex/latex/ms/everyshi.sty
 Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
 )) (c:/texlive/2019/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (c:/te
@@ -449,26 +430,26 @@ Package: pgfsys 2020/01/08 v3.1.5b (3.1.5b)
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
 \pgfkeys@tmptoks=\toks33
 ))
-\pgf@x=\dimen170
-\pgf@y=\dimen171
-\pgf@xa=\dimen172
-\pgf@ya=\dimen173
-\pgf@xb=\dimen174
-\pgf@yb=\dimen175
-\pgf@xc=\dimen176
-\pgf@yc=\dimen177
-\pgf@xd=\dimen178
-\pgf@yd=\dimen179
-\w@pgf@writea=\write4
-\r@pgf@reada=\read4
-\c@pgf@counta=\count284
-\c@pgf@countb=\count285
-\c@pgf@countc=\count286
-\c@pgf@countd=\count287
+\pgf@x=\dimen166
+\pgf@y=\dimen167
+\pgf@xa=\dimen168
+\pgf@ya=\dimen169
+\pgf@xb=\dimen170
+\pgf@yb=\dimen171
+\pgf@xc=\dimen172
+\pgf@yc=\dimen173
+\pgf@xd=\dimen174
+\pgf@yd=\dimen175
+\w@pgf@writea=\write3
+\r@pgf@reada=\read3
+\c@pgf@counta=\count281
+\c@pgf@countb=\count282
+\c@pgf@countc=\count283
+\c@pgf@countd=\count284
 \t@pgf@toka=\toks34
 \t@pgf@tokb=\toks35
 \t@pgf@tokc=\toks36
-\pgf@sys@id@count=\count288
+\pgf@sys@id@count=\count285
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2020/01/08 v3.1.5b (3.1.5b)
 )
@@ -480,8 +461,8 @@ File: pgfsys-common-pdf.def 2020/01/08 v3.1.5b (3.1.5b)
 )))
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfsyssoftpath@smallbuffer@items=\count289
-\pgfsyssoftpath@bigbuffer@items=\count290
+\pgfsyssoftpath@smallbuffer@items=\count286
+\pgfsyssoftpath@bigbuffer@items=\count287
 )
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
 File: pgfsysprotocol.code.tex 2020/01/08 v3.1.5b (3.1.5b)
@@ -491,9 +472,9 @@ Package: pgfcore 2020/01/08 v3.1.5b (3.1.5b)
 019/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex (c:/texlive/2019/texmf
 -dist/tex/generic/pgf/math/pgfmathutil.code.tex) (c:/texlive/2019/texmf-dist/te
 x/generic/pgf/math/pgfmathparser.code.tex
-\pgfmath@dimen=\dimen180
-\pgfmath@count=\count291
-\pgfmath@box=\box53
+\pgfmath@dimen=\dimen176
+\pgfmath@count=\count288
+\pgfmath@box=\box52
 \pgfmath@toks=\toks37
 \pgfmath@stack@operand=\toks38
 \pgfmath@stack@operation=\toks39
@@ -515,54 +496,54 @@ x)
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithm
 etics.code.tex))) (c:/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmathfloat
 .code.tex
-\c@pgfmathroundto@lastzeros=\count292
+\c@pgfmathroundto@lastzeros=\count289
 )) (c:/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (c:/texliv
 e/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
 File: pgfcorepoints.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@picminx=\dimen181
-\pgf@picmaxx=\dimen182
-\pgf@picminy=\dimen183
-\pgf@picmaxy=\dimen184
-\pgf@pathminx=\dimen185
-\pgf@pathmaxx=\dimen186
-\pgf@pathminy=\dimen187
-\pgf@pathmaxy=\dimen188
-\pgf@xx=\dimen189
-\pgf@xy=\dimen190
-\pgf@yx=\dimen191
-\pgf@yy=\dimen192
-\pgf@zx=\dimen193
-\pgf@zy=\dimen194
+\pgf@picminx=\dimen177
+\pgf@picmaxx=\dimen178
+\pgf@picminy=\dimen179
+\pgf@picmaxy=\dimen180
+\pgf@pathminx=\dimen181
+\pgf@pathmaxx=\dimen182
+\pgf@pathminy=\dimen183
+\pgf@pathmaxy=\dimen184
+\pgf@xx=\dimen185
+\pgf@xy=\dimen186
+\pgf@yx=\dimen187
+\pgf@yy=\dimen188
+\pgf@zx=\dimen189
+\pgf@zy=\dimen190
 )
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.cod
 e.tex
 File: pgfcorepathconstruct.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@path@lastx=\dimen195
-\pgf@path@lasty=\dimen196
+\pgf@path@lastx=\dimen191
+\pgf@path@lasty=\dimen192
 )
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.te
 x
 File: pgfcorepathusage.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@shorten@end@additional=\dimen197
-\pgf@shorten@start@additional=\dimen198
+\pgf@shorten@end@additional=\dimen193
+\pgf@shorten@start@additional=\dimen194
 ) (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
 File: pgfcorescopes.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfpic=\box54
-\pgf@hbox=\box55
-\pgf@layerbox@main=\box56
-\pgf@picture@serial@count=\count293
+\pgfpic=\box53
+\pgf@hbox=\box54
+\pgf@layerbox@main=\box55
+\pgf@picture@serial@count=\count290
 )
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code
 .tex
 File: pgfcoregraphicstate.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgflinewidth=\dimen199
+\pgflinewidth=\dimen195
 )
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.c
 ode.tex
 File: pgfcoretransformations.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@pt@x=\dimen256
-\pgf@pt@y=\dimen257
-\pgf@pt@temp=\dimen258
+\pgf@pt@x=\dimen196
+\pgf@pt@y=\dimen197
+\pgf@pt@temp=\dimen198
 ) (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
 File: pgfcorequick.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ) (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.te
@@ -574,18 +555,18 @@ de.tex
 File: pgfcorepathprocessing.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ) (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
 File: pgfcorearrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfarrowsep=\dimen259
+\pgfarrowsep=\dimen199
 ) (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@max=\dimen260
-\pgf@sys@shading@range@num=\count294
-\pgf@shadingcount=\count295
+\pgf@max=\dimen256
+\pgf@sys@shading@range@num=\count291
+\pgf@shadingcount=\count292
 ) (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
 File: pgfcoreimage.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
 File: pgfcoreexternal.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfexternal@startupbox=\box57
+\pgfexternal@startupbox=\box56
 )) (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.te
 x
 File: pgfcorelayers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
@@ -601,15 +582,15 @@ File: pgfcorerdf.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ))) (c:/texlive/2019/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.te
 x
 File: pgfmoduleshapes.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfnodeparttextbox=\box58
+\pgfnodeparttextbox=\box57
 ) (c:/texlive/2019/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
 File: pgfmoduleplot.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )
 (c:/texlive/2019/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.st
 y
 Package: pgfcomp-version-0-65 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@nodesepstart=\dimen261
-\pgf@nodesepend=\dimen262
+\pgf@nodesepstart=\dimen257
+\pgf@nodesepend=\dimen258
 )
 (c:/texlive/2019/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.st
 y
@@ -622,8 +603,8 @@ th.code.tex)) (c:/texlive/2019/texmf-dist/tex/generic/pgf/utilities/pgffor.code
 .tex
 Package: pgffor 2020/01/08 v3.1.5b (3.1.5b)
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
-\pgffor@iter=\dimen263
-\pgffor@skip=\dimen264
+\pgffor@iter=\dimen259
+\pgffor@skip=\dimen260
 \pgffor@stack=\toks40
 \pgffor@toks=\toks41
 )) (c:/texlive/2019/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
@@ -632,32 +613,32 @@ Package: tikz 2020/01/08 v3.1.5b (3.1.5b)
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.co
 de.tex
 File: pgflibraryplothandlers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@plot@mark@count=\count296
-\pgfplotmarksize=\dimen265
+\pgf@plot@mark@count=\count293
+\pgfplotmarksize=\dimen261
 )
-\tikz@lastx=\dimen266
-\tikz@lasty=\dimen267
-\tikz@lastxsaved=\dimen268
-\tikz@lastysaved=\dimen269
-\tikz@lastmovetox=\dimen270
-\tikz@lastmovetoy=\dimen271
-\tikzleveldistance=\dimen272
-\tikzsiblingdistance=\dimen273
-\tikz@figbox=\box59
-\tikz@figbox@bg=\box60
-\tikz@tempbox=\box61
-\tikz@tempbox@bg=\box62
-\tikztreelevel=\count297
-\tikznumberofchildren=\count298
-\tikznumberofcurrentchild=\count299
-\tikz@fig@count=\count300
+\tikz@lastx=\dimen262
+\tikz@lasty=\dimen263
+\tikz@lastxsaved=\dimen264
+\tikz@lastysaved=\dimen265
+\tikz@lastmovetox=\dimen266
+\tikz@lastmovetoy=\dimen267
+\tikzleveldistance=\dimen268
+\tikzsiblingdistance=\dimen269
+\tikz@figbox=\box58
+\tikz@figbox@bg=\box59
+\tikz@tempbox=\box60
+\tikz@tempbox@bg=\box61
+\tikztreelevel=\count294
+\tikznumberofchildren=\count295
+\tikznumberofcurrentchild=\count296
+\tikz@fig@count=\count297
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfmatrixcurrentrow=\count301
-\pgfmatrixcurrentcolumn=\count302
-\pgf@matrix@numberofcolumns=\count303
+\pgfmatrixcurrentrow=\count298
+\pgfmatrixcurrentcolumn=\count299
+\pgf@matrix@numberofcolumns=\count300
 )
-\tikz@expandcount=\count304
+\tikz@expandcount=\count301
 
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzli
 brarytopaths.code.tex
@@ -667,10 +648,10 @@ Package: epigraph 2020/01/02 v1.5e typesetting epigraphs
 (c:/texlive/2019/texmf-dist/tex/latex/nextpage/nextpage.sty
 Package: nextpage 2009/09/03 v1.1a additional page commands
 )
-\beforeepigraphskip=\skip69
-\afterepigraphskip=\skip70
-\epigraphwidth=\skip71
-\epigraphrule=\skip72
+\beforeepigraphskip=\skip68
+\afterepigraphskip=\skip69
+\epigraphwidth=\skip70
+\epigraphrule=\skip71
 ) (./portadas/latex_paginatitulo_mod_ST02_add.sty) (./cpimod.sty
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: 
@@ -710,29 +691,29 @@ File: here_the_logos 2004/09/21 KTH logo English, BW
 File: here_the_logos 2004/09/21 KTH logo Swedish, BW
 File: here_the_logos 2004/09/21 KTH logo Swedish, colour
 File: here_the_logos 2004/09/21 KTH logo Swedish, colour
-\titlep@getextwidth=\skip73
-\titlep@gewhitemargin=\skip74
-\titlep@geleftmargin=\skip75
-\titlep@gemarginsep=\skip76
-\titlep@getextheight=\skip77
-\titlep@getopmargin=\skip78
-\tmpl@ngth=\skip79
+\titlep@getextwidth=\skip72
+\titlep@gewhitemargin=\skip73
+\titlep@geleftmargin=\skip74
+\titlep@gemarginsep=\skip75
+\titlep@getextheight=\skip76
+\titlep@getopmargin=\skip77
+\tmpl@ngth=\skip78
 ) (c:/texlive/2019/texmf-dist/tex/latex/emptypage/emptypage.sty
 Package: emptypage 2010/05/30 v1.2 Suppress page numbers and headings on empty 
 pages
 ) (c:/texlive/2019/texmf-dist/tex/latex/lipsum/lipsum.sty (c:/texlive/2019/texm
 f-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2020-02-21 L3 programming layer (loader) 
+Package: expl3 2020-02-25 L3 programming layer (loader) 
 (c:/texlive/2019/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
-File: l3backend-pdfmode.def 2020-02-21 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count305
-\l__pdf_internal_box=\box63
+File: l3backend-pdfmode.def 2020-02-23 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count302
+\l__pdf_internal_box=\box62
 )) (c:/texlive/2019/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
-Package: xparse 2020-02-14 L3 Experimental document command parser
-\l__xparse_current_arg_int=\count306
-\g__xparse_grabber_int=\count307
-\l__xparse_m_args_int=\count308
-\l__xparse_v_nesting_int=\count309
+Package: xparse 2020-02-25 L3 Experimental document command parser
+\l__xparse_current_arg_int=\count303
+\g__xparse_grabber_int=\count304
+\l__xparse_m_args_int=\count305
+\l__xparse_v_nesting_int=\count306
 )
 Package: lipsum 2019/01/02 v2.2 150 paragraphs of Lorem Ipsum dummy text
 (c:/texlive/2019/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex
@@ -744,17 +725,17 @@ Package: amsthm 2017/10/31 v2.20.4
 \thm@headfont=\toks44
 \thm@notefont=\toks45
 \thm@headpunct=\toks46
-\thm@preskip=\skip80
-\thm@postskip=\skip81
-\thm@headsep=\skip82
+\thm@preskip=\skip79
+\thm@postskip=\skip80
+\thm@headsep=\skip81
 \dth@everypar=\toks47
 )
-\c@dummy=\count310
-\c@problem=\count311
-\c@exerciseT=\count312
-\c@exampleT=\count313
-\c@vocabulary=\count314
-\c@definitionT=\count315
+\c@dummy=\count307
+\c@problem=\count308
+\c@exerciseT=\count309
+\c@exampleT=\count310
+\c@vocabulary=\count311
+\c@definitionT=\count312
 (c:/texlive/2019/texmf-dist/tex/latex/mdframed/mdframed.sty
 Package: mdframed 2013/07/01 1.9b: mdframed
 (c:/texlive/2019/texmf-dist/tex/latex/zref/zref-abspage.sty
@@ -765,155 +746,155 @@ Package zref Info: New property list: main on input line 763.
 Package zref Info: New property: default on input line 764.
 Package zref Info: New property: page on input line 765.
 )
-\c@abspage=\count316
+\c@abspage=\count313
 Package zref Info: New property: abspage on input line 66.
 ) (c:/texlive/2019/texmf-dist/tex/latex/needspace/needspace.sty
 Package: needspace 2010/09/12 v1.3d reserve vertical space
 )
-\mdf@templength=\skip83
-\c@mdf@globalstyle@cnt=\count317
-\mdf@skipabove@length=\skip84
-\mdf@skipbelow@length=\skip85
-\mdf@leftmargin@length=\skip86
-\mdf@rightmargin@length=\skip87
-\mdf@innerleftmargin@length=\skip88
-\mdf@innerrightmargin@length=\skip89
-\mdf@innertopmargin@length=\skip90
-\mdf@innerbottommargin@length=\skip91
-\mdf@splittopskip@length=\skip92
-\mdf@splitbottomskip@length=\skip93
-\mdf@outermargin@length=\skip94
-\mdf@innermargin@length=\skip95
-\mdf@linewidth@length=\skip96
-\mdf@innerlinewidth@length=\skip97
-\mdf@middlelinewidth@length=\skip98
-\mdf@outerlinewidth@length=\skip99
-\mdf@roundcorner@length=\skip100
-\mdf@footenotedistance@length=\skip101
-\mdf@userdefinedwidth@length=\skip102
-\mdf@needspace@length=\skip103
-\mdf@frametitleaboveskip@length=\skip104
-\mdf@frametitlebelowskip@length=\skip105
-\mdf@frametitlerulewidth@length=\skip106
-\mdf@frametitleleftmargin@length=\skip107
-\mdf@frametitlerightmargin@length=\skip108
-\mdf@shadowsize@length=\skip109
-\mdf@extratopheight@length=\skip110
-\mdf@subtitleabovelinewidth@length=\skip111
-\mdf@subtitlebelowlinewidth@length=\skip112
-\mdf@subtitleaboveskip@length=\skip113
-\mdf@subtitlebelowskip@length=\skip114
-\mdf@subtitleinneraboveskip@length=\skip115
-\mdf@subtitleinnerbelowskip@length=\skip116
-\mdf@subsubtitleabovelinewidth@length=\skip117
-\mdf@subsubtitlebelowlinewidth@length=\skip118
-\mdf@subsubtitleaboveskip@length=\skip119
-\mdf@subsubtitlebelowskip@length=\skip120
-\mdf@subsubtitleinneraboveskip@length=\skip121
-\mdf@subsubtitleinnerbelowskip@length=\skip122
+\mdf@templength=\skip82
+\c@mdf@globalstyle@cnt=\count314
+\mdf@skipabove@length=\skip83
+\mdf@skipbelow@length=\skip84
+\mdf@leftmargin@length=\skip85
+\mdf@rightmargin@length=\skip86
+\mdf@innerleftmargin@length=\skip87
+\mdf@innerrightmargin@length=\skip88
+\mdf@innertopmargin@length=\skip89
+\mdf@innerbottommargin@length=\skip90
+\mdf@splittopskip@length=\skip91
+\mdf@splitbottomskip@length=\skip92
+\mdf@outermargin@length=\skip93
+\mdf@innermargin@length=\skip94
+\mdf@linewidth@length=\skip95
+\mdf@innerlinewidth@length=\skip96
+\mdf@middlelinewidth@length=\skip97
+\mdf@outerlinewidth@length=\skip98
+\mdf@roundcorner@length=\skip99
+\mdf@footenotedistance@length=\skip100
+\mdf@userdefinedwidth@length=\skip101
+\mdf@needspace@length=\skip102
+\mdf@frametitleaboveskip@length=\skip103
+\mdf@frametitlebelowskip@length=\skip104
+\mdf@frametitlerulewidth@length=\skip105
+\mdf@frametitleleftmargin@length=\skip106
+\mdf@frametitlerightmargin@length=\skip107
+\mdf@shadowsize@length=\skip108
+\mdf@extratopheight@length=\skip109
+\mdf@subtitleabovelinewidth@length=\skip110
+\mdf@subtitlebelowlinewidth@length=\skip111
+\mdf@subtitleaboveskip@length=\skip112
+\mdf@subtitlebelowskip@length=\skip113
+\mdf@subtitleinneraboveskip@length=\skip114
+\mdf@subtitleinnerbelowskip@length=\skip115
+\mdf@subsubtitleabovelinewidth@length=\skip116
+\mdf@subsubtitlebelowlinewidth@length=\skip117
+\mdf@subsubtitleaboveskip@length=\skip118
+\mdf@subsubtitlebelowskip@length=\skip119
+\mdf@subsubtitleinneraboveskip@length=\skip120
+\mdf@subsubtitleinnerbelowskip@length=\skip121
 (c:/texlive/2019/texmf-dist/tex/latex/mdframed/md-frame-0.mdf
 File: md-frame-0.mdf 2013/07/01\ 1.9b: md-frame-0
 )
-\mdf@frametitlebox=\box64
-\mdf@footnotebox=\box65
-\mdf@splitbox@one=\box66
-\mdf@splitbox@two=\box67
-\mdf@splitbox@save=\box68
-\mdfsplitboxwidth=\skip123
-\mdfsplitboxtotalwidth=\skip124
-\mdfsplitboxheight=\skip125
-\mdfsplitboxdepth=\skip126
-\mdfsplitboxtotalheight=\skip127
-\mdfframetitleboxwidth=\skip128
-\mdfframetitleboxtotalwidth=\skip129
-\mdfframetitleboxheight=\skip130
-\mdfframetitleboxdepth=\skip131
-\mdfframetitleboxtotalheight=\skip132
-\mdffootnoteboxwidth=\skip133
-\mdffootnoteboxtotalwidth=\skip134
-\mdffootnoteboxheight=\skip135
-\mdffootnoteboxdepth=\skip136
-\mdffootnoteboxtotalheight=\skip137
-\mdftotallinewidth=\skip138
-\mdfboundingboxwidth=\skip139
-\mdfboundingboxtotalwidth=\skip140
-\mdfboundingboxheight=\skip141
-\mdfboundingboxdepth=\skip142
-\mdfboundingboxtotalheight=\skip143
-\mdf@freevspace@length=\skip144
-\mdf@horizontalwidthofbox@length=\skip145
-\mdf@verticalmarginwhole@length=\skip146
-\mdf@horizontalspaceofbox=\skip147
-\mdfsubtitleheight=\skip148
-\mdfsubsubtitleheight=\skip149
-\c@mdfcountframes=\count318
+\mdf@frametitlebox=\box63
+\mdf@footnotebox=\box64
+\mdf@splitbox@one=\box65
+\mdf@splitbox@two=\box66
+\mdf@splitbox@save=\box67
+\mdfsplitboxwidth=\skip122
+\mdfsplitboxtotalwidth=\skip123
+\mdfsplitboxheight=\skip124
+\mdfsplitboxdepth=\skip125
+\mdfsplitboxtotalheight=\skip126
+\mdfframetitleboxwidth=\skip127
+\mdfframetitleboxtotalwidth=\skip128
+\mdfframetitleboxheight=\skip129
+\mdfframetitleboxdepth=\skip130
+\mdfframetitleboxtotalheight=\skip131
+\mdffootnoteboxwidth=\skip132
+\mdffootnoteboxtotalwidth=\skip133
+\mdffootnoteboxheight=\skip134
+\mdffootnoteboxdepth=\skip135
+\mdffootnoteboxtotalheight=\skip136
+\mdftotallinewidth=\skip137
+\mdfboundingboxwidth=\skip138
+\mdfboundingboxtotalwidth=\skip139
+\mdfboundingboxheight=\skip140
+\mdfboundingboxdepth=\skip141
+\mdfboundingboxtotalheight=\skip142
+\mdf@freevspace@length=\skip143
+\mdf@horizontalwidthofbox@length=\skip144
+\mdf@verticalmarginwhole@length=\skip145
+\mdf@horizontalspaceofbox=\skip146
+\mdfsubtitleheight=\skip147
+\mdfsubsubtitleheight=\skip148
+\c@mdfcountframes=\count315
 
 ****** mdframed patching \endmdf@trivlist
 
 ****** -- success******
 
-\mdf@envdepth=\count319
-\c@mdf@env@i=\count320
-\c@mdf@env@ii=\count321
-\c@mdf@zref@counter=\count322
+\mdf@envdepth=\count316
+\c@mdf@env@i=\count317
+\c@mdf@env@ii=\count318
+\c@mdf@zref@counter=\count319
 Package zref Info: New property: mdf@pagevalue on input line 895.
 )
-\c@notation=\count323
+\c@notation=\count320
 (c:/texlive/2019/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
 Package: tcolorbox 2019/11/15 version 4.22 text color boxes
 (c:/texlive/2019/texmf-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2019/11/10 v1.5r LaTeX2e package for verbatim enhancements
 \every@verbatim=\toks48
 \verbatim@line=\toks49
-\verbatim@in@stream=\read5
+\verbatim@in@stream=\read4
 ) (c:/texlive/2019/texmf-dist/tex/latex/environ/environ.sty
 Package: environ 2014/05/04 v0.3 A new way to define environments
 (c:/texlive/2019/texmf-dist/tex/latex/trimspaces/trimspaces.sty
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 ))
-\tcb@titlebox=\box69
-\tcb@upperbox=\box70
-\tcb@lowerbox=\box71
-\tcb@phantombox=\box72
-\c@tcbbreakpart=\count324
-\c@tcblayer=\count325
-\tcolorbox@number=\count326
+\tcb@titlebox=\box68
+\tcb@upperbox=\box69
+\tcb@lowerbox=\box70
+\tcb@phantombox=\box71
+\c@tcbbreakpart=\count321
+\c@tcblayer=\count322
+\tcolorbox@number=\count323
+\tcb@temp=\box72
 \tcb@temp=\box73
 \tcb@temp=\box74
 \tcb@temp=\box75
-\tcb@temp=\box76
-\tcb@out=\write5
-\tcb@record@out=\write6
+\tcb@out=\write4
+\tcb@record@out=\write5
 )
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzli
 brarytrees.code.tex
 File: tikzlibrarytrees.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ) (c:/texlive/2019/texmf-dist/tex/latex/tools/array.sty
 Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
-\col@sep=\dimen274
-\ar@mcellbox=\box77
-\extrarowheight=\dimen275
+\col@sep=\dimen270
+\ar@mcellbox=\box76
+\extrarowheight=\dimen271
 \NC@list=\toks50
-\extratabsurround=\skip150
-\backup@length=\skip151
-\ar@cellbox=\box78
+\extratabsurround=\skip149
+\backup@length=\skip150
+\ar@cellbox=\box77
 ) (c:/texlive/2019/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
-\multirow@colwidth=\skip152
-\multirow@cntb=\count327
-\multirow@dima=\skip153
-\bigstrutjot=\dimen276
+\multirow@colwidth=\skip151
+\multirow@cntb=\count324
+\multirow@dima=\skip152
+\bigstrutjot=\dimen272
 ) (c:/texlive/2019/texmf-dist/tex/latex/wrapfig/wrapfig.sty
-\wrapoverhang=\dimen277
-\WF@size=\dimen278
-\c@WF@wrappedlines=\count328
-\WF@box=\box79
+\wrapoverhang=\dimen273
+\WF@size=\dimen274
+\c@WF@wrappedlines=\count325
+\WF@box=\box78
 \WF@everypar=\toks51
 Package: wrapfig 2003/01/31  v 3.6
 ) (c:/texlive/2019/texmf-dist/tex/latex/colortbl/colortbl.sty
 Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
 \everycr=\toks52
-\minrowclearance=\skip154
+\minrowclearance=\skip153
 ) (c:/texlive/2019/texmf-dist/tex/latex/pdflscape/pdflscape.sty
 Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
 (c:/texlive/2019/texmf-dist/tex/latex/graphics/lscape.sty
@@ -924,36 +905,36 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
 (c:/texlive/2019/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
-\@vwid@box=\box80
-\sift@deathcycles=\count329
-\@vwid@loff=\dimen279
-\@vwid@roff=\dimen280
+\@vwid@box=\box79
+\sift@deathcycles=\count326
+\@vwid@loff=\dimen275
+\@vwid@roff=\dimen276
 )
-\c@taburow=\count330
-\tabu@nbcols=\count331
-\tabu@cnt=\count332
-\tabu@Xcol=\count333
-\tabu@alloc=\count334
-\tabu@nested=\count335
-\tabu@target=\dimen281
-\tabu@spreadtarget=\dimen282
-\tabu@naturalX=\dimen283
-\tabucolX=\dimen284
-\tabu@Xsum=\dimen285
-\extrarowdepth=\dimen286
-\abovetabulinesep=\dimen287
-\belowtabulinesep=\dimen288
-\tabustrutrule=\dimen289
+\c@taburow=\count327
+\tabu@nbcols=\count328
+\tabu@cnt=\count329
+\tabu@Xcol=\count330
+\tabu@alloc=\count331
+\tabu@nested=\count332
+\tabu@target=\dimen277
+\tabu@spreadtarget=\dimen278
+\tabu@naturalX=\dimen279
+\tabucolX=\dimen280
+\tabu@Xsum=\dimen281
+\extrarowdepth=\dimen282
+\abovetabulinesep=\dimen283
+\belowtabulinesep=\dimen284
+\tabustrutrule=\dimen285
 \tabu@thebody=\toks53
 \tabu@footnotes=\toks54
-\tabu@box=\box81
-\tabu@arstrutbox=\box82
-\tabu@hleads=\box83
-\tabu@vleads=\box84
-\tabu@cellskip=\skip155
+\tabu@box=\box80
+\tabu@arstrutbox=\box81
+\tabu@hleads=\box82
+\tabu@vleads=\box83
+\tabu@cellskip=\skip154
 ) (c:/texlive/2019/texmf-dist/tex/latex/threeparttable/threeparttable.sty
 Package: threeparttable 2003/06/13  v 3.0
-\@tempboxb=\box85
+\@tempboxb=\box84
 ) (c:/texlive/2019/texmf-dist/tex/latex/subfig/subfig.sty
 Package: subfig 2005/06/28 ver: 1.3 subfig package
 (c:/texlive/2019/texmf-dist/tex/latex/caption/caption.sty
@@ -961,50 +942,50 @@ Package: caption 2020/01/03 v3.4h Customizing captions (AR)
 (c:/texlive/2019/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 61.
-\captionmargin=\dimen290
-\captionmargin@=\dimen291
-\captionwidth=\dimen292
-\caption@tempdima=\dimen293
-\caption@indent=\dimen294
-\caption@parindent=\dimen295
-\caption@hangindent=\dimen296
+\captionmargin=\dimen286
+\captionmargin@=\dimen287
+\captionwidth=\dimen288
+\caption@tempdima=\dimen289
+\caption@indent=\dimen290
+\caption@parindent=\dimen291
+\caption@hangindent=\dimen292
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count336
-\c@continuedfloat=\count337
+\c@caption@flags=\count333
+\c@continuedfloat=\count334
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: threeparttable package is loaded.
 Package caption Info: wrapfig package is loaded.
 )
-\c@KVtest=\count338
-\sf@farskip=\skip156
-\sf@captopadj=\dimen297
-\sf@capskip=\skip157
-\sf@nearskip=\skip158
-\c@subfigure=\count339
-\c@subfigure@save=\count340
-\c@lofdepth=\count341
-\c@subtable=\count342
-\c@subtable@save=\count343
-\c@lotdepth=\count344
-\sf@top=\skip159
-\sf@bottom=\skip160
+\c@KVtest=\count335
+\sf@farskip=\skip155
+\sf@captopadj=\dimen293
+\sf@capskip=\skip156
+\sf@nearskip=\skip157
+\c@subfigure=\count336
+\c@subfigure@save=\count337
+\c@lofdepth=\count338
+\c@subtable=\count339
+\c@subtable@save=\count340
+\c@lotdepth=\count341
+\sf@top=\skip158
+\sf@bottom=\skip159
 ) (c:/texlive/2019/texmf-dist/tex/latex/tools/dcolumn.sty
 Package: dcolumn 2014/10/28 v1.06 decimal alignment package (DPC)
 ) (c:/texlive/2019/texmf-dist/tex/latex/graphics/rotating.sty
 Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
-\c@r@tfl@t=\count345
-\rotFPtop=\skip161
-\rotFPbot=\skip162
-\rot@float@box=\box86
+\c@r@tfl@t=\count342
+\rotFPtop=\skip160
+\rotFPbot=\skip161
+\rot@float@box=\box85
 \rot@mess@toks=\toks55
 ) (c:/texlive/2019/texmf-dist/tex/latex/realboxes/realboxes.sty
 Package: realboxes 2011/08/08 v0.2 Change box commands to read there content as
  real boxes
 (c:/texlive/2019/texmf-dist/tex/latex/collectbox/collectbox.sty
 Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
-\collectedbox=\box87
+\collectedbox=\box86
 ) (c:/texlive/2019/texmf-dist/tex/latex/adjustbox/adjcalc.sty
 Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
 -ends (calc, etex, pgfmath)
@@ -1015,62 +996,62 @@ xmf-dist/tex/generic/xkeyval/xkvutils.tex
 \XKV@toks=\toks56
 \XKV@tempa@toks=\toks57
 )
-\XKV@depth=\count346
+\XKV@depth=\count343
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 )))) (c:/texlive/2019/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen298
-\lightrulewidth=\dimen299
-\cmidrulewidth=\dimen300
-\belowrulesep=\dimen301
-\belowbottomsep=\dimen302
-\aboverulesep=\dimen303
-\abovetopsep=\dimen304
-\cmidrulesep=\dimen305
-\cmidrulekern=\dimen306
-\defaultaddspace=\dimen307
-\@cmidla=\count347
-\@cmidlb=\count348
-\@aboverulesep=\dimen308
-\@belowrulesep=\dimen309
-\@thisruleclass=\count349
-\@lastruleclass=\count350
-\@thisrulewidth=\dimen310
+\heavyrulewidth=\dimen294
+\lightrulewidth=\dimen295
+\cmidrulewidth=\dimen296
+\belowrulesep=\dimen297
+\belowbottomsep=\dimen298
+\aboverulesep=\dimen299
+\abovetopsep=\dimen300
+\cmidrulesep=\dimen301
+\cmidrulekern=\dimen302
+\defaultaddspace=\dimen303
+\@cmidla=\count344
+\@cmidlb=\count345
+\@aboverulesep=\dimen304
+\@belowrulesep=\dimen305
+\@thisruleclass=\count346
+\@lastruleclass=\count347
+\@thisrulewidth=\dimen306
 ) (c:/texlive/2019/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
-\LTleft=\skip163
-\LTright=\skip164
-\LTpre=\skip165
-\LTpost=\skip166
-\LTchunksize=\count351
-\LTcapwidth=\dimen311
-\LT@head=\box88
-\LT@firsthead=\box89
-\LT@foot=\box90
-\LT@lastfoot=\box91
-\LT@cols=\count352
-\LT@rows=\count353
-\c@LT@tables=\count354
-\c@LT@chunks=\count355
+\LTleft=\skip162
+\LTright=\skip163
+\LTpre=\skip164
+\LTpost=\skip165
+\LTchunksize=\count348
+\LTcapwidth=\dimen307
+\LT@head=\box87
+\LT@firsthead=\box88
+\LT@foot=\box89
+\LT@lastfoot=\box90
+\LT@cols=\count349
+\LT@rows=\count350
+\c@LT@tables=\count351
+\c@LT@chunks=\count352
 \LT@p@ftn=\toks58
 ) (c:/texlive/2019/texmf-dist/tex/latex/threeparttablex/threeparttablex.sty
 Package: threeparttablex 2013/07/23 v0.3 by daleif
-\TPTL@width=\skip167
+\TPTL@width=\skip166
 ) (c:/texlive/2019/texmf-dist/tex/generic/ulem/ulem.sty
-\UL@box=\box92
-\UL@hyphenbox=\box93
-\UL@skip=\skip168
+\UL@box=\box91
+\UL@hyphenbox=\box92
+\UL@skip=\skip167
 \UL@hook=\toks59
-\UL@height=\dimen312
-\UL@pe=\count356
-\UL@pixel=\dimen313
-\ULC@box=\box94
+\UL@height=\dimen308
+\UL@pe=\count353
+\UL@pixel=\dimen309
+\ULC@box=\box93
 Package: ulem 2019/11/18
-\ULdepth=\dimen314
+\ULdepth=\dimen310
 ) (c:/texlive/2019/texmf-dist/tex/latex/makecell/makecell.sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
-\rotheadsize=\dimen315
-\c@nlinenum=\count357
+\rotheadsize=\dimen311
+\c@nlinenum=\count354
 \TeXr@lab=\toks60
 ) (./tfe_principal.aux
 LaTeX Info: Redefining \. on input line 22.
@@ -1078,32 +1059,32 @@ LaTeX Info: Redefining \% on input line 22.
 )
 \openout1 = `tfe_principal.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 533.
-LaTeX Font Info:    ... okay on input line 533.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 533.
-LaTeX Font Info:    ... okay on input line 533.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 533.
-LaTeX Font Info:    ... okay on input line 533.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 533.
-LaTeX Font Info:    ... okay on input line 533.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 533.
-LaTeX Font Info:    ... okay on input line 533.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 533.
-LaTeX Font Info:    ... okay on input line 533.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 533.
-LaTeX Font Info:    ... okay on input line 533.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 533.
-LaTeX Font Info:    ... okay on input line 533.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 533.
-LaTeX Font Info:    ... okay on input line 533.
-LaTeX Info: Redefining \microtypecontext on input line 533.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 493.
+LaTeX Font Info:    ... okay on input line 493.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 493.
+LaTeX Font Info:    ... okay on input line 493.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 493.
+LaTeX Font Info:    ... okay on input line 493.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 493.
+LaTeX Font Info:    ... okay on input line 493.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 493.
+LaTeX Font Info:    ... okay on input line 493.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 493.
+LaTeX Font Info:    ... okay on input line 493.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 493.
+LaTeX Font Info:    ... okay on input line 493.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 493.
+LaTeX Font Info:    ... okay on input line 493.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 493.
+LaTeX Font Info:    ... okay on input line 493.
+LaTeX Info: Redefining \microtypecontext on input line 493.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `basictext'.
-LaTeX Info: Redefining \showhyphens on input line 533.
+LaTeX Info: Redefining \showhyphens on input line 493.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1145,8 +1126,8 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\AtBeginShipoutBox=\box95
-Package hyperref Info: Link coloring OFF on input line 533.
+\AtBeginShipoutBox=\box94
+Package hyperref Info: Link coloring OFF on input line 493.
 (c:/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 (c:/texlive/2019/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1154,27 +1135,27 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (c:/texlive/2019/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count358
+\c@section@level=\count355
 )
-LaTeX Info: Redefining \ref on input line 533.
-LaTeX Info: Redefining \pageref on input line 533.
-LaTeX Info: Redefining \nameref on input line 533.
+LaTeX Info: Redefining \ref on input line 493.
+LaTeX Info: Redefining \pageref on input line 493.
+LaTeX Info: Redefining \nameref on input line 493.
 (./tfe_principal.out) (./tfe_principal.out)
-\@outlinefile=\write7
-\openout7 = `tfe_principal.out'.
+\@outlinefile=\write6
+\openout6 = `tfe_principal.out'.
 
 (c:/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count359
-\scratchdimen=\dimen316
-\scratchbox=\box96
-\nofMPsegments=\count360
-\nofMParguments=\count361
+\scratchcounter=\count356
+\scratchdimen=\dimen312
+\scratchbox=\box95
+\nofMPsegments=\count357
+\nofMParguments=\count358
 \everyMPshowfont=\toks61
-\MPscratchCnt=\count362
-\MPscratchDim=\dimen317
-\MPnumerator=\count363
-\makeMPintoPDFobject=\count364
+\MPscratchCnt=\count359
+\MPscratchDim=\dimen313
+\MPnumerator=\count360
+\makeMPintoPDFobject=\count361
 \everyMPtoPDFconversion=\toks62
 ) (c:/texlive/2019/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -1184,8 +1165,8 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Info: Redefining \. on input line 533.
-LaTeX Info: Redefining \% on input line 533.
+LaTeX Info: Redefining \. on input line 493.
+LaTeX Info: Redefining \% on input line 493.
 ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
@@ -1195,48 +1176,48 @@ Package: ltcaption 2018/08/26 v1.4a longtable captions (AR)
 )
 Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
-<logo.png, id=155, 301.125pt x 262.9825pt>
+<logo.png, id=360, 301.125pt x 262.9825pt>
 File: logo.png Graphic file (type png)
 <use logo.png>
-Package pdftex.def Info: logo.png  used on input line 549.
+Package pdftex.def Info: logo.png  used on input line 509.
 (pdftex.def)             Requested size: 227.63055pt x 227.63321pt.
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/12'.
 (microtype)             Ignoring protrusion settings for this character.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 5
-89.
+49.
 (c:/texlive/2019/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 5
-89.
+49.
 (c:/texlive/2019/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-589.
+549.
 (c:/texlive/2019/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-589.
+549.
 (c:/texlive/2019/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 589.
+(Font)              <12> on input line 549.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 589.
+(Font)              <8> on input line 549.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 589.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 589
+(Font)              <6> on input line 549.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 549
 .
 (c:/texlive/2019/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (c:/texlive/2019/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 589
+LaTeX Font Info:    Trying to load font information for U+msb on input line 549
 .
 (c:/texlive/2019/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1251,15 +1232,17 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ] (./tfe_principal.toc
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
-[1
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
+2.
+(c:/texlive/2019/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+) [1
 
-])
-\tf@toc=\write8
-\openout8 = `tfe_principal.toc'.
+] [2])
+\tf@toc=\write7
+\openout7 = `tfe_principal.toc'.
 
-[2] [3
-
-] [4
+[3] [4
 
 ] [5] [6
 
@@ -1267,8 +1250,8 @@ LaTeX Info: Redefining \% on input line 1.
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 )
-\tf@lof=\write9
-\openout9 = `tfe_principal.lof'.
+\tf@lof=\write8
+\openout8 = `tfe_principal.lof'.
 
 [7
 
@@ -1279,8 +1262,8 @@ LaTeX Info: Redefining \% on input line 1.
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 )
-\tf@lot=\write10
-\openout10 = `tfe_principal.lot'.
+\tf@lot=\write9
+\openout9 = `tfe_principal.lot'.
 
 [9
 
@@ -1292,760 +1275,461 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.729 ...tulo}\label{tuxedtulo-del-capuxedtulo-1}}
-                                                   [1
+l.705 
+       [1
 
-]pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has
- been already used, duplicate ignored
+]
+LaTeX Info: Redefining \. on input line 768.
+LaTeX Info: Redefining \% on input line 768.
+LaTeX Info: Redefining \. on input line 768.
+LaTeX Info: Redefining \% on input line 768.
+pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
+been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.729 ...tulo}\label{tuxedtulo-del-capuxedtulo-1}}
-                                                   [2
-
-]
+l.768   C
+         ada una de las provincias les corresponden inicialmente al menos dos [
+2]
+LaTeX Info: Redefining \. on input line 848.
+LaTeX Info: Redefining \% on input line 848.
+LaTeX Info: Redefining \. on input line 848.
+LaTeX Info: Redefining \% on input line 848.
+[3]
+LaTeX Info: Redefining \. on input line 868.
+LaTeX Info: Redefining \% on input line 868.
+LaTeX Info: Redefining \. on input line 868.
+LaTeX Info: Redefining \% on input line 868.
+[4]
 Cap\'{\i }tulo 2.
-[3] [4
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 898.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 898.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 898.
+[5
 
 ]
+
+LaTeX Warning: Command \' invalid in math mode on input line 976.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 976.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 980.
+
+LaTeX Info: Redefining \. on input line 984.
+LaTeX Info: Redefining \% on input line 984.
+LaTeX Info: Redefining \. on input line 984.
+LaTeX Info: Redefining \% on input line 984.
+[6]
+
+LaTeX Warning: Command \' invalid in math mode on input line 990.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 1007.
+
+LaTeX Info: Redefining \. on input line 1058.
+LaTeX Info: Redefining \% on input line 1058.
+LaTeX Info: Redefining \. on input line 1058.
+LaTeX Info: Redefining \% on input line 1058.
+[7]
+
+LaTeX Warning: Command \~ invalid in math mode on input line 1107.
+
+LaTeX Info: Redefining \. on input line 1116.
+LaTeX Info: Redefining \% on input line 1116.
+LaTeX Info: Redefining \. on input line 1116.
+LaTeX Info: Redefining \% on input line 1116.
+[8]
+LaTeX Info: Redefining \. on input line 1196.
+LaTeX Info: Redefining \% on input line 1196.
+LaTeX Info: Redefining \. on input line 1196.
+LaTeX Info: Redefining \% on input line 1196.
+[9]
+LaTeX Info: Redefining \. on input line 1206.
+LaTeX Info: Redefining \% on input line 1206.
+LaTeX Info: Redefining \. on input line 1206.
+LaTeX Info: Redefining \% on input line 1206.
+[10]
 Cap\'{\i }tulo 3.
-[5] [6
+[11
+
+] [12
 
 ]
 Cap\'{\i }tulo 4.
-[7] [8
-
-]
-Cap\'{\i }tulo 5.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 8
-46.
+<figurasR/unnamed-chunk-15-1.pdf, id=618, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-15-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-15-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-15-1.pdf  used on input line 12
+53.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+[13]
+<figurasR/unnamed-chunk-16-1.pdf, id=626, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-16-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-16-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-16-1.pdf  used on input line 12
+70.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1270.
+LaTeX Info: Redefining \% on input line 1270.
+LaTeX Info: Redefining \. on input line 1270.
+LaTeX Info: Redefining \% on input line 1270.
+[14 <./figurasR/unnamed-chunk-15-1.pdf>]
+<figurasR/unnamed-chunk-17-1.pdf, id=639, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-17-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-17-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-17-1.pdf  used on input line 12
+89.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1289.
+LaTeX Info: Redefining \% on input line 1289.
+LaTeX Info: Redefining \. on input line 1289.
+LaTeX Info: Redefining \% on input line 1289.
+[15 <./figurasR/unnamed-chunk-16-1.pdf>]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
+311.
 (c:/texlive/2019/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-846.
-(c:/texlive/2019/texmf-dist/tex/latex/lm/ts1lmtt.fd
-File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 850.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 850.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 850.
-[9]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 9
-18.
-(c:/texlive/2019/texmf-dist/tex/latex/lm/ts1lmr.fd
-File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-Package mdframed Info: mdframed works in twoside mode on input line 923.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 923.
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 926.
-Package mdframed Info: mdframed works in twoside mode on input line 939.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 939.
-Package mdframed Info: mdframed works in twoside mode on input line 955.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 955.
-Package mdframed Info: mdframed works in twoside mode on input line 980.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 980.
-LaTeX Info: Redefining \. on input line 991.
-LaTeX Info: Redefining \% on input line 991.
-LaTeX Info: Redefining \. on input line 991.
-LaTeX Info: Redefining \% on input line 991.
-[10]
-Overfull \hbox (183.05742pt too wide) in paragraph at lines 1011--1011
-[]\T1/lmtt/m/n/12 Se tiene el fichero gráfico "capitulo05ejemplo01.png" en la s
-ubcarpeta "graficos". Este fichero gráfico[] 
- []
+<figurasR/unnamed-chunk-20-1.pdf, id=650, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-20-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-20-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-20-1.pdf  used on input line 13
+15.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1315.
+LaTeX Info: Redefining \% on input line 1315.
+LaTeX Info: Redefining \. on input line 1315.
+LaTeX Info: Redefining \% on input line 1315.
+[16 <./figurasR/unnamed-chunk-17-1.pdf>]
+<figurasR/unnamed-chunk-21-1.pdf, id=663, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-21-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-21-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-21-1.pdf  used on input line 13
+32.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1332.
+LaTeX Info: Redefining \% on input line 1332.
+LaTeX Info: Redefining \. on input line 1332.
+LaTeX Info: Redefining \% on input line 1332.
+[17 <./figurasR/unnamed-chunk-20-1.pdf>]
+<figurasR/unnamed-chunk-22-1.pdf, id=674, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-22-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-22-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-22-1.pdf  used on input line 13
+51.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1351.
+LaTeX Info: Redefining \% on input line 1351.
+LaTeX Info: Redefining \. on input line 1351.
+LaTeX Info: Redefining \% on input line 1351.
+[18 <./figurasR/unnamed-chunk-21-1.pdf>]
+<figurasR/unnamed-chunk-25-1.pdf, id=685, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-25-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-25-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-25-1.pdf  used on input line 13
+77.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1377.
+LaTeX Info: Redefining \% on input line 1377.
+LaTeX Info: Redefining \. on input line 1377.
+LaTeX Info: Redefining \% on input line 1377.
+[19 <./figurasR/unnamed-chunk-22-1.pdf>]
+<figurasR/unnamed-chunk-26-1.pdf, id=698, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-26-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-26-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-26-1.pdf  used on input line 13
+94.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1394.
+LaTeX Info: Redefining \% on input line 1394.
+LaTeX Info: Redefining \. on input line 1394.
+LaTeX Info: Redefining \% on input line 1394.
+[20 <./figurasR/unnamed-chunk-25-1.pdf>]
+<figurasR/unnamed-chunk-27-1.pdf, id=710, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-27-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-27-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-27-1.pdf  used on input line 14
+13.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1413.
+LaTeX Info: Redefining \% on input line 1413.
+LaTeX Info: Redefining \. on input line 1413.
+LaTeX Info: Redefining \% on input line 1413.
+[21 <./figurasR/unnamed-chunk-26-1.pdf>]
+<figurasR/unnamed-chunk-30-1.pdf, id=721, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-30-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-30-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-30-1.pdf  used on input line 14
+40.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1440.
+LaTeX Info: Redefining \% on input line 1440.
+LaTeX Info: Redefining \. on input line 1440.
+LaTeX Info: Redefining \% on input line 1440.
+[22 <./figurasR/unnamed-chunk-27-1.pdf>]
+<figurasR/unnamed-chunk-31-1.pdf, id=733, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-31-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-31-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-31-1.pdf  used on input line 14
+57.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1457.
+LaTeX Info: Redefining \% on input line 1457.
+LaTeX Info: Redefining \. on input line 1457.
+LaTeX Info: Redefining \% on input line 1457.
+[23 <./figurasR/unnamed-chunk-30-1.pdf>]
+<figurasR/unnamed-chunk-32-1.pdf, id=744, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-32-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-32-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-32-1.pdf  used on input line 14
+73.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1473.
+LaTeX Info: Redefining \% on input line 1473.
+LaTeX Info: Redefining \. on input line 1473.
+LaTeX Info: Redefining \% on input line 1473.
+[24 <./figurasR/unnamed-chunk-31-1.pdf>]
+<figurasR/unnamed-chunk-35-1.pdf, id=755, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-35-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-35-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-35-1.pdf  used on input line 15
+00.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1500.
+LaTeX Info: Redefining \% on input line 1500.
+LaTeX Info: Redefining \. on input line 1500.
+LaTeX Info: Redefining \% on input line 1500.
+[25 <./figurasR/unnamed-chunk-32-1.pdf>]
+<figurasR/unnamed-chunk-36-1.pdf, id=768, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-36-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-36-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-36-1.pdf  used on input line 15
+16.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1516.
+LaTeX Info: Redefining \% on input line 1516.
+LaTeX Info: Redefining \. on input line 1516.
+LaTeX Info: Redefining \% on input line 1516.
+[26 <./figurasR/unnamed-chunk-35-1.pdf>]
+<figurasR/unnamed-chunk-37-1.pdf, id=779, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-37-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-37-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-37-1.pdf  used on input line 15
+37.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1537.
+LaTeX Info: Redefining \% on input line 1537.
+LaTeX Info: Redefining \. on input line 1537.
+LaTeX Info: Redefining \% on input line 1537.
+[27 <./figurasR/unnamed-chunk-36-1.pdf>]
+<figurasR/unnamed-chunk-40-1.pdf, id=790, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-40-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-40-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-40-1.pdf  used on input line 15
+69.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1569.
+LaTeX Info: Redefining \% on input line 1569.
+LaTeX Info: Redefining \. on input line 1569.
+LaTeX Info: Redefining \% on input line 1569.
+[28 <./figurasR/unnamed-chunk-37-1.pdf>]
+<figurasR/unnamed-chunk-41-1.pdf, id=802, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-41-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-41-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-41-1.pdf  used on input line 15
+88.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1588.
+LaTeX Info: Redefining \% on input line 1588.
+LaTeX Info: Redefining \. on input line 1588.
+LaTeX Info: Redefining \% on input line 1588.
+[29 <./figurasR/unnamed-chunk-40-1.pdf>]
+<figurasR/unnamed-chunk-42-1.pdf, id=813, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-42-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-42-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-42-1.pdf  used on input line 16
+07.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1607.
+LaTeX Info: Redefining \% on input line 1607.
+LaTeX Info: Redefining \. on input line 1607.
+LaTeX Info: Redefining \% on input line 1607.
+[30 <./figurasR/unnamed-chunk-41-1.pdf>]
+<figurasR/unnamed-chunk-45-1.pdf, id=824, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-45-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-45-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-45-1.pdf  used on input line 16
+35.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1635.
+LaTeX Info: Redefining \% on input line 1635.
+LaTeX Info: Redefining \. on input line 1635.
+LaTeX Info: Redefining \% on input line 1635.
+[31 <./figurasR/unnamed-chunk-42-1.pdf>]
+<figurasR/unnamed-chunk-46-1.pdf, id=838, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-46-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-46-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-46-1.pdf  used on input line 16
+52.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1652.
+LaTeX Info: Redefining \% on input line 1652.
+LaTeX Info: Redefining \. on input line 1652.
+LaTeX Info: Redefining \% on input line 1652.
+[32 <./figurasR/unnamed-chunk-45-1.pdf>]
+<figurasR/unnamed-chunk-47-1.pdf, id=849, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-47-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-47-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-47-1.pdf  used on input line 16
+74.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1674.
+LaTeX Info: Redefining \% on input line 1674.
+LaTeX Info: Redefining \. on input line 1674.
+LaTeX Info: Redefining \% on input line 1674.
+[33 <./figurasR/unnamed-chunk-46-1.pdf>]
+<figurasR/unnamed-chunk-48-1.pdf, id=860, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-48-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-48-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-48-1.pdf  used on input line 17
+01.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1701.
+LaTeX Info: Redefining \% on input line 1701.
+LaTeX Info: Redefining \. on input line 1701.
+LaTeX Info: Redefining \% on input line 1701.
+[34 <./figurasR/unnamed-chunk-47-1.pdf>]
+<figurasR/unnamed-chunk-49-1.pdf, id=871, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-49-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-49-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-49-1.pdf  used on input line 17
+12.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1712.
+LaTeX Info: Redefining \% on input line 1712.
+LaTeX Info: Redefining \. on input line 1712.
+LaTeX Info: Redefining \% on input line 1712.
+[35 <./figurasR/unnamed-chunk-48-1.pdf>]
+<figurasR/unnamed-chunk-50-1.pdf, id=882, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-50-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-50-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-50-1.pdf  used on input line 17
+42.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1742.
+LaTeX Info: Redefining \% on input line 1742.
+LaTeX Info: Redefining \. on input line 1742.
+LaTeX Info: Redefining \% on input line 1742.
+[36 <./figurasR/unnamed-chunk-49-1.pdf>]
+<figurasR/unnamed-chunk-51-1.pdf, id=893, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-51-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-51-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-51-1.pdf  used on input line 17
+56.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1756.
+LaTeX Info: Redefining \% on input line 1756.
+LaTeX Info: Redefining \. on input line 1756.
+LaTeX Info: Redefining \% on input line 1756.
+[37 <./figurasR/unnamed-chunk-50-1.pdf>]
+<figurasR/unnamed-chunk-52-1.pdf, id=904, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-52-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-52-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-52-1.pdf  used on input line 17
+80.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1780.
+LaTeX Info: Redefining \% on input line 1780.
+LaTeX Info: Redefining \. on input line 1780.
+LaTeX Info: Redefining \% on input line 1780.
+[38 <./figurasR/unnamed-chunk-51-1.pdf>]
+<figurasR/unnamed-chunk-53-1.pdf, id=915, 469.755pt x 325.215pt>
+File: figurasR/unnamed-chunk-53-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-53-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-53-1.pdf  used on input line 18
+01.
+(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
+LaTeX Info: Redefining \. on input line 1801.
+LaTeX Info: Redefining \% on input line 1801.
+LaTeX Info: Redefining \. on input line 1801.
+LaTeX Info: Redefining \% on input line 1801.
+[39 <./figurasR/unnamed-chunk-52-1.pdf>]
+LaTeX Info: Redefining \. on input line 1861.
+LaTeX Info: Redefining \% on input line 1861.
+LaTeX Info: Redefining \. on input line 1861.
+LaTeX Info: Redefining \% on input line 1861.
+[40 <./figurasR/unnamed-chunk-53-1.pdf>]
+Cap\'{\i }tulo 5.
+[41
 
-
-Overfull \hbox (201.58243pt too wide) in paragraph at lines 1016--1016
-[]\T1/lmtt/m/n/12 - una ilustración que hemos diseñado con carácter didáctico q
-ue hemos guardado en un fichero gráfico, etc.[] 
- []
-
-
-Overfull \hbox (621.48264pt too wide) in paragraph at lines 1023--1023
-[]\T1/lmtt/m/n/12 Si queremos incluirlo sin ningún tipo de leyenda explicativa 
-y justamente en la posición que lo hemos colocado, podríamos hacerlo con ayuda 
-del siguiente "chunk de código R":[] 
- []
-
-<graficos/capitulo05ejemplo01.png, id=337, 500.87125pt x 517.935pt>
-File: graficos/capitulo05ejemplo01.png Graphic file (type png)
-<use graficos/capitulo05ejemplo01.png>
-Package pdftex.def Info: graficos/capitulo05ejemplo01.png  used on input line 1
-032.
-(pdftex.def)             Requested size: 317.07614pt x 327.88927pt.
-LaTeX Info: Redefining \. on input line 1032.
-LaTeX Info: Redefining \% on input line 1032.
-LaTeX Info: Redefining \. on input line 1032.
-LaTeX Info: Redefining \% on input line 1032.
-[11]
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 1036.
-
-File: graficos/capitulo05ejemplo01.png Graphic file (type png)
-<use graficos/capitulo05ejemplo01.png>
-Package pdftex.def Info: graficos/capitulo05ejemplo01.png  used on input line 1
-056.
-(pdftex.def)             Requested size: 227.62204pt x 235.37627pt.
-LaTeX Info: Redefining \. on input line 1062.
-LaTeX Info: Redefining \% on input line 1062.
-LaTeX Info: Redefining \. on input line 1062.
-LaTeX Info: Redefining \% on input line 1062.
-[12 <./graficos/capitulo05ejemplo01.png>]
-
-LaTeX Warning: Reference `sec:incluirgrafico' on page 13 undefined on input lin
-e 1090.
-
-LaTeX Info: Redefining \. on input line 1116.
-LaTeX Info: Redefining \% on input line 1116.
-LaTeX Info: Redefining \. on input line 1116.
-LaTeX Info: Redefining \% on input line 1116.
-[13]
-File: graficos/capitulo05ejemplo01.png Graphic file (type png)
-<use graficos/capitulo05ejemplo01.png>
-Package pdftex.def Info: graficos/capitulo05ejemplo01.png  used on input line 1
-143.
-(pdftex.def)             Requested size: 227.62204pt x 235.37627pt.
-
-Overfull \hbox (590.60762pt too wide) in paragraph at lines 1155--1155
-[]\T1/lmtt/m/n/12 Se tienen las mismas posibilidades que el caso de un fichero 
-gráfico, pero habitualmente en este caso el gráfico se construye con funciones 
-de R en un chunk de código R.[] 
- []
-
-
-Overfull \hbox (1288.38297pt too wide) in paragraph at lines 1157--1157
-[]\T1/lmtt/m/n/12 También es posible construir el gráfico con funciones R en un
- fichero de script R y guardar el resultado en un fichero gráfico (ver comandos
-: **\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 png()\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 **
- y **\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 dev.off()\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/
-12 **, **\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 ggplot2::ggsave()\TS1/lmtt/m/n/12 `\
-T1/lmtt/m/n/12 **). Para incluirlo en el documento R Markdown se haría lo visto
- en la sección anterior.[] 
- []
-
-
-Overfull \hbox (510.33258pt too wide) in paragraph at lines 1159--1159
-[]\T1/lmtt/m/n/12 El siguiente código ilustra cómo crear un fichero con ayuda d
-el paquete "ggplot2" y lo grabamos en un fichero ".png" con ayuda de la función
- **\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 ggsave()\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 
-**.[] 
- []
-
-LaTeX Info: Redefining \. on input line 1165.
-LaTeX Info: Redefining \% on input line 1165.
-LaTeX Info: Redefining \. on input line 1165.
-LaTeX Info: Redefining \% on input line 1165.
-[14]
-Overfull \hbox (473.28256pt too wide) in paragraph at lines 1170--1170
-[]\T1/lmtt/m/n/12 Para incluirlo en el documento se podría utilizar el siguient
-e chunk de código R (lo coloca aquí porque por defecto se ha definido **\TS1/lm
-tt/m/n/12 `\T1/lmtt/m/n/12 fig.pos="H"\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 **):[] 
-
- []
-
-<figurasR/capi05mtcars.png, id=366, 469.755pt x 324.9741pt>
-File: figurasR/capi05mtcars.png Graphic file (type png)
-<use figurasR/capi05mtcars.png>
-Package pdftex.def Info: figurasR/capi05mtcars.png  used on input line 1178.
-(pdftex.def)             Requested size: 317.07614pt x 219.35301pt.
-
-Overfull \vbox (0.66798pt too high) detected at line 1224
- []
-
-LaTeX Info: Redefining \. on input line 1224.
-LaTeX Info: Redefining \% on input line 1224.
-LaTeX Info: Redefining \. on input line 1224.
-LaTeX Info: Redefining \% on input line 1224.
-[15 <./figurasR/capi05mtcars.png>]
-<figurasR/unnamed-chunk-28-1.pdf, id=374, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-28-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-28-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-28-1.pdf  used on input line 12
-26.
-(pdftex.def)             Requested size: 362.37569pt x 250.87286pt.
-
-Overfull \hbox (34.85735pt too wide) in paragraph at lines 1230--1230
-[]\T1/lmtt/m/n/12 #### Incluir un gráfico creado con R con leyenda y situado en
- la parte superior[] 
- []
-
-
-Overfull \hbox (565.90761pt too wide) in paragraph at lines 1232--1232
-[]\T1/lmtt/m/n/12 El gráfico de la Figura \ref{fig:cap05gg02} es un ejemplo de 
-gráfico creado con R y aparece con una leyenda explicativa y colocado en la par
-te superior de la página.[] 
- []
-
-
-Overfull \hbox (28.68234pt too wide) in paragraph at lines 1236--1236
-[]\T1/lmtt/m/n/12 fig.cap="\\label{fig:cap05gg02}Gr\\\TS1/lmtt/m/n/12 '\T1/lmtt
-/m/n/12 afico de L\\\TS1/lmtt/m/n/12 '\T1/lmtt/m/n/12 {\\i}neas creado con ggpl
-ot2.[] 
- []
-
-<figurasR/unnamed-chunk-29-1.pdf, id=375, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-29-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-29-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-29-1.pdf  used on input line 12
-46.
-(pdftex.def)             Requested size: 362.37569pt x 250.87286pt.
-
-Overfull \hbox (1368.644pt too wide) in paragraph at lines 1260--1260
-[]\T1/lmtt/m/n/12 Con el siguiente código se pueden presentar dos gráficos en u
-na única figura y además se puede colocar una leyenda explicativa a cada gráfic
-o (obtenido en: [stackoverflow](https://stackoverflow.com/questions/53850299/ho
-w-to-get-a-newline-in-a-figure-caption-in-rmarkdown-bookdown-pdfdocument2)).[] 
-
- []
-
-
-Overfull \hbox (1387.18301pt too wide) in paragraph at lines 1263--1263
-[]\T1/lmtt/m/n/12 **Observe** que no se ha usado **label** en \TS1/lmtt/m/n/12 
-`\T1/lmtt/m/n/12 fig.cap\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 , el identificador se
- ha construido del identificador del chunk: "plot-cars" al que se le ha añadido
- como prefijo: "fig:", quedando el identificador para usar con **ref**: "fig:pl
-ot-cars". A las subfiguras se les ha añadido números consecutivos.[] 
- []
-
-LaTeX Info: Redefining \. on input line 1270.
-LaTeX Info: Redefining \% on input line 1270.
-LaTeX Info: Redefining \. on input line 1270.
-LaTeX Info: Redefining \% on input line 1270.
-[16 <./figurasR/unnamed-chunk-28-1.pdf>]
-<figurasR/plot-cars-1.pdf, id=388, 289.08pt x 216.81pt>
-File: figurasR/plot-cars-1.pdf Graphic file (type pdf)
-<use figurasR/plot-cars-1.pdf>
-Package pdftex.def Info: figurasR/plot-cars-1.pdf  used on input line 1283.
-(pdftex.def)             Requested size: 221.95676pt x 166.46782pt.
-<figurasR/plot-cars-2.pdf, id=389, 289.08pt x 216.81pt>
-File: figurasR/plot-cars-2.pdf Graphic file (type pdf)
-<use figurasR/plot-cars-2.pdf>
-Package pdftex.def Info: figurasR/plot-cars-2.pdf  used on input line 1283.
-(pdftex.def)             Requested size: 221.95676pt x 166.46782pt.
-LaTeX Info: Redefining \. on input line 1294.
-LaTeX Info: Redefining \% on input line 1294.
-LaTeX Info: Redefining \. on input line 1294.
-LaTeX Info: Redefining \% on input line 1294.
-[17 <./figurasR/unnamed-chunk-29-1.pdf> <./figurasR/plot-cars-1.pdf> <./figuras
-R/plot-cars-2.pdf>]
-<figurasR/fig2-1.pdf, id=412, 469.755pt x 325.215pt>
-File: figurasR/fig2-1.pdf Graphic file (type pdf)
-<use figurasR/fig2-1.pdf>
-Package pdftex.def Info: figurasR/fig2-1.pdf  used on input line 1309.
-(pdftex.def)             Requested size: 203.83417pt x 141.11505pt.
-<figurasR/fig2-2.pdf, id=413, 469.755pt x 325.215pt>
-File: figurasR/fig2-2.pdf Graphic file (type pdf)
-<use figurasR/fig2-2.pdf>
-Package pdftex.def Info: figurasR/fig2-2.pdf  used on input line 1309.
-(pdftex.def)             Requested size: 203.83417pt x 141.11505pt.
-LaTeX Info: Redefining \. on input line 1363.
-LaTeX Info: Redefining \% on input line 1363.
-LaTeX Info: Redefining \. on input line 1363.
-LaTeX Info: Redefining \% on input line 1363.
-[18 <./figurasR/fig2-1.pdf> <./figurasR/fig2-2.pdf>]
-Overfull \hbox (775.85771pt too wide) in paragraph at lines 1420--1420
-[]\T1/lmtt/m/n/12 Para corregir esa situación, la librería "kableExtra" nos per
-mite presentar tablas que ocupen varias páginas utilizando los siguientes argum
-entos, como puede comprobarse en el ejemplo que se muestra:[] 
- []
-
-
-Overfull \hbox (22.50734pt too wide) in paragraph at lines 1424--1424
-[]\T1/lmtt/m/n/12 - Se ha indicado el texto que aparecerá antes de pasar a la s
-iguiente página:[] 
- []
-
-
-Overfull \hbox (528.85759pt too wide) in paragraph at lines 1427--1427
-[]\T1/lmtt/m/n/12 - Se ha indicado también el texto que aparecerá antes de escr
-ibir información de la tabla en la siguiente página: **\TS1/lmtt/m/n/12 `\T1/lm
-tt/m/n/12 repeat_header_text = "continuaci\\\TS1/lmtt/m/n/12 '\T1/lmtt/m/n/12 o
-n"\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 **.[] 
- []
-
-LaTeX Info: Redefining \. on input line 1432.
-LaTeX Info: Redefining \% on input line 1432.
-LaTeX Info: Redefining \. on input line 1432.
-LaTeX Info: Redefining \% on input line 1432.
-[19]
-LaTeX Info: Redefining \. on input line 1521.
-LaTeX Info: Redefining \% on input line 1521.
-LaTeX Info: Redefining \. on input line 1521.
-LaTeX Info: Redefining \% on input line 1521.
-[20]
-LaTeX Info: Redefining \. on input line 1553.
-LaTeX Info: Redefining \% on input line 1553.
-LaTeX Info: Redefining \. on input line 1553.
-LaTeX Info: Redefining \% on input line 1553.
-[21]
-LaTeX Info: Redefining \. on input line 1625.
-LaTeX Info: Redefining \% on input line 1625.
-LaTeX Info: Redefining \. on input line 1625.
-LaTeX Info: Redefining \% on input line 1625.
-[22]
-Overfull \vbox (1.868pt too high) detected at line 1683
- []
-
-LaTeX Info: Redefining \. on input line 1683.
-LaTeX Info: Redefining \% on input line 1683.
-LaTeX Info: Redefining \. on input line 1683.
-LaTeX Info: Redefining \% on input line 1683.
-[23]
-LaTeX Info: Redefining \. on input line 1737.
-LaTeX Info: Redefining \% on input line 1737.
-LaTeX Info: Redefining \. on input line 1737.
-LaTeX Info: Redefining \% on input line 1737.
-[24]
-LaTeX Info: Redefining \. on input line 1777.
-LaTeX Info: Redefining \% on input line 1777.
-LaTeX Info: Redefining \. on input line 1777.
-LaTeX Info: Redefining \% on input line 1777.
-[25]
-LaTeX Info: Redefining \. on input line 1824.
-LaTeX Info: Redefining \% on input line 1824.
-LaTeX Info: Redefining \. on input line 1824.
-LaTeX Info: Redefining \% on input line 1824.
-[26
-
+] [42
 
 ]
-LaTeX Info: Redefining \. on input line 1868.
-LaTeX Info: Redefining \% on input line 1868.
-LaTeX Info: Redefining \. on input line 1868.
-LaTeX Info: Redefining \% on input line 1868.
-[27]
-Overfull \hbox (1473.63306pt too wide) in paragraph at lines 1898--1898
-[]\T1/lmtt/m/n/12 En el siguiente enlace [overleaf: alfabeto griego y símbolos 
-matemáticos](https://www.overleaf.com/learn/latex/List_of_Greek_letters_and_mat
-h_symbols) puede encontrarse una recopilación de los comandos LaTeX para repres
-entar todo el alfabeto griego y muchos de los símbolos más usados en expresione
-s matemáticas.[] 
- []
-
-
-Overfull \hbox (386.83252pt too wide) in paragraph at lines 1906--1906
-[]\T1/lmtt/m/n/12 Las fracciones pueden usarse en el texto, por ejemplo $\frac{
-1}{2}$, y en un estilo matemático centrado como puede verse a continuación:[] 
- []
-
-
-Overfull \hbox (621.48264pt too wide) in paragraph at lines 1920--1920
-[]\T1/lmtt/m/n/12 - Como puede verse **\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 \( \)\
-TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 ** se utiliza para modo matemático en el texto
-. También se puede escribir la expresión matemática entre un signo de dólar a c
-ada lado: **\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 $  $\TS1/lmtt/m/n/12 `\T1/lmtt/m/
-n/12 **.[] 
- []
-
-
-Overfull \hbox (726.45769pt too wide) in paragraph at lines 1922--1922
-[]\T1/lmtt/m/n/12 - Como puede verse **\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 \[ \]\
-TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 ** se utiliza para modo matemático centrado en
- el texto. También se puede escribir la expresión matemática entre un doble sig
-no de dólar a cada lado: **\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 $$  $$\TS1/lmtt/m/
-n/12 `\T1/lmtt/m/n/12 **.[] 
- []
-
-
-Overfull \hbox (1442.75804pt too wide) in paragraph at lines 1925--1925
-[]\T1/lmtt/m/n/12 **Nota**. Cuando se usa el modo matemático visto anteriorment
-e no es posible añadir etiquetado de ecuaciones para hacer referencia a ellas. 
-Para el etiquetado se usa el entorno LaTeX: **\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12
- \begin{equation} \label{identificador} ... \end{equation}\TS1/lmtt/m/n/12 `\T1
-/lmtt/m/n/12 **, el cual se verá en el apartado \ref{etiquetadomatematico}.[] 
- []
-
-
-Overfull \hbox (90.43237pt too wide) in paragraph at lines 1927--1927
-[]\T1/lmtt/m/n/12 Veamos más ejemplos de uso de LaTeX en R Markdown para escrib
-ir expresiones matemáticas:[] 
- []
-
-LaTeX Info: Redefining \. on input line 1933.
-LaTeX Info: Redefining \% on input line 1933.
-LaTeX Info: Redefining \. on input line 1933.
-LaTeX Info: Redefining \% on input line 1933.
-[28
+Cap\'{\i }tulo 6.
+[43] [44
 
 ]
-LaTeX Info: Redefining \. on input line 1981.
-LaTeX Info: Redefining \% on input line 1981.
-LaTeX Info: Redefining \. on input line 1981.
-LaTeX Info: Redefining \% on input line 1981.
-[29]
-Overfull \hbox (399.18253pt too wide) in paragraph at lines 1991--1991
-[]\T1/lmtt/m/n/12 El uso de \TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 \begin{array}{} .
-.. \end{array}\TS1/lmtt/m/n/12 ` \T1/lmtt/m/n/12 nos permite escribir expresion
-es en forma de tabla. Veamos con algunos ejemplos su uso básico.[] 
- []
-
-LaTeX Info: Redefining \. on input line 2029.
-LaTeX Info: Redefining \% on input line 2029.
-LaTeX Info: Redefining \. on input line 2029.
-LaTeX Info: Redefining \% on input line 2029.
-[30]
-LaTeX Info: Redefining \. on input line 2077.
-LaTeX Info: Redefining \% on input line 2077.
-LaTeX Info: Redefining \. on input line 2077.
-LaTeX Info: Redefining \% on input line 2077.
-[31]
-Overfull \hbox (664.70766pt too wide) in paragraph at lines 2092--2092
-[]\T1/lmtt/m/n/12 Para alinear ecuaciones en R Markdown habrá que utilizar las 
-habilidades de los paquetes LaTeX. Ver [overleaf](https://www.overleaf.com/lear
-n/latex/Aligning_equations_with_amsmath).[] 
- []
-
-
-Overfull \hbox (115.13239pt too wide) in paragraph at lines 2094--2094
-[]\T1/lmtt/m/n/12 A continuación se mostrará el código LaTeX necesario para con
-struir expresiones matemáticas.[] 
- []
-
-
-Overfull \hbox (28.68234pt too wide) in paragraph at lines 2097--2097
-[]\T1/lmtt/m/n/12 - Uso de "equation-split" y etiquetado con "label" (ver la ec
-uación \ref{eq1})[] 
- []
-
-LaTeX Info: Redefining \. on input line 2125.
-LaTeX Info: Redefining \% on input line 2125.
-LaTeX Info: Redefining \. on input line 2125.
-LaTeX Info: Redefining \% on input line 2125.
-[32]
-Overfull \hbox (220.10744pt too wide) in paragraph at lines 2134--2134
-[]\T1/lmtt/m/n/12 - Uso de "\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 align\TS1/lmtt/m/
-n/12 `\T1/lmtt/m/n/12 " y "\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 align*\TS1/lmtt/m/
-n/12 `\T1/lmtt/m/n/12 " (diferencia entre incluir "*" y no incluirlo) para alin
-ear varias ecuaciones:[] 
- []
-
-LaTeX Info: Redefining \. on input line 2173.
-LaTeX Info: Redefining \% on input line 2173.
-LaTeX Info: Redefining \. on input line 2173.
-LaTeX Info: Redefining \% on input line 2173.
-[33]
-Overfull \hbox (1436.58304pt too wide) in paragraph at lines 2181--2181
-[]\T1/lmtt/m/n/12 Se pueden utilizar entornos matemáticos para establecer: "Def
-iniciones", "Teoremas", "Corolarios", "Demostraciones", "Ejemplos", etc. Se ha 
-dado un aspecto personalizado a estas construcciones, que pueden consultarse (y
- modificarse) en el interior del fichero de estilos LaTeX: "latex/latex_preambu
-lo.tex".[] 
- []
-
-LaTeX Info: Redefining \. on input line 2221.
-LaTeX Info: Redefining \% on input line 2221.
-LaTeX Info: Redefining \. on input line 2221.
-LaTeX Info: Redefining \% on input line 2221.
-[34]
-Overfull \hbox (590.60762pt too wide) in paragraph at lines 2240--2240
-[]\T1/lmtt/m/n/12 Se aconseja guardar todas las referencias bibliográficas en f
-icheros con formato bibtex. En este caso se usan dos ficheros de bibliografía (
-podrían tener otros nombres):[] 
- []
-
-
-Overfull \hbox (732.63269pt too wide) in paragraph at lines 2242--2242
-[]\T1/lmtt/m/n/12 - "bib/library.bib": en este fichero podremos tener todas las
- referencias bibliográficas que vayamos encontrando convenientemente formateada
-s. Se podría utilizar en otros proyectos o trabajos.[] 
- []
-
-
-Overfull \hbox (3011.20882pt too wide) in paragraph at lines 2244--2244
-[]\T1/lmtt/m/n/12 - "bib/paquetes.bib": este fichero lo genera automáticamente 
-R cuando creamos la salida R Markdown del fichero principal: "tfe_principal.Rmd
-", de ahí que no se debe modificar porque se perderían los cambios introducidos
-. En este se recogerán las referencias bibliográficas de los paquetes R que le 
-indiquemos. Si quisiéramos personalizar alguna referencia a un paquete R se deb
-ería incluir en el fichero: "library.bib". Por ejemplo, en el chunk inicial del
- fichero "tfe_principal.Rmd" se han indicado para que paquetes R se incluirán r
-eferencias bibliográficas.[] 
- []
-
-
-Overfull \hbox (954.9328pt too wide) in paragraph at lines 2259--2259
-[]\T1/lmtt/m/n/12 Algunas de las referencias bibliográficas incluidas en el fic
-hero "bib/library.bib" aparecen a continuación. Se recogen ejemplos de publicac
-iones de tipos diferentes: "Manual", "book", "article", "misc", pero existen mu
-chas más.[] 
- []
-
-
-Overfull \hbox (1251.33295pt too wide) in paragraph at lines 2261--2261
-[]\T1/lmtt/m/n/12 Hay que resaltar, que cada una de estas referencias bibliográ
-ficas tiene un identificador ("Luque2017", "R-base", "Wickham2017", etc) que se
-rá el que nos permita hacer referencia a las correspondientes referencias al añ
-adir el prefijo \TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 @\TS1/lmtt/m/n/12 `\T1/lmtt/m
-/n/12 , es decir, por ejemplo: \TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 @Luque2017\TS1
-/lmtt/m/n/12 `\T1/lmtt/m/n/12 .[] 
- []
-
-LaTeX Info: Redefining \. on input line 2269.
-LaTeX Info: Redefining \% on input line 2269.
-LaTeX Info: Redefining \. on input line 2269.
-LaTeX Info: Redefining \% on input line 2269.
-[35]
-Overfull \hbox (10.15733pt too wide) in paragraph at lines 2305--2305
-[]  \T1/lmtt/m/n/12 \url{https://www.techopedia.com/definition/345/business-int
-elligence-bi}}[] 
- []
-
-
-Overfull \hbox (170.70741pt too wide) in paragraph at lines 2312--2312
-[]\T1/lmtt/m/n/12 Podrían generarse en la consola de R, al utilizar la función 
-**\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 citation("paqueteR")\TS1/lmtt/m/n/12 `\T1/l
-mtt/m/n/12 **, por ejemplo:[] 
- []
-
-LaTeX Info: Redefining \. on input line 2317.
-LaTeX Info: Redefining \% on input line 2317.
-LaTeX Info: Redefining \. on input line 2317.
-LaTeX Info: Redefining \% on input line 2317.
-[36]
-Overfull \hbox (53.37535pt too wide) in paragraph at lines 2321--2321
-[]  \T1/lmtt/m/n/12 Hadley Wickham, Romain François, Lionel Henry and Kirill Mü
-ller (2019). dplyr: A[] 
- []
-
-
-Overfull \hbox (71.90736pt too wide) in paragraph at lines 2329--2329
-[]    \T1/lmtt/m/n/12 author = {Hadley Wickham and Romain François and Lionel H
-enry and Kirill Müller},[] 
- []
-
-
-Overfull \hbox (819.08273pt too wide) in paragraph at lines 2340--2340
-[]\T1/lmtt/m/n/12 Para obtener más información sobre la realización de citas en
- R Markdown visitar la url [R Markdown: Bibliographies and Citations](https://r
-markdown.rstudio.com/authoring_bibliographies_and_citations.html).[] 
- []
-
-
-Overfull \hbox (1263.68295pt too wide) in paragraph at lines 2344--2344
-[]\T1/lmtt/m/n/12 Las citas van entre corchetes y están separadas por punto y c
-oma. Cada cita debe tener una clave, compuesta de "\TS1/lmtt/m/n/12 `\T1/lmtt/m
-/n/12 @\TS1/lmtt/m/n/12 `\T1/lmtt/m/n/12 " + el identificador de cita de la bas
-e de datos, y opcionalmente puede tener un prefijo, un localizador y un sufijo.
- A continuación  se muestran algunos ejemplos:[] 
- []
-
-
-Overfull \hbox (405.35753pt too wide) in paragraph at lines 2363--2363
-[]\T1/lmtt/m/n/12 Un signo menos (-) antes de la @ suprimirá la mención del aut
-or en la cita. Esto puede ser útil cuando el autor ya se menciona en el texto:[
-] 
- []
-
-
-Overfull \hbox (535.0326pt too wide) in paragraph at lines 2365--2365
-[]\T1/lmtt/m/n/12 <!-- A minus sign (-) before the @ will suppress mention of t
-he author in the citation. This can be useful when the author is already mentio
-ned in the text: -->[] 
- []
-
-LaTeX Info: Redefining \. on input line 2365.
-LaTeX Info: Redefining \% on input line 2365.
-LaTeX Info: Redefining \. on input line 2365.
-LaTeX Info: Redefining \% on input line 2365.
-[37]
-Overfull \hbox (868.48276pt too wide) in paragraph at lines 2392--2392
-[]\T1/lmtt/m/n/12 Por defecto, pandoc usará un formato de "fecha-autor" del est
-ilo "Chicago" para citas y referencias. Para usar otro estilo, deberá especific
-ar un archivo de estilo CSL 1.0 en el campo de metadatos csl. Por ejemplo:[] 
- []
-
-
-Overfull \hbox (1467.45805pt too wide) in paragraph at lines 2403--2403
-[]\T1/lmtt/m/n/12 Puede encontrar una introducción a la creación y modificación
- de estilos CSL en <http://citationstyles.org/downloads/primer.html>. Puede enc
-ontrar un repositorio de estilos CSL en <https://github.com/citation-style-lang
-uage/styles>. Consulte también <http://zotero.org/styles> para navegar fácilmen
-te por ellos.[] 
- []
-
-
-Overfull \hbox (1726.80818pt too wide) in paragraph at lines 2406--2406
-[]\T1/lmtt/m/n/12 **Citaciones para salidas PDF**. Por defecto, las citas son g
-eneradas por la utilidad "pandoc-citeproc", y funciona para todos los formatos 
-de salida. Cuando la salida es LaTeX/PDF, también puede usar paquetes LaTeX (po
-r ejemplo, natbib) para generar citas; ver [documentos PDF](https://bookdown.or
-g/yihui/rmarkdown/pdf-document.html) para más detalles.[] 
- []
-
-LaTeX Info: Redefining \. on input line 2413.
-LaTeX Info: Redefining \% on input line 2413.
-LaTeX Info: Redefining \. on input line 2413.
-LaTeX Info: Redefining \% on input line 2413.
-[38]
-Overfull \hbox (596.78262pt too wide) in paragraph at lines 2417--2417
-[]\T1/lmtt/m/n/12 **Importante**. Hay que asegurarse que en el fichero principa
-l: "tfe_principal.Rmd" aparecen sin comentar las siguientes líneas (habría que 
-comentar las del otro método):[] 
- []
-
-
-Overfull \hbox (652.35765pt too wide) in paragraph at lines 2439--2439
-[]\T1/lmtt/m/n/12 **Importante**. En la bibligrafía  que **se muestra al final 
-del documento**  aparecerán las referencias bibliográficas de aquellas que haya
-n sido citadas en el documento escrito.[] 
- []
-
-
-Overfull \hbox (868.48276pt too wide) in paragraph at lines 2441--2441
-[]\T1/lmtt/m/n/12 También es posible incluir algunas referencias bibliográficas
- que no hayan sido citadas, con ayuda del comando \TS1/lmtt/m/n/12 `\T1/lmtt/m/
-n/12 \nocite{}\TS1/lmtt/m/n/12 ` \T1/lmtt/m/n/12 situado al final del fichero: 
-"tfe_principal.Rmd", como puede verse en el siguiente código:[] 
- []
-
-LaTeX Info: Redefining \. on input line 2465.
-LaTeX Info: Redefining \% on input line 2465.
-LaTeX Info: Redefining \. on input line 2465.
-LaTeX Info: Redefining \% on input line 2465.
-[39]
-LaTeX Info: Redefining \. on input line 2572.
-LaTeX Info: Redefining \% on input line 2572.
-LaTeX Info: Redefining \. on input line 2572.
-LaTeX Info: Redefining \% on input line 2572.
-[40]
-Underfull \hbox (badness 2134) in paragraph at lines 2573--2578
-[]\T1/lmr/m/n/12 (+20) Para ha-cer re-fe-ren-cia a es-te iden-ti-fi-ca-dor se p
-ue-den em-plear los co-man-dos
- []
-
-
-Underfull \hbox (badness 2384) in paragraph at lines 2573--2578
-\T1/lmr/m/n/12 (+20) La-TeX: \T1/lmtt/b/n/12 \ref{identificador} \T1/lmr/m/n/12
- (+20) pa-ra re-fe-rir-se a la nu-me-ra-ción del apar-ta-do o
- []
-
-LaTeX Info: Redefining \. on input line 2647.
-LaTeX Info: Redefining \% on input line 2647.
-LaTeX Info: Redefining \. on input line 2647.
-LaTeX Info: Redefining \% on input line 2647.
-[41]
-<graficos/chuleta_tabla_kableExtra_apaisada.pdf, id=561, 794.97pt x 614.295pt>
-File: graficos/chuleta_tabla_kableExtra_apaisada.pdf Graphic file (type pdf)
-<use graficos/chuleta_tabla_kableExtra_apaisada.pdf>
-Package pdftex.def Info: graficos/chuleta_tabla_kableExtra_apaisada.pdf  used o
-n input line 2710.
-(pdftex.def)             Requested size: 794.96806pt x 614.29349pt.
-File: graficos/chuleta_tabla_kableExtra_apaisada.pdf Graphic file (type pdf)
-<use graficos/chuleta_tabla_kableExtra_apaisada.pdf>
-Package pdftex.def Info: graficos/chuleta_tabla_kableExtra_apaisada.pdf  used o
-n input line 2710.
-(pdftex.def)             Requested size: 794.96806pt x 614.29349pt.
-<graficos/chuleta_tabla_kableExtra_apaisada.pdf, id=564, page=1, 794.97pt x 614
-.295pt>
-File: graficos/chuleta_tabla_kableExtra_apaisada.pdf Graphic file (type pdf)
-<use graficos/chuleta_tabla_kableExtra_apaisada.pdf, page 1>
-Package pdftex.def Info: graficos/chuleta_tabla_kableExtra_apaisada.pdf , page1
- used on input line 2710.
-(pdftex.def)             Requested size: 794.96806pt x 614.29349pt.
-File: graficos/chuleta_tabla_kableExtra_apaisada.pdf Graphic file (type pdf)
-<use graficos/chuleta_tabla_kableExtra_apaisada.pdf, page 1>
-Package pdftex.def Info: graficos/chuleta_tabla_kableExtra_apaisada.pdf , page1
- used on input line 2710.
-(pdftex.def)             Requested size: 715.4664pt x 552.86038pt.
-LaTeX Info: Redefining \. on input line 2710.
-LaTeX Info: Redefining \% on input line 2710.
-LaTeX Info: Redefining \. on input line 2710.
-LaTeX Info: Redefining \% on input line 2710.
-[42]
-File: graficos/chuleta_tabla_kableExtra_apaisada.pdf Graphic file (type pdf)
-<use graficos/chuleta_tabla_kableExtra_apaisada.pdf, page 1>
-Package pdftex.def Info: graficos/chuleta_tabla_kableExtra_apaisada.pdf , page1
- used on input line 2710.
-(pdftex.def)             Requested size: 715.4664pt x 552.86038pt.
-File: graficos/chuleta_tabla_kableExtra_apaisada.pdf Graphic file (type pdf)
-<use graficos/chuleta_tabla_kableExtra_apaisada.pdf, page 1>
-Package pdftex.def Info: graficos/chuleta_tabla_kableExtra_apaisada.pdf , page1
- used on input line 2710.
-(pdftex.def)             Requested size: 715.4664pt x 552.86038pt.
-LaTeX Info: Redefining \. on input line 2710.
-LaTeX Info: Redefining \% on input line 2710.
-LaTeX Info: Redefining \. on input line 2710.
-LaTeX Info: Redefining \% on input line 2710.
-File: graficos/chuleta_tabla_kableExtra_apaisada.pdf Graphic file (type pdf)
-<use graficos/chuleta_tabla_kableExtra_apaisada.pdf, page 1>
-Package pdftex.def Info: graficos/chuleta_tabla_kableExtra_apaisada.pdf , page1
- used on input line 2710.
-(pdftex.def)             Requested size: 715.4664pt x 552.86038pt.
-[43 <./graficos/chuleta_tabla_kableExtra_apaisada.pdf, page is rotated 90 degre
-es>] [44
-
-]
-Ap\'{e}ndice A.
+Cap\'{\i }tulo 7.
 [45] [46
 
 ]
-Ap\'{e}ndice B.
+Ap\'{e}ndice A.
 [47] [48
 
-] (./tfe_principal.bbl) [49
+]
+Ap\'{e}ndice B.
+[49] [50
+
+] (./tfe_principal.bbl) [51
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2813.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2813.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2035.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2035.
 (./tfe_principal.aux
 LaTeX Info: Redefining \. on input line 22.
 LaTeX Info: Redefining \% on input line 22.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2813.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2813.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2035.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2035.
 
 Package rerunfilecheck Info: File `tfe_principal.out' has not changed.
-(rerunfilecheck)             Checksum: E0CEEDB5CD09F6252D7DC547B8E78C0B;7502.
-
-LaTeX Warning: There were undefined references.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2813.
+(rerunfilecheck)             Checksum: 719507B25D5B4EAE46E0ABE28F0FE3E1;16782.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2035.
  ) 
 Here is how much of TeX's memory you used:
- 32034 strings out of 481228
- 571387 string characters out of 5921397
- 989467 words of memory out of 5000000
- 46367 multiletter control sequences out of 15000+600000
- 616771 words of font info for 127 fonts, out of 8000000 for 9000
+ 31840 strings out of 481228
+ 572239 string characters out of 5921397
+ 970606 words of memory out of 5000000
+ 46048 multiletter control sequences out of 15000+600000
+ 624735 words of font info for 140 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,21n,87p,976b,689s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,12n,75p,976b,644s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/texlive/2019/tex
 mf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{c:/texlive/2019/texmf-dist/fonts/enc/dvi
-ps/lm/lm-rm.enc}{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}<c
-:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/texlive/2019/tex
-mf-dist/fonts/type1/public/lm/lmbx8.pfb><c:/texlive/2019/texmf-dist/fonts/type1
-/public/lm/lmbxi10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmcsc1
-0.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/texlive/
-2019/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/texlive/2019/texmf-dist/fon
-ts/type1/public/lm/lmr12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/
-lmr17.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/texliv
-e/2019/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/texlive/2019/texmf-dist/fo
-nts/type1/public/lm/lmri12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/l
-m/lmro8.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/te
-xlive/2019/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/texlive/2019/texmf-d
-ist/fonts/type1/public/lm/lmtt12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/pu
-blic/lm/lmtti10.pfb>
-<<<<<<< HEAD
-Output written on tfe_principal.pdf (61 pages, 708619 bytes).
-=======
-Output written on tfe_principal.pdf (61 pages, 707875 bytes).
->>>>>>> e413a9b802aff757ff184867b8e5a957e4ac7663
+ps/lm/lm-mathit.enc}{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.en
+c}{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{c:/texlive/2019
+/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}<c:/texlive/2019/texmf-dist/fonts/type
+1/public/lm/lmbx12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmbxi1
+0.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb><c:/texlive
+/2019/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/texlive/2019/texmf-dist/f
+onts/type1/public/lm/lmmi12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/
+lm/lmmi6.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/te
+xlive/2019/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/texlive/2019/texmf-di
+st/fonts/type1/public/lm/lmr12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/publ
+ic/lm/lmr17.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/
+texlive/2019/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/texlive/2019/texmf-d
+ist/fonts/type1/public/lm/lmri10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/pu
+blic/lm/lmri12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmro8.pfb>
+<c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/texlive/2019/t
+exmf-dist/fonts/type1/public/lm/lmtt12.pfb>
+Output written on tfe_principal.pdf (63 pages, 1831924 bytes).
 PDF statistics:
- 731 PDF objects out of 1000 (max. 8388607)
- 623 compressed objects within 7 object streams
- 156 named destinations out of 1000 (max. 500000)
- 14710 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 1137 PDF objects out of 1200 (max. 8388607)
+ 990 compressed objects within 10 object streams
+ 251 named destinations out of 1000 (max. 500000)
+ 17241 words of extra memory for PDF output out of 17280 (max. 10000000)
 
