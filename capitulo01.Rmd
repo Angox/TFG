@@ -363,122 +363,122 @@ $\textrm{Cuota} = \frac{Censo Distrito}{Censo Total}$
 
 
 
-# Analisis de los datos 
+<!-- # Analisis de los datos  -->
 
-## Año 1977
+<!-- ## Año 1977 -->
 
-```{r Leer y limpiar datos, eval=FALSE, include=FALSE}
-library(openxlsx)
-library(electoral)
-setwd("~/Universidad/TFG/TFG_Git")
-datos1977 <- read.xlsx(xlsxFile = "Datos/Congreso/PROV_02_197706_1.xlsx")
-# Eliminar fila con nombres y sustituirlos por las siglas
-datos1977[3, ][!is.na(datos1977[2, ])] <- datos1977[2, ][!is.na(datos1977[2, ])]
-datos1977 <- datos1977[-nrow(datos1977), ]
-colnames(datos1977) <- datos1977[3, ]
-datos1977 <- datos1977[-c(1, 2, 3), ]
-# Columnas como números
-datos1977[, 4:ncol(datos1977)] <- apply(datos1977[, 4:ncol(datos1977)], 2, as.numeric)
-row.names(datos1977) <- NULL
-# Quedarnos con las columnas que queramos
-datos1977$asientos <- rowSums(datos1977[, (colnames(datos1977) %in% c("Diputados"))])
-datos1977 <- datos1977[, !(colnames(datos1977) %in% c("Diputados"))]
-datos1977 <- datos1977[, -grep(pattern = c("censo"), tolower(colnames(datos1977)))]
-datos1977 <- datos1977[, -grep(pattern = c("Código"), colnames(datos1977))]
+<!-- ```{r Leer y limpiar datos, eval=FALSE, include=FALSE} -->
+<!-- library(openxlsx) -->
+<!-- library(electoral) -->
+<!-- setwd("~/Universidad/TFG/TFG_Git") -->
+<!-- datos1977 <- read.xlsx(xlsxFile = "Datos/Congreso/PROV_02_197706_1.xlsx") -->
+<!-- # Eliminar fila con nombres y sustituirlos por las siglas -->
+<!-- datos1977[3, ][!is.na(datos1977[2, ])] <- datos1977[2, ][!is.na(datos1977[2, ])] -->
+<!-- datos1977 <- datos1977[-nrow(datos1977), ] -->
+<!-- colnames(datos1977) <- datos1977[3, ] -->
+<!-- datos1977 <- datos1977[-c(1, 2, 3), ] -->
+<!-- # Columnas como números -->
+<!-- datos1977[, 4:ncol(datos1977)] <- apply(datos1977[, 4:ncol(datos1977)], 2, as.numeric) -->
+<!-- row.names(datos1977) <- NULL -->
+<!-- # Quedarnos con las columnas que queramos -->
+<!-- datos1977$asientos <- rowSums(datos1977[, (colnames(datos1977) %in% c("Diputados"))]) -->
+<!-- datos1977 <- datos1977[, !(colnames(datos1977) %in% c("Diputados"))] -->
+<!-- datos1977 <- datos1977[, -grep(pattern = c("censo"), tolower(colnames(datos1977)))] -->
+<!-- datos1977 <- datos1977[, -grep(pattern = c("Código"), colnames(datos1977))] -->
 
-datos1977 <- datos1977[, -grep(pattern = c("mesas"), colnames(datos1977))]
-```
-
-
-### Método D`Hondt
-
-Calculamos el número de escaños obtenidos por los diferentes partidos según el método particular de votación en España, en donde si los partidos no llegan a un 3% de representación, no tendrán representabilidad.
+<!-- datos1977 <- datos1977[, -grep(pattern = c("mesas"), colnames(datos1977))] -->
+<!-- ``` -->
 
 
+<!-- ### Método D`Hondt -->
 
-```{r eval=FALSE, include=FALSE}
+<!-- Calculamos el número de escaños obtenidos por los diferentes partidos según el método particular de votación en España, en donde si los partidos no llegan a un 3% de representación, no tendrán representabilidad. -->
 
-library(data.table)
-borrar <- NULL
-for (prov in seq_len(nrow(datos1977))) {
-  # Votos tenerife Alianza Popular mal contados
-  if (prov == 15) {
-    datos1977[prov, 12] <- 23866
-  }
-  # Contar a partir de columna de los partidos
-  desde <- 1 + grep(pattern = "nulos", x = colnames(datos1977))
-  # Cota del 3%
-  corte <- 100 * colSums(datos1977[prov, desde:ncol(datos1977)]) / sum(datos1977$`Votos válidos`[prov])
-  partidos <- colnames(datos1977[, desde:ncol(datos1977)])[corte > 3]
-  votos <- datos1977[prov, desde:ncol(datos1977)][corte > 3]
-  # Asientos por circunscripción
-  n_asientos <- datos1977$asientos[prov]
-  s <- 1:n_asientos
-  # Creamos matriz con los datos y los dividimos
-  selec <- matrix(data = as.numeric(votos), ncol = length(votos), nrow = n_asientos, byrow = T)
-  selec <- as.data.frame(selec)
-  for (i in 1:n_asientos) {
-    selec[i, ] <- selec[i, ] / i
-  }
-  # Arreglamos los nombres y los ordenamos de mayor a menor
-  colnames(selec) <- partidos
-  selec <- as.data.frame(selec)
-  selec <- sort(unlist(selec), decreasing = T)[1:n_asientos]
-  library(stringr)
-  names(selec) <- gsub("\\d", "", names(selec)) 
-  # Presentamos el resultado
-  borrar[[prov]] <- sort(table(names(selec)), decreasing = T)
-}
 
-# seats_ha(parties = partidos,votes = as.numeric(votos),n_seats = n_asientos,method = "dhondt")
-borrar2 <- borrar[[1]]
-for (i in 2:length(borrar)) {
-  borrar2 <- c(borrar2, borrar[[i]])
-}
-resul_dhondt_1977 <- as.data.table(aggregate(as.numeric(borrar2), by = list(names(borrar2)), FUN = sum))[order(-x)]
-```
 
-### Método Sainte-Lague
+<!-- ```{r eval=FALSE, include=FALSE} -->
 
-```{r eval=FALSE, include=FALSE}
+<!-- library(data.table) -->
+<!-- borrar <- NULL -->
+<!-- for (prov in seq_len(nrow(datos1977))) { -->
+<!--   # Votos tenerife Alianza Popular mal contados -->
+<!--   if (prov == 15) { -->
+<!--     datos1977[prov, 12] <- 23866 -->
+<!--   } -->
+<!--   # Contar a partir de columna de los partidos -->
+<!--   desde <- 1 + grep(pattern = "nulos", x = colnames(datos1977)) -->
+<!--   # Cota del 3% -->
+<!--   corte <- 100 * colSums(datos1977[prov, desde:ncol(datos1977)]) / sum(datos1977$`Votos válidos`[prov]) -->
+<!--   partidos <- colnames(datos1977[, desde:ncol(datos1977)])[corte > 3] -->
+<!--   votos <- datos1977[prov, desde:ncol(datos1977)][corte > 3] -->
+<!--   # Asientos por circunscripción -->
+<!--   n_asientos <- datos1977$asientos[prov] -->
+<!--   s <- 1:n_asientos -->
+<!--   # Creamos matriz con los datos y los dividimos -->
+<!--   selec <- matrix(data = as.numeric(votos), ncol = length(votos), nrow = n_asientos, byrow = T) -->
+<!--   selec <- as.data.frame(selec) -->
+<!--   for (i in 1:n_asientos) { -->
+<!--     selec[i, ] <- selec[i, ] / i -->
+<!--   } -->
+<!--   # Arreglamos los nombres y los ordenamos de mayor a menor -->
+<!--   colnames(selec) <- partidos -->
+<!--   selec <- as.data.frame(selec) -->
+<!--   selec <- sort(unlist(selec), decreasing = T)[1:n_asientos] -->
+<!--   library(stringr) -->
+<!--   names(selec) <- gsub("\\d", "", names(selec))  -->
+<!--   # Presentamos el resultado -->
+<!--   borrar[[prov]] <- sort(table(names(selec)), decreasing = T) -->
+<!-- } -->
 
-borrar <- NULL
-for (prov in seq_len(nrow(datos1977))) {
-  # Votos tenerife Alianza Popular mal contados
-  if (prov == 15) {
-    datos1977[prov, 12] <- 23866
-  }
-  # Contar a partir de columna de los partidos
-  desde <- 1 + grep(pattern = "nulos", x = colnames(datos1977))
-  # Cota del 3%
-  corte <- 100 * colSums(datos1977[prov, desde:ncol(datos1977)]) / sum(datos1977$`Votos válidos`[prov])
-  partidos <- colnames(datos1977[, desde:ncol(datos1977)])[corte > 3]
-  votos <- datos1977[prov, desde:ncol(datos1977)][corte > 3]
-  # Asientos por circunscripción
-  n_asientos <- datos1977$asientos[prov]
-  s <- 1:n_asientos
-  # Creamos matriz con los datos y los dividimos
-  selec <- matrix(data = as.numeric(votos), ncol = length(votos), nrow = n_asientos, byrow = T)
-  selec <- as.data.frame(selec)
-  for (i in 1:n_asientos) {
-    selec[i, ] <- selec[i, ] / (2 * i + 1)
-  }
-  # Arreglamos los nombres y los ordenamos de mayor a menor
-  colnames(selec) <- partidos
-  selec <- as.data.frame(selec)
-  selec <- sort(unlist(selec), decreasing = T)[1:n_asientos]
-  library(stringr)
-  names(selec) <- gsub("\\d", "", names(selec))
-  # Presentamos el resultado
-  borrar[[prov]] <- sort(table(names(selec)), decreasing = T)
-}
+<!-- # seats_ha(parties = partidos,votes = as.numeric(votos),n_seats = n_asientos,method = "dhondt") -->
+<!-- borrar2 <- borrar[[1]] -->
+<!-- for (i in 2:length(borrar)) { -->
+<!--   borrar2 <- c(borrar2, borrar[[i]]) -->
+<!-- } -->
+<!-- resul_dhondt_1977 <- as.data.table(aggregate(as.numeric(borrar2), by = list(names(borrar2)), FUN = sum))[order(-x)] -->
+<!-- ``` -->
 
-borrar2 <- borrar[[1]]
-for (i in 2:length(borrar)) {
-  borrar2 <- c(borrar2, borrar[[i]])
-}
-resul_SainteLague_1977 <- as.data.table(aggregate(as.numeric(borrar2), by = list(names(borrar2)), FUN = sum))[order(-x)]
-```
+<!-- ### Método Sainte-Lague -->
+
+<!-- ```{r eval=FALSE, include=FALSE} -->
+
+<!-- borrar <- NULL -->
+<!-- for (prov in seq_len(nrow(datos1977))) { -->
+<!--   # Votos tenerife Alianza Popular mal contados -->
+<!--   if (prov == 15) { -->
+<!--     datos1977[prov, 12] <- 23866 -->
+<!--   } -->
+<!--   # Contar a partir de columna de los partidos -->
+<!--   desde <- 1 + grep(pattern = "nulos", x = colnames(datos1977)) -->
+<!--   # Cota del 3% -->
+<!--   corte <- 100 * colSums(datos1977[prov, desde:ncol(datos1977)]) / sum(datos1977$`Votos válidos`[prov]) -->
+<!--   partidos <- colnames(datos1977[, desde:ncol(datos1977)])[corte > 3] -->
+<!--   votos <- datos1977[prov, desde:ncol(datos1977)][corte > 3] -->
+<!--   # Asientos por circunscripción -->
+<!--   n_asientos <- datos1977$asientos[prov] -->
+<!--   s <- 1:n_asientos -->
+<!--   # Creamos matriz con los datos y los dividimos -->
+<!--   selec <- matrix(data = as.numeric(votos), ncol = length(votos), nrow = n_asientos, byrow = T) -->
+<!--   selec <- as.data.frame(selec) -->
+<!--   for (i in 1:n_asientos) { -->
+<!--     selec[i, ] <- selec[i, ] / (2 * i + 1) -->
+<!--   } -->
+<!--   # Arreglamos los nombres y los ordenamos de mayor a menor -->
+<!--   colnames(selec) <- partidos -->
+<!--   selec <- as.data.frame(selec) -->
+<!--   selec <- sort(unlist(selec), decreasing = T)[1:n_asientos] -->
+<!--   library(stringr) -->
+<!--   names(selec) <- gsub("\\d", "", names(selec)) -->
+<!--   # Presentamos el resultado -->
+<!--   borrar[[prov]] <- sort(table(names(selec)), decreasing = T) -->
+<!-- } -->
+
+<!-- borrar2 <- borrar[[1]] -->
+<!-- for (i in 2:length(borrar)) { -->
+<!--   borrar2 <- c(borrar2, borrar[[i]]) -->
+<!-- } -->
+<!-- resul_SainteLague_1977 <- as.data.table(aggregate(as.numeric(borrar2), by = list(names(borrar2)), FUN = sum))[order(-x)] -->
+<!-- ``` -->
 
 
 

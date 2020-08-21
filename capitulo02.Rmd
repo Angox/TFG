@@ -4691,7 +4691,9 @@ ggplot(fe, aes(Partidos, Metodo)) +
   guides(fill = "none")
 ```
 
-
+En esta gráfica de las elecciones de Noviembre de 2019 podemos observar una ligera recuperación del bipartidismo en donde los dos principales partidos vuelven a aumentar el número de escaños obtenidos y también aumentar la diferencia en escaños respecto a los demás.
+Son unas elecciones en donde hay dos partidos principales, que son el *PSOE* y el *PP* respectivamente, uno medio en escaños, *Vox*, y tres partidos de un nivel medio-bajo de escaños, que son *Podemos*, *ERC* y *Ciudadanos* respectivamente.
+En el caso de optar por otro método en ninguno de ellos se alcanzaría la mayoría absoluta, hay dos partidos perjudicados por utilizar el método D´Hondt en vez de otro más proporcional como pueda ser el Danish, que son los partidos de Podemos que pasarían de obtener 26 escaños a 40 y el partido Ciudadanos que pasaría a duplicar su presencia de 10 escaños a 23.
 
 #### Disproporcionalidad
 ```{r}
@@ -4727,6 +4729,9 @@ ggplot(Disproporc, aes(reorder(m, -c), c)) +
   guides(fill="none")
 ```
 
+En el gráfico por comunidades obtenemos el mismo comportamiento que en las elecciones anteriores sin obtener una diferencia significativa.
+Cuando comparamos la disproporcionalidad según el método de reparto el método de Imperiali sigue siendo el más disproporcionado mientras que el mejor método esta vez resulta ser el Sainte-Lague, el método D´Hondt como hemos visto en anteriores elecciones sigue siendo el segundo peor método posible, por lo que es necesario cada vez más plantear seriamente un cambio de método de reparto.
+
 
 ## Comparativa entre años
 ```{r}
@@ -4756,12 +4761,37 @@ ggplot(dds[,mean(Disproporcionalidad),by=.(Año,Metodos)],aes(Año,V1))+
   labs(title = "Disproporcionalidad media por año ",caption = "Angel Gonzalez",y="Disproporcionalidad")+
   theme(legend.position = "bottom")
 
-ggplot(dds[,mean(Disproporcionalidad),by=.(Año,Metodos,Comunidad)],aes(Año,V1))+
-  geom_line(aes(group=Comunidad,color=Comunidad))+
-  geom_point(aes(color=Comunidad,size=V1,shape=Comunidad))+
-  labs(title = "Disproporcionalidad media por año ",caption = "Angel Gonzalez",y="Disproporcionalidad")+
-  theme(legend.position = "bottom")+
-  facet_grid(~Metodos)
+# ggplot(dds[,mean(Disproporcionalidad),by=.(Año,Metodos,Comunidad)][Metodos%in%"Adams"],aes(Año,V1))+
+#   geom_line(aes(group=Comunidad,color=Comunidad))+
+#   geom_point(aes(color=Comunidad,size=V1))+
+#   geom_label(aes(label=Comunidad),position="nudge")+
+#   labs(title = "Disproporcionalidad media por año ",caption = "Angel Gonzalez",y="Disproporcionalidad")+
+#   theme(legend.position = "none")+
+#   facet_grid(rows = vars(Metodos))
+
+# ggplot(dds[,mean(Disproporcionalidad),by=.(Año,Metodos)],aes(Año,V1))+
+#   geom_line(aes(group=Metodos,color=Metodos),size=1.2)+
+#   geom_point(aes(color=Metodos,size=V1,shape=Metodos))+
+#   labs(title = "Disproporcionalidad media por año ",caption = "Angel Gonzalez",y="Disproporcionalidad")+
+#   theme(legend.position = "bottom")
+
+ggplot(dds[,mean(Disproporcionalidad),by=.(Metodos)], aes(reorder(Metodos, -V1), V1)) +
+  geom_col(aes(fill = Metodos)) +
+  coord_flip()+
+   labs(title = "Disproporcionalidad según método de reparto",caption = "Angel Gonzalez",x="Métodos",y="Disproporcionalidad",subtitle = "Media de todos los años" )+
+  guides(fill="none")
 
 ```
+
+En este gráfico comparando la disproporcionalidad media por año observamos como la disproporción desde las elecciones de 1977 hasta 1989 está en un nivel medio, a partir del año 1993 la disproporción baja, principalmente debido a un bipartidismo más marcado, esto se mantiene hasta el año de las elecciones de 2011, en donde empieza por primera vez a aparecer un tercer partido que debilita el bipartidismo por lo que la disproporcionalidad aumenta a los niveles de las primeras elecciones, desde el año 2011 hasta ya las últimas elecciones de 2019 la disproporcionalidad se mantiene sin mucha variación.
+
+En el gráfico de la disproporcionalidad según el método de reparto podemos extraer conclusiones para decidir cual método ha sido el mejor a lo largo de todas las elecciones realizadas en España a partir de 1977, por lo tanto sacamos estas conclusiones:  
+
+  * El mejor método es el Saint-Lague.
+  * El peor método es el Imperiali.
+  * El método D´Hondt es el cuarto mejor método.
+
+Por lo tanto al preguntarnos si el método utilizado en España es el mejor método que se puede utilizar para el reparto de los escaños podemos afirmar que no lo es, de hecho se sitúa en la mitad de la tabla entre todos los métodos analizados, la característica que tiene el método D´Hont es que se sitúa entre los métodos que benefician más a los partidos más votados y de entre ellos es el método más proporcional, por lo que se podría decir que es el método más proporcional entre los métodos que "facilitan la gobernanza". Pero si nuestro objetivo es obtener la máxima proporcionalidad en vez de facilitar la gobernanza deberíamos plantear un cambio de método en primer lugar al Sainte-Lague o al Danish, ambos métodos son casi idénticos en términos de proporcionalidad pero el Sainte-Lague tiene una mejor característica que el Danish, que reparte los escaños de forma que es más fácil gobernar. 
+
+
 

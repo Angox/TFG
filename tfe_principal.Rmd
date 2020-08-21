@@ -21,6 +21,8 @@ output:
     includes:
       before_body: portadas/latex_paginatitulo_modTFE.tex
     keep_tex: yes
+    fig_width: 12
+    fig_height: 5
     number_sections: yes
     template: latex/templateMemoriaTFE.tex
 #      before_body: portadas/latex_paginatitulo_modTFGE.tex
@@ -33,15 +35,16 @@ output:
 ---
 
 ---
-nocite: | 
-  @Luque2017,@Luque2019,@RStudio,@R-base,
-  @R-knitr,@R-rmarkdown,@R-dplyr,@R-ggplot2, @R-xtable,
-  @R-stringr,@Techopedia
+nocite: '@*'
+<!-- | -->
+<!--   @Luque2017,@Luque2019,@RStudio,@R-base, -->
+<!--   @R-knitr,@R-rmarkdown,@R-dplyr,@R-ggplot2, @R-xtable, -->
+<!--   @R-stringr,@Techopedia -->
 ...
 
 
 ```{r global_options, include=FALSE}
-Sys.setlocale('LC_ALL','C') # corrige problema con 
+# Sys.setlocale('LC_ALL','C') # corrige problema con 
 options(kableExtra.latex.load_packages = F)
 #options(tinytex.latexmk.emulation = FALSE)
 knitr::opts_chunk$set(fig.path = 'figurasR/',
@@ -69,13 +72,13 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
 \renewcommand{\footrulewidth}{0pt}
 \pagenumbering{roman}
 
-\setcounter{tocdepth}{4}
+\setcounter{tocdepth}{2}
 \subpdfbookmark{Índice General}{indice}
 \tableofcontents
 
 
 <!-- \cleardoublepage    -->
-<!-- <!--  \clearpage --> -->
+<!-- <!--  \clearpage --> 
 <!-- \section*{Prólogo} -->
 <!-- \addcontentsline{toc}{section}{Prólogo} -->
 
@@ -100,14 +103,14 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
 ```
 
 
-\cleardoublepage   
-\listoffigures
-\addcontentsline{toc}{section}{Índice de Figuras}
+<!-- \cleardoublepage    -->
+<!-- \listoffigures -->
+<!-- \addcontentsline{toc}{section}{Índice de Figuras} -->
 
-\cleardoublepage   
+<!-- \cleardoublepage    -->
 
-\listoftables
-\addcontentsline{toc}{section}{Índice de Cuadros}
+<!-- \listoftables -->
+<!-- \addcontentsline{toc}{section}{Índice de Cuadros} -->
 
 
 \cleardoublepage   
@@ -137,34 +140,34 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
 ```{r child = 'capitulo02.Rmd'}
 ```
 
-\FloatBarrier
+<!-- \FloatBarrier -->
 
-```{r child = 'capitulo03.Rmd'}
-```
-
-\FloatBarrier
-
-```{r child = 'capitulo04.Rmd'}
-```
+<!-- ```{r child = 'capitulo03.Rmd'} -->
+<!-- ``` -->
 
 <!-- \FloatBarrier -->
 
-<!-- <!-- Borrarlo o comentarlo para obtener la versión final: contiene utilidades --> -->
+<!-- ```{r child = 'capitulo04.Rmd'} -->
+<!-- ``` -->
+
+<!-- \FloatBarrier -->
+
+<!-- <!-- Borrarlo o comentarlo para obtener la versión final: contiene utilidades --> 
 <!-- ```{r child = 'capitulo05.Rmd'} -->
 <!-- ``` -->
 
 
-\FloatBarrier
+<!-- \FloatBarrier -->
 
-\appendix
+<!-- \appendix -->
 
-```{r child = 'apendice01.Rmd'}
-```
+<!-- ```{r child = 'apendice01.Rmd'} -->
+<!-- ``` -->
 
 
 
-```{r child = 'apendice02.Rmd'}
-```
+<!-- ```{r child = 'apendice02.Rmd'} -->
+<!-- ``` -->
 
 
 \FloatBarrier
@@ -191,9 +194,9 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
 \else
 
 
-<!-- \nocite{*} -->
-\nocite{Luque2017,Luque2019,RStudio,R-base,
-R-knitr,R-rmarkdown,R-dplyr,R-ggplot2, R-xtable,
-R-stringr,Techopedia}
+\nocite{*}
+<!-- \nocite{Luque2017,Luque2019,RStudio,R-base, -->
+<!-- R-knitr,R-rmarkdown,R-dplyr,R-ggplot2, R-xtable, -->
+<!-- R-stringr,Techopedia} -->
 
 \fi 
