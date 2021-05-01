@@ -34,13 +34,13 @@ output:
       #after_body: latex/latex_antes_enddoc.tex
 ---
 
----
-nocite: '@*'
+<!-- --- -->
+<!-- nocite: '@*' -->
 <!-- | -->
 <!--   @Luque2017,@Luque2019,@RStudio,@R-base, -->
 <!--   @R-knitr,@R-rmarkdown,@R-dplyr,@R-ggplot2, @R-xtable, -->
 <!--   @R-stringr,@Techopedia -->
-...
+<!-- ... -->
 
 
 ```{r global_options, include=FALSE}
