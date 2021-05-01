@@ -2079,8 +2079,8 @@ ggplot(fe) +
   legend.key.width = unit(0.2,"cm") ,legend.text = element_text(size=6, face="bold"))
 ```
 
-En las elecciones de 1993 podemos observar como la fuerza del primer partido va decreciendo lentamente. Los dos partidos más votados son el *PSOE* y el *PP* respectivamente, la diferencia estas elecciones es que el PSOE ha perdido la mayoría absoluta según el método D´Hondt y en cambio el PP ha aumentado su presencia significativamente y está ya relativamente cerca de alcanzar al PSOE. De haber utilizado los métodos más proporcionales resultaría en una menor diferencia de escaños entre estos dos grandes partidos, el partido más castigado en estas elecciones sigue siendo IU, el cual podría haber obtenido de 1.5 a 2 veces más asientos de haber cambiado de método de reparto.
-Son unas elecciones en donde hay dos partidos hegemónicos y dos partidos medianos que son IU y CIU, como hemos visto IU es un partido muy castigado por el método de reparto actual, en cambio CiU no se vería agraviado o beneficiado al cambiar el método de reparto.
+En las elecciones de 1993 podemos observar como la fuerza del primer partido va decreciendo lentamente. Los dos partidos más votados son el *PSOE* y el *PP* respectivamente, la diferencia estas elecciones es que el PSOE ha perdido la mayoría absoluta según el método D´Hondt y en cambio el PP ha aumentado su presencia significativamente y está ya relativamente cerca de alcanzar al *PSOE.* De haber utilizado los métodos más proporcionales resultaría en una menor diferencia de escaños entre estos dos grandes partidos, el partido más castigado en estas elecciones sigue siendo *IU*, el cual podría haber obtenido de 1.5 a 2 veces más asientos de haber cambiado de método de reparto.
+Son unas elecciones en donde hay dos partidos hegemónicos y dos partidos medianos que son *IU* y *CIU*, como hemos visto *IU* es un partido muy castigado por el método de reparto actual, en cambio *CIU* no se vería agraviado o beneficiado al cambiar el método de reparto.
 
 #### Disproporcionalidad
 ```{r}
@@ -2422,6 +2422,10 @@ ggplot(Disproporc, aes(reorder(m, -c), c)) +
   guides(fill="none")
 ```
 
+
+En estas elecciones de 1996 se observa una disproporción similar a las elecciones anteriores, no hay novedades significativas en el comportamiento de las provincias.  
+
+Este año en el caso de la disproporcionalidad media según el método de reparto vemos que hay diferencias en los métodos más disproporcionales respecto a la anterior elección, el método más disproporcionado vuelve a ser el Imperiali. Los más disproporcionados este año son  el método anteriormente citado, Imperiali seguido muy de cerca por los métodos Adams y de Huntington-Hill, en el caso de los más proporcionados cambia, el método Danish pasa a un segundo puesto superado por el método Sainte-Lague.
 
 
 ## Año 2000

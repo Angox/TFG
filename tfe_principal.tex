@@ -557,6 +557,11 @@ Sevilla, Enero de 2020
 
 \raggedbottom
 
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\ldots{}
+
 \setlength{\parindent}{1em}
 
 \pagestyle{fancy}
@@ -712,7 +717,7 @@ en la ciudad de Cádiz con diputados venidos de todas las regiones tanto
 de la península como de ultramar. La asamblea concluyó con la
 promulgación de la constitución de 1812.
 
-En la instrucción de 1810 comienzan a a parecer los mecanismos para
+En la instrucción de 1810 comienzan a aparecer los mecanismos para
 elegir a los representantes tanto parroquiales, de partido y de
 provincia. La fórmula electoral escogida fue la mayoritaria. El sufragio
 es masculino universal e indirecto, aunque se requería que los electores
@@ -740,15 +745,17 @@ la anterior Ley Orgánica.
 Español}\label{descripciuxf3n-del-sistema-electoral-espauxf1ol}}
 
 La descripción del sistema Electoral Español se encuentra el la LOREG
-(Ley Orgánica del Régimen Electoral Español) En el caso de España
-debemos diferenciar la elección de Diputados y Senadores, cada provincia
-es considerada como una circunscripción electoral. Como excepción a la
-regla las ciudades de Ceuta y Melilla son consideradas cada una de ellas
-como una circunscripción electoral. En el artículo 161.2 se nos añade
-otra excepción para la elección de Senadores en donde se consideran
-circunscripciones las siguientes islas o agrupaciones de islas:
-Mallorca, Menorca, Ibiza-Formentera, Gran Canaria, Fuerteventura,
-Lanzarote, Tenerife, Hierro, Gomera y La Palma.
+(Ley Orgánica del Régimen Electoral Español).
+
+En el caso de España debemos diferenciar la elección de Diputados y
+Senadores, cada provincia es considerada como una circunscripción
+electoral. Como excepción a la regla las ciudades de Ceuta y Melilla son
+consideradas cada una de ellas como una circunscripción electoral.
+
+En el artículo 161.2 se nos añade otra excepción para la elección de
+Senadores en donde se consideran circunscripciones las siguientes islas
+o agrupaciones de islas: Mallorca, Menorca, Ibiza-Formentera, Gran
+Canaria, Fuerteventura, Lanzarote, Tenerife, Hierro, Gomera y La Palma.
 
 \hypertarget{congreso}{%
 \subsection{Congreso}\label{congreso}}
@@ -861,10 +868,6 @@ Lanzarote, Tenerife, Hierro, Gomera y La Palma.
 \hypertarget{muxe9todos-de-reparto-de-escauxf1os}{%
 \chapter{Métodos de reparto de
 escaños}\label{muxe9todos-de-reparto-de-escauxf1os}}
-
-A continuación presentaremos los distintos métodos de reparto de escaños
-
--Paquete R estadístico Electoral-
 
 \hypertarget{muxe9todo-de-cifra-repartidora}{%
 \section{Método de cifra
@@ -1104,10 +1107,10 @@ favorecer a las partes más pequeñas a expensas de las más grandes.
 \hypertarget{cociente-droop}{%
 \subsection{Cociente Droop}\label{cociente-droop}}
 
-Algunos países emplean en cociente son Australia Irlanda o Malta, entre
-otros. Es más favorable a los partidos mayoritarios que el obtenido
-mediante el sistema Hare, aunque no favorece tanto como el sistema
-Imperiali.
+Algunos países que emplean este cociente son Australia Irlanda o Malta,
+entre otros. Es más favorable a los partidos mayoritarios que el
+obtenido mediante el sistema Hare, aunque no favorece tanto como el
+sistema Imperiali.
 
 Si se eligen \({n}\) escaños para un cuerpo colegiado, y se emiten
 \({m}\) votos válidos, se establece un cociente \({q}\) el cual
@@ -1150,9 +1153,9 @@ votos. Este cociente se calcula mediante la fórmula:
 
 \({q={\frac {m}{n+2}}.}\) con q aproximado al entero más próximo.
 
-Si lai-ésima lista de I listas inscritas obtiene \({m_{i}}\) votos, esta
-lista tendrá \({e_{i}}\) escaños por cociente y \({r_{i}}\) votos por
-residuo mediante la fórmula: \({m_{i}=qe_{i}+r_{i}}\).
+Si la i-ésima lista de I listas inscritas obtiene \({m_{i}}\) votos,
+esta lista tendrá \({e_{i}}\) escaños por cociente y \({r_{i}}\) votos
+por residuo mediante la fórmula: \({m_{i}=qe_{i}+r_{i}}\).
 
 \({e_{i}=\left\lfloor {\frac {m_{i}}{q}}\right\rfloor ,r_{i}=m_{i}-qe_{i}}\)
 
@@ -1210,16 +1213,16 @@ distintos métodos de reparto de escaños.
 
 Los sistemas que analizaremos en este análisis emprírico serán, dentro
 de los métodos de promedio mayor, el método D´Hondt, Método Saint-Lague
-y el método de saint lague modificado. Dentro de los métodos de resto
+y el método de Saint-Lague modificado. Dentro de los métodos de resto
 mayor analizaremos el método Hagenbach-Bischoff, Droop, Hare e
-imperiali. Dentro de los métodos mayoritario analizaremos únicamente el
+Imperiali. Dentro de los métodos mayoritario analizaremos únicamente el
 método de mayoría simple.
 
 Generaremos datos ficticios de partidos, que irán desde 2 posibles
 partidos hasta 100 partidos, número de escaños que irán desde 1 posible
 escaño a repartir a 400 escaños a repartir y según diferentes densidades
 desde una máxima desigualdad en votos entre los partidos hasta una
-máxima igualdad entre los votos entre partidos.
+máxima igualdad de votos entre partidos.
 
 \hypertarget{dhondt}{%
 \subsection{D`Hondt}\label{dhondt}}
@@ -1286,10 +1289,6 @@ tengan unos pocos partidos con respecto a los demás.
 \subsubsection{Sainte-Lague variando el número de
 escaños}\label{sainte-lague-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{verbatim}
-## [1] 1.436887
-\end{verbatim}
-
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-14-1} \end{center}
 
 En este caso se nos presenta la disproporcionalidad variando el número
@@ -1347,10 +1346,6 @@ respecto a los demás.
 \hypertarget{modified-sainte-lague-variando-el-nuxfamero-de-escauxf1os}{%
 \subsubsection{Modified Sainte-Lague variando el número de
 escaños}\label{modified-sainte-lague-variando-el-nuxfamero-de-escauxf1os}}
-
-\begin{verbatim}
-## [1] 1.436887
-\end{verbatim}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-19-1} \end{center}
 
@@ -1411,10 +1406,6 @@ demás.
 \subsubsection{Imperiali variando el número de
 escaños}\label{imperiali-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{verbatim}
-## [1] 1.436887
-\end{verbatim}
-
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-24-1} \end{center}
 
 En este caso se nos presenta la disproporcionalidad variando el número
@@ -1470,10 +1461,6 @@ muy baja.
 \hypertarget{huntington-hill-variando-el-nuxfamero-de-escauxf1os}{%
 \subsubsection{Huntington-Hill variando el número de
 escaños}\label{huntington-hill-variando-el-nuxfamero-de-escauxf1os}}
-
-\begin{verbatim}
-## [1] 1.158221
-\end{verbatim}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-29-1} \end{center}
 
@@ -1540,10 +1527,6 @@ disproporcionalidad.
 \subsubsection{Adams variando el número de
 escaños}\label{adams-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{verbatim}
-## [1] 1.158221
-\end{verbatim}
-
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-34-1} \end{center}
 
 En este caso se nos presenta la disproporcionalidad variando el número
@@ -1605,10 +1588,6 @@ será peor cuanto mayor concentración de voto se presente.
 \hypertarget{danish-variando-el-nuxfamero-de-escauxf1os}{%
 \subsubsection{Danish variando el número de
 escaños}\label{danish-variando-el-nuxfamero-de-escauxf1os}}
-
-\begin{verbatim}
-## [1] 1.436887
-\end{verbatim}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-39-1} \end{center}
 
@@ -1852,6 +1831,8 @@ métodos}\label{comparativa-entre-muxe9todos}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-59-2} \end{center}
 
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-59-3} \end{center}
+
 En estas primeras elecciones de 1977 podemos observar que la fuerza más
 votada en las elecciones es el partido \emph{Unión de Centro
 democrático} seguido del \emph{PSOE}. Observamos que según el método
@@ -1919,6 +1900,8 @@ métodos}\label{comparativa-entre-muxe9todos-1}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-68-2} \end{center}
 
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-68-3} \end{center}
+
 En estas elecciones de 1979 el partido más votado fué \emph{UCD} seguido
 del \emph{PSOE}, según los distintos métodos de reparto únicamente en el
 método Imperiali UCD conseguiría la mayoría absoluta, en todos los demás
@@ -1965,6 +1948,8 @@ métodos}\label{comparativa-entre-muxe9todos-2}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-77-2} \end{center}
 
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-77-3} \end{center}
+
 En estas elecciones de 1982 el partido más votado es el \emph{PSOE} el
 cual según la mayoría de los métodos de reparto, incluido el método
 D´Hondt, alcanza la mayoría absoluta. Son unas elecciones en los que el
@@ -2008,6 +1993,8 @@ métodos}\label{comparativa-entre-muxe9todos-3}}
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-86-1} \end{center}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-86-2} \end{center}
+
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-86-3} \end{center}
 
 En estas elecciones de 1986 el partido más votado fué el \emph{PSOE},
 tal y como sucedió en las anteriores elecciones, son también unas
@@ -2057,6 +2044,8 @@ métodos}\label{comparativa-entre-muxe9todos-4}}
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-95-1} \end{center}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-95-2} \end{center}
+
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-95-3} \end{center}
 
 En estas elecciones de 1989 el partido más votado es, como sucedió el
 las anteriores elecciones, el \emph{PSOE}, vemos como aparece por
@@ -2110,20 +2099,23 @@ métodos}\label{comparativa-entre-muxe9todos-5}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-104-2} \end{center}
 
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-104-3} \end{center}
+
 En las elecciones de 1993 podemos observar como la fuerza del primer
 partido va decreciendo lentamente. Los dos partidos más votados son el
 \emph{PSOE} y el \emph{PP} respectivamente, la diferencia estas
 elecciones es que el PSOE ha perdido la mayoría absoluta según el método
 D´Hondt y en cambio el PP ha aumentado su presencia significativamente y
-está ya relativamente cerca de alcanzar al PSOE. De haber utilizado los
-métodos más proporcionales resultaría en una menor diferencia de escaños
-entre estos dos grandes partidos, el partido más castigado en estas
-elecciones sigue siendo IU, el cual podría haber obtenido de 1.5 a 2
-veces más asientos de haber cambiado de método de reparto. Son unas
-elecciones en donde hay dos partidos hegemónicos y dos partidos medianos
-que son IU y CIU, como hemos visto IU es un partido muy castigado por el
-método de reparto actual, en cambio CiU no se vería agraviado o
-beneficiado al cambiar el método de reparto.
+está ya relativamente cerca de alcanzar al \emph{PSOE.} De haber
+utilizado los métodos más proporcionales resultaría en una menor
+diferencia de escaños entre estos dos grandes partidos, el partido más
+castigado en estas elecciones sigue siendo \emph{IU}, el cual podría
+haber obtenido de 1.5 a 2 veces más asientos de haber cambiado de método
+de reparto. Son unas elecciones en donde hay dos partidos hegemónicos y
+dos partidos medianos que son \emph{IU} y \emph{CIU}, como hemos visto
+\emph{IU} es un partido muy castigado por el método de reparto actual,
+en cambio \emph{CIU} no se vería agraviado o beneficiado al cambiar el
+método de reparto.
 
 \hypertarget{disproporcionalidad-5}{%
 \subsubsection{Disproporcionalidad}\label{disproporcionalidad-5}}
@@ -2159,6 +2151,8 @@ métodos}\label{comparativa-entre-muxe9todos-6}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-113-2} \end{center}
 
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-113-3} \end{center}
+
 En estas elecciones de 1996 son las primeras elecciones en donde el
 \emph{PP} son la fuerza más votada, el \emph{PSOE} que ya llevaba una
 tendencia descendiente al final ha perdido el primer puesto. Sigue
@@ -2166,12 +2160,25 @@ habiendo un bipartidismo significativo con dos partidos medianos,
 todavía el PP a pesar de ganar las elecciones no alcanza la mayoría
 absoluta en ninguno de los métodos analizados
 
-\hypertarget{disproporcionalidads}{%
-\subsubsection{Disproporcionalidads}\label{disproporcionalidads}}
+\hypertarget{disproporcionalidad-6}{%
+\subsubsection{Disproporcionalidad}\label{disproporcionalidad-6}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-114-1} \end{center}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-114-2} \end{center}
+
+En estas elecciones de 1996 se observa una disproporción similar a las
+elecciones anteriores, no hay novedades significativas en el
+comportamiento de las provincias.
+
+Este año en el caso de la disproporcionalidad media según el método de
+reparto vemos que hay diferencias en los métodos más disproporcionales
+respecto a la anterior elección, el método más disproporcionado vuelve a
+ser el Imperiali. Los más disproporcionados este año son el método
+anteriormente citado, Imperiali seguido muy de cerca por los métodos
+Adams y de Huntington-Hill, en el caso de los más proporcionados cambia,
+el método Danish pasa a un segundo puesto superado por el método
+Sainte-Lague.
 
 \hypertarget{auxf1o-2000}{%
 \section{Año 2000}\label{auxf1o-2000}}
@@ -2187,6 +2194,8 @@ métodos}\label{comparativa-entre-muxe9todos-7}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-122-2} \end{center}
 
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-122-3} \end{center}
+
 En las elecciones del año 2000 el partido más votado vuelve a ser el
 \emph{Partido Popular} seguido del \emph{PSOE}, en estas elecciones
 según el método D´Hondt utilizado en España el PP conseguiría una
@@ -2199,8 +2208,8 @@ pequeños con menos de tres votos casi duplicar su presencia en escaños.
 El partido más castigado por utilizar el método D´Hondt en estas
 elecciones sigue siendo Izquierda Unida.
 
-\hypertarget{disproporcionalidad-6}{%
-\subsubsection{Disproporcionalidad}\label{disproporcionalidad-6}}
+\hypertarget{disproporcionalidad-7}{%
+\subsubsection{Disproporcionalidad}\label{disproporcionalidad-7}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-123-1} \end{center}
 
@@ -2236,6 +2245,8 @@ métodos}\label{comparativa-entre-muxe9todos-8}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-131-2} \end{center}
 
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-131-3} \end{center}
+
 En estas elecciones del año 2004 volvemos a ver unas elecciones con un
 claro bipartidismo y con una diferencia de escaños entre partidos cada
 vez menor, en estas elecciones el partido más votado cambia y el
@@ -2250,8 +2261,8 @@ en el caso de optar por el método Danish, en cambio el partido más
 castigado por el método D´Hondt, Izquierda Unida, hasta podría ver
 duplicado o triplicado su presencia en el congreso.
 
-\hypertarget{disproporcionalidad-7}{%
-\subsubsection{Disproporcionalidad}\label{disproporcionalidad-7}}
+\hypertarget{disproporcionalidad-8}{%
+\subsubsection{Disproporcionalidad}\label{disproporcionalidad-8}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-132-1} \end{center}
 
@@ -2281,6 +2292,8 @@ métodos}\label{comparativa-entre-muxe9todos-9}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-140-2} \end{center}
 
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-140-3} \end{center}
+
 En estos comicios del año 2008 no hay diferencias significativas en
 términos de escaños, sigue un claro bipartidismo con dos partidos
 hegemónicos, en primer lugar el más votado en estas elecciones que sigue
@@ -2297,8 +2310,8 @@ el partido más perjudicado sigue siendo Izquierda Unida que podría en
 este año hasta mas que quintuplicar su presencia en el congreso de haber
 optado por el método Danish.
 
-\hypertarget{disproporcionalidad-8}{%
-\subsubsection{Disproporcionalidad}\label{disproporcionalidad-8}}
+\hypertarget{disproporcionalidad-9}{%
+\subsubsection{Disproporcionalidad}\label{disproporcionalidad-9}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-141-1} \end{center}
 
@@ -2330,6 +2343,8 @@ métodos}\label{comparativa-entre-muxe9todos-10}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-149-2} \end{center}
 
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-149-3} \end{center}
+
 Este año 2011 podemos considerarlo como el primer año en el que aunque
 siga sucediendo un claro bipartidismo empiezan a surgir partidos
 medianos con cada vez más presencia en el congreso, en este año es la
@@ -2352,8 +2367,8 @@ la diferencia de escaños a la mitad pero la diferencia más notoria está
 en los partidos medianos UPyD y IU, que pasarían de 5 a 41 escaños y de
 11 a 54 escaños respectivamente.
 
-\hypertarget{disproporcionalidad-9}{%
-\subsubsection{Disproporcionalidad}\label{disproporcionalidad-9}}
+\hypertarget{disproporcionalidad-10}{%
+\subsubsection{Disproporcionalidad}\label{disproporcionalidad-10}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-150-1} \end{center}
 
@@ -2389,6 +2404,8 @@ métodos}\label{comparativa-entre-muxe9todos-11}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-158-2} \end{center}
 
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-158-3} \end{center}
+
 En estas elecciones del 2014 ya vemos como habíamos predicho en las
 anteriores que el bipartidismo que veíamos omnipresente en todas las
 elecciones anteriores ahora ya no ocurre, es el primer año en el que se
@@ -2408,8 +2425,8 @@ supondría un cambio significativo. El partido más perjudicado este año
 vuelve a ser Izquierda Unida, que podría pasar de obtener 2 escaños con
 el método D´Hondt a 11 escaños con el Danish.
 
-\hypertarget{disproporcionalidad-10}{%
-\subsubsection{Disproporcionalidad}\label{disproporcionalidad-10}}
+\hypertarget{disproporcionalidad-11}{%
+\subsubsection{Disproporcionalidad}\label{disproporcionalidad-11}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-159-1} \end{center}
 
@@ -2442,6 +2459,8 @@ métodos}\label{comparativa-entre-muxe9todos-12}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-167-2} \end{center}
 
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-167-3} \end{center}
+
 En las elecciones del año 2016 vemos como se va consolidando el modelo
 de las anteriores elecciones, con dos grandes partidos y dos partidos
 medianos. La fuerza política más votada este año es el \emph{Partido
@@ -2455,8 +2474,8 @@ cambia significativamente el reparto de escaños, es notorio que en este
 año el PSOE obtenga casi los mismos votos independientemente del método
 utilizado.
 
-\hypertarget{disproporcionalidad-11}{%
-\subsubsection{Disproporcionalidad}\label{disproporcionalidad-11}}
+\hypertarget{disproporcionalidad-12}{%
+\subsubsection{Disproporcionalidad}\label{disproporcionalidad-12}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-168-1} \end{center}
 
@@ -2489,6 +2508,8 @@ métodos}\label{comparativa-entre-muxe9todos-13}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-176-2} \end{center}
 
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-176-3} \end{center}
+
 En estas elecciones de Abril de 2019 vemos como ya no existe
 bipartidismo, este año podemos agrupar a los partidos políticos en
 cuatro categorías, la primera en donde hay un partido con muchos votos
@@ -2505,8 +2526,8 @@ partido que se vería más beneficiado sería Vox seguido de Ciudadanos,
 partido que superaría en escaños al PP y se convertiría en la segunda
 fuerza en el hemiciclo.
 
-\hypertarget{disproporcionalidad-12}{%
-\subsubsection{Disproporcionalidad}\label{disproporcionalidad-12}}
+\hypertarget{disproporcionalidad-13}{%
+\subsubsection{Disproporcionalidad}\label{disproporcionalidad-13}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-177-1} \end{center}
 
@@ -2542,6 +2563,8 @@ métodos}\label{comparativa-entre-muxe9todos-14}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-185-2} \end{center}
 
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-185-3} \end{center}
+
 En esta gráfica de las elecciones de Noviembre de 2019 podemos observar
 una ligera recuperación del bipartidismo en donde los dos principales
 partidos vuelven a aumentar el número de escaños obtenidos y también
@@ -2556,8 +2579,8 @@ más proporcional como pueda ser el Danish, que son los partidos de
 Podemos que pasarían de obtener 26 escaños a 40 y el partido Ciudadanos
 que pasaría a duplicar su presencia de 10 escaños a 23.
 
-\hypertarget{disproporcionalidad-13}{%
-\subsubsection{Disproporcionalidad}\label{disproporcionalidad-13}}
+\hypertarget{disproporcionalidad-14}{%
+\subsubsection{Disproporcionalidad}\label{disproporcionalidad-14}}
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-186-1} \end{center}
 
@@ -2617,8 +2640,6 @@ deberíamos plantear un cambio de método en primer lugar al Sainte-Lague
 o al Danish, ambos métodos son casi idénticos en términos de
 proporcionalidad pero el Sainte-Lague tiene una mejor característica que
 el Danish, que reparte los escaños de forma que es más fácil gobernar.
-
---\textgreater{}
 
 \FloatBarrier
 \cleardoublepage
