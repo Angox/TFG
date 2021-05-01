@@ -2425,7 +2425,11 @@ ggplot(Disproporc, aes(reorder(m, -c), c)) +
 
 En estas elecciones de 1996 se observa una disproporción similar a las elecciones anteriores, no hay novedades significativas en el comportamiento de las provincias.  
 
+<<<<<<< HEAD
 Este año en el caso de la desproporción media según el método de reparto vemos que hay diferencias en los métodos más desproporcionales respecto a la anterior elección, el método más desproporcionado vuelve a ser el Imperiali. Los más desproporcionados este año son  el método anteriormente citado, Imperiali seguido muy de cerca por los métodos Adams y de Huntington-Hill, en el caso de los más proporcionados cambia, el método Danish pasa a un segundo puesto superado por el método Sainte-Lague.
+=======
+Este año en el caso de la disproporcionalidad media según el método de reparto vemos que hay diferencias en los métodos más disproporcionales respecto a la anterior elección, el método más disproporcionado vuelve a ser el Imperiali. Los más disproporcionados este año son  el método anteriormente citado, Imperiali seguido muy de cerca por los métodos Adams y de Huntington-Hill, en el caso de los más proporcionados cambia, el método Danish pasa a un segundo puesto superado por el método Sainte-Lague.
+>>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
 
 
 ## Año 2000
