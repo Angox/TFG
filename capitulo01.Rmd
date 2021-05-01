@@ -104,7 +104,7 @@ A lo largo del trabajo trataremos indistintamente ambos términos.
 
 El origen de el sistema electoral español se remonta a principios del siglo XIX, en una España invadida por el ejército de Napoleón. El vacío de poder facilitó la convocatoria de una asamblea nacional, las cortes, en la ciudad de Cádiz con diputados venidos de todas las regiones tanto de la península como de ultramar. La asamblea concluyó con la promulgación de la constitución de 1812.
 
-En la instrucción de 1810 comienzan a a parecer los mecanismos para elegir a los representantes tanto parroquiales, de partido y de provincia. La fórmula electoral escogida fue la mayoritaria. El sufragio es masculino universal e indirecto, aunque se requería que los electores ejerciesen algún tipo de industria.
+En la instrucción de 1810 comienzan a aparecer los mecanismos para elegir a los representantes tanto parroquiales, de partido y de provincia. La fórmula electoral escogida fue la mayoritaria. El sufragio es masculino universal e indirecto, aunque se requería que los electores ejerciesen algún tipo de industria.
 Ya en la constitución de 1812 se reguló todo el proceso electoral en los artículos 27 a 103, se determinó una distribución de 1 diputado por cada 70.000 personas.
 
 Formalmente las leyes que regulan el derecho de sufragio se remontan a 1837, estableciéndose en el año 1869 el sufragio universal consolidado en 1907 por ley.
@@ -115,9 +115,12 @@ El sistema actual español se rige bajo tres normas, en primer lugar la misma co
 
 ### Descripción del sistema Electoral Español
 
-La descripción del sistema Electoral Español se encuentra el la LOREG (Ley Orgánica del Régimen Electoral Español)
-En el caso de España debemos diferenciar la elección de Diputados y Senadores, cada provincia es considerada como una circunscripción electoral. Como excepción a la regla las ciudades de Ceuta y Melilla son consideradas cada una de ellas como una circunscripción electoral.
-En el artículo 161.2 se nos añade otra excepción para la elección de Senadores en donde se consideran circunscripciones las siguientes islas o agrupaciones de islas: Mallorca, Menorca, Ibiza-Formentera, Gran Canaria, Fuerteventura, Lanzarote, Tenerife, Hierro, Gomera y La Palma.
+La descripción del sistema Electoral Español se encuentra el la LOREG (Ley Orgánica del Régimen Electoral Español).  
+
+En el caso de España debemos diferenciar la elección de Diputados y Senadores, cada provincia es considerada como una circunscripción electoral. Como excepción a la regla las ciudades de Ceuta y Melilla son consideradas cada una de ellas como una circunscripción electoral.  
+
+En el artículo 161.2 se nos añade otra excepción para la elección de Senadores en donde se consideran circunscripciones las siguientes islas o agrupaciones de islas: Mallorca, Menorca, Ibiza-Formentera, Gran Canaria, Fuerteventura, Lanzarote, Tenerife, Hierro, Gomera y La Palma.  
+
 
 ### Congreso
 
@@ -172,9 +175,7 @@ En el artículo 161.2 se nos añade otra excepción para la elección de Senador
 
 # Métodos de reparto de escaños
 
-A continuación presentaremos los distintos métodos de reparto de escaños
 
--Paquete R estadístico Electoral-
 
 ## Método de cifra repartidora
 
@@ -308,7 +309,7 @@ $Cociente = \frac{Total Votos}{Total Escaños}$
   
 ### Cociente Droop
 
-Algunos países emplean en cociente son Australia Irlanda o Malta, entre otros.
+Algunos países que emplean este cociente son Australia Irlanda o Malta, entre otros.
 Es más favorable a los partidos mayoritarios que el obtenido mediante el sistema Hare, aunque no favorece tanto como el sistema Imperiali.
 
 
@@ -340,7 +341,7 @@ Si se eligen n escaños para un cuerpo colegiado, y se emiten m votos válidos, 
 ${q={\frac {m}{n+2}}.}$
 con q aproximado al entero más próximo.
 
-Si lai-ésima lista de I listas inscritas obtiene ${m_{i}}$ votos, esta lista tendrá ${e_{i}}$ escaños por cociente y ${r_{i}}$ votos por residuo mediante la fórmula: ${m_{i}=qe_{i}+r_{i}}$.
+Si la i-ésima lista de I listas inscritas obtiene ${m_{i}}$ votos, esta lista tendrá ${e_{i}}$ escaños por cociente y ${r_{i}}$ votos por residuo mediante la fórmula: ${m_{i}=qe_{i}+r_{i}}$.
 
 ${e_{i}=\left\lfloor {\frac {m_{i}}{q}}\right\rfloor ,r_{i}=m_{i}-qe_{i}}$
 
@@ -488,9 +489,9 @@ $\textrm{Cuota} = \frac{Censo Distrito}{Censo Total}$
 
 Vamos a simular distintos escenarios para analizarlos según los distintos métodos de reparto de escaños. 
 
-Los sistemas que analizaremos en este análisis emprírico serán, dentro de los métodos de promedio mayor, el método D´Hondt, Método Saint-Lague y el método de saint lague modificado. Dentro de los métodos de resto mayor analizaremos el método Hagenbach-Bischoff, Droop, Hare e imperiali. Dentro de los métodos mayoritario analizaremos únicamente el método de mayoría simple.
+Los sistemas que analizaremos en este análisis emprírico serán, dentro de los métodos de promedio mayor, el método D´Hondt, Método Saint-Lague y el método de Saint-Lague modificado. Dentro de los métodos de resto mayor analizaremos el método Hagenbach-Bischoff, Droop, Hare e Imperiali. Dentro de los métodos mayoritario analizaremos únicamente el método de mayoría simple.
 
-Generaremos datos ficticios de partidos, que irán desde 2 posibles partidos hasta 100 partidos, número de escaños que irán desde 1 posible escaño a repartir a 400 escaños a repartir y según diferentes densidades desde una máxima desigualdad en votos entre los partidos hasta una máxima igualdad entre los votos entre partidos.
+Generaremos datos ficticios de partidos, que irán desde 2 posibles partidos hasta 100 partidos, número de escaños que irán desde 1 posible escaño a repartir a 400 escaños a repartir y según diferentes densidades desde una máxima desigualdad en votos entre los partidos hasta una máxima igualdad de votos entre partidos.
 
 
 
@@ -853,7 +854,7 @@ disproporcionalidad <-
   }
 
 
-disproporcionalidad(s = resul1[, 1], v = votos)
+#disproporcionalidad(s = resul1[, 1], v = votos)
 
 dis <- apply(X = resul1[, 1:500], MARGIN = 2, FUN = function(x) disproporcionalidad(s = x, v = votos))
 
@@ -1100,7 +1101,7 @@ disproporcionalidad <-
   }
 
 
-disproporcionalidad(s = resul1[, 1], v = votos)
+#disproporcionalidad(s = resul1[, 1], v = votos)
 
 dis <- apply(X = resul1[, 1:500], MARGIN = 2, FUN = function(x) disproporcionalidad(s = x, v = votos))
 
@@ -1346,7 +1347,7 @@ disproporcionalidad <-
   }
 
 
-disproporcionalidad(s = resul1[, 1], v = votos)
+#disproporcionalidad(s = resul1[, 1], v = votos)
 
 dis <- apply(X = resul1[, 1:500], MARGIN = 2, FUN = function(x) disproporcionalidad(s = x, v = votos))
 
@@ -1592,7 +1593,7 @@ disproporcionalidad <-
   }
 
 
-disproporcionalidad(s = resul1[, 1], v = votos)
+#disproporcionalidad(s = resul1[, 1], v = votos)
 
 dis <- apply(X = resul1[, 1:500], MARGIN = 2, FUN = function(x) disproporcionalidad(s = x, v = votos))
 
@@ -1842,7 +1843,7 @@ disproporcionalidad <-
   }
 
 
-disproporcionalidad(s = resul1[, 1], v = votos)
+#disproporcionalidad(s = resul1[, 1], v = votos)
 
 dis <- apply(X = resul1[, 1:500], MARGIN = 2, FUN = function(x) disproporcionalidad(s = x, v = votos))
 
@@ -2090,7 +2091,7 @@ disproporcionalidad <-
   }
 
 
-disproporcionalidad(s = resul1[, 1], v = votos)
+#disproporcionalidad(s = resul1[, 1], v = votos)
 
 dis <- apply(X = resul1[, 1:500], MARGIN = 2, FUN = function(x) disproporcionalidad(s = x, v = votos))
 
