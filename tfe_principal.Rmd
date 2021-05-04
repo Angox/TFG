@@ -34,11 +34,7 @@ output:
       #after_body: latex/latex_antes_enddoc.tex
 ---
 
-<<<<<<< HEAD
-<!-- --- -->
-=======
----
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
+
 <!-- nocite: '@*' -->
 <!-- | -->
 <!--   @Luque2017,@Luque2019,@RStudio,@R-base, -->

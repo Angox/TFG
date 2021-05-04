@@ -474,6 +474,11 @@ disprop_danish <- disprop
 ```{r}
 
 library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(ggpol)
+
+
 fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
 fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
@@ -482,7 +487,7 @@ fe <- full_join(fe, resul_huntington, by = "Partidos")
 fe <- full_join(fe, resul_imperiali, by = "Partidos")
 colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
 
-library(tidyr)
+
 
 fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
   key = "Metodo", value = "Asientos"
@@ -494,7 +499,7 @@ filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
 fe <- as.data.frame(fe1)
 fe <- fe[!fe$Partidos %in% filtro, ]
 
-library(ggplot2)
+
 
 filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
 fe <- as.data.frame(fe1)
@@ -520,7 +525,7 @@ ggplot(fe, aes(Partidos, Metodo)) +
   guides(fill = "none")
 
 
-library(ggpol)
+
 
 ggplot(fe) + 
   geom_parliament(aes(seats = Asientos, fill = Partidos), color = "black") + 
@@ -794,7 +799,7 @@ disprop_danish <- disprop
 
 ```{r}
 
-library(dplyr)
+
 fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
 fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
@@ -803,7 +808,7 @@ fe <- full_join(fe, resul_huntington, by = "Partidos")
 fe <- full_join(fe, resul_imperiali, by = "Partidos")
 colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
 
-library(tidyr)
+
 
 fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
   key = "Metodo", value = "Asientos"
@@ -815,7 +820,7 @@ filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
 fe <- as.data.frame(fe1)
 fe <- fe[!fe$Partidos %in% filtro, ]
 
-library(ggplot2)
+
 
 filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
 fe <- as.data.frame(fe1)
@@ -1100,7 +1105,7 @@ disprop_danish <- disprop
 
 ```{r}
 
-library(dplyr)
+
 fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
 fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
@@ -1109,7 +1114,7 @@ fe <- full_join(fe, resul_huntington, by = "Partidos")
 fe <- full_join(fe, resul_imperiali, by = "Partidos")
 colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
 
-library(tidyr)
+
 
 fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
   key = "Metodo", value = "Asientos"
@@ -1121,7 +1126,7 @@ filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
 fe <- as.data.frame(fe1)
 fe <- fe[!fe$Partidos %in% filtro, ]
 
-library(ggplot2)
+
 
 filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
 fe <- as.data.frame(fe1)
@@ -1407,7 +1412,7 @@ disprop_danish <- disprop
 
 ```{r}
 
-library(dplyr)
+
 fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
 fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
@@ -1416,7 +1421,7 @@ fe <- full_join(fe, resul_huntington, by = "Partidos")
 fe <- full_join(fe, resul_imperiali, by = "Partidos")
 colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
 
-library(tidyr)
+
 
 fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
   key = "Metodo", value = "Asientos"
@@ -1428,7 +1433,7 @@ filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
 fe <- as.data.frame(fe1)
 fe <- fe[!fe$Partidos %in% filtro, ]
 
-library(ggplot2)
+
 
 filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
 fe <- as.data.frame(fe1)
@@ -1714,7 +1719,7 @@ disprop_danish <- disprop
 
 ```{r}
 
-library(dplyr)
+
 fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
 fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
@@ -1723,7 +1728,7 @@ fe <- full_join(fe, resul_huntington, by = "Partidos")
 fe <- full_join(fe, resul_imperiali, by = "Partidos")
 colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
 
-library(tidyr)
+
 
 fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
   key = "Metodo", value = "Asientos"
@@ -1735,7 +1740,7 @@ filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
 fe <- as.data.frame(fe1)
 fe <- fe[!fe$Partidos %in% filtro, ]
 
-library(ggplot2)
+
 
 filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
 fe <- as.data.frame(fe1)
@@ -2022,7 +2027,7 @@ disprop_danish <- disprop
 
 ```{r}
 
-library(dplyr)
+
 fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
 fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
@@ -2031,7 +2036,7 @@ fe <- full_join(fe, resul_huntington, by = "Partidos")
 fe <- full_join(fe, resul_imperiali, by = "Partidos")
 colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
 
-library(tidyr)
+
 
 fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
   key = "Metodo", value = "Asientos"
@@ -2043,7 +2048,7 @@ filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
 fe <- as.data.frame(fe1)
 fe <- fe[!fe$Partidos %in% filtro, ]
 
-library(ggplot2)
+
 
 filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
 fe <- as.data.frame(fe1)
@@ -2329,7 +2334,7 @@ disprop_danish <- disprop
 
 ```{r}
 
-library(dplyr)
+
 fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
 fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
@@ -2338,7 +2343,7 @@ fe <- full_join(fe, resul_huntington, by = "Partidos")
 fe <- full_join(fe, resul_imperiali, by = "Partidos")
 colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
 
-library(tidyr)
+
 
 fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
   key = "Metodo", value = "Asientos"
@@ -2350,7 +2355,7 @@ filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
 fe <- as.data.frame(fe1)
 fe <- fe[!fe$Partidos %in% filtro, ]
 
-library(ggplot2)
+
 
 filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
 fe <- as.data.frame(fe1)
@@ -2637,7 +2642,7 @@ disprop_danish <- disprop
 
 ```{r}
 
-library(dplyr)
+
 fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
 fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
@@ -2646,7 +2651,7 @@ fe <- full_join(fe, resul_huntington, by = "Partidos")
 fe <- full_join(fe, resul_imperiali, by = "Partidos")
 colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
 
-library(tidyr)
+
 
 fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
   key = "Metodo", value = "Asientos"
@@ -2658,7 +2663,7 @@ filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
 fe <- as.data.frame(fe1)
 fe <- fe[!fe$Partidos %in% filtro, ]
 
-library(ggplot2)
+
 
 filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
 fe <- as.data.frame(fe1)
@@ -2945,7 +2950,7 @@ disprop_danish <- disprop
 
 ```{r}
 
-library(dplyr)
+
 fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
 fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
@@ -2954,7 +2959,7 @@ fe <- full_join(fe, resul_huntington, by = "Partidos")
 fe <- full_join(fe, resul_imperiali, by = "Partidos")
 colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
 
-library(tidyr)
+
 
 fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
   key = "Metodo", value = "Asientos"
@@ -2966,7 +2971,7 @@ filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
 fe <- as.data.frame(fe1)
 fe <- fe[!fe$Partidos %in% filtro, ]
 
-library(ggplot2)
+
 
 filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
 fe <- as.data.frame(fe1)
@@ -3253,7 +3258,7 @@ disprop_danish <- disprop
 
 ```{r}
 
-library(dplyr)
+
 fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
 fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
@@ -3262,7 +3267,7 @@ fe <- full_join(fe, resul_huntington, by = "Partidos")
 fe <- full_join(fe, resul_imperiali, by = "Partidos")
 colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
 
-library(tidyr)
+
 
 fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
   key = "Metodo", value = "Asientos"
@@ -3274,7 +3279,7 @@ filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
 fe <- as.data.frame(fe1)
 fe <- fe[!fe$Partidos %in% filtro, ]
 
-library(ggplot2)
+
 
 filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
 fe <- as.data.frame(fe1)
@@ -3560,7 +3565,7 @@ disprop_danish <- disprop
 
 ```{r}
 
-library(dplyr)
+
 fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
 fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
@@ -3569,7 +3574,7 @@ fe <- full_join(fe, resul_huntington, by = "Partidos")
 fe <- full_join(fe, resul_imperiali, by = "Partidos")
 colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
 
-library(tidyr)
+
 
 fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
   key = "Metodo", value = "Asientos"
@@ -3581,7 +3586,7 @@ filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
 fe <- as.data.frame(fe1)
 fe <- fe[!fe$Partidos %in% filtro, ]
 
-library(ggplot2)
+
 
 filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
 fe <- as.data.frame(fe1)
@@ -3870,7 +3875,7 @@ disprop_danish <- disprop
 
 ```{r}
 
-library(dplyr)
+
 fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
 fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
@@ -3879,7 +3884,7 @@ fe <- full_join(fe, resul_huntington, by = "Partidos")
 fe <- full_join(fe, resul_imperiali, by = "Partidos")
 colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
 
-library(tidyr)
+
 
 fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
   key = "Metodo", value = "Asientos"
@@ -3891,7 +3896,7 @@ filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
 fe <- as.data.frame(fe1)
 fe <- fe[!fe$Partidos %in% filtro, ]
 
-library(ggplot2)
+
 
 filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
 fe <- as.data.frame(fe1)
@@ -4177,7 +4182,7 @@ disprop_danish <- disprop
 
 ```{r}
 
-library(dplyr)
+
 fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
 fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
@@ -4186,7 +4191,7 @@ fe <- full_join(fe, resul_huntington, by = "Partidos")
 fe <- full_join(fe, resul_imperiali, by = "Partidos")
 colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
 
-library(tidyr)
+
 
 fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
   key = "Metodo", value = "Asientos"
@@ -4198,7 +4203,7 @@ filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
 fe <- as.data.frame(fe1)
 fe <- fe[!fe$Partidos %in% filtro, ]
 
-library(ggplot2)
+
 
 filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
 fe <- as.data.frame(fe1)
@@ -4484,7 +4489,7 @@ disprop_danish <- disprop
 
 ```{r}
 
-library(dplyr)
+
 fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
 fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
@@ -4493,7 +4498,7 @@ fe <- full_join(fe, resul_huntington, by = "Partidos")
 fe <- full_join(fe, resul_imperiali, by = "Partidos")
 colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
 
-library(tidyr)
+
 
 fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
   key = "Metodo", value = "Asientos"
@@ -4505,7 +4510,7 @@ filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
 fe <- as.data.frame(fe1)
 fe <- fe[!fe$Partidos %in% filtro, ]
 
-library(ggplot2)
+
 
 filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
 fe <- as.data.frame(fe1)
@@ -4793,7 +4798,7 @@ disprop_danish <- disprop
 
 ```{r}
 
-library(dplyr)
+
 fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
 fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
@@ -4802,7 +4807,7 @@ fe <- full_join(fe, resul_huntington, by = "Partidos")
 fe <- full_join(fe, resul_imperiali, by = "Partidos")
 colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
 
-library(tidyr)
+
 
 fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
   key = "Metodo", value = "Asientos"
@@ -4814,7 +4819,7 @@ filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
 fe <- as.data.frame(fe1)
 fe <- fe[!fe$Partidos %in% filtro, ]
 
-library(ggplot2)
+
 
 filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
 fe <- as.data.frame(fe1)

@@ -179,9 +179,9 @@ En el artículo 161.2 se nos añade otra excepción para la elección de Senador
 
 ## Método de los promedios mayores 
 
--Rev- Sistema utilizado para repartir los escaños de manera no puramente proporcional al número de votos obtenidos por las diferentes candidaturas. El método trata de asignar los escaños proporcionalmente al número de votos recibidos, es un sistema que permite a partidos con pocos votos estar representados.
-
-Existen dos métodos basados en la cifra repartidora que son habitualmente utilizados, y que se encuentran también dentro de los llamados métodos de los restos mayores, éstos son el método D`Hondt y el Método Sainte-Laguë.
+  El método de los promedios mayores son un conjunto de fórmulas electorales utilizadas para asignar escaños en sistemas de representación proporcional por listas electorales. El número de votos obtenidos por cada partido se divide sucesivamente por una serie de divisores. Esto produce una tabla de cocientes, o promedios, con una fila para cada divisor y una columna para cada partido. El enésimo escaño se asigna al partido cuya columna contiene la enésima entrada más grande en esta tabla, hasta el número total de escaños disponibles. 
+  
+Dentro de los llamados métodos de los restos mayores, se encuentran el método D`Hondt, el Método Sainte-Laguë, Imperiali, Huntington–Hill, Danish y Adams.
 
 ### Ley D´Hondt
 
@@ -276,7 +276,7 @@ El método danés[^1] se utiliza en las elecciones danesas para asignar los esca
 
 El método de Adams fue concebido por John Quincy Adams para distribuir los escaños de la Cámara entre los distintos estados. Otorga un escaño al partido que tiene más votos por escaño antes de que se agregue el escaño.
 
-El método de Adams usa $n-1$ como divisor. La secuencia de los cinco primeros divisores serían (0,1,2,3,4). Al igual que el método Huntington-Hill, esto da como resultado un valor de 0 para los primeros escaños que se designarán para cada partido, lo que da como resultado un promedio de ∞. 
+El método de Adams usa $n-1$ como divisor. La secuencia de los cinco primeros divisores serían (0,1,2,3,4). Al igual que el método Huntington-Hill, esto da como resultado un valor de 0 para los primeros escaños que se designarán para cada partido, lo que da como resultado un promedio de $\infty$. 
 
 Sin umbral, todos los partidos que han recibido al menos un voto, también reciben un escaño, con la obvia excepción de los casos en los que hay más partidos que escaños. Esta propiedad puede ser deseable, por ejemplo, al distribuir escaños entre distritos electorales. Siempre que haya al menos tantos escaños como distritos, todos los distritos estarán representados. En una elección de representación proporcional por lista de partidos, puede resultar en que partidos muy pequeños obtengan escaños. Las violaciones de la regla de la cuota en el método puro de Adams son muy comunes. Estos problemas pueden resolverse mediante la introducción de un umbral electoral.
 
