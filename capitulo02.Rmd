@@ -1196,7 +1196,7 @@ ggplot(Disproporc, aes(reorder(m, -c), c)) +
 
 Según la gráfica de desproporción por comunidades es un año en el que generalmente no hay mucha diferencia de desproporción entre ellas, este año las comunidades más desproporcionadas son la comunidad Foral de Navarra y Cantabria mientras que las comunidades más proporcionadas son la comunidad de Madrid y la región de Murcia.
 
-Según la disproporción media, se reconocen tres grupos distintos, un grupo muy desproporcionado, con el método Imperiali como el más desproporcionado, otro grupo medio en donde se encontraría el método D´Hondt y un último grupo el cual sería el más proporcionado en el que se encontraría el método Danish y el Saint-Lague. 
+Según la desproporción media, se reconocen tres grupos distintos, un grupo muy desproporcionado, con el método Imperiali como el más desproporcionado, otro grupo medio en donde se encontraría el método D´Hondt y un último grupo el cual sería el más proporcionado en el que se encontraría el método Danish y el Saint-Lague. 
 
 ## Año 1986
 
@@ -1501,7 +1501,7 @@ ggplot(Disproporc, aes(reorder(m, -c), c)) +
   guides(fill="none")
 ```
 
-Este año en el caso de la disproporción por comunidades podemos observar que aumenta la diferencia respecto a las pasadas elecciones, una de las comunidades más proporcionadas es la comunidad de Asturias mientras que Aragón pasa a ser ahora una de las que más desproporción presenta. En los extremos no hay novedades, Madrid sigue siendo la más proporcionada y las ciudades de Ceuta y Melilla las que menos proporcionadas resultan.
+Este año en el caso de la desproporción por comunidades podemos observar que aumenta la diferencia respecto a las pasadas elecciones, una de las comunidades más proporcionadas es la comunidad de Asturias mientras que Aragón pasa a ser ahora una de las que más desproporción presenta. En los extremos no hay novedades, Madrid sigue siendo la más proporcionada y las ciudades de Ceuta y Melilla las que menos proporcionadas resultan.
 
 Según el método de reparto este año el método Imperiali es el más desproporcionado con diferencia, los demás métodos se podrían en un mismo grupo, en donde el método más proporcionado este año es el método Danish.
 
@@ -1807,9 +1807,9 @@ ggplot(Disproporc, aes(reorder(m, -c), c)) +
   guides(fill="none")
 ```
 
-Este año aunmenta ligeramente la diferencia de disproporción entre comunidades, sin encontrar novedades en las comunidades más proporcionales, Madrid, y las más desproporcionadas, las ciudades de Ceuta y Melilla. Observando los métodos de reparto hay dos grupos diferenciados, uno en el que se encuentran el método Adams y el método de huntington-Hill, en los cuales no se encuentran comunidades con picos de disproporción pero por el lado contrario su disproporción media es alta, y otro grupo que serían los restantes métodos los cuales todos presentan unos mismos picos máximos como míninos.
+Este año aunmenta ligeramente la diferencia de desproporción entre comunidades, sin encontrar novedades en las comunidades más proporcionales, Madrid, y las más desproporcionadas, las ciudades de Ceuta y Melilla. Observando los métodos de reparto hay dos grupos diferenciados, uno en el que se encuentran el método Adams y el método de huntington-Hill, en los cuales no se encuentran comunidades con picos de desproporción pero por el lado contrario su desproporción media es alta, y otro grupo que serían los restantes métodos los cuales todos presentan unos mismos picos máximos como míninos.
 
-Estas elecciones de 1989 la desproporción media se agrupa en tres grupos, alta, media y baja disproporción, el más desproporcionado vuelve a ser el método Imperiali, el método D´Hondt sigue en el grupo medio y el método más proporcionado vuelve a ser el Danish aunque le sigue muy cerca el método Sainte-Lague.
+Estas elecciones de 1989 la desproporción media se agrupa en tres grupos, alta, media y baja desproporción, el más desproporcionado vuelve a ser el método Imperiali, el método D´Hondt sigue en el grupo medio y el método más proporcionado vuelve a ser el Danish aunque le sigue muy cerca el método Sainte-Lague.
 
 
 
@@ -2116,7 +2116,7 @@ ggplot(Disproporc, aes(reorder(m, -c), c)) +
   guides(fill="none")
 ```
 
-En estas elecciones se observan más picos de disproporción en comparación con las elecciones anteriores, especialmente aumenta su disproporción el Pais Vasco y Aragón, no hay novedades en los máximos ni en los mínimos.
+En estas elecciones se observan más picos de desproporción en comparación con las elecciones anteriores, especialmente aumenta su desproporción el Pais Vasco y Aragón, no hay novedades en los máximos ni en los mínimos.
 
 Este año en el caso de la desproporción media según el método de reparto vemos que hay diferencias en los métodos más desproporcionales, usualmente el método más desproporcionado ha sido el Imperiali, en estas elecciones esto cambia, de hecho mejora en dos puestos. Los más desproporcionados este año entonces son los métodos Adams y de Huntington-Hill, en el caso de los más proporcionados no hay novedades, sigue siendo el método Danish seguido muy de cerca por el Sainte-Lague.
 
@@ -2423,13 +2423,9 @@ ggplot(Disproporc, aes(reorder(m, -c), c)) +
 ```
 
 
-En estas elecciones de 1996 se observa una disproporción similar a las elecciones anteriores, no hay novedades significativas en el comportamiento de las provincias.  
+En estas elecciones de 1996 se observa una desproporción similar a las elecciones anteriores, no hay novedades significativas en el comportamiento de las provincias.  
 
-<<<<<<< HEAD
-Este año en el caso de la desproporción media según el método de reparto vemos que hay diferencias en los métodos más desproporcionales respecto a la anterior elección, el método más desproporcionado vuelve a ser el Imperiali. Los más desproporcionados este año son  el método anteriormente citado, Imperiali seguido muy de cerca por los métodos Adams y de Huntington-Hill, en el caso de los más proporcionados cambia, el método Danish pasa a un segundo puesto superado por el método Sainte-Lague.
-=======
-Este año en el caso de la disproporcionalidad media según el método de reparto vemos que hay diferencias en los métodos más disproporcionales respecto a la anterior elección, el método más disproporcionado vuelve a ser el Imperiali. Los más disproporcionados este año son  el método anteriormente citado, Imperiali seguido muy de cerca por los métodos Adams y de Huntington-Hill, en el caso de los más proporcionados cambia, el método Danish pasa a un segundo puesto superado por el método Sainte-Lague.
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
+Este año en el caso de la desproporción media según el método de reparto vemos que hay diferencias en los métodos con más desproporción respecto a la anterior elección, el método más desproporcionado vuelve a ser el Imperiali. Los más desproporcionados este año son el método anteriormente citado, Imperiali, seguido muy de cerca por los métodos Adams y de Huntington-Hill, en el caso de los más proporcionados cambia, el método Danish pasa a un segundo puesto superado por el método Sainte-Lague.
 
 
 ## Año 2000
@@ -2699,7 +2695,7 @@ ggplot(fe) +
 ```
 
 En las elecciones del año 2000 el partido más votado vuelve a ser el *Partido Popular* seguido del *PSOE*, en estas elecciones según el método D´Hondt utilizado en España el PP conseguiría una mayoría absoluta holgada, es una elección con un claro bipartidismo donde se podría decir que no existen partidos medianos. 
-Si optasemos por otro método de reparto más proporcional como puede ser el método Danish o el Sainte-Lague el PP no alcanzaría la mayoría absoluta, se quedaría a muy pocos escaños de alcanzarla, en cambio veríamos a muchos partidos pequeños con menos de tres votos casi duplicar su presencia en escaños. El partido más castigado por utilizar el método D´Hondt en estas elecciones sigue siendo Izquierda Unida.
+Si optásemos por otro método de reparto más proporcional como puede ser el método Danish o el Sainte-Lague el PP no alcanzaría la mayoría absoluta, se quedaría a muy pocos escaños de alcanzarla, en cambio veríamos a muchos partidos pequeños con menos de tres votos casi duplicar su presencia en escaños. El partido más castigado por utilizar el método D´Hondt en estas elecciones sigue siendo Izquierda Unida.
 
 #### Desproporción
 ```{r}
@@ -2735,9 +2731,9 @@ ggplot(Disproporc, aes(reorder(m, -c), c)) +
   guides(fill="none")
 ```
 
-Observando la disproporción por comunidades no encontramos diferencias significativas respecto a las anteriores elecciones, es decir, tanto el método Adams como el Huntington-Hill tienen un comportamiento diferente respecto a los demás, siguen siendo los más despropocionados las ciudades de Ceuta y Melilla, y la más proporcionada la Comunidad de Madrid, este año es especialmente alta la disproporción de las Islas Baleares respecto a anteriores elecciones.
+Observando la desproporción por comunidades no encontramos diferencias significativas respecto a las anteriores elecciones, es decir, tanto el método Adams como el Huntington-Hill tienen un comportamiento diferente respecto a los demás, siguen siendo los más despropocionados las ciudades de Ceuta y Melilla, y la más proporcionada la Comunidad de Madrid, este año es especialmente alta la desproporción de las Islas Baleares respecto a anteriores elecciones.
 
-Si miramos la gráfica de la desproporción según el método de reparto se pueden agrupar los métodos en dos grupos, uno con gran desproporción en el que estarían incluidos los métodos Adams, Imperiali y Huntington-Hill, y el otro grupo restante con una disproporción media baja. Seguimos observando que el método D´Hont no es el mejor aunque en estas elecciones se puede considerar un método aceptable siendo el mejor método alternativo el Danish.
+Si miramos la gráfica de la desproporción según el método de reparto se pueden agrupar los métodos en dos grupos, uno con gran desproporción en el que estarían incluidos los métodos Adams, Imperiali y Huntington-Hill, y el otro grupo restante con una desproporción media baja. Seguimos observando que el método D´Hont no es el mejor aunque en estas elecciones se puede considerar un método aceptable siendo el mejor método alternativo el Danish.
 
 
 ## Año 2004
@@ -3044,7 +3040,7 @@ ggplot(Disproporc, aes(reorder(m, -c), c)) +
 ```
 
 Según el gráfico anterior por comunidades sigue la tónica general de las anteriores elecciones, únicamente podemos apreciar en estas elecciones una reducción de la disproporciorcionalidad entre comunidades, es decir, una menor diferencia de desproporción entre ellas.
-En el caso de agrupar la disproporción por métodos observamos que el método Imperiali vuelve a ser el más desproporcionado este año mientras que en la parte de los métodos mas proporcionados el método mejor sería el Sainte-Lague, el método utilizado en España sigue siendo un método que se encuentra en el medio, no siendo ni bueno ni malo.
+En el caso de agrupar la desproporción por métodos observamos que el método Imperiali vuelve a ser el más desproporcionado este año mientras que en la parte de los métodos mas proporcionados el método mejor sería el Sainte-Lague, el método utilizado en España sigue siendo un método que se encuentra en el medio, no siendo ni bueno ni malo.
 
 
 
@@ -3970,7 +3966,7 @@ ggplot(Disproporc, aes(reorder(m, -c), c)) +
 
 Según el gráfico por comunidades volvemos a ver un comportamiento claramente distinto de los demás de los métodos Adams y Huntington-Hill, es un año en el que la diferencia de desproporción entre las distintas comunidades aumentan.
 
-En el caso de la disproporción según el método de reparto este año tenemos nuevamente dos grupos difenrenciados, en un grupo con una desproporción alta estaría únicamente el método Imperiali y todos los métodos restantes se encontrarían en el grupo de desproporción baja, el mejor método este año es el Sainte-Lague y encontramos que el método utilizado en España es el segundo peor método posible, por lo tanto sería interesante este año utilizar otro método mejor.
+En el caso de la desproporción según el método de reparto este año tenemos nuevamente dos grupos difenrenciados, en un grupo con una desproporción alta estaría únicamente el método Imperiali y todos los métodos restantes se encontrarían en el grupo de desproporción baja, el mejor método este año es el Sainte-Lague y encontramos que el método utilizado en España es el segundo peor método posible, por lo tanto sería interesante este año utilizar otro método mejor.
 
 ## Año 2016
 
@@ -4276,7 +4272,7 @@ ggplot(Disproporc, aes(reorder(m, -c), c)) +
 ```
 
 En la desproporción por comunidades vemos el habitual comportamiento entre los métodos, con el método Adams y el Huntington-Hill comportándose diferente a los demás. Respecto a las diferencias de desproporción entre comunidades este año es especialmente similar el comportamiento entre los distintos métodos.
-En el gráfico en que comparamos los métodos de reparto el comportamiento es similar al anterior año, con un método muy desproporcional respecto a los demás, el método Imperiali, y los demás métodos muy similares entre ellos siendo el mejor el método de Sainte-Lague, el método utilizado en España, el D´Hondt, vuelve a ser el segundo peor por lo que cada vez es más necesario proponer un cambio de método de reparto a otro más proporcional.
+En el gráfico en que comparamos los métodos de reparto el comportamiento es similar al anterior año, con un método que es significativamente desproporcionado respecto a los demás, el método Imperiali, y los demás métodos muy similares entre ellos siendo el mejor el método de Sainte-Lague, el método utilizado en España, el D´Hondt, vuelve a ser el segundo peor por lo que cada vez es más necesario proponer un cambio de método de reparto a otro más proporcional.
 
 
 ## Año 2019, Abril
@@ -4545,7 +4541,7 @@ ggplot(fe) +
   legend.key.width = unit(0.2,"cm") ,legend.text = element_text(size=6, face="bold"))
 ```
 
-En estas elecciones de Abril de 2019 vemos como ya no existe bipartidismo, este año podemos agrupar a los partidos políticos en cuatro categorías, la primera en donde hay un partido con muchos votos con una gran diferencia de escaños respecto a los demás, que es el PSOE, un segundo grupo en donde se encontrarían dos partidos con un número medio-alto de escaños, que son el PP y Ciudadanos respectivamente, un tercer grupo con un número mediano de escaños con Podemos y Vox, y un último grupo de pocos escaños con los demás partidos.
+En estas elecciones de Abril de 2019 vemos como ya no existe bipartidismo, este año podemos agrupar a los partidos políticos en cuatro categorías, la primera en donde hay un partido con muchos votos con una gran diferencia de escaños respecto a los demás, que es el *PSOE*, un segundo grupo en donde se encontrarían dos partidos con un número medio-alto de escaños, que son el *PP* y *Ciudadanos* respectivamente, un tercer grupo con un número mediano de escaños con *Podemos* y *Vox*, y un último grupo de pocos escaños con los demás partidos.
 Este año tampoco hay una diferencia significativa de haber utilizado un método de reparto respecto a otro, no hay partidos especialmente perjudicados por la elección del método D´Hondt, en ningún caso el partido más votado alcanza la mayoría absoluta. De haber utilizado el método Danish el partido que se vería más beneficiado sería Vox seguido de Ciudadanos, partido que superaría en escaños al PP y se convertiría en la segunda fuerza en el hemiciclo.
 
 #### Desproporción
@@ -4946,15 +4942,15 @@ ggplot(dds[,mean(Desproporción),by=.(Metodos)], aes(reorder(Metodos, -V1), V1))
 
 ```
 
-En este gráfico comparando la desproporción media por año observamos como la disproporción desde las elecciones de 1977 hasta 1989 está en un nivel medio, a partir del año 1993 la disproporción baja, principalmente debido a un bipartidismo más marcado, esto se mantiene hasta el año de las elecciones de 2011, en donde empieza por primera vez a aparecer un tercer partido que debilita el bipartidismo por lo que la desproporción aumenta a los niveles de las primeras elecciones, desde el año 2011 hasta ya las últimas elecciones de 2019 la desproporción se mantiene sin mucha variación.
+En este gráfico comparando la desproporción media por año observamos como la desproporción desde las elecciones de 1977 hasta 1989 está en un nivel medio, a partir del año 1993 la desproporción baja, principalmente debido a un bipartidismo más marcado, esto se mantiene hasta el año de las elecciones de 2011, en donde empieza por primera vez a aparecer un tercer partido que debilita el bipartidismo por lo que la desproporción aumenta a los niveles de las primeras elecciones, desde el año 2011 hasta ya las últimas elecciones de 2019 la desproporción se mantiene sin mucha variación.
 
 En el gráfico de la desproporción según el método de reparto podemos extraer conclusiones para decidir cual método ha sido el mejor a lo largo de todas las elecciones realizadas en España a partir de 1977, por lo tanto sacamos estas conclusiones:  
 
   * El mejor método es el Saint-Lague.
   * El peor método es el Imperiali.
-  * El método D´Hondt es el cuarto mejor método.
+  * El método D´Hondt es el cuarto mejor método en términos de proporcionalidad.
 
-Por lo tanto al preguntarnos si el método utilizado en España es el mejor método que se puede utilizar para el reparto de los escaños podemos afirmar que no lo es, de hecho se sitúa en la mitad de la tabla entre todos los métodos analizados, la característica que tiene el método D´Hont es que se sitúa entre los métodos que benefician más a los partidos más votados y de entre ellos es el método más proporcional, por lo que se podría decir que es el método más proporcional entre los métodos que "facilitan la gobernanza". Pero si nuestro objetivo es obtener la máxima proporcionalidad en vez de facilitar la gobernanza deberíamos plantear un cambio de método en primer lugar al Sainte-Lague o al Danish, ambos métodos son casi idénticos en términos de proporcionalidad pero el Sainte-Lague tiene una mejor característica que el Danish, que reparte los escaños de forma que es más fácil gobernar. 
+Por lo tanto al preguntarnos si el método utilizado en España es el mejor método que se puede utilizar para el reparto de los escaños podemos afirmar que no lo es, de hecho se sitúa en la mitad de la tabla entre todos los métodos analizados, la característica que tiene el método D´Hont es que se sitúa entre los métodos que benefician más a los partidos más votados y de entre ellos es el método más proporcional, por lo que se podría decir que es el método más proporcional entre los métodos que "facilitan la gobernanza". Pero si nuestro objetivo es obtener la máxima proporcionalidad en vez de facilitar la gobernanza deberíamos plantear un cambio de método, en primer lugar al Sainte-Lague o al Danish, ambos métodos son casi idénticos en términos de proporcionalidad pero el Sainte-Lague tiene una mejor característica que el Danish, que reparte los escaños de forma que es más fácil gobernar. 
 
 
 

@@ -78,7 +78,7 @@ knitr::opts_chunk$set(
 
 ## Objetivos
 
-Rev-El objetivo del presente trabajo será analizar los distintos sistemas de votación que existen en la actualidad que puedan ser aplicados actualmente en España, aplicar estos sistemas a España, indicando sus ventajas e inconvenientes y proponer nuevos sistemas de votación o reparto para una eventual reforma de la Ley Orgánica del Régimen Electoral.
+  El objetivo del presente trabajo será una pequeña introducción explicando el funcionamiento del sistema electoral español, analizar distintos sistemas de votación que existen en la actualidad, analizar su comportamiento en diferentes escenarios y aplicar estos sistemas a España, analizando sus ventajas e inconvenientes.
 
 ## ¿Qué significa votar?
 
@@ -2317,7 +2317,7 @@ El peor método entre los presentados es el método Imperiali, con una diferenci
 Podemos agrupar los métodos en tres grupos,un grupo que sería el de una desproporción baja, en el que se encontrarían los métodos de Sainte-Lague, Danish y Modified Sainte-Lague.
 Un segundo grupo que sería el que presentaría una desproporción media, con los métodos Adams, Huntington-Hill y D´Hondt, finalizando con un último grupo de desproporción alta, y debido a ello no deseable en el que estaría el método Imperiali.
 
-Actualmente en España se reparten 350 escaños y se utiliza el método D´Hondt, según los datos obtenidos podemos decir que no es el mejor método que se puede utilizar, es un método que está en el grupo de dispropocionalidad media, e incluso no es el mejor método dentro de ese subgrupo, sería interesante según lo observado en la gráfica plantearse un cambio de método a otro mejor, al menos a alguno dentro del subgrupo de desproporción baja, preferentemente el mejor método que podríamos utilizar, que sería el método de Sainte-Lague sin modificar.
+Actualmente en España se reparten 350 escaños y se utiliza el método D´Hondt, según los datos obtenidos podemos decir que no es el mejor método que se puede utilizar, es un método que está en el grupo de desproporción media, e incluso no es el mejor método dentro de ese subgrupo, sería interesante según lo observado en la gráfica plantearse un cambio de método a otro mejor, al menos a alguno dentro del subgrupo de desproporción baja, preferentemente el mejor método que podríamos utilizar, que sería el método de Sainte-Lague sin modificar.
 
 ### Variando el número de partidos
 ```{r}
