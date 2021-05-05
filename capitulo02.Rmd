@@ -353,7 +353,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
   labs(subtitle = "Variando el número de partidos", title = "Desproporción según D`Hondt", caption = "Elaboración propia: Angel González", x = "Número de Partidos")
 ```
 
-En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
+En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 100 partidos que se presentan a una elección ficticia.
 Observamos que cuando se presentan 2 o 3 partidos a las elecciones la desproporción es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de desproporción con 6 partidos que se presentan a las elecciones, a partir de el séptimo partido la curva comienza a decrecer.
 Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 4 a 60 ) la desproporción es alta pero decreciente, cuanto mayor número de partidos se presentan en las elcciones menor es la desproporción que encontramos, como en el apartado anterior, la desproporción tiende a estabilizarse.
 
@@ -603,7 +603,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
   labs(subtitle = "Variando el número de partidos", title = "Desproporción según Sainte-Lague", caption = "Elaboración propia: Angel González", x = "Número de Partidos")
 ```
 
-En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
+En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 100 partidos que se presentan a una elección ficticia.
 Observamos que cuando se presentan 2 partidos a las elecciones la desproporción es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de desproporción con 2 partidos que se presentan a las elecciones, a partir de el séptimo partido la curva comienza a decrecer.
 Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 4 a 6 ) la desproporción es alta pero decreciente, cuanto mayor número de partidos se presentan en las elcciones menor es la desproporción que encontramos, como en el apartado anterior, la desproporción tiende a estabilizarse.
 
@@ -849,7 +849,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
   labs(subtitle = "Variando el número de partidos", title = "Desproporción según Modified Sainte-Lague", caption = "Elaboración propia: Angel González", x = "Número de Partidos")
 ```
 
-En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
+En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 100 partidos que se presentan a una elección ficticia.
 Observamos que cuando se presentan 2 o 3 partidos a las elecciones la desproporción es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de desproporción con 6 partidos que se presentan a las elecciones, a partir de el séptimo partido la curva comienza a decrecer.
 Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 2 a 6 ) la desproporción es alta pero decreciente, cuanto mayor número de partidos se presentan en las elcciones menor es la desproporción que encontramos, como en el apartado anterior, la desproporción tiende a estabilizarse.
 
@@ -1095,7 +1095,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
   labs(subtitle = "Variando el número de partidos", title = "Desproporción según Imperiali", caption = "Elaboración propia: Angel González", x = "Número de Partidos")
 ```
 
-En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
+En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 100 partidos que se presentan a una elección ficticia.
 Observamos que cuando se presentan 2 o 3 partidos a las elecciones la desproporción es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de desproporción con 6 partidos que se presentan a las elecciones, a partir del séptimo partido la curva comienza a decrecer.
 Entonces, según el modelo Imperiali tendremos una menor desproporción según se vayan aumentando el número de partidos.
 
@@ -1341,7 +1341,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
   labs(subtitle = "Variando el número de partidos", title = "Desproporción según Huntington-Hill", caption = "Elaboración propia: Angel González", x = "Número de Partidos")
 ```
 
-En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
+En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 100 partidos que se presentan a una elección ficticia.
 
 Observamos que cuando se presentan 2 o 3 partidos a las elecciones la desproporción es media, va aumentando a medida que se presentan más partidos, alcanzando el máximo de desproporción con 50 partidos que se presentan a las elecciones, a partir de 50 partidos la curva comienza a decrecer.
 
@@ -1591,7 +1591,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
   labs(subtitle = "Variando el número de partidos", title = "Desproporción según Adams", caption = "Elaboración propia: Angel González", x = "Número de Partidos")
 ```
 
-En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
+En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 100 partidos que se presentan a una elección ficticia.
 
 Observamos que cuando se presentan 2 o 3 partidos a las elecciones la desproporción es media, va aumentando a medida que se presentan más partidos, alcanzando el máximo de desproporción con 50 partidos que se presentan a las elecciones, a partir de los 50 partidos que se presentan a las elecciones la curva comienza a decrecer.
 
@@ -1839,7 +1839,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
   labs(subtitle = "Variando el número de partidos", title = "Desproporción según Danish", caption = "Elaboración propia: Angel González", x = "Número de Partidos")
 ```
 
-En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 500 partidos que se presentan a una elección ficticia.
+En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 100 partidos que se presentan a una elección ficticia.
 Observamos que cuando se presentan 2 o 3 partidos a las elecciones la desproporción es baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de desproporción con 6 partidos que se presentan a las elecciones, a partir de el séptimo partido la curva comienza a decrecer.
 Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 4 a 6 ) la desproporción es alta pero decreciente, cuanto mayor número de partidos se presentan en las elecciones menor es la desproporción que encontramos, como en el apartado anterior, la desproporción tiende a estabilizarse.
 

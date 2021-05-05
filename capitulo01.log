@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.2.24)  1 MAY 2021 18:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.2.24)  4 MAY 2021 23:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1221,501 +1221,125 @@ LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
 8.
 (c:/texlive/2019/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [1
-
-
-
-{c:/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
+))
 \tf@toc=\write7
 \openout7 = `capitulo01.toc'.
 
-LaTeX Info: Redefining \. on input line 523.
-LaTeX Info: Redefining \% on input line 523.
-LaTeX Info: Redefining \. on input line 523.
-LaTeX Info: Redefining \% on input line 523.
-[2]
+[1
+
+
+
+{c:/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
+
+]
 Cap\'{\i }tulo 1.
 
 Underfull \vbox (badness 1721) has occurred while \output is active []
 
-[3
-
-]
-LaTeX Info: Redefining \. on input line 640.
-LaTeX Info: Redefining \% on input line 640.
-LaTeX Info: Redefining \. on input line 640.
-LaTeX Info: Redefining \% on input line 640.
+[3]
+LaTeX Info: Redefining \. on input line 639.
+LaTeX Info: Redefining \% on input line 639.
+LaTeX Info: Redefining \. on input line 639.
+LaTeX Info: Redefining \% on input line 639.
 [4]
-LaTeX Info: Redefining \. on input line 720.
-LaTeX Info: Redefining \% on input line 720.
-LaTeX Info: Redefining \. on input line 720.
-LaTeX Info: Redefining \% on input line 720.
+LaTeX Info: Redefining \. on input line 719.
+LaTeX Info: Redefining \% on input line 719.
+LaTeX Info: Redefining \. on input line 719.
+LaTeX Info: Redefining \% on input line 719.
 [5]
-LaTeX Info: Redefining \. on input line 740.
-LaTeX Info: Redefining \% on input line 740.
-LaTeX Info: Redefining \. on input line 740.
-LaTeX Info: Redefining \% on input line 740.
+LaTeX Info: Redefining \. on input line 739.
+LaTeX Info: Redefining \% on input line 739.
+LaTeX Info: Redefining \. on input line 739.
+LaTeX Info: Redefining \% on input line 739.
 [6]
 Cap\'{\i }tulo 2.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 766.
+(Font)              <10> on input line 767.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 766.
+(Font)              <7> on input line 767.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 766.
+(Font)              <5> on input line 767.
+<graficos/vanguardia.jpeg, id=244, 409.53pt x 166.37157pt>
+File: graficos/vanguardia.jpeg Graphic file (type jpg)
+<use graficos/vanguardia.jpeg>
+Package pdftex.def Info: graficos/vanguardia.jpeg  used on input line 776.
+(pdftex.def)             Requested size: 452.9679pt x 184.02979pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 [7
 
 ]
-
-LaTeX Warning: Command \' invalid in math mode on input line 844.
-
-
-LaTeX Warning: Command \' invalid in math mode on input line 844.
-
-
-LaTeX Warning: Command \' invalid in math mode on input line 848.
-
-
-LaTeX Warning: Command \' invalid in math mode on input line 858.
-
-LaTeX Info: Redefining \. on input line 860.
-LaTeX Info: Redefining \% on input line 860.
-LaTeX Info: Redefining \. on input line 860.
-LaTeX Info: Redefining \% on input line 860.
-[8]
-
-LaTeX Warning: Command \~ invalid in math mode on input line 875.
-
-LaTeX Info: Redefining \. on input line 926.
-LaTeX Info: Redefining \% on input line 926.
-LaTeX Info: Redefining \. on input line 926.
-LaTeX Info: Redefining \% on input line 926.
+LaTeX Info: Redefining \. on input line 828.
+LaTeX Info: Redefining \% on input line 828.
+LaTeX Info: Redefining \. on input line 828.
+LaTeX Info: Redefining \% on input line 828.
+[8 <./graficos/vanguardia.jpeg>]
+LaTeX Info: Redefining \. on input line 895.
+LaTeX Info: Redefining \% on input line 895.
+LaTeX Info: Redefining \. on input line 895.
+LaTeX Info: Redefining \% on input line 895.
 [9]
 
-LaTeX Warning: Command \~ invalid in math mode on input line 975.
+LaTeX Warning: Command \' invalid in math mode on input line 899.
 
-LaTeX Info: Redefining \. on input line 990.
-LaTeX Info: Redefining \% on input line 990.
-LaTeX Info: Redefining \. on input line 990.
-LaTeX Info: Redefining \% on input line 990.
+
+LaTeX Warning: Command \' invalid in math mode on input line 899.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 909.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 931.
+
+LaTeX Info: Redefining \. on input line 976.
+LaTeX Info: Redefining \% on input line 976.
+LaTeX Info: Redefining \. on input line 976.
+LaTeX Info: Redefining \% on input line 976.
 [10]
-LaTeX Info: Redefining \. on input line 1065.
-LaTeX Info: Redefining \% on input line 1065.
-LaTeX Info: Redefining \. on input line 1065.
-LaTeX Info: Redefining \% on input line 1065.
+LaTeX Info: Redefining \. on input line 1043.
+LaTeX Info: Redefining \% on input line 1043.
+LaTeX Info: Redefining \. on input line 1043.
+LaTeX Info: Redefining \% on input line 1043.
 [11]
-LaTeX Info: Redefining \. on input line 1075.
-LaTeX Info: Redefining \% on input line 1075.
-LaTeX Info: Redefining \. on input line 1075.
-LaTeX Info: Redefining \% on input line 1075.
+
+LaTeX Warning: Command \~ invalid in math mode on input line 1047.
+
+LaTeX Info: Redefining \. on input line 1122.
+LaTeX Info: Redefining \% on input line 1122.
+LaTeX Info: Redefining \. on input line 1122.
+LaTeX Info: Redefining \% on input line 1122.
 [12]
-Cap\'{\i }tulo 3.
-<figurasR/unnamed-chunk-5-1.pdf, id=466, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-5-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-5-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-5-1.pdf  used on input line 110
-4.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[13
-
-]
-<figurasR/unnamed-chunk-6-1.pdf, id=474, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-6-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-6-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-6-1.pdf  used on input line 112
-0.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1120.
-LaTeX Info: Redefining \% on input line 1120.
-LaTeX Info: Redefining \. on input line 1120.
-LaTeX Info: Redefining \% on input line 1120.
-[14 <./figurasR/unnamed-chunk-5-1.pdf>]
-<figurasR/unnamed-chunk-7-1.pdf, id=487, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-7-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-7-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-7-1.pdf  used on input line 113
-9.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1139.
-LaTeX Info: Redefining \% on input line 1139.
-LaTeX Info: Redefining \. on input line 1139.
-LaTeX Info: Redefining \% on input line 1139.
-[15 <./figurasR/unnamed-chunk-6-1.pdf>]
-<figurasR/unnamed-chunk-10-1.pdf, id=498, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-10-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-10-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-10-1.pdf  used on input line 11
-61.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1161.
-LaTeX Info: Redefining \% on input line 1161.
-LaTeX Info: Redefining \. on input line 1161.
-LaTeX Info: Redefining \% on input line 1161.
-[16 <./figurasR/unnamed-chunk-7-1.pdf>]
-<figurasR/unnamed-chunk-11-1.pdf, id=509, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-11-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-11-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-11-1.pdf  used on input line 11
-77.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1177.
-LaTeX Info: Redefining \% on input line 1177.
-LaTeX Info: Redefining \. on input line 1177.
-LaTeX Info: Redefining \% on input line 1177.
-[17 <./figurasR/unnamed-chunk-10-1.pdf>]
-<figurasR/unnamed-chunk-12-1.pdf, id=521, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-12-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-12-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-12-1.pdf  used on input line 11
-96.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1196.
-LaTeX Info: Redefining \% on input line 1196.
-LaTeX Info: Redefining \. on input line 1196.
-LaTeX Info: Redefining \% on input line 1196.
-[18 <./figurasR/unnamed-chunk-11-1.pdf>]
-<figurasR/unnamed-chunk-15-1.pdf, id=532, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-15-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-15-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-15-1.pdf  used on input line 12
-18.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1218.
-LaTeX Info: Redefining \% on input line 1218.
-LaTeX Info: Redefining \. on input line 1218.
-LaTeX Info: Redefining \% on input line 1218.
-[19 <./figurasR/unnamed-chunk-12-1.pdf>]
-<figurasR/unnamed-chunk-16-1.pdf, id=544, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-16-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-16-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-16-1.pdf  used on input line 12
-34.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1234.
-LaTeX Info: Redefining \% on input line 1234.
-LaTeX Info: Redefining \. on input line 1234.
-LaTeX Info: Redefining \% on input line 1234.
-[20 <./figurasR/unnamed-chunk-15-1.pdf>]
-<figurasR/unnamed-chunk-17-1.pdf, id=556, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-17-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-17-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-17-1.pdf  used on input line 12
-53.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1253.
-LaTeX Info: Redefining \% on input line 1253.
-LaTeX Info: Redefining \. on input line 1253.
-LaTeX Info: Redefining \% on input line 1253.
-[21 <./figurasR/unnamed-chunk-16-1.pdf>]
-<figurasR/unnamed-chunk-20-1.pdf, id=568, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-20-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-20-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-20-1.pdf  used on input line 12
-75.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1275.
-LaTeX Info: Redefining \% on input line 1275.
-LaTeX Info: Redefining \. on input line 1275.
-LaTeX Info: Redefining \% on input line 1275.
-[22 <./figurasR/unnamed-chunk-17-1.pdf>]
-<figurasR/unnamed-chunk-21-1.pdf, id=579, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-21-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-21-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-21-1.pdf  used on input line 12
-91.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1291.
-LaTeX Info: Redefining \% on input line 1291.
-LaTeX Info: Redefining \. on input line 1291.
-LaTeX Info: Redefining \% on input line 1291.
-[23 <./figurasR/unnamed-chunk-20-1.pdf>]
-<figurasR/unnamed-chunk-22-1.pdf, id=591, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-22-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-22-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-22-1.pdf  used on input line 13
-07.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1307.
-LaTeX Info: Redefining \% on input line 1307.
-LaTeX Info: Redefining \. on input line 1307.
-LaTeX Info: Redefining \% on input line 1307.
-[24 <./figurasR/unnamed-chunk-21-1.pdf>]
-<figurasR/unnamed-chunk-25-1.pdf, id=602, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-25-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-25-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-25-1.pdf  used on input line 13
-29.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1329.
-LaTeX Info: Redefining \% on input line 1329.
-LaTeX Info: Redefining \. on input line 1329.
-LaTeX Info: Redefining \% on input line 1329.
-[25 <./figurasR/unnamed-chunk-22-1.pdf>]
-<figurasR/unnamed-chunk-26-1.pdf, id=614, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-26-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-26-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-26-1.pdf  used on input line 13
-44.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1344.
-LaTeX Info: Redefining \% on input line 1344.
-LaTeX Info: Redefining \. on input line 1344.
-LaTeX Info: Redefining \% on input line 1344.
-[26 <./figurasR/unnamed-chunk-25-1.pdf>]
-<figurasR/unnamed-chunk-27-1.pdf, id=626, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-27-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-27-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-27-1.pdf  used on input line 13
-65.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1365.
-LaTeX Info: Redefining \% on input line 1365.
-LaTeX Info: Redefining \. on input line 1365.
-LaTeX Info: Redefining \% on input line 1365.
-[27 <./figurasR/unnamed-chunk-26-1.pdf>]
-<figurasR/unnamed-chunk-30-1.pdf, id=637, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-30-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-30-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-30-1.pdf  used on input line 13
-92.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1392.
-LaTeX Info: Redefining \% on input line 1392.
-LaTeX Info: Redefining \. on input line 1392.
-LaTeX Info: Redefining \% on input line 1392.
-[28 <./figurasR/unnamed-chunk-27-1.pdf>]
-<figurasR/unnamed-chunk-31-1.pdf, id=648, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-31-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-31-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-31-1.pdf  used on input line 14
-10.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1410.
-LaTeX Info: Redefining \% on input line 1410.
-LaTeX Info: Redefining \. on input line 1410.
-LaTeX Info: Redefining \% on input line 1410.
-[29 <./figurasR/unnamed-chunk-30-1.pdf>]
-<figurasR/unnamed-chunk-32-1.pdf, id=660, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-32-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-32-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-32-1.pdf  used on input line 14
-29.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1429.
-LaTeX Info: Redefining \% on input line 1429.
-LaTeX Info: Redefining \. on input line 1429.
-LaTeX Info: Redefining \% on input line 1429.
-[30 <./figurasR/unnamed-chunk-31-1.pdf>]
-<figurasR/unnamed-chunk-35-1.pdf, id=671, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-35-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-35-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-35-1.pdf  used on input line 14
-53.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1453.
-LaTeX Info: Redefining \% on input line 1453.
-LaTeX Info: Redefining \. on input line 1453.
-LaTeX Info: Redefining \% on input line 1453.
-[31 <./figurasR/unnamed-chunk-32-1.pdf>]
-<figurasR/unnamed-chunk-36-1.pdf, id=684, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-36-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-36-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-36-1.pdf  used on input line 14
-69.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1469.
-LaTeX Info: Redefining \% on input line 1469.
-LaTeX Info: Redefining \. on input line 1469.
-LaTeX Info: Redefining \% on input line 1469.
-[32 <./figurasR/unnamed-chunk-35-1.pdf>]
-<figurasR/unnamed-chunk-37-1.pdf, id=696, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-37-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-37-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-37-1.pdf  used on input line 14
-91.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1491.
-LaTeX Info: Redefining \% on input line 1491.
-LaTeX Info: Redefining \. on input line 1491.
-LaTeX Info: Redefining \% on input line 1491.
-[33 <./figurasR/unnamed-chunk-36-1.pdf>]
-<figurasR/unnamed-chunk-38-1.pdf, id=707, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-38-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-38-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-38-1.pdf  used on input line 15
-17.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1517.
-LaTeX Info: Redefining \% on input line 1517.
-LaTeX Info: Redefining \. on input line 1517.
-LaTeX Info: Redefining \% on input line 1517.
-[34 <./figurasR/unnamed-chunk-37-1.pdf>]
-<figurasR/unnamed-chunk-39-1.pdf, id=718, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-39-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-39-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-39-1.pdf  used on input line 15
-28.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1528.
-LaTeX Info: Redefining \% on input line 1528.
-LaTeX Info: Redefining \. on input line 1528.
-LaTeX Info: Redefining \% on input line 1528.
-[35 <./figurasR/unnamed-chunk-38-1.pdf>]
-<figurasR/unnamed-chunk-40-1.pdf, id=729, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-40-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-40-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-40-1.pdf  used on input line 15
-58.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1558.
-LaTeX Info: Redefining \% on input line 1558.
-LaTeX Info: Redefining \. on input line 1558.
-LaTeX Info: Redefining \% on input line 1558.
-[36 <./figurasR/unnamed-chunk-39-1.pdf>]
-<figurasR/unnamed-chunk-41-1.pdf, id=740, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-41-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-41-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-41-1.pdf  used on input line 15
-72.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1572.
-LaTeX Info: Redefining \% on input line 1572.
-LaTeX Info: Redefining \. on input line 1572.
-LaTeX Info: Redefining \% on input line 1572.
-[37 <./figurasR/unnamed-chunk-40-1.pdf>]
-<figurasR/unnamed-chunk-42-1.pdf, id=751, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-42-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-42-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-42-1.pdf  used on input line 15
-96.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1596.
-LaTeX Info: Redefining \% on input line 1596.
-LaTeX Info: Redefining \. on input line 1596.
-LaTeX Info: Redefining \% on input line 1596.
-[38 <./figurasR/unnamed-chunk-41-1.pdf>]
-<figurasR/unnamed-chunk-43-1.pdf, id=762, 469.755pt x 325.215pt>
-File: figurasR/unnamed-chunk-43-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-43-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-43-1.pdf  used on input line 16
-16.
-(pdftex.def)             Requested size: 430.31812pt x 297.91121pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1616.
-LaTeX Info: Redefining \% on input line 1616.
-LaTeX Info: Redefining \. on input line 1616.
-LaTeX Info: Redefining \% on input line 1616.
-[39 <./figurasR/unnamed-chunk-42-1.pdf>]
 No file capitulo01.bbl.
-LaTeX Info: Redefining \. on input line 1653.
-LaTeX Info: Redefining \% on input line 1653.
-LaTeX Info: Redefining \. on input line 1653.
-LaTeX Info: Redefining \% on input line 1653.
-[40 <./figurasR/unnamed-chunk-43-1.pdf>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1653.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1653.
+LaTeX Info: Redefining \. on input line 1181.
+LaTeX Info: Redefining \% on input line 1181.
+LaTeX Info: Redefining \. on input line 1181.
+LaTeX Info: Redefining \% on input line 1181.
+[13]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1181.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1181.
 (./capitulo01.aux
 LaTeX Info: Redefining \. on input line 22.
 LaTeX Info: Redefining \% on input line 22.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1653.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1653.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1181.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1181.
 
 Package rerunfilecheck Info: File `capitulo01.out' has not changed.
-(rerunfilecheck)             Checksum: FCD5C27173858704D1FE7F3D4A4BC267;14085.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1653.
+(rerunfilecheck)             Checksum: 0FF6E8B25DD315D295D1649B3C2E2FC8;5438.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1181.
  ) 
 Here is how much of TeX's memory you used:
- 31609 strings out of 481228
- 568775 string characters out of 5921397
- 967339 words of memory out of 5000000
- 45915 multiletter control sequences out of 15000+600000
- 610823 words of font info for 127 fonts, out of 8000000 for 9000
+ 31292 strings out of 481228
+ 558468 string characters out of 5921397
+ 963874 words of memory out of 5000000
+ 45708 multiletter control sequences out of 15000+600000
+ 610137 words of font info for 125 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,12n,75p,973b,622s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{c:/texlive/2019/te
-xmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/texlive/2019/texmf-dist/fonts/enc
-/dvips/lm/lm-mathsy.enc}{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-ec.en
+ 60i,12n,77p,973b,503s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/texlive/2019
+/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/texlive/2019/texmf-dist/fonts/
+enc/dvips/lm/lm-ec.enc}{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-ts1.en
 c}{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{c:/texlive/2019
 /texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}<c:/texlive/2019/texmf-dist/fonts/type
 1/public/lm/lmbx12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmex10
@@ -1728,10 +1352,10 @@ nts/type1/public/lm/lmr8.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/
 lmri10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/tex
 live/2019/texmf-dist/fonts/type1/public/lm/lmro8.pfb><c:/texlive/2019/texmf-dis
 t/fonts/type1/public/lm/lmsy10.pfb>
-Output written on capitulo01.pdf (40 pages, 1708427 bytes).
+Output written on capitulo01.pdf (13 pages, 292438 bytes).
 PDF statistics:
- 879 PDF objects out of 1000 (max. 8388607)
- 762 compressed objects within 8 object streams
- 185 named destinations out of 1000 (max. 500000)
- 15036 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 394 PDF objects out of 1000 (max. 8388607)
+ 361 compressed objects within 4 object streams
+ 98 named destinations out of 1000 (max. 500000)
+ 14642 words of extra memory for PDF output out of 17280 (max. 10000000)
 

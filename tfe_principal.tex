@@ -34,6 +34,46 @@
 \usepackage{natbib}
 \bibliographystyle{plainnat}
 \usepackage[usenames,dvipsnames]{xcolor}  %new PLLC
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \IfFileExists{parskip.sty}{%
 \usepackage{parskip}
 }{% else
@@ -543,7 +583,7 @@ en los resultados electorales
 Angel González Rizo} \\[0.5cm]
 
 {\large
-Sevilla, Enero de 2020
+Sevilla, Junio de 2021
 }
 
 \end{minipage}
@@ -558,13 +598,6 @@ Sevilla, Enero de 2020
 \raggedbottom
 
 
-<<<<<<< HEAD
-=======
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\ldots{}
-
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
 \setlength{\parindent}{1em}
 
 \pagestyle{fancy}
@@ -589,20 +622,20 @@ Sevilla, Enero de 2020
 \addcontentsline{toc}{section}{Resumen}
 
 En este trabajo de fin de grado se ha tratado de analizar los distintos
-métodos de repartición de escaños, enfocándolo desde una perspectiva
-novedosa en donde se analizan los métodos variando experimentalmente los
-escaños a repartir, el número de partidos que se presentan a la elección
-o la concentración del voto. También se analiza el grado de
-desproporción que resulta de haber realizado las elecciones en España
-según los distintos métodos de reparto de escaños.
+métodos de repartición de escaños, enfocándolo desde una perspectiva en
+donde se analizan los métodos variando experimentalmente los escaños a
+repartir, el número de partidos que se presentan a la elección o la
+concentración del voto. También se analiza el grado de desproporción que
+resulta de haber realizado las elecciones en España según los distintos
+métodos de reparto de escaños.
 
 \clearpage
 \section*{Abstract}
 \addcontentsline{toc}{section}{Abstract}
 
 In this end-of-degree work, we have tried to analyse the different
-methods of distributing seats, focusing on them from a novel perspective
-where the methods are analysed by experimentally varying the seats to be
+methods of distributing seats, focusing on them from a perspective where
+the methods are analysed by experimentally varying the seats to be
 distributed, the number of parties running for election or the
 concentration of the vote. It also analyses the degree of
 disproportionality resulting from having held elections in Spain
@@ -658,12 +691,11 @@ according to the different methods of seat distribution.
 \hypertarget{objetivos}{%
 \section{Objetivos}\label{objetivos}}
 
-Rev-El objetivo del presente trabajo será analizar los distintos
-sistemas de votación que existen en la actualidad que puedan ser
-aplicados actualmente en España, aplicar estos sistemas a España,
-indicando sus ventajas e inconvenientes y proponer nuevos sistemas de
-votación o reparto para una eventual reforma de la Ley Orgánica del
-Régimen Electoral.
+El objetivo del presente trabajo será una pequeña introducción
+explicando el funcionamiento del sistema electoral español, analizar
+distintos sistemas de votación que existen en la actualidad, analizar su
+comportamiento en diferentes escenarios y aplicar estos sistemas a
+España, analizando sus ventajas e inconvenientes.
 
 \hypertarget{quuxe9-significa-votar}{%
 \section{¿Qué significa votar?}\label{quuxe9-significa-votar}}
@@ -872,25 +904,27 @@ Canaria, Fuerteventura, Lanzarote, Tenerife, Hierro, Gomera y La Palma.
 \chapter{Métodos de reparto de
 escaños}\label{muxe9todos-de-reparto-de-escauxf1os}}
 
-\hypertarget{muxe9todo-de-cifra-repartidora}{%
-\section{Método de cifra
-repartidora}\label{muxe9todo-de-cifra-repartidora}}
+\hypertarget{muxe9todo-de-los-promedios-mayores}{%
+\section{Método de los promedios
+mayores}\label{muxe9todo-de-los-promedios-mayores}}
 
-Sistema utilizado para repartir los escaños de manera no puramente
-proporcional a el número de votos obtenidos por las diferentes
-candidaturas. El método trata de asignar los escaños proporcionalmente
-al número de votos recibidos, es un sistema que permite a partidos con
-pocos votos estar representados.
+El método de los promedios mayores son un conjunto de fórmulas
+electorales utilizadas para asignar escaños en sistemas de
+representación proporcional por listas electorales. El número de votos
+obtenidos por cada partido se divide sucesivamente por una serie de
+divisores. Esto produce una tabla de cocientes, o promedios, con una
+fila para cada divisor y una columna para cada partido. El enésimo
+escaño se asigna al partido cuya columna contiene la enésima entrada más
+grande en esta tabla, hasta el número total de escaños disponibles.
 
-Existen dos métodos basados en la cifra repartidora que son
-habitualmente utilizados, y que se encuentran también dentro de los
-llamados métodos de los restos mayores, éstos son el método D`Hondt y el
-Método Sainte-Laguë.
+Dentro de los llamados métodos de los restos mayores, se encuentran el
+método D`Hondt, el Método Sainte-Laguë, Imperiali, Huntington--Hill,
+Danish y Adams.
 
-\hypertarget{ley-dhondt}{%
-\subsection{Ley D´Hondt}\label{ley-dhondt}}
+\hypertarget{muxe9todo-dhondt}{%
+\subsection{Método D´Hondt}\label{muxe9todo-dhondt}}
 
-La ley D´Hondt lleva el nombre del matemático y jurista belga Victor
+El método D´Hondt lleva el nombre del matemático y jurista belga Victor
 D´Hondt , el cual describió la metodología en el año 1878 en su libro
 \emph{``La représentation proportionnelle des partis par un électeur''}.
 \footnote{Puede leerse el línea el segundo libro del autor:
@@ -901,8 +935,25 @@ D´Hondt , el cual describió la metodología en el año 1878 en su libro
 Se trata de un método de promedio mayor, utilizado para asignar los
 escaños usualmente en sistemas de listas. Es un sistema que trata de
 asignar los escaños aproximados al número de votos recibidos y que
-incentiva las coaliciones de partidos.\\
-Es el sistema más habitualmente utilizado en las democracias actuales.
+incentiva las coaliciones de partidos.
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\linewidth]{graficos/vanguardia} 
+
+}
+
+\caption{Método D´Hondt}\label{fig:pressure}
+\end{figure}
+
+Es el sistema más habitualmente utilizado en las democracias actuales
+Utilizado en países como Albania, Argentina, Austria, Bélgica, Bolivia,
+Brasil, Bulgaria, Camboya, Cabo Verde, Chile, Colombia, Croacia,
+República Checa, República Dominicana, Ecuador, Escocia, Eslovenia,
+España, Estonia, Finlandia, Gales, Guatemala, Hungría, Islandia, Israel,
+Japón, Kosovo, Luxemburgo, Macedonia, Moldavia, Montenegro, Países
+Bajos, Paraguay, Perú, Polonia, Portugal, Rumanía, Serbia, Timor del
+Este, Turquía, Uruguay y parcialmente en Venezuela.
 
 \hypertarget{reparto}{%
 \subsubsection{Reparto}\label{reparto}}
@@ -918,7 +969,9 @@ según la fórmula:
 momento, inicialmente 0 para cada lista.
 
 El número de votos recibidos por cada lista se divide primero por 1,
-después por 2, 3, hasta el número total de escaños para ese distrito.
+después por 2, 3, hasta el número total de escaños para ese distrito. La
+asignación de escaños se hace ordenando los cocientes de mayor a menor y
+asignando a cada uno un escaño hasta que estos se agoten.
 
 \hypertarget{muxe9todo-sainte-laguuxeb}{%
 \subsection{Método Sainte-Laguë}\label{muxe9todo-sainte-laguuxeb}}
@@ -953,39 +1006,92 @@ los cocientes de mayor a menor y asignando a cada uno un escaño hasta
 que estos se agoten. A diferencia de otros sistemas, el número total de
 votos no interviene en el cómputo.
 
-\hypertarget{muxe9todo-modificado}{%
-\subsubsection{Método modificado}\label{muxe9todo-modificado}}
+\hypertarget{muxe9todo-sainte-laguuxeb-modificado}{%
+\subsection{Método Sainte-Laguë
+modificado}\label{muxe9todo-sainte-laguuxeb-modificado}}
 
+Método utilizado en algunos países como Nepal, Noruega o Suecia.
 Consiste en utilizar una fórmula distinta para el primer escaño y a
-partir del segundo utilizar el método habitual. La forma para el primer
-escaño es:
+partir del segundo utilizar el método habitual.Así, el método modificado
+cambia la secuencia de divisores de (1, 3, 5, 7, \ldots) a (1.4, 3, 5,
+7, \ldots). Esto da una preferencia ligeramente mayor a los partidos más
+grandes sobre los partidos más pequeños que ganarían, por un pequeño
+margen, un solo escaño si se utilizara el método de Sainte-Laguë sin
+modificar. Con el método modificado, estos partidos pequeños no obtienen
+representación, en cambio, estos escaños se le otorgan a un partido más
+grande. La forma para el primer escaño es:
 
-\(\textrm{Cociente} = \frac{V}{1.4}\)
+\(\textrm{Cociente[s=0]} = \frac{V}{1.4}\) donde:
+
+\(V\): Representa el número total de votos recibidos por la lista.
+
+\hypertarget{muxe9todo-imperiali}{%
+\subsection{Método Imperiali}\label{muxe9todo-imperiali}}
+
+Otro método de promedio mayor se llama Imperiali ( no debe confundirse
+con la cuota Imperiali, que es un método del resto mayor). Los divisores
+son 1, 1,5, 2, 2,5, 3, 3,5 y así sucesivamente. Está diseñado para
+desfavorecer a los partidos más pequeños, se utiliza solo en las
+elecciones municipales belgas. Este método (a diferencia de otros
+métodos enumerados) no es estrictamente proporcional, si es que existe
+una asignación perfectamente proporcional, mediante este método no se
+garantiza encontrarla. Método utilizado en Bélgica en las elecciones
+municipales.\footnote{\emph{BJPS1992.pdf} ,
+  \textless{}\url{https://www.tcd.ie/Political_Science/people/michael_gallagher/BJPS1992.pdf}\textgreater{}
+  {[}accessed 4 May 2021{]}}
 
 \hypertarget{muxe9todo-huntington-hill}{%
-\section{Método Huntington-Hill}\label{muxe9todo-huntington-hill}}
+\subsection{Método Huntington-Hill}\label{muxe9todo-huntington-hill}}
 
 Método creado en 1920 por Joseph Hill y corregido por el compañero de
-escuela de Hill, Edward Huntington. Es un método en el que se elige el
-tamaño de la cámara.\\
-El objetivo es mantener la relación de ``una persona un voto'' lo más
-cercana posible a 1.
+escuela de Hill, Edward Huntington. Actualmente se utiliza para
+distribuir los asientos que les corresponde a cada estado en la cámara
+de representantes de los Estados Unidos de América. El objetivo es
+mantener la relación de ``una persona un voto'' lo más cercana posible a
+1.
 
 \hypertarget{muxe9todo}{%
 \subsection{Método}\label{muxe9todo}}
 
+Para distribuir los asientos entre los distintos partidos se utiliza el
+divisor según \(\sqrt{n(n+1)}\). Los primeros divisores son 0, 1.41,
+2.45, 3.46, 4.47. La asignación de escaños se hace ordenando los
+cocientes de mayor a menor y asignando a cada uno un escaño hasta que
+estos se agoten.
+
+Para repartir los asientos por estado se utiliza el siguiente método:
+
+I. Calculamos D:
 \(\textrm{D} = \frac{Población Total}{NúmeroTotalDiputados}\)
 
-Calcular la cuota de diputados por estado:
+\begin{enumerate}
+\def\labelenumi{\Roman{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Calcular la cuota de diputados por estado:
+\end{enumerate}
 
 \(CoutaEstado = \frac{Población Estado}{D}\)
 
-Redondeamos la cuota a la parte entera.
+\begin{enumerate}
+\def\labelenumi{\Roman{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Redondeamos la cuota a la parte entera.
+\end{enumerate}
 
 \(\textrm{n} = ParteEntera\left\{{Cuota Estado}\right\}\)
 
-Comparar la Cuota del estado con la media geométrica de \(n\) y \(n+1\),
-\(\sqrt{n(n+1)}\)
+\begin{enumerate}
+\def\labelenumi{\Roman{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Comparar la Cuota del estado con la media geométrica de \(n\) y
+  \(n+1\), \(\sqrt{n(n+1)}\)
+\end{enumerate}
 
 Si
 \(\begin{cases}CuotaEstado>MediaGeométrica & Representantes = n+1\\\textrm{Caso Contrario} & Representantes = n\end{cases}\)
@@ -993,80 +1099,43 @@ Si
 Ajustar D para que el número de asientos totales coincida con el número
 total de asientos designados.
 
-\hypertarget{cuota-hagenbach-bischoff}{%
-\section{Cuota Hagenbach-Bischoff}\label{cuota-hagenbach-bischoff}}
+\hypertarget{muxe9todo-danish}{%
+\subsection{Método Danish}\label{muxe9todo-danish}}
 
-Fórmula utilizada en los sistemas de representación proporcional para un
-sistema de listas electorales. Su nombre proviene del inventor suizo,
-profesor de física y matemáticas Eduard Hagenbach-Bischoff (1833--1910).
+El método danés\footnote{\href{http://www.infoelectoral.mir.es/min/}{Consulta
+  de resultados electorales Ministerio del interior}} se utiliza en las
+elecciones danesas para asignar los escaños de cada partido a nivel de
+provincia electoral. Divide el número de votos recibidos por un partido
+en una circunscripción de varios miembros por los divisores que aumentan
+de tres en tres (1, 4, 7, 10, etc.). También, dividir los números de
+votos por 0.33, 1.33, 2.33, 3.33, etc. da el mismo resultado. Este
+sistema intenta deliberadamente asignar escaños por igual en lugar de
+proporcionalmente.
 
-\hypertarget{reparto-2}{%
-\subsection{Reparto}\label{reparto-2}}
+\hypertarget{muxe9todo-adams}{%
+\subsection{Método Adams}\label{muxe9todo-adams}}
 
-La fórmula de reparto es:
+El método de Adams fue concebido por John Quincy Adams para distribuir
+los escaños de la Cámara entre los distintos estados. Otorga un escaño
+al partido que tiene más votos por escaño antes de que se agregue el
+escaño.
 
-\(\textrm{Cociente} = \frac{Total Votos}{Total Escaños+1}\) donde:
+El método de Adams usa \(n-1\) como divisor. La secuencia de los cinco
+primeros divisores serían (0,1,2,3,4). Al igual que el método
+Huntington-Hill, esto da como resultado un valor de 0 para los primeros
+escaños que se designarán para cada partido, lo que da como resultado un
+promedio de \(\infty\).
 
-\emph{Total votos}: Representa el número total de votos válidos.
-
-\emph{Total escaños}: Total de escaños a repartir.
-
-\hypertarget{muxe9todo-de-condorcet}{%
-\section{Método de Condorcet}\label{muxe9todo-de-condorcet}}
-
-El método de Condorcet lleva el nombre del matemático y filósofo francés
-del siglo XVIII Marie Jean Antoine Nicolas Caritat, marqués de
-Condorcet, aunque anteriormente Ramón Llull en 1299 creó un método
-similar que cumple el criterio de Condorcet pero en un diseño iterativo.
-
-Es uno de los métodos en los que se elige al candidato que gana la
-mayoría de los votos en cada par de elecciones frente a cada uno de los
-otros candidatos, es decir, un candidato preferido por más votantes que
-cualquier otro, siempre que exista tal candidato. Un candidato con esta
-propiedad, el campeón de la pareja o el ganador de la victoria, se llama
-formalmente el ganador de Condorcet.
-
-Puede que no siempre exista un ganador del premio Condorcet en una
-elección particular porque la preferencia de un grupo de votantes que
-seleccionan entre más de dos opciones puede ser cíclica, es decir, es
-posible (pero muy raro) que cada candidato tenga un oponente que le
-derrote en una contienda entre dos candidatos. La posibilidad de tales
-preferencias cíclicas en un grupo de votantes se conoce como la paradoja
-de Condorcet.
-
-\hypertarget{procedimiento}{%
-\subsection{Procedimiento}\label{procedimiento}}
-
-\begin{itemize}
-\item
-  Voto\\
-  En una elección según el método de Condorcet el votante rellena la
-  lista de candidatos por orden de preferencia.
-\item
-  Vencedor\\
-  El recuento se realiza contrastando a cada candidato contra todos los
-  demás candidatos en una serie de hipotéticos enfrentamientos uno a
-  uno. El ganador de cada pareja es el candidato preferido por la
-  mayoría de los votantes. Se considera que el candidato preferido por
-  cada votante es el que está más alto en su papeleta de votación.
-  Cuando se han considerado todos los emparejamientos posibles de
-  candidatos, si un candidato vence a todos los demás candidatos en
-  estos concursos, entonces se le declara ganador de Condorcet. Como se
-  ha señalado anteriormente, si no hay un ganador de Condorcet debe
-  utilizarse otro método para encontrar el ganador de la elección, y
-  este mecanismo varía de un método de Condorcet a otro.
-\item
-  Recuento de votos mediante matrices\\
-  Se utiliza para los resultados una matriz en donde cada fila es el
-  elemento como ``contendiente'' y en cada columna el elemento como
-  ``oponente''.
-
-  En el caso de que un candidato gane a todos los restantes, será el
-  ganador de Condorcet. Cuando no hay un ganador Condorcet se utilizan
-  métodos alternativos de Condorcet, como el método Minimax y el método
-  Schulze, que utilizan la información contenida en la matriz para
-  elegir un ganador.
-\end{itemize}
+Sin umbral, todos los partidos que han recibido al menos un voto,
+también reciben un escaño, con la obvia excepción de los casos en los
+que hay más partidos que escaños. Esta propiedad puede ser deseable, por
+ejemplo, al distribuir escaños entre distritos electorales. Siempre que
+haya al menos tantos escaños como distritos, todos los distritos estarán
+representados. En una elección de representación proporcional por lista
+de partidos, puede resultar en que partidos muy pequeños obtengan
+escaños. Las violaciones de la regla de la cuota en el método puro de
+Adams son muy comunes. Estos problemas pueden resolverse mediante la
+introducción de un umbral electoral.
 
 \hypertarget{muxe9todo-del-resto-mayor}{%
 \section{Método del resto mayor}\label{muxe9todo-del-resto-mayor}}
@@ -1088,24 +1157,6 @@ cada uno un escaño adicional hasta que se hayan asignado todos los
 escaños. De ahí el nombre del método. Hay distintos modelos para
 calcular el cociente, los más utilizados son el cociente Hare, Droop e
 Imperiali.
-
-\hypertarget{cociente-hare}{%
-\subsection{Cociente Hare}\label{cociente-hare}}
-
-La fórmula del cociente Hare es la fórmula más simple que puede
-utilizarse en unas elecciones según un sistema de voto transferible
-único, también se utiliza en sistemas de representación proporcional por
-listas. En comparación con algunos métodos similares, la utilización del
-método del cociente de Hare con el método de resto mayor tiende a
-favorecer a las partes más pequeñas a expensas de las más grandes.
-
-\begin{itemize}
-\tightlist
-\item
-  Fórmula:
-\end{itemize}
-
-\(Cociente = \frac{Total Votos}{Total Escaños}\)
 
 \hypertarget{cociente-droop}{%
 \subsection{Cociente Droop}\label{cociente-droop}}
@@ -1138,6 +1189,26 @@ Estos k escaños son repartidos entre los mejores k residuos \({r_{i}}\).
 De esta forma, el número total de escaños del i-ésimo partido será
 \({p_{i}=e_{i}}\) o \({p_{i}=e_{i}+1}\).
 
+\hypertarget{cociente-hare}{%
+\subsection{Cociente Hare}\label{cociente-hare}}
+
+La fórmula del cociente Hare es la fórmula más simple que puede
+utilizarse en unas elecciones según un sistema de voto transferible
+único, también se utiliza en sistemas de representación proporcional por
+listas. En comparación con algunos métodos similares, la utilización del
+método del cociente de Hare con el método de resto mayor tiende a
+favorecer a las partes más pequeñas a expensas de las más grandes.
+
+\begin{itemize}
+\item
+  Fórmula:
+
+  El cociente se calcula mediante la siguiente fórmula y se siguen los
+  pasos explicados anteriormente para el cociente Droop:
+\end{itemize}
+
+\(Cociente = \frac{Total Votos}{Total Escaños}\)
+
 \hypertarget{cociente-imperiali}{%
 \subsection{Cociente Imperiali}\label{cociente-imperiali}}
 
@@ -1154,7 +1225,7 @@ Si se eligen n escaños para un cuerpo colegiado, y se emiten m votos
 válidos, se establece un cociente q el cual servirá para repartir los
 votos. Este cociente se calcula mediante la fórmula:
 
-\({q={\frac {m}{n+2}}.}\) con q aproximado al entero más próximo.
+\({q={\frac {m}{n+2}}}\) con q aproximado al entero más próximo.
 
 Si la i-ésima lista de I listas inscritas obtiene \({m_{i}}\) votos,
 esta lista tendrá \({e_{i}}\) escaños por cociente y \({r_{i}}\) votos
@@ -1162,8 +1233,69 @@ por residuo mediante la fórmula: \({m_{i}=qe_{i}+r_{i}}\).
 
 \({e_{i}=\left\lfloor {\frac {m_{i}}{q}}\right\rfloor ,r_{i}=m_{i}-qe_{i}}\)
 
+\hypertarget{otros-muxe9todos}{%
+\section{Otros métodos}\label{otros-muxe9todos}}
+
+\hypertarget{muxe9todo-de-condorcet}{%
+\subsection{Método de Condorcet}\label{muxe9todo-de-condorcet}}
+
+El método de Condorcet lleva el nombre del matemático y filósofo francés
+del siglo XVIII Marie Jean Antoine Nicolas Caritat, marqués de
+Condorcet, aunque anteriormente Ramón Llull en 1299 creó un método
+similar que cumple el criterio de Condorcet pero en un diseño iterativo.
+Actualmente este método no se utiliza en ningún país.
+
+Es uno de los métodos en los que se elige al candidato que gana la
+mayoría de los votos en cada par de elecciones frente a cada uno de los
+otros candidatos, es decir, un candidato preferido por más votantes que
+cualquier otro, siempre que exista tal candidato. Un candidato con esta
+propiedad, el campeón de la pareja o el ganador de la victoria, se llama
+formalmente el ganador de Condorcet.
+
+Puede que no siempre exista un ganador del premio Condorcet en una
+elección particular porque la preferencia de un grupo de votantes que
+seleccionan entre más de dos opciones puede ser cíclica, es decir, es
+posible (pero muy raro) que cada candidato tenga un oponente que le
+derrote en una contienda entre dos candidatos. La posibilidad de tales
+preferencias cíclicas en un grupo de votantes se conoce como la paradoja
+de Condorcet.
+
+\hypertarget{procedimiento}{%
+\subsubsection{Procedimiento}\label{procedimiento}}
+
+\begin{itemize}
+\item
+  Voto\\
+  En una elección según el método de Condorcet el votante rellena la
+  lista de candidatos por orden de preferencia.
+\item
+  Vencedor\\
+  El recuento se realiza contrastando a cada candidato contra todos los
+  demás candidatos en una serie de hipotéticos enfrentamientos uno a
+  uno. El ganador de cada pareja es el candidato preferido por la
+  mayoría de los votantes. Se considera que el candidato preferido por
+  cada votante es el que está más alto en su papeleta de votación.
+  Cuando se han considerado todos los emparejamientos posibles de
+  candidatos, si un candidato vence a todos los demás candidatos en
+  estos concursos, entonces se le declara ganador de Condorcet. Como se
+  ha señalado anteriormente, si no hay un ganador de Condorcet debe
+  utilizarse otro método para encontrar el ganador de la elección, y
+  este mecanismo varía de un método de Condorcet a otro.
+\item
+  Recuento de votos mediante matrices\\
+  Se utiliza para los resultados una matriz en donde cada fila es el
+  elemento como ``contendiente'' y en cada columna el elemento como
+  ``oponente''.
+
+  En el caso de que un candidato gane a todos los restantes, será el
+  ganador de Condorcet. Cuando no hay un ganador Condorcet se utilizan
+  métodos alternativos de Condorcet, como el método Minimax y el método
+  Schulze, que utilizan la información contenida en la matriz para
+  elegir un ganador.
+\end{itemize}
+
 \hypertarget{muxe9todo-schulze}{%
-\section{Método Schulze}\label{muxe9todo-schulze}}
+\subsection{Método Schulze}\label{muxe9todo-schulze}}
 
 Método por el cual se selecciona un ganador a partir de las preferencias
 de los votantes, fue creado en 1997 por Markus Schulze
@@ -1188,9 +1320,9 @@ de los votantes, fue creado en 1997 por Markus Schulze
 \end{itemize}
 
 \hypertarget{regla-de-hamilton}{%
-\section{Regla de Hamilton}\label{regla-de-hamilton}}
+\subsection{Regla de Hamilton}\label{regla-de-hamilton}}
 
--Rev- El Método de Hamilton es un método que se emplea para repartir los
+El Método de Hamilton es un método que se emplea para repartir los
 escaños de un Parlamento. Se trata de un método no proporcional, ya que
 dependiendo de la provincia se necesitará un número diferente de votos
 para obtener un escaño.
@@ -1203,38 +1335,149 @@ decimal más grande.
 
 \(\textrm{Cuota} = \frac{Censo Distrito}{Censo Total}\)
 
-\hypertarget{anuxe1lisis-empuxedrico-muxe9todo-reparto-de-escauxf1os}{%
-\chapter{Análisis empírico método reparto de
-escaños}\label{anuxe1lisis-empuxedrico-muxe9todo-reparto-de-escauxf1os}}
+\FloatBarrier
 
-\hypertarget{seguxfan-nuxba-partidos-densidad-y-nuxba-de-escauxf1os-a-repartir}{%
-\section{Según nº partidos, densidad y nº de escaños a
-repartir}\label{seguxfan-nuxba-partidos-densidad-y-nuxba-de-escauxf1os-a-repartir}}
+\ifdefined\ifprincipal
+\else
+\setlength{\parindent}{1em}
+\pagestyle{fancy}
+\setcounter{tocdepth}{4}
+\tableofcontents
+
+\fi
+
+\ifdefined\ifdoblecara
+\fancyhead{}{}
+\fancyhead[LE,RO]{\scriptsize\rightmark}
+\fancyfoot[LO,RE]{\scriptsize\slshape \leftmark}
+\fancyfoot[C]{}
+\fancyfoot[LE,RO]{\footnotesize\thepage}
+\else
+\fancyhead{}{}
+\fancyhead[RO]{\scriptsize\rightmark}
+\fancyfoot[LO]{\scriptsize\slshape \leftmark}
+\fancyfoot[C]{}
+\fancyfoot[RO]{\footnotesize\thepage}
+\fi
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\hypertarget{anuxe1lisis-de-los-muxe9todos-de-reparto-de-escauxf1os}{%
+\chapter{Análisis de los métodos de reparto de
+escaños}\label{anuxe1lisis-de-los-muxe9todos-de-reparto-de-escauxf1os}}
 
 Vamos a simular distintos escenarios para analizarlos según los
 distintos métodos de reparto de escaños.
 
-Los sistemas que analizaremos en este análisis emprírico serán, dentro
-de los métodos de promedio mayor, el método D´Hondt, Método Saint-Lague
-y el método de Saint-Lague modificado. Dentro de los métodos de resto
-mayor analizaremos el método Hagenbach-Bischoff, Droop, Hare e
-Imperiali. Dentro de los métodos mayoritario analizaremos únicamente el
-método de mayoría simple.
+Los sistemas que analizaremos en este análisis empírico serán, dentro de
+los métodos de promedio mayor, el método \emph{D´Hondt}, método
+\emph{Saint-Lague}, método \emph{Saint-Lague modificado}, el método
+\emph{Huntington-Hill}, el método \emph{Imperiali}, \emph{Danish} y
+\emph{Adams}.
 
-Generaremos datos ficticios de partidos, que irán desde 2 posibles
-partidos hasta 100 partidos, número de escaños que irán desde 1 posible
-escaño a repartir a 400 escaños a repartir y según diferentes densidades
-desde una máxima desigualdad en votos entre los partidos hasta una
-máxima igualdad de votos entre partidos.
+\hypertarget{procedimiento-general}{%
+\section{Procedimiento general}\label{procedimiento-general}}
+
+Generaremos datos ficticios de partidos, utilizaremos tres distintas
+variables, que son el número de partidos, el número de escaños a
+repartir y la distribución de los votos entre los partidos. De estas
+tres variables dejaremos dos variables fijas y una tercera que irá
+variando:
+
+\begin{itemize}
+\item
+  La variable \emph{número de partidos} variará entre los 2 posibles
+  partidos hasta los 100 partidos, por ejemplo en países como la India
+  podemos observar que se presentan a las elecciones hasta 2698
+  partidos, aunque no todos ellos de nivel estatal.
+\item
+  La variable \emph{número de escaños} variará entre el reparto de 1
+  sólo escaño a repartir hasta 800 escaños, números similares de escaños
+  a repartir podemos observarlos en Reino Unido o más aún escaños, hasta
+  2987 en China.
+\item
+  La variable \emph{densidad o distribución de los votos} varía entre
+  una casi máxima igualdad de votos entre partidos, es decir, que casi
+  no hay diferencia de votos entre los distintos partidos, hasta una
+  desigualdad muy marcada de los votos que reciben cada partido, como
+  ejemplo presentamos un gráfico para que sea más comprensivo:
+\end{itemize}
+
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-8-1} \end{center}
+
+\hypertarget{cuxe1lculo-de-la-desproporciuxf3n}{%
+\section{Cálculo de la
+desproporción}\label{cuxe1lculo-de-la-desproporciuxf3n}}
+
+En este bloque los resultados los resultados son comparados mediante la
+desproporción, a continuación presentaremos la función y explicaremos el
+procedimiento de cálculo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{desproporción }\OtherTok{\textless{}{-}}
+  \ControlFlowTok{function}\NormalTok{(s, v) \{  }\CommentTok{\# Variables}
+\NormalTok{    s }\OtherTok{\textless{}{-}} \FunctionTok{as.vector}\NormalTok{(s)}
+\NormalTok{    v }\OtherTok{\textless{}{-}} \FunctionTok{as.vector}\NormalTok{(v)}
+\NormalTok{    l\_s }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(s)}
+    \CommentTok{\# Suma de escaños y votos}
+\NormalTok{    s\_s }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(s)   }
+\NormalTok{    s\_v }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(v)}
+    \CommentTok{\# Dividir escaños y votos entre sus totales}
+\NormalTok{    p\_s }\OtherTok{\textless{}{-}}\NormalTok{ s }\SpecialCharTok{/}\NormalTok{ s\_s}
+\NormalTok{    p\_v }\OtherTok{\textless{}{-}}\NormalTok{ v }\SpecialCharTok{/}\NormalTok{ s\_v}
+    \CommentTok{\# Aplicar la fórmula para obtener la desproporción}
+\NormalTok{    o }\OtherTok{\textless{}{-}}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{/}\NormalTok{ l\_s) }\SpecialCharTok{*} \FunctionTok{sum}\NormalTok{(}\FunctionTok{abs}\NormalTok{(p\_s }\SpecialCharTok{{-}}\NormalTok{ p\_v))}
+\NormalTok{    o}
+\NormalTok{  \}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  La función depende de dos variables:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \emph{s}: Escaños obtenidos por cada partido.
+  \item
+    \emph{v}: Votos obtenidos por cada partido.
+  \end{itemize}
+\item
+  En primer lugar se realiza la suma total de escaños, que se recoge en
+  la variable \emph{s\_s} y la suma total de votos, recogida en la
+  variable \emph{s\_v}.
+\item
+  A continuación para cada partido se dividen los escaños obtenidos
+  entre el total de escaños a repartir, se recoge en la variable
+  \emph{p\_s}. El mismo procedimiento para los votos, para cada partido
+  se dividen los votos obtenidos entre el total de votos, recogido en la
+  variable \emph{p\_v}.
+\item
+  Finalmente para cada partido se restan los resultados \emph{p\_s} y
+  \emph{p\_v} anteriormente obtenidos, seguidamente nos quedamos con el
+  valor absoluto de los resultados, sumamos todos los valores y los
+  dividimos entre el número de partidos, lo recogemos en la variable
+  \emph{o}.
+\end{itemize}
+
+Los valores sobre los que puede variar la función de desproporción
+parten de 0, que representaría una proporcionalidad perfecta, y cuanto
+mayor vaya siendo el valor obtenido, peor proporcionalidad presentará.
+Por lo tanto para un método de reparto lo que se pretende conseguir es
+presentar el mínimo valor posible, cuanto menor valor de desproporción
+obtenga mejor método será.
 
 \hypertarget{dhondt}{%
-\subsection{D`Hondt}\label{dhondt}}
+\section{D`Hondt}\label{dhondt}}
 
 \hypertarget{dhondt-variando-el-nuxfamero-de-escauxf1os}{%
-\subsubsection{D`Hondt variando el número de
+\subsection{D`Hondt variando el número de
 escaños}\label{dhondt-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-9-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-12-1} \end{center}
 
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, en el presente caso se empieza por repartir un único
@@ -1247,10 +1490,10 @@ entre sucesivos escaños se va reduciendo, a números altos de escaños a
 repartir la desproporción tiende a estabilizarse.
 
 \hypertarget{dhondt-variando-el-nuxfamero-de-partidos}{%
-\subsubsection{D`Hondt variando el número de
+\subsection{D`Hondt variando el número de
 partidos}\label{dhondt-variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-10-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-13-1} \end{center}
 
 En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 500
@@ -1266,10 +1509,10 @@ elcciones menor es la desproporción que encontramos, como en el apartado
 anterior, la desproporción tiende a estabilizarse.
 
 \hypertarget{dhondt-variando-la-distribuciuxf3n-de-los-votos}{%
-\subsubsection{D`Hondt variando la distribución de los
+\subsection{D`Hondt variando la distribución de los
 votos}\label{dhondt-variando-la-distribuciuxf3n-de-los-votos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-11-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-14-1} \end{center}
 
 En el presente gráfico variamos la distribución de los votos en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -1285,13 +1528,13 @@ D`Hondt es mejor cuanto más concentración de voto tengan unos pocos
 partidos con respecto a los demás.
 
 \hypertarget{sainte-lague}{%
-\subsection{Sainte-Lague}\label{sainte-lague}}
+\section{Sainte-Lague}\label{sainte-lague}}
 
 \hypertarget{sainte-lague-variando-el-nuxfamero-de-escauxf1os}{%
-\subsubsection{Sainte-Lague variando el número de
+\subsection{Sainte-Lague variando el número de
 escaños}\label{sainte-lague-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-14-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-17-1} \end{center}
 
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, en el presente caso se empieza por repartir un único
@@ -1304,10 +1547,10 @@ entre sucesivos escaños va reduciendose, a números altos de escaños a
 repartir la desproporción tiende a estabilizarse.
 
 \hypertarget{sainte-lague-variando-el-nuxfamero-de-partidos}{%
-\subsubsection{Sainte-Lague variando el número de
+\subsection{Sainte-Lague variando el número de
 partidos}\label{sainte-lague-variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-15-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-18-1} \end{center}
 
 En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 500
@@ -1323,10 +1566,10 @@ elcciones menor es la desproporción que encontramos, como en el apartado
 anterior, la desproporción tiende a estabilizarse.
 
 \hypertarget{sainte-lague-variando-la-distribuciuxf3n-de-los-votos}{%
-\subsubsection{Sainte-Lague variando la distribución de los
+\subsection{Sainte-Lague variando la distribución de los
 votos}\label{sainte-lague-variando-la-distribuciuxf3n-de-los-votos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-16-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-19-1} \end{center}
 
 En el presente gráfico variamos la distribución de los votos en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -1342,13 +1585,13 @@ cuanto más concentración de voto tengan unos pocos partidos con respecto
 a los demás.
 
 \hypertarget{modified-sainte-lague}{%
-\subsection{Modified Sainte-Lague}\label{modified-sainte-lague}}
+\section{Modified Sainte-Lague}\label{modified-sainte-lague}}
 
 \hypertarget{modified-sainte-lague-variando-el-nuxfamero-de-escauxf1os}{%
-\subsubsection{Modified Sainte-Lague variando el número de
+\subsection{Modified Sainte-Lague variando el número de
 escaños}\label{modified-sainte-lague-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-19-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-22-1} \end{center}
 
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, en el presente caso se empieza por repartir un único
@@ -1361,10 +1604,10 @@ entre sucesivos escaños va reduciendose, a números altos de escaños a
 repartir la desproporción tiende a estabilizarse.
 
 \hypertarget{modified-sainte-lague-variando-el-nuxfamero-de-partidos}{%
-\subsubsection{Modified Sainte-Lague variando el número de
+\subsection{Modified Sainte-Lague variando el número de
 partidos}\label{modified-sainte-lague-variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-20-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-23-1} \end{center}
 
 En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 500
@@ -1380,10 +1623,10 @@ elcciones menor es la desproporción que encontramos, como en el apartado
 anterior, la desproporción tiende a estabilizarse.
 
 \hypertarget{modified-sainte-lague-variando-la-distribuciuxf3n-de-los-votos}{%
-\subsubsection{Modified Sainte-Lague variando la distribución de los
+\subsection{Modified Sainte-Lague variando la distribución de los
 votos}\label{modified-sainte-lague-variando-la-distribuciuxf3n-de-los-votos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-21-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-24-1} \end{center}
 
 En el presente gráfico variamos la distribución de los votos en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -1399,13 +1642,13 @@ Modified Sainte-Lague es mejor cuanto más concentración de voto tengan
 unos pocos partidos con respecto a los demás.
 
 \hypertarget{imperiali}{%
-\subsection{Imperiali}\label{imperiali}}
+\section{Imperiali}\label{imperiali}}
 
 \hypertarget{imperiali-variando-el-nuxfamero-de-escauxf1os}{%
-\subsubsection{Imperiali variando el número de
+\subsection{Imperiali variando el número de
 escaños}\label{imperiali-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-24-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-27-1} \end{center}
 
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, en el presente caso se empieza por repartir un único
@@ -1418,10 +1661,10 @@ entre sucesivos escaños va reduciendose, a números altos de escaños a
 repartir la desproporción tiende a estabilizarse.
 
 \hypertarget{imperiali-variando-el-nuxfamero-de-partidos}{%
-\subsubsection{Imperiali variando el número de
+\subsection{Imperiali variando el número de
 partidos}\label{imperiali-variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-25-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-28-1} \end{center}
 
 En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 500
@@ -1434,10 +1677,10 @@ Entonces, según el modelo Imperiali tendremos una menor desproporción
 según se vayan aumentando el número de partidos.
 
 \hypertarget{imperiali-variando-la-distribuciuxf3n-de-los-votos}{%
-\subsubsection{Imperiali variando la distribución de los
+\subsection{Imperiali variando la distribución de los
 votos}\label{imperiali-variando-la-distribuciuxf3n-de-los-votos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-26-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-29-1} \end{center}
 
 En el presente gráfico variamos la distribución de los votos en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -1453,13 +1696,13 @@ Imperiali obtiene su menor desproporción en los escenarios en donde la
 diferencia de votos entre los partidos sea muy baja.
 
 \hypertarget{huntington-hill}{%
-\subsection{Huntington-Hill}\label{huntington-hill}}
+\section{Huntington-Hill}\label{huntington-hill}}
 
 \hypertarget{huntington-hill-variando-el-nuxfamero-de-escauxf1os}{%
-\subsubsection{Huntington-Hill variando el número de
+\subsection{Huntington-Hill variando el número de
 escaños}\label{huntington-hill-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-29-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-32-1} \end{center}
 
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, en el presente caso se empieza por repartir un único
@@ -1471,10 +1714,10 @@ desproporción, descenso rápido en los primeros escaños que tiende a
 estabilizarse cuanto mayor número de escaños se repartan.
 
 \hypertarget{huntington-hill-variando-el-nuxfamero-de-partidos}{%
-\subsubsection{Huntington-Hill variando el número de
+\subsection{Huntington-Hill variando el número de
 partidos}\label{huntington-hill-variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-30-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-33-1} \end{center}
 
 En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 500
@@ -1492,10 +1735,10 @@ elecciones pocos partidos, sino que la menor desproporción se obtiene
 cuanto más partidos se presenten a las elecciones.
 
 \hypertarget{huntington-hill-variando-la-distribuciuxf3n-de-los-votos}{%
-\subsubsection{Huntington-Hill variando la distribución de los
+\subsection{Huntington-Hill variando la distribución de los
 votos}\label{huntington-hill-variando-la-distribuciuxf3n-de-los-votos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-31-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-34-1} \end{center}
 
 En el presente gráfico variamos la distribución de los votos en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -1516,13 +1759,13 @@ los otros métodos en donde cuanto mayor concentración de votos menor
 desproporción.
 
 \hypertarget{adams}{%
-\subsection{Adams}\label{adams}}
+\section{Adams}\label{adams}}
 
 \hypertarget{adams-variando-el-nuxfamero-de-escauxf1os}{%
-\subsubsection{Adams variando el número de
+\subsection{Adams variando el número de
 escaños}\label{adams-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-34-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-37-1} \end{center}
 
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, en el presente caso se empieza por repartir un único
@@ -1537,10 +1780,10 @@ reduciendose, a números altos de escaños a repartir la desproporción
 tiende a estabilizarse.
 
 \hypertarget{adams-variando-el-nuxfamero-de-partidos}{%
-\subsubsection{Adams variando el número de
+\subsection{Adams variando el número de
 partidos}\label{adams-variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-35-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-38-1} \end{center}
 
 En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 500
@@ -1556,10 +1799,10 @@ Entonces según el método Adams obtenemos el mejor resultado cuanto mayor
 número de partidos se presenten a las elecciones.
 
 \hypertarget{adams-variando-la-distribuciuxf3n-de-los-votos}{%
-\subsubsection{Adams variando la distribución de los
+\subsection{Adams variando la distribución de los
 votos}\label{adams-variando-la-distribuciuxf3n-de-los-votos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-36-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-39-1} \end{center}
 
 En el presente gráfico variamos la distribución de los votos en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -1577,13 +1820,13 @@ mejor cuanto menor concentración de voto los partidos entre ellos, y
 será peor cuanto mayor concentración de voto se presente.
 
 \hypertarget{danish}{%
-\subsection{Danish}\label{danish}}
+\section{Danish}\label{danish}}
 
 \hypertarget{danish-variando-el-nuxfamero-de-escauxf1os}{%
-\subsubsection{Danish variando el número de
+\subsection{Danish variando el número de
 escaños}\label{danish-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-39-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-42-1} \end{center}
 
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, en el presente caso se empieza por repartir un único
@@ -1596,10 +1839,10 @@ entre sucesivos escaños va reduciendose, a números altos de escaños a
 repartir la desproporción tiende a estabilizarse.
 
 \hypertarget{danish-variando-el-nuxfamero-de-partidos}{%
-\subsubsection{Danish variando el número de
+\subsection{Danish variando el número de
 partidos}\label{danish-variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-40-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-43-1} \end{center}
 
 En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 500
@@ -1618,10 +1861,10 @@ Entonces según el método Danish obtenemos el mejor resultado cuanto más
 partidos se presenten a las elecciones.
 
 \hypertarget{danish-variando-la-distribuciuxf3n-de-los-votos}{%
-\subsubsection{Danish variando la distribución de los
+\subsection{Danish variando la distribución de los
 votos}\label{danish-variando-la-distribuciuxf3n-de-los-votos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-41-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-44-1} \end{center}
 
 En el presente gráfico variamos la distribución de los votos en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -1647,7 +1890,7 @@ métodos}\label{comparaciones-entre-muxe9todos}}
 \subsection{Variando el número de
 escaños}\label{variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-42-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-45-1} \end{center}
 
 En el presente gráfico comparamos en un mismo lugar los métodos
 anteriormente analizados individualmente. En esta comparación podemos
@@ -1658,7 +1901,7 @@ escaños menor y el Imperiali a partir aproximadamente de los 100
 escaños. Los mejores métodos en este caso serían el método de
 Sainte-Lague y el método Danish.
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-43-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-46-1} \end{center}
 
 En este gráfico nos centramos en la desproporción para un número de
 escaños a repartir de entre 300 y 400 diputados, actualmente en España
@@ -1678,7 +1921,7 @@ método Imperiali.
 Actualmente en España se reparten 350 escaños y se utiliza el método
 D´Hondt, según los datos obtenidos podemos decir que no es el mejor
 método que se puede utilizar, es un método que está en el grupo de
-dispropocionalidad media, e incluso no es el mejor método dentro de ese
+desproporción media, e incluso no es el mejor método dentro de ese
 subgrupo, sería interesante según lo observado en la gráfica plantearse
 un cambio de método a otro mejor, al menos a alguno dentro del subgrupo
 de desproporción baja, preferentemente el mejor método que podríamos
@@ -1688,7 +1931,7 @@ utilizar, que sería el método de Sainte-Lague sin modificar.
 \subsection{Variando el número de
 partidos}\label{variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-44-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-47-1} \end{center}
 
 En el presente gráfico comparamos la desproporción variando el número de
 partidos en un mismo lugar con los métodos anteriormente analizados
@@ -1702,7 +1945,7 @@ el método Adams, mientras que los demás métodos son muy similares en su
 desproporción, donde la menor desproporción lo podemos encontrar en el
 método Adams.
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-45-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-48-1} \end{center}
 
 En este gráfico nos centramos en la desproporción para un número de
 partidos entre 2 y 50 partidos.
@@ -1726,7 +1969,7 @@ el mejor método es el Saint-Lague.
 \subsection{Variando la distribución de los
 votos}\label{variando-la-distribuciuxf3n-de-los-votos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-46-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-49-1} \end{center}
 
 En el presente gráfico comparamos la distribución de los votos en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -1746,7 +1989,7 @@ desproporción aumenta hasta que alcanza un punto en donde alcanza el
 máximo de desproporción y a partir de ese punto la desproporción va
 bajando alcanzando el mínimo de desproporción.
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-47-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-50-1} \end{center}
 
 En este gráfico nos centramos en los casos en que hay mayor
 concentración de votos de unos pocos partidos, lo que suele suceder
@@ -1804,8 +2047,84 @@ resultados.
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
-\hypertarget{analisis-de-los-datos}{%
-\chapter{Analisis de los datos}\label{analisis-de-los-datos}}
+\hypertarget{elecciones-espauxf1olas-seguxfan-distintos-muxe9todos-de-reparto-de-escauxf1os.}{%
+\chapter{Elecciones españolas según distintos métodos de reparto de
+escaños.}\label{elecciones-espauxf1olas-seguxfan-distintos-muxe9todos-de-reparto-de-escauxf1os.}}
+
+A continuación analizaremos el reparto de escaños para el congreso de
+las distintas elecciones en España desde el 1977. Aplicando diferentes
+métodos de reparto de escaños, analizaremos los resultados obtenidos en
+cada elección. Una vez obtenidos el reparto de escaños según los
+distintos métodos procederemos a obtener la proporcionalidad para cada
+método y así analizar la desproporción tanto por comunidades autónomas
+como por España en su conjunto.
+
+\hypertarget{procedimiento-1}{%
+\section{Procedimiento}\label{procedimiento-1}}
+
+Para ser capaces de realizar el análisis pretendido se ha procedido de
+este modo:
+
+\begin{itemize}
+\tightlist
+\item
+  En primer lugar se han obtenido los resultados de las elecciones al
+  congreso de la página web del ministerio del interior\footnote{\href{http://www.infoelectoral.mir.es/min/}{Consulta
+    de resultados electorales Ministerio del interior}}, desde el año
+  1977 hasta las últimas elecciones del 2019.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Creación de las distintas funciones para los distintos métodos de
+  reparto de escaños así como la función para calcular la desproporción.
+  Se han empleado distintas librerías de \emph{R} tal y como
+  \emph{openxlsx} para leer los diferentes resultados electorales,
+  \emph{electoral} como apoyo para escribir las funciones,
+  \emph{data.table}, \emph{dplyr} y \emph{tidyr} para manipular los
+  datos, \emph{ggplot2} y \emph{ggpol} para la creación de los distintos
+  gráficos. Como muestra se presenta la función para el método D´Hondt:
+\end{itemize}
+
+\pagebreak
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{asientos\_dhondt }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(partidos, votos,}
+\NormalTok{                            n\_escannos,}
+                            \AttributeTok{couta\_min =} \DecValTok{0}\NormalTok{) \{}
+  \CommentTok{\# Cuota mínima}
+\NormalTok{  nv }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(votos)}
+\NormalTok{  vn }\OtherTok{\textless{}{-}}\NormalTok{ votos}
+\NormalTok{  vn[votos }\SpecialCharTok{\textless{}=}\NormalTok{ nv }\SpecialCharTok{*}\NormalTok{ couta\_min] }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{  votos }\OtherTok{\textless{}{-}}\NormalTok{ vn}
+
+  \CommentTok{\# Escaños}
+\NormalTok{  div }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n\_escannos}
+\NormalTok{  G }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(div, }\ControlFlowTok{function}\NormalTok{(x) votos }\SpecialCharTok{/}\NormalTok{ x)}
+\NormalTok{  cuota }\OtherTok{\textless{}{-}}\NormalTok{ G[}\FunctionTok{order}\NormalTok{(G, }\AttributeTok{decreasing =}\NormalTok{ T)][n\_escannos]}
+\NormalTok{  W }\OtherTok{\textless{}{-}}\NormalTok{ (G }\SpecialCharTok{\textgreater{}=}\NormalTok{ cuota)}
+\NormalTok{  seats }\OtherTok{\textless{}{-}} \FunctionTok{rowSums}\NormalTok{(W)}
+\NormalTok{  o }\OtherTok{\textless{}{-}}\NormalTok{ seats}
+  \CommentTok{\# Resultados}
+  \FunctionTok{data.frame}\NormalTok{(}\StringTok{"Partidos"} \OtherTok{=}\NormalTok{ partidos, }\StringTok{"Escanos"} \OtherTok{=} \FunctionTok{as.numeric}\NormalTok{(o))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\item
+  Una vez obtenidos los resultados electorales y creado las funciones
+  necesarias, se procede a aplicar las funciones creadas con los
+  resultados electorales.
+\item
+  Creación de los gráficos y análisis de los resultados, tanto para el
+  reparto de escaños como para los resultados de la desproporción por
+  comunidades autónomas y España en su conjunto.
+\end{itemize}
+
+\newpage
 
 \hypertarget{auxf1o-1977}{%
 \section{Año 1977}\label{auxf1o-1977}}
@@ -1817,11 +2136,9 @@ métodos}\label{comparativa-entre-muxe9todos}}
 \hypertarget{votos-obtenidos}{%
 \subsubsection{Votos obtenidos}\label{votos-obtenidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-59-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-62-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-59-2} \end{center}
-
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-59-3} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-62-2} \end{center}
 
 En estas primeras elecciones de 1977 podemos observar que la fuerza más
 votada en las elecciones es el partido \emph{Unión de Centro
@@ -1848,9 +2165,9 @@ escaños más de haber optado por otro método de reparto de votos.
 \hypertarget{desproporciuxf3n}{%
 \subsubsection{Desproporción}\label{desproporciuxf3n}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-60-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-63-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-60-2} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-63-2} \end{center}
 
 En el presente gráfico, en el que se mide la desproporción por
 comunidades, observamos que en general entre todos los métodos las
@@ -1886,11 +2203,9 @@ métodos}\label{comparativa-entre-muxe9todos-1}}
 \hypertarget{votos-obtenidos-1}{%
 \subsubsection{Votos obtenidos}\label{votos-obtenidos-1}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-68-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-71-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-68-2} \end{center}
-
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-68-3} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-71-2} \end{center}
 
 En estas elecciones de 1979 el partido más votado fué \emph{UCD} seguido
 del \emph{PSOE}, según los distintos métodos de reparto únicamente en el
@@ -1907,9 +2222,9 @@ encuentran todos los demás.
 \hypertarget{desproporciuxf3n-1}{%
 \subsubsection{Desproporción}\label{desproporciuxf3n-1}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-69-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-72-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-69-2} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-72-2} \end{center}
 
 En el presente gráfico vemos como respecto a las anteriores elecciones
 hay una mayor diferencia de desproporción entre comunidades, siguen
@@ -1933,11 +2248,9 @@ métodos}\label{comparativa-entre-muxe9todos-2}}
 \hypertarget{votos-obtenidos-2}{%
 \subsubsection{Votos obtenidos}\label{votos-obtenidos-2}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-77-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-80-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-77-2} \end{center}
-
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-77-3} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-80-2} \end{center}
 
 En estas elecciones de 1982 el partido más votado es el \emph{PSOE} el
 cual según la mayoría de los métodos de reparto, incluido el método
@@ -1953,9 +2266,9 @@ puede ser el método Danish o bien el Sainte-Lague podría multiplicar por
 \hypertarget{desproporciuxf3n-2}{%
 \subsubsection{Desproporción}\label{desproporciuxf3n-2}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-78-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-81-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-78-2} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-81-2} \end{center}
 
 Según la gráfica de desproporción por comunidades es un año en el que
 generalmente no hay mucha diferencia de desproporción entre ellas, este
@@ -1963,7 +2276,7 @@ año las comunidades más desproporcionadas son la comunidad Foral de
 Navarra y Cantabria mientras que las comunidades más proporcionadas son
 la comunidad de Madrid y la región de Murcia.
 
-Según la disproporción media, se reconocen tres grupos distintos, un
+Según la desproporción media, se reconocen tres grupos distintos, un
 grupo muy desproporcionado, con el método Imperiali como el más
 desproporcionado, otro grupo medio en donde se encontraría el método
 D´Hondt y un último grupo el cual sería el más proporcionado en el que
@@ -1979,11 +2292,9 @@ métodos}\label{comparativa-entre-muxe9todos-3}}
 \hypertarget{votos-obtenidos-3}{%
 \subsubsection{Votos obtenidos}\label{votos-obtenidos-3}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-86-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-89-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-86-2} \end{center}
-
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-86-3} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-89-2} \end{center}
 
 En estas elecciones de 1986 el partido más votado fué el \emph{PSOE},
 tal y como sucedió en las anteriores elecciones, son también unas
@@ -2004,11 +2315,11 @@ duplicar sus escaños en el caso de optar por el método Danish.
 \hypertarget{desproporciuxf3n-3}{%
 \subsubsection{Desproporción}\label{desproporciuxf3n-3}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-87-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-90-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-87-2} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-90-2} \end{center}
 
-Este año en el caso de la disproporción por comunidades podemos observar
+Este año en el caso de la desproporción por comunidades podemos observar
 que aumenta la diferencia respecto a las pasadas elecciones, una de las
 comunidades más proporcionadas es la comunidad de Asturias mientras que
 Aragón pasa a ser ahora una de las que más desproporción presenta. En
@@ -2030,11 +2341,9 @@ métodos}\label{comparativa-entre-muxe9todos-4}}
 \hypertarget{votos-obtenidos-4}{%
 \subsubsection{Votos obtenidos}\label{votos-obtenidos-4}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-95-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-98-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-95-2} \end{center}
-
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-95-3} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-98-2} \end{center}
 
 En estas elecciones de 1989 el partido más votado es, como sucedió el
 las anteriores elecciones, el \emph{PSOE}, vemos como aparece por
@@ -2054,22 +2363,22 @@ de optar por los métodos más proporcionales.
 \hypertarget{desproporciuxf3n-4}{%
 \subsubsection{Desproporción}\label{desproporciuxf3n-4}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-96-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-99-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-96-2} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-99-2} \end{center}
 
-Este año aunmenta ligeramente la diferencia de disproporción entre
+Este año aunmenta ligeramente la diferencia de desproporción entre
 comunidades, sin encontrar novedades en las comunidades más
 proporcionales, Madrid, y las más desproporcionadas, las ciudades de
 Ceuta y Melilla. Observando los métodos de reparto hay dos grupos
 diferenciados, uno en el que se encuentran el método Adams y el método
 de huntington-Hill, en los cuales no se encuentran comunidades con picos
-de disproporción pero por el lado contrario su disproporción media es
+de desproporción pero por el lado contrario su desproporción media es
 alta, y otro grupo que serían los restantes métodos los cuales todos
 presentan unos mismos picos máximos como míninos.
 
 Estas elecciones de 1989 la desproporción media se agrupa en tres
-grupos, alta, media y baja disproporción, el más desproporcionado vuelve
+grupos, alta, media y baja desproporción, el más desproporcionado vuelve
 a ser el método Imperiali, el método D´Hondt sigue en el grupo medio y
 el método más proporcionado vuelve a ser el Danish aunque le sigue muy
 cerca el método Sainte-Lague.
@@ -2084,11 +2393,9 @@ métodos}\label{comparativa-entre-muxe9todos-5}}
 \hypertarget{votos-obtenidos-5}{%
 \subsubsection{Votos obtenidos}\label{votos-obtenidos-5}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-104-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-107-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-104-2} \end{center}
-
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-104-3} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-107-2} \end{center}
 
 En las elecciones de 1993 podemos observar como la fuerza del primer
 partido va decreciendo lentamente. Los dos partidos más votados son el
@@ -2106,21 +2413,16 @@ dos partidos medianos que son \emph{IU} y \emph{CIU}, como hemos visto
 en cambio \emph{CIU} no se vería agraviado o beneficiado al cambiar el
 método de reparto.
 
-<<<<<<< HEAD
 \hypertarget{desproporciuxf3n-5}{%
 \subsubsection{Desproporción}\label{desproporciuxf3n-5}}
-=======
-\hypertarget{disproporcionalidad-5}{%
-\subsubsection{Disproporcionalidad}\label{disproporcionalidad-5}}
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-105-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-108-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-105-2} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-108-2} \end{center}
 
-En estas elecciones se observan más picos de disproporción en
+En estas elecciones se observan más picos de desproporción en
 comparación con las elecciones anteriores, especialmente aumenta su
-disproporción el Pais Vasco y Aragón, no hay novedades en los máximos ni
+desproporción el Pais Vasco y Aragón, no hay novedades en los máximos ni
 en los mínimos.
 
 Este año en el caso de la desproporción media según el método de reparto
@@ -2141,11 +2443,9 @@ métodos}\label{comparativa-entre-muxe9todos-6}}
 \hypertarget{votos-obtenidos-6}{%
 \subsubsection{Votos obtenidos}\label{votos-obtenidos-6}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-113-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-116-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-113-2} \end{center}
-
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-113-3} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-116-2} \end{center}
 
 En estas elecciones de 1996 son las primeras elecciones en donde el
 \emph{PP} son la fuerza más votada, el \emph{PSOE} que ya llevaba una
@@ -2154,34 +2454,22 @@ habiendo un bipartidismo significativo con dos partidos medianos,
 todavía el PP a pesar de ganar las elecciones no alcanza la mayoría
 absoluta en ninguno de los métodos analizados
 
-<<<<<<< HEAD
 \hypertarget{desproporciuxf3n-6}{%
 \subsubsection{Desproporción}\label{desproporciuxf3n-6}}
-=======
-\hypertarget{disproporcionalidad-6}{%
-\subsubsection{Disproporcionalidad}\label{disproporcionalidad-6}}
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-114-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-117-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-114-2} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-117-2} \end{center}
 
-En estas elecciones de 1996 se observa una disproporción similar a las
+En estas elecciones de 1996 se observa una desproporción similar a las
 elecciones anteriores, no hay novedades significativas en el
 comportamiento de las provincias.
 
-<<<<<<< HEAD
 Este año en el caso de la desproporción media según el método de reparto
-vemos que hay diferencias en los métodos más desproporcionales respecto
+vemos que hay diferencias en los métodos con más desproporción respecto
 a la anterior elección, el método más desproporcionado vuelve a ser el
 Imperiali. Los más desproporcionados este año son el método
-=======
-Este año en el caso de la disproporcionalidad media según el método de
-reparto vemos que hay diferencias en los métodos más disproporcionales
-respecto a la anterior elección, el método más disproporcionado vuelve a
-ser el Imperiali. Los más disproporcionados este año son el método
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
-anteriormente citado, Imperiali seguido muy de cerca por los métodos
+anteriormente citado, Imperiali, seguido muy de cerca por los métodos
 Adams y de Huntington-Hill, en el caso de los más proporcionados cambia,
 el método Danish pasa a un segundo puesto superado por el método
 Sainte-Lague.
@@ -2196,17 +2484,15 @@ métodos}\label{comparativa-entre-muxe9todos-7}}
 \hypertarget{votos-obtenidos-7}{%
 \subsubsection{Votos obtenidos}\label{votos-obtenidos-7}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-122-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-125-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-122-2} \end{center}
-
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-122-3} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-125-2} \end{center}
 
 En las elecciones del año 2000 el partido más votado vuelve a ser el
 \emph{Partido Popular} seguido del \emph{PSOE}, en estas elecciones
 según el método D´Hondt utilizado en España el PP conseguiría una
 mayoría absoluta holgada, es una elección con un claro bipartidismo
-donde se podría decir que no existen partidos medianos. Si optasemos por
+donde se podría decir que no existen partidos medianos. Si optásemos por
 otro método de reparto más proporcional como puede ser el método Danish
 o el Sainte-Lague el PP no alcanzaría la mayoría absoluta, se quedaría a
 muy pocos escaños de alcanzarla, en cambio veríamos a muchos partidos
@@ -2214,30 +2500,25 @@ pequeños con menos de tres votos casi duplicar su presencia en escaños.
 El partido más castigado por utilizar el método D´Hondt en estas
 elecciones sigue siendo Izquierda Unida.
 
-<<<<<<< HEAD
 \hypertarget{desproporciuxf3n-7}{%
 \subsubsection{Desproporción}\label{desproporciuxf3n-7}}
-=======
-\hypertarget{disproporcionalidad-7}{%
-\subsubsection{Disproporcionalidad}\label{disproporcionalidad-7}}
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-123-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-126-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-123-2} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-126-2} \end{center}
 
-Observando la disproporción por comunidades no encontramos diferencias
+Observando la desproporción por comunidades no encontramos diferencias
 significativas respecto a las anteriores elecciones, es decir, tanto el
 método Adams como el Huntington-Hill tienen un comportamiento diferente
 respecto a los demás, siguen siendo los más despropocionados las
 ciudades de Ceuta y Melilla, y la más proporcionada la Comunidad de
-Madrid, este año es especialmente alta la disproporción de las Islas
+Madrid, este año es especialmente alta la desproporción de las Islas
 Baleares respecto a anteriores elecciones.
 
 Si miramos la gráfica de la desproporción según el método de reparto se
 pueden agrupar los métodos en dos grupos, uno con gran desproporción en
 el que estarían incluidos los métodos Adams, Imperiali y
-Huntington-Hill, y el otro grupo restante con una disproporción media
+Huntington-Hill, y el otro grupo restante con una desproporción media
 baja. Seguimos observando que el método D´Hont no es el mejor aunque en
 estas elecciones se puede considerar un método aceptable siendo el mejor
 método alternativo el Danish.
@@ -2252,11 +2533,9 @@ métodos}\label{comparativa-entre-muxe9todos-8}}
 \hypertarget{votos-obtenidos-8}{%
 \subsubsection{Votos obtenidos}\label{votos-obtenidos-8}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-131-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-134-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-131-2} \end{center}
-
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-131-3} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-134-2} \end{center}
 
 En estas elecciones del año 2004 volvemos a ver unas elecciones con un
 claro bipartidismo y con una diferencia de escaños entre partidos cada
@@ -2272,23 +2551,18 @@ en el caso de optar por el método Danish, en cambio el partido más
 castigado por el método D´Hondt, Izquierda Unida, hasta podría ver
 duplicado o triplicado su presencia en el congreso.
 
-<<<<<<< HEAD
 \hypertarget{desproporciuxf3n-8}{%
 \subsubsection{Desproporción}\label{desproporciuxf3n-8}}
-=======
-\hypertarget{disproporcionalidad-8}{%
-\subsubsection{Disproporcionalidad}\label{disproporcionalidad-8}}
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-132-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-135-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-132-2} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-135-2} \end{center}
 
 Según el gráfico anterior por comunidades sigue la tónica general de las
 anteriores elecciones, únicamente podemos apreciar en estas elecciones
 una reducción de la disproporciorcionalidad entre comunidades, es decir,
 una menor diferencia de desproporción entre ellas. En el caso de agrupar
-la disproporción por métodos observamos que el método Imperiali vuelve a
+la desproporción por métodos observamos que el método Imperiali vuelve a
 ser el más desproporcionado este año mientras que en la parte de los
 métodos mas proporcionados el método mejor sería el Sainte-Lague, el
 método utilizado en España sigue siendo un método que se encuentra en el
@@ -2304,11 +2578,9 @@ métodos}\label{comparativa-entre-muxe9todos-9}}
 \hypertarget{votos-obtenidos-9}{%
 \subsubsection{Votos obtenidos}\label{votos-obtenidos-9}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-140-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-143-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-140-2} \end{center}
-
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-140-3} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-143-2} \end{center}
 
 En estos comicios del año 2008 no hay diferencias significativas en
 términos de escaños, sigue un claro bipartidismo con dos partidos
@@ -2326,17 +2598,12 @@ el partido más perjudicado sigue siendo Izquierda Unida que podría en
 este año hasta mas que quintuplicar su presencia en el congreso de haber
 optado por el método Danish.
 
-<<<<<<< HEAD
 \hypertarget{desproporciuxf3n-9}{%
 \subsubsection{Desproporción}\label{desproporciuxf3n-9}}
-=======
-\hypertarget{disproporcionalidad-9}{%
-\subsubsection{Disproporcionalidad}\label{disproporcionalidad-9}}
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-141-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-144-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-141-2} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-144-2} \end{center}
 
 Este es un año que se puede observar una mayor igualdad en el caso de
 las desproporcionalidades, las comunidades no tienen una gran diferencia
@@ -2360,11 +2627,9 @@ métodos}\label{comparativa-entre-muxe9todos-10}}
 \hypertarget{votos-obtenidos-10}{%
 \subsubsection{Votos obtenidos}\label{votos-obtenidos-10}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-149-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-152-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-149-2} \end{center}
-
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-149-3} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-152-2} \end{center}
 
 Este año 2011 podemos considerarlo como el primer año en el que aunque
 siga sucediendo un claro bipartidismo empiezan a surgir partidos
@@ -2388,17 +2653,12 @@ la diferencia de escaños a la mitad pero la diferencia más notoria está
 en los partidos medianos UPyD y IU, que pasarían de 5 a 41 escaños y de
 11 a 54 escaños respectivamente.
 
-<<<<<<< HEAD
 \hypertarget{desproporciuxf3n-10}{%
 \subsubsection{Desproporción}\label{desproporciuxf3n-10}}
-=======
-\hypertarget{disproporcionalidad-10}{%
-\subsubsection{Disproporcionalidad}\label{disproporcionalidad-10}}
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-150-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-153-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-150-2} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-153-2} \end{center}
 
 Observando el gráfico de la desproporción entre comunidades vemos como
 este año particularmente el comportamiento general de todos los métodos
@@ -2425,11 +2685,9 @@ métodos}\label{comparativa-entre-muxe9todos-11}}
 \hypertarget{votos-obtenidos-11}{%
 \subsubsection{Votos obtenidos}\label{votos-obtenidos-11}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-158-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-161-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-158-2} \end{center}
-
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-158-3} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-161-2} \end{center}
 
 En estas elecciones del 2014 ya vemos como habíamos predicho en las
 anteriores que el bipartidismo que veíamos omnipresente en todas las
@@ -2450,24 +2708,19 @@ supondría un cambio significativo. El partido más perjudicado este año
 vuelve a ser Izquierda Unida, que podría pasar de obtener 2 escaños con
 el método D´Hondt a 11 escaños con el Danish.
 
-<<<<<<< HEAD
 \hypertarget{desproporciuxf3n-11}{%
 \subsubsection{Desproporción}\label{desproporciuxf3n-11}}
-=======
-\hypertarget{disproporcionalidad-11}{%
-\subsubsection{Disproporcionalidad}\label{disproporcionalidad-11}}
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-159-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-162-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-159-2} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-162-2} \end{center}
 
 Según el gráfico por comunidades volvemos a ver un comportamiento
 claramente distinto de los demás de los métodos Adams y Huntington-Hill,
 es un año en el que la diferencia de desproporción entre las distintas
 comunidades aumentan.
 
-En el caso de la disproporción según el método de reparto este año
+En el caso de la desproporción según el método de reparto este año
 tenemos nuevamente dos grupos difenrenciados, en un grupo con una
 desproporción alta estaría únicamente el método Imperiali y todos los
 métodos restantes se encontrarían en el grupo de desproporción baja, el
@@ -2485,11 +2738,9 @@ métodos}\label{comparativa-entre-muxe9todos-12}}
 \hypertarget{votos-obtenidos-12}{%
 \subsubsection{Votos obtenidos}\label{votos-obtenidos-12}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-167-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-170-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-167-2} \end{center}
-
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-167-3} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-170-2} \end{center}
 
 En las elecciones del año 2016 vemos como se va consolidando el modelo
 de las anteriores elecciones, con dos grandes partidos y dos partidos
@@ -2504,17 +2755,12 @@ cambia significativamente el reparto de escaños, es notorio que en este
 año el PSOE obtenga casi los mismos votos independientemente del método
 utilizado.
 
-<<<<<<< HEAD
 \hypertarget{desproporciuxf3n-12}{%
 \subsubsection{Desproporción}\label{desproporciuxf3n-12}}
-=======
-\hypertarget{disproporcionalidad-12}{%
-\subsubsection{Disproporcionalidad}\label{disproporcionalidad-12}}
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-168-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-171-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-168-2} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-171-2} \end{center}
 
 En la desproporción por comunidades vemos el habitual comportamiento
 entre los métodos, con el método Adams y el Huntington-Hill
@@ -2522,12 +2768,12 @@ comportándose diferente a los demás. Respecto a las diferencias de
 desproporción entre comunidades este año es especialmente similar el
 comportamiento entre los distintos métodos. En el gráfico en que
 comparamos los métodos de reparto el comportamiento es similar al
-anterior año, con un método muy desproporcional respecto a los demás, el
-método Imperiali, y los demás métodos muy similares entre ellos siendo
-el mejor el método de Sainte-Lague, el método utilizado en España, el
-D´Hondt, vuelve a ser el segundo peor por lo que cada vez es más
-necesario proponer un cambio de método de reparto a otro más
-proporcional.
+anterior año, con un método que es significativamente desproporcionado
+respecto a los demás, el método Imperiali, y los demás métodos muy
+similares entre ellos siendo el mejor el método de Sainte-Lague, el
+método utilizado en España, el D´Hondt, vuelve a ser el segundo peor por
+lo que cada vez es más necesario proponer un cambio de método de reparto
+a otro más proporcional.
 
 \hypertarget{auxf1o-2019-abril}{%
 \section{Año 2019, Abril}\label{auxf1o-2019-abril}}
@@ -2539,39 +2785,32 @@ métodos}\label{comparativa-entre-muxe9todos-13}}
 \hypertarget{votos-obtenidos-13}{%
 \subsubsection{Votos obtenidos}\label{votos-obtenidos-13}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-176-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-179-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-176-2} \end{center}
-
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-176-3} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-179-2} \end{center}
 
 En estas elecciones de Abril de 2019 vemos como ya no existe
 bipartidismo, este año podemos agrupar a los partidos políticos en
 cuatro categorías, la primera en donde hay un partido con muchos votos
-con una gran diferencia de escaños respecto a los demás, que es el PSOE,
-un segundo grupo en donde se encontrarían dos partidos con un número
-medio-alto de escaños, que son el PP y Ciudadanos respectivamente, un
-tercer grupo con un número mediano de escaños con Podemos y Vox, y un
-último grupo de pocos escaños con los demás partidos. Este año tampoco
-hay una diferencia significativa de haber utilizado un método de reparto
-respecto a otro, no hay partidos especialmente perjudicados por la
-elección del método D´Hondt, en ningún caso el partido más votado
-alcanza la mayoría absoluta. De haber utilizado el método Danish el
-partido que se vería más beneficiado sería Vox seguido de Ciudadanos,
-partido que superaría en escaños al PP y se convertiría en la segunda
-fuerza en el hemiciclo.
+con una gran diferencia de escaños respecto a los demás, que es el
+\emph{PSOE}, un segundo grupo en donde se encontrarían dos partidos con
+un número medio-alto de escaños, que son el \emph{PP} y
+\emph{Ciudadanos} respectivamente, un tercer grupo con un número mediano
+de escaños con \emph{Podemos} y \emph{Vox}, y un último grupo de pocos
+escaños con los demás partidos. Este año tampoco hay una diferencia
+significativa de haber utilizado un método de reparto respecto a otro,
+no hay partidos especialmente perjudicados por la elección del método
+D´Hondt, en ningún caso el partido más votado alcanza la mayoría
+absoluta. De haber utilizado el método Danish el partido que se vería
+más beneficiado sería Vox seguido de Ciudadanos, partido que superaría
+en escaños al PP y se convertiría en la segunda fuerza en el hemiciclo.
 
-<<<<<<< HEAD
 \hypertarget{desproporciuxf3n-13}{%
 \subsubsection{Desproporción}\label{desproporciuxf3n-13}}
-=======
-\hypertarget{disproporcionalidad-13}{%
-\subsubsection{Disproporcionalidad}\label{disproporcionalidad-13}}
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-177-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-180-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-177-2} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-180-2} \end{center}
 
 Este es un año en el que viendo la desproporción por comunidades es
 especialmente similar independientemente del método utilizado, todos los
@@ -2599,11 +2838,9 @@ métodos}\label{comparativa-entre-muxe9todos-14}}
 \hypertarget{votos-obtenidos-14}{%
 \subsubsection{Votos obtenidos}\label{votos-obtenidos-14}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-185-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-188-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-185-2} \end{center}
-
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-185-3} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-188-2} \end{center}
 
 En esta gráfica de las elecciones de Noviembre de 2019 podemos observar
 una ligera recuperación del bipartidismo en donde los dos principales
@@ -2619,17 +2856,12 @@ más proporcional como pueda ser el Danish, que son los partidos de
 Podemos que pasarían de obtener 26 escaños a 40 y el partido Ciudadanos
 que pasaría a duplicar su presencia de 10 escaños a 23.
 
-<<<<<<< HEAD
 \hypertarget{desproporciuxf3n-14}{%
 \subsubsection{Desproporción}\label{desproporciuxf3n-14}}
-=======
-\hypertarget{disproporcionalidad-14}{%
-\subsubsection{Disproporcionalidad}\label{disproporcionalidad-14}}
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-186-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-189-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-186-2} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-189-2} \end{center}
 
 En el gráfico por comunidades obtenemos el mismo comportamiento que en
 las elecciones anteriores sin obtener una diferencia significativa.
@@ -2643,13 +2875,13 @@ cambio de método de reparto.
 \hypertarget{comparativa-entre-auxf1os}{%
 \section{Comparativa entre años}\label{comparativa-entre-auxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-187-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-190-1} \end{center}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-187-2} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-190-2} \end{center}
 
 En este gráfico comparando la desproporción media por año observamos
-como la disproporción desde las elecciones de 1977 hasta 1989 está en un
-nivel medio, a partir del año 1993 la disproporción baja, principalmente
+como la desproporción desde las elecciones de 1977 hasta 1989 está en un
+nivel medio, a partir del año 1993 la desproporción baja, principalmente
 debido a un bipartidismo más marcado, esto se mantiene hasta el año de
 las elecciones de 2011, en donde empieza por primera vez a aparecer un
 tercer partido que debilita el bipartidismo por lo que la desproporción
@@ -2669,7 +2901,8 @@ lo tanto sacamos estas conclusiones:
 \item
   El peor método es el Imperiali.
 \item
-  El método D´Hondt es el cuarto mejor método.
+  El método D´Hondt es el cuarto mejor método en términos de
+  proporcionalidad.
 \end{itemize}
 
 Por lo tanto al preguntarnos si el método utilizado en España es el
@@ -2681,7 +2914,7 @@ partidos más votados y de entre ellos es el método más proporcional, por
 lo que se podría decir que es el método más proporcional entre los
 métodos que ``facilitan la gobernanza''. Pero si nuestro objetivo es
 obtener la máxima proporcionalidad en vez de facilitar la gobernanza
-deberíamos plantear un cambio de método en primer lugar al Sainte-Lague
+deberíamos plantear un cambio de método, en primer lugar al Sainte-Lague
 o al Danish, ambos métodos son casi idénticos en términos de
 proporcionalidad pero el Sainte-Lague tiene una mejor característica que
 el Danish, que reparte los escaños de forma que es más fácil gobernar.

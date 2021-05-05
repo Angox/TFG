@@ -140,10 +140,10 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
 ```{r child = 'capitulo02.Rmd'}
 ```
 
-<!-- \FloatBarrier -->
+\FloatBarrier
 
-<!-- ```{r child = 'capitulo03.Rmd'} -->
-<!-- ``` -->
+```{r child = 'capitulo03.Rmd'}
+```
 
 <!-- \FloatBarrier -->
 
