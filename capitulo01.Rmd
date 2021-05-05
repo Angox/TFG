@@ -241,14 +241,14 @@ $\textrm{Cociente[s=0]} = \frac{V}{1.4}$ donde:
 
 $V$: Representa el número total de votos recibidos por la lista.
 
-## Método Imperiali
+### Método Imperiali
 
 Otro método de promedio mayor se llama Imperiali ( no debe confundirse con la cuota Imperiali, que es un método del resto mayor). Los divisores son 1, 1,5, 2, 2,5, 3, 3,5 y así sucesivamente. Está diseñado para desfavorecer a los partidos más pequeños, se utiliza solo en las elecciones municipales belgas. Este método (a diferencia de otros métodos enumerados) no es estrictamente proporcional, si es que existe una asignación perfectamente proporcional, mediante este método no se garantiza encontrarla. 
 Método utilizado en Bélgica en las elecciones municipales.[^4]
 
 [^4]: *BJPS1992.pdf* , \<<https://www.tcd.ie/Political_Science/people/michael_gallagher/BJPS1992.pdf>\> [accessed 4 May 2021]
 
-## Método Huntington-Hill
+### Método Huntington-Hill
 
 Método creado en 1920 por Joseph Hill y corregido por el compañero de escuela de Hill, Edward Huntington. Actualmente se utiliza para distribuir los asientos que les corresponde a cada estado en la cámara de representantes de los Estados Unidos de América.
 El objetivo es mantener la relación de "una persona un voto" lo más cercana posible a 1.
@@ -275,13 +275,13 @@ Si $\begin{cases}CuotaEstado>MediaGeométrica & Representantes = n+1\\\textrm{Ca
 
 Ajustar D para que el número de asientos totales coincida con el número total de asientos designados.
 
-## Método Danish
+### Método Danish
 
 El método danés[^1] se utiliza en las elecciones danesas para asignar los escaños de cada partido a nivel de provincia electoral. Divide el número de votos recibidos por un partido en una circunscripción de varios miembros por los divisores que aumentan de tres en tres (1, 4, 7, 10, etc.). También, dividir los números de votos por 0.33, 1.33, 2.33, 3.33, etc. da el mismo resultado. Este sistema intenta deliberadamente asignar escaños por igual en lugar de proporcionalmente.
 
 [^1]: Wikipedia contributors, 'Highest averages method', *Wikipedia, The Free Encyclopedia,* 31 December 2020, 20:02 UTC, \<<https://en.wikipedia.org/w/index.php?title=Highest_averages_method&oldid=997495824>\> [accessed 4 May 2021]
 
-## Método Adams
+### Método Adams
 
 El método de Adams fue concebido por John Quincy Adams para distribuir los escaños de la Cámara entre los distintos estados. Otorga un escaño al partido que tiene más votos por escaño antes de que se agregue el escaño.
 

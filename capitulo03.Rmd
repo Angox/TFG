@@ -258,6 +258,30 @@ asientos_danish <- function(partidos, votos,
   # Resultados
   data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
+
+asientos_hare <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+  
+  # Escaños
+  div <- trunc(nv/n_escannos)  # Parte entera
+  G <- sapply(div, function(x) votos / x)
+  o <- trunc(G)
+  if(sum(o)!=n_escannos){
+    resto <- G-o
+    cuota <- resto[order(resto, decreasing = T)][n_escannos-sum(o)]
+    W <- (resto >= cuota) 
+    seats <- o+rowSums(W)
+    o <- seats}
+  
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
 ```
 
 ```{r Funcion desproporción}
@@ -508,6 +532,33 @@ resul_danish <- asientos
 disprop_danish <- disprop
 ```
 
+```{r}
+
+# hare
+
+generardato(eleccion = 1)
+
+partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+escanos <- numeric(length = length(colum))
+disprop <- numeric(length = nrow(datos))
+
+for (provincia in seq_len(nrow(datos))) {
+  votos <- unlist(datos[provincia, colum])
+  escannos <- datos[provincia, ncol(datos)]
+
+  asientos <- asientos_hare(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+  escanos <- asientos$Escanos + escanos
+}
+asientos$Escanos <- escanos
+asientos <- asientos[asientos$Escanos >= 1, ]
+resul_hare <- asientos
+disprop_hare <- disprop
+```
 ### Comparativa entre métodos
 
 #### Votos obtenidos
@@ -526,11 +577,12 @@ fe <- full_join(fe, resul_modsainte, by = "Partidos")
 fe <- full_join(fe, resul_adams, by = "Partidos")
 fe <- full_join(fe, resul_huntington, by = "Partidos")
 fe <- full_join(fe, resul_imperiali, by = "Partidos")
-colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+fe <- full_join(fe, resul_hare, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare")
 
 
 
-fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare",
   key = "Metodo", value = "Asientos"
 )
 fe$Asientos <- replace_na(fe$Asientos, 0)
@@ -593,12 +645,13 @@ En estas elecciones no se obtiene la mayoría absoluta en ningún método except
 
 #### Desproporción
 ```{r}
-metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare")
 
 disprop_1977 <- bind_cols(
   "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
   "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
-  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),
+  "LR-Hare"=(disprop_hare),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
 
 
 disprop_1977 <- as.data.table(disprop_1977)
@@ -612,7 +665,7 @@ ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
 disprop_mean <- c(
   mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
   mean(disprop_modsainte), mean(disprop_adams),
-  mean(disprop_huntington), mean(disprop_imperiali)
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare)
 )
 Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
 
