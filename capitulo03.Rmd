@@ -71,9 +71,50 @@ knitr::opts_chunk$set(
 \renewcommand{\footrulewidth}{0.4pt}
 
 
-# Analisis de los datos 
+# Elecciones españolas según distintos métodos de reparto de escaños.
 
+  A continuación analizaremos el reparto de escaños para el congreso de las distintas elecciones en España desde el 1977. Aplicando diferentes métodos de reparto de escaños, analizaremos los resultados obtenidos en cada elección. Una vez obtenidos el reparto de escaños según los distintos métodos procederemos a obtener la proporcionalidad para cada método y así analizar la desproporción tanto por comunidades autónomas como por España en su conjunto.
+  
+## Procedimiento
 
+  Para ser capaces de realizar el análisis pretendido se ha procedido de este modo:
+  
+  
+  - En primer lugar se han obtenido los resultados de las elecciones al congreso de la página web del ministerio del interior[^1], desde el año 1977 hasta las últimas elecciones del 2019.
+  
+  [^1]: [Consulta de resultados electorales Ministerio del interior](http://www.infoelectoral.mir.es/min/ "Ministerio del interior")
+  
+  - Creación de las distintas funciones para los distintos métodos de reparto de escaños así como la función para calcular la desproporción. Se han empleado distintas librerías de *R* tal y como *openxlsx* para leer los diferentes resultados electorales, *electoral* como apoyo para escribir las funciones, *data.table*, *dplyr* y *tidyr* para manipular los datos, *ggplot2* y *ggpol* para la creación de los distintos gráficos. Como muestra se presenta la función para el método D´Hondt:
+  
+  \pagebreak
+  
+``` {.R}
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 1:n_escannos
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+```
+
+  - Una vez obtenidos los resultados electorales y creado las funciones necesarias, se procede a aplicar las funciones creadas con los resultados electorales.
+  
+  - Creación de los gráficos y análisis de los resultados, tanto para el reparto de escaños como para los resultados de la desproporción por comunidades autónomas y España en su conjunto.
+  
+  
 ```{r}
 library(data.table)
 # Variables
@@ -262,7 +303,7 @@ generardato <- function(eleccion) {
 }
 ```
 
-
+ \newpage
 
 ## Año 1977
 

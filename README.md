@@ -1,4 +1,5 @@
 # MemoriaTFE
 
-Repositorio que mantiene actualizado el proyecto MemoriaTFE que se encuentra publicado a través de mi página web: 
-<http://destio.us.es/calvo/post/escribir-un-trabajo-fin-de-estudios-con-rmarkdown/>.
+![](logo.png)
+
+Repositorio que mantiene actualizado el proyecto final de grado de la titulación de Estadística de la Universidad de Sevilla.
