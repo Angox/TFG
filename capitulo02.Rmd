@@ -131,9 +131,37 @@ ggplot(data = dis, mapping = aes(Partidos, Votos, group = Distribucion, color = 
   
 ## Cálculo de la desproporción
 
-En este bloque los resultados los resultados son comparados mediante la desproporción, a continuación explicaremos en qué consiste esta función:
+En este bloque los resultados los resultados son comparados mediante la desproporción, a continuación presentaremos la función y explicaremos el procedimiento de cálculo:
 
-  - 
+``` {.R}
+desproporción <-
+  function(s, v) {  # Variables
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    # Suma de escaños y votos
+    s_s <- sum(s)   
+    s_v <- sum(v)
+    # Dividir escaños y votos entre sus totales
+    p_s <- s / s_s
+    p_v <- v / s_v
+    # Aplicar la fórmula para obtener la desproporción
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
+    o
+  }
+```
+
+  - La función depende de dos variables:
+    +   *s*: Escaños obtenidos por cada partido.
+    +   *v*: Votos obtenidos por cada partido.
+    
+  - En primer lugar se realiza la suma total de escaños, que se recoge en la variable *s_s* y la suma total de votos, recogida en la variable *s_v*.
+  - A continuación para cada partido se dividen los escaños obtenidos entre el total de escaños a repartir, se recoge en la variable *p_s*. El mismo procedimiento para los votos, para cada partido se dividen los votos obtenidos entre el total de votos, recogido en la variable *p_v*.
+  - Finalmente para cada partido se restan los resultados *p_s* y *p_v* anteriormente obtenidos, seguidamente nos quedamos con el valor absoluto de los resultados, sumamos todos los valores y los dividimos entre el número de partidos, lo recogemos en la variable *o*.
+  
+
+Los valores sobre los que puede variar la función de desproporción parten de 0, que representaría una proporcionalidad perfecta, y cuanto mayor vaya siendo el valor obtenido, peor proporcionalidad presentará. Por lo tanto para un método de reparto lo que se pretende conseguir es presentar el mínimo valor posible, cuanto menor valor de desproporción obtenga mejor método será.
+
 
 
 
@@ -221,7 +249,7 @@ votos <- votos / seq_len(49)
 # }
 resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
-# beepr::beep(sound = 3)
+
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
 ```
 
@@ -470,7 +498,7 @@ votos <- votos / seq_len(49)
 # }
 resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
-# beepr::beep(sound = 3)
+
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
 ```
 
@@ -717,7 +745,7 @@ votos <- votos / seq_len(49)
 # }
 resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
-# beepr::beep(sound = 3)
+
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
 ```
 
@@ -963,7 +991,7 @@ votos <- votos / seq_len(49)
 # }
 resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
-# beepr::beep(sound = 3)
+
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
 ```
 
@@ -1209,7 +1237,7 @@ votos <- votos / seq_len(49)
 # }
 resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
-# beepr::beep(sound = 3)
+
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
 ```
 
@@ -1459,7 +1487,7 @@ votos <- votos / seq_len(49)
 # }
 resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
-# beepr::beep(sound = 3)
+
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
 ```
 
@@ -1707,7 +1735,7 @@ votos <- votos / seq_len(49)
 # }
 resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
-# beepr::beep(sound = 3)
+
 # resultados <- cbind.data.frame("Partidos" = resul[, 1], "Escaños" = rowSums(resul[, lapply(resul, is.numeric) == TRUE, with = FALSE]))
 ```
 

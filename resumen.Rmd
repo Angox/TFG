@@ -2,5 +2,5 @@
 output: pdf_document
 ---
 
-En este trabajo de fin de grado se ha tratado de analizar los distintos métodos de repartición de escaños, enfocándolo desde una perspectiva novedosa en donde se analizan los métodos variando experimentalmente los escaños a repartir, el número de partidos que se presentan a la elección o la concentración del voto.
+En este trabajo de fin de grado se ha tratado de analizar los distintos métodos de repartición de escaños, enfocándolo desde una perspectiva en donde se analizan los métodos variando experimentalmente los escaños a repartir, el número de partidos que se presentan a la elección o la concentración del voto.
 También se analiza el grado de desproporción que resulta de haber realizado las elecciones en España según los distintos métodos de reparto de escaños.
