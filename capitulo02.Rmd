@@ -2600,6 +2600,96 @@ Vemos que hay dos grupos diferenciados, uno en el que hay una alta desproporció
 En España actualmente la concentración de voto en alta o medio-alta y se utiliza el método de D´Hondt, por lo tanto observando el gráfico podemos decir que el método utilizado en España no es el más optimo en el caso de la concentración de voto actual en España, sería conveniente realizar un cambio de método y cambiarlo preferentemente por el método Sainte-Lague, que es el mejor entre los métodos del grupo con desproporción baja.
 
 
+## Comparaciones variando escaños y nº partidos a la vez
+
+```{r}
+desproporción <-
+  function(s, v) {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s / s_s
+    p_v <- v / s_v
+    
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
+    o
+  }
+
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+  
+  # Escaños
+  div <- 1:n_escannos
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+
+
+# Crear lista con partidos
+partidos <- NULL
+for (i in (seq_len(100)+1)) {
+  partidos[[i-1]] <- paste("Partido_", seq_len(i), sep = "")
+}
+
+# Fijar el número de escaños
+n_escannos <- seq_len(800)
+
+# Nivel de distribución de los votos, 1 igualado, 1000 desigualdad maxima
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+
+ 
+# Voto modificado
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[1000])
+}
+
+
+
+resul <- NULL
+iter <- 1
+dis <- numeric()
+for (j in n_escannos) {
+  for (i in seq_len(length(partidos))) {
+    # if (i == 1) {
+    #   next
+    # }
+    resul[[iter]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis[iter] <- desproporción(s = resul[[iter]], v = votos[[i]])
+    iter <- iter + 1
+  }
+}
+
+num_escannos <- sapply(resul, sum)
+num_partidos <- sapply(resul, length)
+
+
+resul1 <- as.data.table(resul)
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(ncol(resul1))
+for (i in seq_len(ncol(resul1))) {
+  dis[i] <- desproporción(s = resul1[[i]], v = vot[[i]])
+}
+
+```
+
 
 
 ## Conclusiones 
