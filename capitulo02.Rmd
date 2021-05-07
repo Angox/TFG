@@ -98,11 +98,11 @@ Generaremos datos ficticios de partidos, utilizaremos tres distintas variables, 
   - La variable *densidad o distribución de los votos* varía entre una casi máxima igualdad de votos entre partidos, es decir, que casi no hay diferencia de votos entre los distintos partidos, hasta una desigualdad muy marcada de los votos que reciben cada partido, como ejemplo presentamos un gráfico para que sea más comprensivo:
   
 ```{r}
-
+library(ggplot2)
 
 
 # Fijar número de partidos
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 
 # Modificar la distribución de los votos
 votos <- trunc(rep(x = 10e5, length(partidos)))
@@ -111,7 +111,7 @@ vot <- NULL
 for (i in seq_len(1000)) {
   vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
 }
-
+vot_igualdad_media <- vot[[100]]
 dis1 <- data.frame("Votos" = 10 * vot[[1]], "Partidos" = seq_len(length(vot[[1]])), "Distribucion" = "Igualdad Alta")
 
 dis2 <- data.frame("Votos" = vot[[100]], "Partidos" = seq_len(length(vot[[100]])), "Distribucion" = "Igualdad Media")
@@ -175,7 +175,7 @@ n_partidos <- seq_len(50)[-1]
 
 densidad <- rep(length(n_partidos), 100)
 
-n_escannos <- seq_len(50)
+n_escannos <- seq_len(350)
 ```
 
 
@@ -183,9 +183,9 @@ n_escannos <- seq_len(50)
 ```{r}
 
 # Variables
-partidos <- paste("Partido_", seq_len(49), sep = "")
-n_escannos <- 5
-votos <- trunc(seq(from = 100, to = 1, length.out = length(partidos)))
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 350
+votos <- trunc(vot[[100]])
 
 asientos_dhondt <- function(partidos, votos,
                             n_escannos,
@@ -206,22 +206,18 @@ asientos_dhondt <- function(partidos, votos,
   # Resultados
   data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
-
-
 ```
 
 ### D`Hondt variando el número de escaños
 
 ```{r}
 # D`Hondt Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 800
-votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
-votos <- votos / seq_len(49)
+votos <- vot_igualdad_media
+
 resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
-
-
 ```
 
 <!-- ### D`Hondt Desproporción -->
@@ -274,12 +270,12 @@ partidos <- NULL
 for (i in seq_len(100)) {
   partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
 }
-# partidos <- paste("Partido_", seq_len(49), sep = "")
+# partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 30
 votos <- NULL
 for (i in seq_len(100)) {
-  votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
-  votos[[i]] <- votos[[i]] / seq_len(length(partidos[[i]]))
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
 }
 
 
@@ -333,7 +329,7 @@ Podemos apreciar en el gráfico que para un número bajo de partidos que se pres
 
 ```{r}
 # D`Hondt Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 500
 
 
@@ -400,9 +396,9 @@ Así podemos concluir que el reparto de escaños según la ley D`Hondt es mejor 
 ```{r}
 
 # Variables
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 5
-votos <- trunc(seq(from = 100, to = 1, length.out = length(partidos)))
+votos <- trunc(vot[[100]])
 
 asientos_dhondt <- function(partidos, votos,
                             n_escannos,
@@ -423,17 +419,16 @@ asientos_dhondt <- function(partidos, votos,
   # Resultados
   data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
-
 ```
 
 ### Sainte-Lague variando el número de escaños
 
 ```{r}
 # Sainte-Lague Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 800
-votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
-votos <- votos / seq_len(49)
+votos <- vot_igualdad_media
+
 
 
 
@@ -443,8 +438,6 @@ votos <- votos / seq_len(49)
 
 resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
-
-
 ```
 
 <!-- ### Sainte-Lague Desproporción -->
@@ -478,12 +471,12 @@ partidos <- NULL
 for (i in seq_len(100)) {
   partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
 }
-# partidos <- paste("Partido_", seq_len(49), sep = "")
+# partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 30
 votos <- NULL
 for (i in seq_len(100)) {
-  votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
-  votos[[i]] <- votos[[i]] / seq_len(length(partidos[[i]]))
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
 }
 
 
@@ -538,7 +531,7 @@ Podemos apreciar en el gráfico que para un número bajo de partidos que se pres
 
 ```{r}
 # Sainte-Lague Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 500
 
 
@@ -602,9 +595,9 @@ Así podemos concluir que el reparto de escaños según la ley Sainte-Lague es m
 ```{r}
 
 # Variables
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 5
-votos <- trunc(seq(from = 100, to = 1, length.out = length(partidos)))
+votos <- trunc(vot[[100]])
 
 asientos_dhondt <- function(partidos, votos,
                             n_escannos,
@@ -649,18 +642,16 @@ asientos_dhondt <- function(partidos, votos,
 
 
 #
-
-
 ```
 
 ### Modified Sainte-Lague variando el número de escaños
 
 ```{r}
 # Modified Sainte-Lague Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 800
-votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
-votos <- votos / seq_len(49)
+votos <- vot_igualdad_media
+
 
 
 
@@ -670,8 +661,6 @@ votos <- votos / seq_len(49)
 
 resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
-
-
 ```
 
 <!-- ### Modified Sainte-Lague Desproporción -->
@@ -705,12 +694,12 @@ partidos <- NULL
 for (i in seq_len(100)) {
   partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
 }
-# partidos <- paste("Partido_", seq_len(49), sep = "")
+# partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 30
 votos <- NULL
 for (i in seq_len(100)) {
-  votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
-  votos[[i]] <- votos[[i]] / seq_len(length(partidos[[i]]))
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
 }
 
 
@@ -764,7 +753,7 @@ Podemos apreciar en el gráfico que para un número bajo de partidos que se pres
 
 ```{r}
 # Modified Sainte-Lague Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 500
 
 
@@ -828,9 +817,9 @@ Así podemos concluir que el reparto de escaños según la ley Modified Sainte-L
 ```{r}
 
 # Variables
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 5
-votos <- trunc(seq(from = 100, to = 1, length.out = length(partidos)))
+votos <- trunc(vot[[100]])
 
 asientos_dhondt <- function(partidos, votos,
                             n_escannos,
@@ -851,19 +840,16 @@ asientos_dhondt <- function(partidos, votos,
   # Resultados
   data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
-
-
-
 ```
 
 ### Imperiali variando el número de escaños
 
 ```{r}
 # Imperiali Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 800
-votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
-votos <- votos / seq_len(49)
+votos <- vot_igualdad_media
+
 
 
 
@@ -873,8 +859,6 @@ votos <- votos / seq_len(49)
 
 resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
-
-
 ```
 
 <!-- ### Imperiali Desproporción -->
@@ -908,12 +892,12 @@ partidos <- NULL
 for (i in seq_len(100)) {
   partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
 }
-# partidos <- paste("Partido_", seq_len(49), sep = "")
+# partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 30
 votos <- NULL
 for (i in seq_len(100)) {
-  votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
-  votos[[i]] <- votos[[i]] / seq_len(length(partidos[[i]]))
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
 }
 
 
@@ -967,7 +951,7 @@ Entonces, según el modelo Imperiali tendremos una menor desproporción según s
 
 ```{r}
 # Imperiali Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 500
 
 
@@ -1031,9 +1015,9 @@ Así podemos concluir que el reparto de escaños según la ley Imperiali obtiene
 ```{r}
 
 # Variables
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 5
-votos <- trunc(seq(from = 100, to = 1, length.out = length(partidos)))
+votos <- trunc(vot[[100]])
 
 asientos_dhondt <- function(partidos, votos,
                             n_escannos,
@@ -1078,18 +1062,16 @@ asientos_dhondt <- function(partidos, votos,
 
 
 #
-
-
 ```
 
 ### Huntington-Hill variando el número de escaños
 
 ```{r}
 # Huntington-Hill Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 800
-votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
-votos <- votos / seq_len(49)
+votos <- vot_igualdad_media
+
 
 
 
@@ -1099,8 +1081,6 @@ votos <- votos / seq_len(49)
 
 resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
-
-
 ```
 
 <!-- ### Huntington-Hill Desproporción -->
@@ -1134,12 +1114,12 @@ partidos <- NULL
 for (i in seq_len(100)) {
   partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
 }
-# partidos <- paste("Partido_", seq_len(49), sep = "")
+# partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 30
 votos <- NULL
 for (i in seq_len(100)) {
-  votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
-  votos[[i]] <- votos[[i]] / seq_len(length(partidos[[i]]))
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
 }
 
 
@@ -1194,7 +1174,7 @@ Lo particular de este método respecto a otros métodos es que la menor despropo
 
 ```{r}
 # Huntington-Hill Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 500
 
 
@@ -1260,9 +1240,9 @@ Así podemos concluir que el reparto de escaños según la ley Huntington-Hill e
 ```{r}
 
 # Variables
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 5
-votos <- trunc(seq(from = 100, to = 1, length.out = length(partidos)))
+votos <- trunc(vot[[100]])
 
 asientos_dhondt <- function(partidos, votos,
                             n_escannos,
@@ -1308,18 +1288,16 @@ asientos_dhondt <- function(partidos, votos,
 
 
 #
-
-
 ```
 
 ### Adams variando el número de escaños
 
 ```{r}
 # Adams Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 800
-votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
-votos <- votos / seq_len(49)
+votos <- vot_igualdad_media
+
 
 
 
@@ -1329,8 +1307,6 @@ votos <- votos / seq_len(49)
 
 resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
-
-
 ```
 
 <!-- ### Adams Desproporción -->
@@ -1364,12 +1340,12 @@ partidos <- NULL
 for (i in seq_len(100)) {
   partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
 }
-# partidos <- paste("Partido_", seq_len(49), sep = "")
+# partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 30
 votos <- NULL
 for (i in seq_len(100)) {
-  votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
-  votos[[i]] <- votos[[i]] / seq_len(length(partidos[[i]]))
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
 }
 
 
@@ -1424,7 +1400,7 @@ Entonces según el método Adams obtenemos el mejor resultado cuanto mayor núme
 
 ```{r}
 # Adams Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 500
 
 
@@ -1489,9 +1465,9 @@ Así podemos concluir que el reparto de escaños según la ley Adams es mejor cu
 ```{r}
 
 # Variables
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 5
-votos <- trunc(seq(from = 100, to = 1, length.out = length(partidos)))
+votos <- trunc(vot[[100]])
 
 asientos_dhondt <- function(partidos, votos,
                             n_escannos,
@@ -1536,18 +1512,16 @@ asientos_dhondt <- function(partidos, votos,
 
 
 #
-
-
 ```
 
 ### Danish variando el número de escaños
 
 ```{r}
 # Danish Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 800
-votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
-votos <- votos / seq_len(49)
+votos <- vot_igualdad_media
+
 
 
 
@@ -1557,8 +1531,6 @@ votos <- votos / seq_len(49)
 
 resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
-
-
 ```
 
 <!-- ### Danish Desproporción -->
@@ -1592,12 +1564,12 @@ partidos <- NULL
 for (i in seq_len(100)) {
   partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
 }
-# partidos <- paste("Partido_", seq_len(49), sep = "")
+# partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 30
 votos <- NULL
 for (i in seq_len(100)) {
-  votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
-  votos[[i]] <- votos[[i]] / seq_len(length(partidos[[i]]))
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
 }
 
 
@@ -1653,7 +1625,7 @@ Entonces según el método Danish obtenemos el mejor resultado cuanto más parti
 
 ```{r}
 # Danish Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 500
 
 
@@ -1719,9 +1691,9 @@ Así podemos concluir que el reparto de escaños según la ley Danish es mejor c
 ```{r}
 
 # Variables
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 5
-votos <- trunc(seq(from = 100, to = 1, length.out = length(partidos)))
+votos <- trunc(vot[[100]])
 
 asientos_dhondt <- function(partidos, votos,
                             n_escannos,
@@ -1731,39 +1703,36 @@ asientos_dhondt <- function(partidos, votos,
   vn <- votos
   vn[votos <= nv * couta_min] <- 0
   votos <- vn
-  
+
   # Escaños
-  div <- trunc(nv/n_escannos)  # Parte entera
+  div <- trunc(nv / n_escannos) # Parte entera
   G <- sapply(div, function(x) votos / x)
   o <- trunc(G)
-  if(sum(o)!=n_escannos){
-    resto <- G-o
-    cuota <- resto[order(resto, decreasing = T)][n_escannos-sum(o)]
-    W <- (resto >= cuota) 
-    seats <- o+rowSums(W)
-    o <- seats}
-  
+  if (sum(o) != n_escannos) {
+    resto <- G - o
+    cuota <- resto[order(resto, decreasing = T)][n_escannos - sum(o)]
+    W <- (resto >= cuota) & (cumsum(resto) <= n_escannos - sum(o))
+    seats <- o + rowSums(W)
+    o <- seats
+  }
+
   # Resultados
   data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
-
-
 ```
 
 ### LR Hare variando el número de escaños
 
 ```{r}
 # LR Hare Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 800
-votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
-votos <- votos / seq_len(49)
+votos <- vot_igualdad_media
+
 
 
 resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
-
-
 ```
 
 <!-- ### LR Hare Desproporción -->
@@ -1797,12 +1766,12 @@ partidos <- NULL
 for (i in seq_len(100)) {
   partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
 }
-# partidos <- paste("Partido_", seq_len(49), sep = "")
+# partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 30
 votos <- NULL
 for (i in seq_len(100)) {
-  votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
-  votos[[i]] <- votos[[i]] / seq_len(length(partidos[[i]]))
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
 }
 
 
@@ -1858,7 +1827,7 @@ Entonces según el método LR Hare obtenemos el mejor resultado cuanto más part
 
 ```{r}
 # LR Hare Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 500
 
 
@@ -1925,9 +1894,9 @@ Así podemos concluir que el reparto de escaños según la ley LR Hare es mejor 
 ```{r}
 
 # Variables
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 5
-votos <- trunc(seq(from = 100, to = 1, length.out = length(partidos)))
+votos <- trunc(vot[[100]])
 
 asientos_dhondt <- function(partidos, votos,
                             n_escannos,
@@ -1937,18 +1906,19 @@ asientos_dhondt <- function(partidos, votos,
   vn <- votos
   vn[votos <= nv * couta_min] <- 0
   votos <- vn
-  
+
   # Escaños
-  div <- trunc(nv/(n_escannos+1))  # Parte entera
+  div <- trunc(nv / (n_escannos + 1)) # Parte entera
   G <- sapply(div, function(x) votos / x)
   o <- trunc(G)
-  if(sum(o)!=n_escannos){
-    resto <- G-o
-    cuota <- resto[order(resto, decreasing = T)][n_escannos-sum(o)]
-    W <- (resto >= cuota) 
-    seats <- o+rowSums(W)
-    o <- seats}
-  
+  if (sum(o) != n_escannos) {
+    resto <- G - o
+    cuota <- resto[order(resto, decreasing = T)][n_escannos - sum(o)]
+    W <- (resto >= cuota) & (cumsum(resto) <= n_escannos - sum(o))
+    seats <- o + rowSums(W)
+    o <- seats
+  }
+
   # Resultados
   data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
@@ -1976,18 +1946,16 @@ asientos_dhondt <- function(partidos, votos,
 
 
 #
-
-
 ```
 
 ### LR Droop variando el número de escaños
 
 ```{r}
 # LR Droop Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 800
-votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
-votos <- votos / seq_len(49)
+votos <- vot_igualdad_media
+
 
 
 
@@ -1997,8 +1965,6 @@ votos <- votos / seq_len(49)
 
 resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
-
-
 ```
 
 <!-- ### LR Droop Desproporción -->
@@ -2032,12 +1998,12 @@ partidos <- NULL
 for (i in seq_len(100)) {
   partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
 }
-# partidos <- paste("Partido_", seq_len(49), sep = "")
+# partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 30
 votos <- NULL
 for (i in seq_len(100)) {
-  votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
-  votos[[i]] <- votos[[i]] / seq_len(length(partidos[[i]]))
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
 }
 
 
@@ -2093,7 +2059,7 @@ Entonces según el método LR Droop obtenemos el mejor resultado cuanto más par
 
 ```{r}
 # LR Droop Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 500
 
 
@@ -2160,9 +2126,9 @@ Así podemos concluir que el reparto de escaños según la ley LR Droop es mejor
 ```{r}
 
 # Variables
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 5
-votos <- trunc(seq(from = 100, to = 1, length.out = length(partidos)))
+votos <- trunc(vot[[100]])
 
 asientos_dhondt <- function(partidos, votos,
                             n_escannos,
@@ -2172,18 +2138,19 @@ asientos_dhondt <- function(partidos, votos,
   vn <- votos
   vn[votos <= nv * couta_min] <- 0
   votos <- vn
-  
+
   # Escaños
-  div <- trunc(nv/(n_escannos+2))  # Parte entera
+  div <- trunc(nv / (n_escannos + 2)) # Parte entera
   G <- sapply(div, function(x) votos / x)
   o <- trunc(G)
-  if(sum(o)!=n_escannos){
-    resto <- G-o
-    cuota <- resto[order(resto, decreasing = T)][n_escannos-sum(o)]
-    W <- (resto >= cuota) 
-    seats <- o+rowSums(W)
-    o <- seats}
-  
+  if (sum(o) != n_escannos) {
+    resto <- G - o
+    cuota <- resto[order(resto, decreasing = T)][n_escannos - sum(o)]
+    W <- (resto >= cuota) & (cumsum(resto) <= n_escannos - sum(o))
+    seats <- o + rowSums(W)
+    o <- seats
+  }
+
   # Resultados
   data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
@@ -2211,18 +2178,16 @@ asientos_dhondt <- function(partidos, votos,
 
 
 #
-
-
 ```
 
 ### LR imperialilr variando el número de escaños
 
 ```{r}
 # LR imperialilr Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 800
-votos <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos)))
-votos <- votos / seq_len(49)
+votos <- vot_igualdad_media
+
 
 
 
@@ -2232,8 +2197,6 @@ votos <- votos / seq_len(49)
 
 resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
 resul1 <- as.data.table(resul)
-
-
 ```
 
 <!-- ### LR imperialilr Desproporción -->
@@ -2267,12 +2230,12 @@ partidos <- NULL
 for (i in seq_len(100)) {
   partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
 }
-# partidos <- paste("Partido_", seq_len(49), sep = "")
+# partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 30
 votos <- NULL
 for (i in seq_len(100)) {
-  votos[[i]] <- trunc(seq(from = 10e5, to = 1, length.out = length(partidos[[i]])))
-  votos[[i]] <- votos[[i]] / seq_len(length(partidos[[i]]))
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
 }
 
 
@@ -2328,7 +2291,7 @@ Entonces según el método LR imperialilr obtenemos el mejor resultado cuanto m�
 
 ```{r}
 # LR imperialilr Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
-partidos <- paste("Partido_", seq_len(49), sep = "")
+partidos <- paste("Partido_", seq_len(20), sep = "")
 n_escannos <- 500
 
 
@@ -2406,7 +2369,7 @@ var_esc_hare$Metodo <- "LR-Hare"
 var_esc_Droop$Metodo <- "LR-Droop"
 var_esc_imperialilr$Metodo <- "LR-Imperiali"
 
-var_esc <- rbind(var_esc_dhondt, var_esc_sl, var_esc_msl, var_esc_imp, var_esc_hh, var_esc_ad, var_esc_dan,var_esc_hare,var_esc_Droop,var_esc_imperialilr)
+var_esc <- rbind(var_esc_dhondt, var_esc_sl, var_esc_msl, var_esc_imp, var_esc_hh, var_esc_ad, var_esc_dan, var_esc_hare, var_esc_Droop, var_esc_imperialilr)
 
 # ggplot(data = var_esc, mapping = aes(Escannos, Desproporción)) +
 #   # geom_point(data = var_esc, mapping = aes(fill = "Metodo"), show.legend = F) +
@@ -2443,7 +2406,7 @@ Los mejores métodos en este caso serían el método de Sainte-Lague y el métod
 # var_esc_dan$Metodo <- "Danish"
 # var_esc_hare$Metodo <- "LR-Hare"
 # var_esc_Droop$Metodo <- "LR-Droop"
-# 
+#
 # var_esc <- rbind(var_esc_dhondt, var_esc_sl, var_esc_msl, var_esc_imp, var_esc_hh, var_esc_ad, var_esc_dan,var_esc_hare,var_esc_Droop)
 
 # ggplot(data = var_esc, mapping = aes(Escannos, Desproporción)) +
@@ -2485,7 +2448,7 @@ var_par_hare$Metodo <- "LR-Hare"
 var_par_Droop$Metodo <- "LR-Droop"
 var_par_imperialilr$Metodo <- "LR-Imperiali"
 
-var_par <- rbind(var_par_dhondt, var_par_sl, var_par_msl, var_par_imp, var_par_hh, var_par_ad, var_par_dan,var_par_hare,var_par_Droop,var_par_imperialilr)
+var_par <- rbind(var_par_dhondt, var_par_sl, var_par_msl, var_par_imp, var_par_hh, var_par_ad, var_par_dan, var_par_hare, var_par_Droop, var_par_imperialilr)
 
 
 ggplot(data = var_par, mapping = aes(Escannos, Desproporción)) +
@@ -2514,7 +2477,7 @@ Observamos que para un número de partidos bajo hasta los 50 partidos que se pre
 # var_par_ad$Metodo <- "Adams"
 # var_par_dan$Metodo <- "Danish"
 # var_par_hare$Metodo <- "LR-Hare"
-# 
+#
 # var_par <- rbind(var_par_dhondt, var_par_sl, var_par_msl, var_par_imp, var_par_hh, var_par_ad, var_par_dan,var_par_hare)
 
 
@@ -2550,7 +2513,7 @@ var_dis_hare$Metodo <- "LR-Hare"
 var_dis_Droop$Metodo <- "LR-Droop"
 var_dis_imperialilr$Metodo <- "LR-Imperiali"
 
-var_dis <- rbind(var_dis_dhondt, var_dis_sl, var_dis_msl, var_dis_imp, var_dis_hh, var_dis_ad, var_dis_dan,var_dis_hare,var_dis_Droop,var_dis_imperialilr)
+var_dis <- rbind(var_dis_dhondt, var_dis_sl, var_dis_msl, var_dis_imp, var_dis_hh, var_dis_ad, var_dis_dan, var_dis_hare, var_dis_Droop, var_dis_imperialilr)
 
 
 ggplot(data = var_dis, mapping = aes(Escannos, Desproporción)) +
@@ -2578,7 +2541,7 @@ Observamos que hay dos grupos diferenciados, uno de ellos en los que la despropo
 # var_dis_ad$Metodo <- "Adams"
 # var_dis_dan$Metodo <- "Danish"
 # var_dis_hare$Metodo <- "LR-Hare"
-# 
+#
 # var_dis <- rbind(var_dis_dhondt, var_dis_sl, var_dis_msl, var_dis_imp, var_dis_hh, var_dis_ad, var_dis_dan,var_dis_hare)
 
 
@@ -2612,7 +2575,7 @@ desproporción <-
     s_v <- sum(v)
     p_s <- s / s_s
     p_v <- v / s_v
-    
+
     o <- (1 / l_s) * sum(abs(p_s - p_v))
     o
   }
@@ -2626,7 +2589,7 @@ asientos_dhondt <- function(partidos, votos,
   vn <- votos
   vn[votos <= nv * couta_min] <- 0
   votos <- vn
-  
+
   # Escaños
   div <- 1:n_escannos
   G <- sapply(div, function(x) votos / x)
@@ -2642,52 +2605,128 @@ asientos_dhondt <- function(partidos, votos,
 
 # Crear lista con partidos
 partidos <- NULL
-for (i in (seq_len(100)+1)) {
-  partidos[[i-1]] <- paste("Partido_", seq_len(i), sep = "")
+for (i in (seq_len(100) + 1)) {
+  partidos[[i - 1]] <- paste("Partido_", seq_len(i), sep = "")
 }
 
 # Fijar el número de escaños
 n_escannos <- seq_len(800)
 
-# Nivel de distribución de los votos, 1 igualado, 1000 desigualdad maxima
+# Nivel de distribución de los votos, 1 igualado, 1000 desigualdad máxima
 expon <- seq(from = 0.001, to = 1, length.out = 1000)
 
- 
-# Voto modificado
+
+# Crear lista con Votos modificado
+# Cambiar expon para la distrubución de los votos, por igualdad baja a alta
+votos_alto <- NULL
+votos_medio <- NULL
+votos_bajo <- NULL
 votos <- NULL
 for (i in seq_len(100)) {
   votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
-  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[1000])
+  votos_alto[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[500])
+  votos_medio[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+  votos_bajo[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[1])
 }
 
+## Diferencia votos alto ####
 
-
-resul <- NULL
+# Cálculo de los escaños y de la desproporción
 iter <- 1
-dis <- numeric()
+resul_alto <- NULL
+dis_alto <- numeric()
+resul_medio <- NULL
+dis_medio <- numeric()
+resul_bajo <- NULL
+dis_bajo <- numeric()
+
 for (j in n_escannos) {
   for (i in seq_len(length(partidos))) {
-    # if (i == 1) {
-    #   next
-    # }
-    resul[[iter]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos[[j]], couta_min = 0)$Escanos
-    dis[iter] <- desproporción(s = resul[[iter]], v = votos[[i]])
+    # Alto
+    resul_alto[[iter]] <- asientos_dhondt(partidos[[i]], votos_alto[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_alto[iter] <- desproporción(s = resul_alto[[iter]], v = votos_alto[[i]])
+    # Bajo
+    resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+    # Medio
+    resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
     iter <- iter + 1
   }
 }
 
-num_escannos <- sapply(resul, sum)
-num_partidos <- sapply(resul, length)
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_alto, sum)
+num_partidos <- sapply(resul_alto, length)
+
+despro_alto <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_alto)
 
 
-resul1 <- as.data.table(resul)
+graf_alto <- ggplot(data = despro_alto, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none") 
+  # scale_fill_gradient(low = "red", high = "yellow") +
+  # labs(subtitle = "Diferencia entre votos alta", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
 
-# Analizar la desproporción columna a columna
-dis <- seq_len(ncol(resul1))
-for (i in seq_len(ncol(resul1))) {
-  dis[i] <- desproporción(s = resul1[[i]], v = vot[[i]])
-}
 
+### Distribución media ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_medio <- NULL
+# iter <- 1
+# dis_medio <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_medio, sum)
+num_partidos <- sapply(resul_medio, length)
+
+despro_media <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_medio)
+
+
+graf_medio <- ggplot(data = despro_media, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none") 
+  # scale_fill_gradient(low = "red", high = "yellow") +
+  # labs(subtitle = "Diferencia entre votos media", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+## Diferencia votos bajo ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_bajo <- NULL
+# iter <- 1
+# dis_bajo <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_bajo, sum)
+num_partidos <- sapply(resul_bajo, length)
+
+despro_bajo <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_bajo)
+
+
+graf_bajo <- ggplot(data = despro_bajo, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+   theme(legend.position = "none") 
+  # labs(subtitle = "Diferencia entre votos baja", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+library(grid)
+grid.newpage()
+grid.draw(rbind(ggplotGrob(graf_bajo), ggplotGrob(graf_medio),ggplotGrob(graf_alto),size = "last"))
 ```
 
 

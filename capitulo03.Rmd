@@ -35,7 +35,7 @@ editor_options:
 knitr::opts_chunk$set(
   fig.path = "figurasR/",
   echo = FALSE, warning = FALSE, message = FALSE,
-  fig.pos = "H", fig.align = "center", out.width = "95%",
+  fig.pos = "H", fig.align = "center", out.width = "100%",
   cache = FALSE
 )
 ```
@@ -275,7 +275,55 @@ asientos_hare <- function(partidos, votos,
   if(sum(o)!=n_escannos){
     resto <- G-o
     cuota <- resto[order(resto, decreasing = T)][n_escannos-sum(o)]
-    W <- (resto >= cuota) 
+    W <- (resto >= cuota)&(cumsum(resto)<=n_escannos-sum(o)) 
+    seats <- o+rowSums(W)
+    o <- seats}
+  
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_droop <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+  
+  # Escaños
+  div <- trunc(nv/(n_escannos+1))  # Parte entera
+  G <- sapply(div, function(x) votos / x)
+  o <- trunc(G)
+  if(sum(o)!=n_escannos){
+    resto <- G-o
+    cuota <- resto[order(resto, decreasing = T)][n_escannos-sum(o)]
+    W <- (resto >= cuota)&(cumsum(resto)<=n_escannos-sum(o)) 
+    seats <- o+rowSums(W)
+    o <- seats}
+  
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_imperialilr <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+  
+  # Escaños
+  div <- trunc(nv/(n_escannos+2))  # Parte entera
+  G <- sapply(div, function(x) votos / x)
+  o <- trunc(G)
+  if(sum(o)!=n_escannos){
+    resto <- G-o
+    cuota <- resto[order(resto, decreasing = T)][n_escannos-sum(o)]
+    W <- (resto >= cuota)&(cumsum(resto)<=n_escannos-sum(o)) 
     seats <- o+rowSums(W)
     o <- seats}
   
@@ -290,16 +338,11 @@ desproporción <- function(s, v) {
   s <- as.vector(s)
   v <- as.vector(v)
   l_s <- length(s)
-  #        l_v <- length(v)
   s_s <- sum(s)
   s_v <- sum(v)
   p_s <- s / s_s
   p_v <- v / s_v
-
   o <- (1 / l_s) * sum(abs(p_s - p_v))
-  #            nm <- 'Rae'
-
-  # return(list(measure=nm, value=o))
   o
 }
 ```
@@ -327,238 +370,264 @@ generardato <- function(eleccion) {
 }
 ```
 
+
+```{r crear funciones}
+dhondt <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_dhondt <<- asientos
+  disprop_dhondt <<- disprop
+}
+# sainte
+sainte <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_sainte <<- asientos
+  disprop_sainte <<- disprop
+}
+# modsainte
+modsainte <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_modsainte <<- asientos
+  disprop_modsainte <<- disprop
+}
+# huntington
+huntington <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+    asientos$Escanos[is.na(asientos$Escanos)] <- 0
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_huntington <<- asientos
+  disprop_huntington <<- disprop
+}
+# imperiali
+imperiali <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_imperiali <<- asientos
+  disprop_imperiali <<- disprop
+}
+# adams
+adams <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+    asientos$Escanos[is.na(asientos$Escanos)] <- 0
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_adams <<- asientos
+  disprop_adams <<- disprop
+}
+# danish
+danish <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_danish <<- asientos
+  disprop_danish <<- disprop
+}
+# hare
+hare <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_hare(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_hare <<- asientos
+  disprop_hare <<- disprop
+}
+# droop
+droop <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_droop(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_droop <<- asientos
+  disprop_droop <<- disprop
+}
+# imperialilr
+imperialilr <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_imperialilr(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_imperialilr <<- asientos
+  disprop_imperialilr <<- disprop
+}
+```
  \newpage
 
 ## Año 1977
 
 
 
-<!-- ### Método D`Hondt -->
 
-```{r}
+
+
+```{r }
 generardato(eleccion = 1)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_dhondt <- asientos
-disprop_dhondt <- disprop
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
 ```
 
 
-
-```{r}
-
-# sainte
-
-generardato(eleccion = 1)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_sainte <- asientos
-disprop_sainte <- disprop
-```
-
-```{r}
-
-# modsainte
-
-generardato(eleccion = 1)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_modsainte <- asientos
-disprop_modsainte <- disprop
-```
-
-```{r}
-
-# huntington
-
-generardato(eleccion = 1)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_huntington <- asientos
-disprop_huntington <- disprop
-```
-
-```{r}
-
-# imperiali
-
-generardato(eleccion = 1)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_imperiali <- asientos
-disprop_imperiali <- disprop
-```
-
-```{r}
-
-# adams
-
-generardato(eleccion = 1)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_adams <- asientos
-disprop_adams <- disprop
-```
-
-```{r}
-
-# danish
-
-generardato(eleccion = 1)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_danish <- asientos
-disprop_danish <- disprop
-```
-
-```{r}
-
-# hare
-
-generardato(eleccion = 1)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_hare(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_hare <- asientos
-disprop_hare <- disprop
-```
 ### Comparativa entre métodos
 
 #### Votos obtenidos
@@ -578,11 +647,13 @@ fe <- full_join(fe, resul_adams, by = "Partidos")
 fe <- full_join(fe, resul_huntington, by = "Partidos")
 fe <- full_join(fe, resul_imperiali, by = "Partidos")
 fe <- full_join(fe, resul_hare, by = "Partidos")
-colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare")
+fe <- full_join(fe, resul_droop, by = "Partidos")
+fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
 
 
 
-fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare",
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
   key = "Metodo", value = "Asientos"
 )
 fe$Asientos <- replace_na(fe$Asientos, 0)
@@ -613,8 +684,9 @@ votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
   geom_tile(aes(fill = Asientos)) +
   scale_fill_gradient(low = "green", high = "red") +
   coord_flip() +
-  geom_text(aes(label = Asientos))+
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
   labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  theme(axis.text.x = element_text(angle = 90))+
   guides(fill = "none")
 
 
@@ -645,13 +717,12 @@ En estas elecciones no se obtiene la mayoría absoluta en ningún método except
 
 #### Desproporción
 ```{r}
-metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare")
+metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
 
 disprop_1977 <- bind_cols(
   "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
   "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
-  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),
-  "LR-Hare"=(disprop_hare),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
 
 
 disprop_1977 <- as.data.table(disprop_1977)
@@ -665,7 +736,7 @@ ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
 disprop_mean <- c(
   mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
   mean(disprop_modsainte), mean(disprop_adams),
-  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare)
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
 )
 Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
 
@@ -686,206 +757,20 @@ Si nos centramos en el gráfico de la desproporción media según el método de 
 
 ## Año 1979
 
-
-
-<!-- ### Método D`Hondt -->
-
-```{r}
+```{r }
 generardato(eleccion = 2)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_dhondt <- asientos
-disprop_dhondt <- disprop
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
 ```
 
-
-
-```{r}
-
-# sainte
-
-generardato(eleccion = 2)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_sainte <- asientos
-disprop_sainte <- disprop
-```
-
-```{r}
-
-# modsainte
-
-generardato(eleccion = 2)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_modsainte <- asientos
-disprop_modsainte <- disprop
-```
-
-```{r}
-
-# huntington
-
-generardato(eleccion = 2)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_huntington <- asientos
-disprop_huntington <- disprop
-```
-
-```{r}
-
-# imperiali
-
-generardato(eleccion = 2)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_imperiali <- asientos
-disprop_imperiali <- disprop
-```
-
-```{r}
-
-# adams
-
-generardato(eleccion = 2)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_adams <- asientos
-disprop_adams <- disprop
-```
-
-```{r}
-
-# danish
-
-generardato(eleccion = 2)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_danish <- asientos
-disprop_danish <- disprop
-```
 
 ### Comparativa entre métodos
 
@@ -900,11 +785,14 @@ fe <- full_join(fe, resul_modsainte, by = "Partidos")
 fe <- full_join(fe, resul_adams, by = "Partidos")
 fe <- full_join(fe, resul_huntington, by = "Partidos")
 fe <- full_join(fe, resul_imperiali, by = "Partidos")
-colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+fe <- full_join(fe, resul_hare, by = "Partidos")
+fe <- full_join(fe, resul_droop, by = "Partidos")
+fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
 
 
 
-fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
   key = "Metodo", value = "Asientos"
 )
 fe$Asientos <- replace_na(fe$Asientos, 0)
@@ -935,7 +823,7 @@ votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
   geom_tile(aes(fill = Asientos)) +
   scale_fill_gradient(low = "green", high = "red") +
   coord_flip() +
-  geom_text(aes(label = Asientos))+
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
   labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
   guides(fill = "none")
 
@@ -954,12 +842,12 @@ En estas elecciones de 1979 el partido más votado fué *UCD* seguido del *PSOE*
 
 #### Desproporción
 ```{r}
-metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+
 
 disprop_1979 <- bind_cols(
   "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
   "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
-  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
 
 
 disprop_1979 <- as.data.table(disprop_1979)
@@ -973,7 +861,7 @@ ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
 disprop_mean <- c(
   mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
   mean(disprop_modsainte), mean(disprop_adams),
-  mean(disprop_huntington), mean(disprop_imperiali)
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
 )
 Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
 
@@ -994,203 +882,18 @@ Según la desproporción media los peores métodos de reparto se pueden agrupar 
 
 
 
-<!-- ### Método D`Hondt -->
-
-```{r}
+```{r }
 generardato(eleccion = 3)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_dhondt <- asientos
-disprop_dhondt <- disprop
-```
-
-
-
-```{r}
-
-# sainte
-
-generardato(eleccion = 3)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_sainte <- asientos
-disprop_sainte <- disprop
-```
-
-```{r}
-
-# modsainte
-
-generardato(eleccion = 3)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_modsainte <- asientos
-disprop_modsainte <- disprop
-```
-
-```{r}
-
-# huntington
-
-generardato(eleccion = 3)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_huntington <- asientos
-disprop_huntington <- disprop
-```
-
-```{r}
-
-# imperiali
-
-generardato(eleccion = 3)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_imperiali <- asientos
-disprop_imperiali <- disprop
-```
-
-```{r}
-
-# adams
-
-generardato(eleccion = 3)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_adams <- asientos
-disprop_adams <- disprop
-```
-
-```{r}
-
-# danish
-
-generardato(eleccion = 3)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_danish <- asientos
-disprop_danish <- disprop
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
 ```
 
 ### Comparativa entre métodos
@@ -1205,12 +908,12 @@ fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
 fe <- full_join(fe, resul_adams, by = "Partidos")
 fe <- full_join(fe, resul_huntington, by = "Partidos")
-fe <- full_join(fe, resul_imperiali, by = "Partidos")
-colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
 
 
 
-fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
   key = "Metodo", value = "Asientos"
 )
 fe$Asientos <- replace_na(fe$Asientos, 0)
@@ -1241,7 +944,7 @@ votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
   geom_tile(aes(fill = Asientos)) +
   scale_fill_gradient(low = "green", high = "red") +
   coord_flip() +
-  geom_text(aes(label = Asientos))+
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
   labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
   guides(fill = "none")
 
@@ -1260,12 +963,12 @@ En estas elecciones de 1982 el partido más votado es el *PSOE* el cual según l
 
 #### Desproporción
 ```{r}
-metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+
 
 disprop_1982 <- bind_cols(
   "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
   "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
-  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
 
 
 disprop_1982 <- as.data.table(disprop_1982)
@@ -1279,7 +982,7 @@ ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
 disprop_mean <- c(
   mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
   mean(disprop_modsainte), mean(disprop_adams),
-  mean(disprop_huntington), mean(disprop_imperiali)
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
 )
 Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
 
@@ -1301,210 +1004,25 @@ Según la desproporción media, se reconocen tres grupos distintos, un grupo muy
 
 
 
-<!-- ### Método D`Hondt -->
-
-```{r}
+```{r }
 generardato(eleccion = 4)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_dhondt <- asientos
-disprop_dhondt <- disprop
-```
-
-
-
-```{r}
-
-# sainte
-
-generardato(eleccion = 4)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_sainte <- asientos
-disprop_sainte <- disprop
-```
-
-```{r}
-
-# modsainte
-
-generardato(eleccion = 4)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_modsainte <- asientos
-disprop_modsainte <- disprop
-```
-
-```{r}
-
-# huntington
-
-generardato(eleccion = 4)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_huntington <- asientos
-disprop_huntington <- disprop
-```
-
-```{r}
-
-# imperiali
-
-generardato(eleccion = 4)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_imperiali <- asientos
-disprop_imperiali <- disprop
-```
-
-```{r}
-
-# adams
-
-generardato(eleccion = 4)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_adams <- asientos
-disprop_adams <- disprop
-```
-
-```{r}
-
-# danish
-
-generardato(eleccion = 4)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_danish <- asientos
-disprop_danish <- disprop
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
 ```
 
 ### Comparativa entre métodos
 
 #### Votos obtenidos
 
-```{r}
+```{r }
 
 
 fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
@@ -1512,12 +1030,12 @@ fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
 fe <- full_join(fe, resul_adams, by = "Partidos")
 fe <- full_join(fe, resul_huntington, by = "Partidos")
-fe <- full_join(fe, resul_imperiali, by = "Partidos")
-colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
 
 
 
-fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
   key = "Metodo", value = "Asientos"
 )
 fe$Asientos <- replace_na(fe$Asientos, 0)
@@ -1548,7 +1066,7 @@ votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
   geom_tile(aes(fill = Asientos)) +
   scale_fill_gradient(low = "green", high = "red") +
   coord_flip() +
-  geom_text(aes(label = Asientos))+
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
   labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
   guides(fill = "none")
 
@@ -1568,12 +1086,12 @@ Este año también reconocemos un partido que podría decirse de nivel de votos 
 
 #### Desproporción
 ```{r}
-metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+
 
 disprop_1986 <- bind_cols(
   "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
   "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
-  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
 
 
 disprop_1986 <- as.data.table(disprop_1986)
@@ -1587,7 +1105,7 @@ ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
 disprop_mean <- c(
   mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
   mean(disprop_modsainte), mean(disprop_adams),
-  mean(disprop_huntington), mean(disprop_imperiali)
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
 )
 Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
 
@@ -1606,205 +1124,18 @@ Según el método de reparto este año el método Imperiali es el más despropor
 
 ## Año 1989
 
-
-
-<!-- ### Método D`Hondt -->
-
-```{r}
+```{r }
 generardato(eleccion = 5)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_dhondt <- asientos
-disprop_dhondt <- disprop
-```
-
-
-
-```{r}
-
-# sainte
-
-generardato(eleccion = 5)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_sainte <- asientos
-disprop_sainte <- disprop
-```
-
-```{r}
-
-# modsainte
-
-generardato(eleccion = 5)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_modsainte <- asientos
-disprop_modsainte <- disprop
-```
-
-```{r}
-
-# huntington
-
-generardato(eleccion = 5)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_huntington <- asientos
-disprop_huntington <- disprop
-```
-
-```{r}
-
-# imperiali
-
-generardato(eleccion = 5)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_imperiali <- asientos
-disprop_imperiali <- disprop
-```
-
-```{r}
-
-# adams
-
-generardato(eleccion = 5)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_adams <- asientos
-disprop_adams <- disprop
-```
-
-```{r}
-
-# danish
-
-generardato(eleccion = 5)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_danish <- asientos
-disprop_danish <- disprop
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
 ```
 
 ### Comparativa entre métodos
@@ -1819,12 +1150,12 @@ fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
 fe <- full_join(fe, resul_adams, by = "Partidos")
 fe <- full_join(fe, resul_huntington, by = "Partidos")
-fe <- full_join(fe, resul_imperiali, by = "Partidos")
-colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
 
 
 
-fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
   key = "Metodo", value = "Asientos"
 )
 fe$Asientos <- replace_na(fe$Asientos, 0)
@@ -1855,7 +1186,7 @@ votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
   geom_tile(aes(fill = Asientos)) +
   scale_fill_gradient(low = "green", high = "red") +
   coord_flip() +
-  geom_text(aes(label = Asientos))+
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
   labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
   guides(fill = "none")
 
@@ -1874,12 +1205,12 @@ En estas elecciones de 1989 el partido más votado es, como sucedió el las ante
 
 #### Desproporción
 ```{r}
-metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+
 
 disprop_1989 <- bind_cols(
   "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
   "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
-  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
 
 
 disprop_1989 <- as.data.table(disprop_1989)
@@ -1893,7 +1224,7 @@ ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
 disprop_mean <- c(
   mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
   mean(disprop_modsainte), mean(disprop_adams),
-  mean(disprop_huntington), mean(disprop_imperiali)
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
 )
 Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
 
@@ -1914,205 +1245,18 @@ Estas elecciones de 1989 la desproporción media se agrupa en tres grupos, alta,
 
 ## Año 1993
 
-
-
-<!-- ### Método D`Hondt -->
-
-```{r}
+```{r }
 generardato(eleccion = 6)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_dhondt <- asientos
-disprop_dhondt <- disprop
-```
-
-
-
-```{r}
-
-# sainte
-
-generardato(eleccion = 6)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_sainte <- asientos
-disprop_sainte <- disprop
-```
-
-```{r}
-
-# modsainte
-
-generardato(eleccion = 6)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_modsainte <- asientos
-disprop_modsainte <- disprop
-```
-
-```{r}
-
-# huntington
-
-generardato(eleccion = 6)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_huntington <- asientos
-disprop_huntington <- disprop
-```
-
-```{r}
-
-# imperiali
-
-generardato(eleccion = 6)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_imperiali <- asientos
-disprop_imperiali <- disprop
-```
-
-```{r}
-
-# adams
-
-generardato(eleccion = 6)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_adams <- asientos
-disprop_adams <- disprop
-```
-
-```{r}
-
-# danish
-
-generardato(eleccion = 6)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_danish <- asientos
-disprop_danish <- disprop
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
 ```
 
 ### Comparativa entre métodos
@@ -2127,12 +1271,12 @@ fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
 fe <- full_join(fe, resul_adams, by = "Partidos")
 fe <- full_join(fe, resul_huntington, by = "Partidos")
-fe <- full_join(fe, resul_imperiali, by = "Partidos")
-colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
 
 
 
-fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
   key = "Metodo", value = "Asientos"
 )
 fe$Asientos <- replace_na(fe$Asientos, 0)
@@ -2163,7 +1307,7 @@ votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
   geom_tile(aes(fill = Asientos)) +
   scale_fill_gradient(low = "green", high = "red") +
   coord_flip() +
-  geom_text(aes(label = Asientos))+
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
   labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
   guides(fill = "none")
 
@@ -2183,12 +1327,12 @@ Son unas elecciones en donde hay dos partidos hegemónicos y dos partidos median
 
 #### Desproporción
 ```{r}
-metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+
 
 disprop_1993 <- bind_cols(
   "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
   "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
-  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
 
 
 disprop_1993 <- as.data.table(disprop_1993)
@@ -2202,7 +1346,7 @@ ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
 disprop_mean <- c(
   mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
   mean(disprop_modsainte), mean(disprop_adams),
-  mean(disprop_huntington), mean(disprop_imperiali)
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
 )
 Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
 
@@ -2222,204 +1366,18 @@ Este año en el caso de la desproporción media según el método de reparto vem
 ## Año 1996
 
 
-
-<!-- ### Método D`Hondt -->
-
-```{r}
+```{r }
 generardato(eleccion = 7)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_dhondt <- asientos
-disprop_dhondt <- disprop
-```
-
-
-
-```{r}
-
-# sainte
-
-generardato(eleccion = 7)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_sainte <- asientos
-disprop_sainte <- disprop
-```
-
-```{r}
-
-# modsainte
-
-generardato(eleccion = 7)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_modsainte <- asientos
-disprop_modsainte <- disprop
-```
-
-```{r}
-
-# huntington
-
-generardato(eleccion = 7)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_huntington <- asientos
-disprop_huntington <- disprop
-```
-
-```{r}
-
-# imperiali
-
-generardato(eleccion = 7)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_imperiali <- asientos
-disprop_imperiali <- disprop
-```
-
-```{r}
-
-# adams
-
-generardato(eleccion = 7)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_adams <- asientos
-disprop_adams <- disprop
-```
-
-```{r}
-
-# danish
-
-generardato(eleccion = 7)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_danish <- asientos
-disprop_danish <- disprop
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
 ```
 
 ### Comparativa entre métodos
@@ -2434,12 +1392,12 @@ fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
 fe <- full_join(fe, resul_adams, by = "Partidos")
 fe <- full_join(fe, resul_huntington, by = "Partidos")
-fe <- full_join(fe, resul_imperiali, by = "Partidos")
-colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
 
 
 
-fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
   key = "Metodo", value = "Asientos"
 )
 fe$Asientos <- replace_na(fe$Asientos, 0)
@@ -2470,7 +1428,7 @@ votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
   geom_tile(aes(fill = Asientos)) +
   scale_fill_gradient(low = "green", high = "red") +
   coord_flip() +
-  geom_text(aes(label = Asientos))+
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
   labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
   guides(fill = "none")
 
@@ -2489,12 +1447,12 @@ En estas elecciones de 1996 son las primeras elecciones en donde el *PP* son la 
 
 #### Desproporción
 ```{r}
-metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+
 
 disprop_1996 <- bind_cols(
   "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
   "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
-  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
 
 
 disprop_1996 <- as.data.table(disprop_1996)
@@ -2508,7 +1466,7 @@ ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
 disprop_mean <- c(
   mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
   mean(disprop_modsainte), mean(disprop_adams),
-  mean(disprop_huntington), mean(disprop_imperiali)
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
 )
 Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
 
@@ -2530,204 +1488,18 @@ Este año en el caso de la desproporción media según el método de reparto vem
 ## Año 2000
 
 
-
-<!-- ### Método D`Hondt -->
-
-```{r}
+```{r }
 generardato(eleccion = 8)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_dhondt <- asientos
-disprop_dhondt <- disprop
-```
-
-
-
-```{r}
-
-# sainte
-
-generardato(eleccion = 8)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_sainte <- asientos
-disprop_sainte <- disprop
-```
-
-```{r}
-
-# modsainte
-
-generardato(eleccion = 8)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_modsainte <- asientos
-disprop_modsainte <- disprop
-```
-
-```{r}
-
-# huntington
-
-generardato(eleccion = 8)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_huntington <- asientos
-disprop_huntington <- disprop
-```
-
-```{r}
-
-# imperiali
-
-generardato(eleccion = 8)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_imperiali <- asientos
-disprop_imperiali <- disprop
-```
-
-```{r}
-
-# adams
-
-generardato(eleccion = 8)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_adams <- asientos
-disprop_adams <- disprop
-```
-
-```{r}
-
-# danish
-
-generardato(eleccion = 8)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_danish <- asientos
-disprop_danish <- disprop
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
 ```
 
 ### Comparativa entre métodos
@@ -2742,12 +1514,12 @@ fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
 fe <- full_join(fe, resul_adams, by = "Partidos")
 fe <- full_join(fe, resul_huntington, by = "Partidos")
-fe <- full_join(fe, resul_imperiali, by = "Partidos")
-colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
 
 
 
-fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
   key = "Metodo", value = "Asientos"
 )
 fe$Asientos <- replace_na(fe$Asientos, 0)
@@ -2778,7 +1550,7 @@ votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
   geom_tile(aes(fill = Asientos)) +
   scale_fill_gradient(low = "green", high = "red") +
   coord_flip() +
-  geom_text(aes(label = Asientos))+
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+theme(axis.text.x = element_text(size = 6))+
   labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
   guides(fill = "none")
 
@@ -2798,12 +1570,12 @@ Si optásemos por otro método de reparto más proporcional como puede ser el m�
 
 #### Desproporción
 ```{r}
-metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+
 
 disprop_2000 <- bind_cols(
   "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
   "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
-  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
 
 
 disprop_2000 <- as.data.table(disprop_2000)
@@ -2817,7 +1589,7 @@ ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
 disprop_mean <- c(
   mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
   mean(disprop_modsainte), mean(disprop_adams),
-  mean(disprop_huntington), mean(disprop_imperiali)
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
 )
 Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
 
@@ -2837,205 +1609,18 @@ Si miramos la gráfica de la desproporción según el método de reparto se pued
 
 ## Año 2004
 
-
-
-<!-- ### Método D`Hondt -->
-
-```{r}
+```{r }
 generardato(eleccion = 9)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_dhondt <- asientos
-disprop_dhondt <- disprop
-```
-
-
-
-```{r}
-
-# sainte
-
-generardato(eleccion = 9)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_sainte <- asientos
-disprop_sainte <- disprop
-```
-
-```{r}
-
-# modsainte
-
-generardato(eleccion = 9)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_modsainte <- asientos
-disprop_modsainte <- disprop
-```
-
-```{r}
-
-# huntington
-
-generardato(eleccion = 9)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_huntington <- asientos
-disprop_huntington <- disprop
-```
-
-```{r}
-
-# imperiali
-
-generardato(eleccion = 9)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_imperiali <- asientos
-disprop_imperiali <- disprop
-```
-
-```{r}
-
-# adams
-
-generardato(eleccion = 9)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_adams <- asientos
-disprop_adams <- disprop
-```
-
-```{r}
-
-# danish
-
-generardato(eleccion = 9)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_danish <- asientos
-disprop_danish <- disprop
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
 ```
 
 ### Comparativa entre métodos
@@ -3050,12 +1635,12 @@ fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
 fe <- full_join(fe, resul_adams, by = "Partidos")
 fe <- full_join(fe, resul_huntington, by = "Partidos")
-fe <- full_join(fe, resul_imperiali, by = "Partidos")
-colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
 
 
 
-fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
   key = "Metodo", value = "Asientos"
 )
 fe$Asientos <- replace_na(fe$Asientos, 0)
@@ -3086,7 +1671,7 @@ votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
   geom_tile(aes(fill = Asientos)) +
   scale_fill_gradient(low = "green", high = "red") +
   coord_flip() +
-  geom_text(aes(label = Asientos))+
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
   labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
   guides(fill = "none")
 
@@ -3106,12 +1691,12 @@ En ningún método el PSOE alcanzaría la mayoría absoluta por lo que deberá d
 
 #### Desproporción
 ```{r}
-metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+
 
 disprop_2004 <- bind_cols(
   "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
   "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
-  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
 
 
 disprop_2004 <- as.data.table(disprop_2004)
@@ -3125,7 +1710,7 @@ ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
 disprop_mean <- c(
   mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
   mean(disprop_modsainte), mean(disprop_adams),
-  mean(disprop_huntington), mean(disprop_imperiali)
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
 )
 Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
 
@@ -3145,205 +1730,18 @@ En el caso de agrupar la desproporción por métodos observamos que el método I
 
 ## Año 2008
 
-
-
-<!-- ### Método D`Hondt -->
-
-```{r}
+```{r }
 generardato(eleccion = 10)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_dhondt <- asientos
-disprop_dhondt <- disprop
-```
-
-
-
-```{r}
-
-# sainte
-
-generardato(eleccion = 10)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_sainte <- asientos
-disprop_sainte <- disprop
-```
-
-```{r}
-
-# modsainte
-
-generardato(eleccion = 10)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_modsainte <- asientos
-disprop_modsainte <- disprop
-```
-
-```{r}
-
-# huntington
-
-generardato(eleccion = 10)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_huntington <- asientos
-disprop_huntington <- disprop
-```
-
-```{r}
-
-# imperiali
-
-generardato(eleccion = 10)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_imperiali <- asientos
-disprop_imperiali <- disprop
-```
-
-```{r}
-
-# adams
-
-generardato(eleccion = 10)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_adams <- asientos
-disprop_adams <- disprop
-```
-
-```{r}
-
-# danish
-
-generardato(eleccion = 10)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_danish <- asientos
-disprop_danish <- disprop
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
 ```
 
 ### Comparativa entre métodos
@@ -3358,12 +1756,12 @@ fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
 fe <- full_join(fe, resul_adams, by = "Partidos")
 fe <- full_join(fe, resul_huntington, by = "Partidos")
-fe <- full_join(fe, resul_imperiali, by = "Partidos")
-colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
 
 
 
-fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
   key = "Metodo", value = "Asientos"
 )
 fe$Asientos <- replace_na(fe$Asientos, 0)
@@ -3394,7 +1792,7 @@ votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
   geom_tile(aes(fill = Asientos)) +
   scale_fill_gradient(low = "green", high = "red") +
   coord_flip() +
-  geom_text(aes(label = Asientos))+
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
   labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
   guides(fill = "none")
 
@@ -3415,12 +1813,12 @@ Utilizando los métodos de reparto más proporcionales como son el Danish y el S
 
 #### Desproporción
 ```{r}
-metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+
 
 disprop_2008 <- bind_cols(
   "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
   "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
-  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
 
 
 disprop_2008 <- as.data.table(disprop_2008)
@@ -3434,7 +1832,7 @@ ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
 disprop_mean <- c(
   mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
   mean(disprop_modsainte), mean(disprop_adams),
-  mean(disprop_huntington), mean(disprop_imperiali)
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
 )
 Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
 
@@ -3453,204 +1851,18 @@ Si observamos la gráfica de la desproporción según el método de reparto es l
 ## Año 2011
 
 
-
-<!-- ### Método D`Hondt -->
-
-```{r}
+```{r }
 generardato(eleccion = 11)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_dhondt <- asientos
-disprop_dhondt <- disprop
-```
-
-
-
-```{r}
-
-# sainte
-
-generardato(eleccion = 11)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_sainte <- asientos
-disprop_sainte <- disprop
-```
-
-```{r}
-
-# modsainte
-
-generardato(eleccion = 11)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_modsainte <- asientos
-disprop_modsainte <- disprop
-```
-
-```{r}
-
-# huntington
-
-generardato(eleccion = 11)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_huntington <- asientos
-disprop_huntington <- disprop
-```
-
-```{r}
-
-# imperiali
-
-generardato(eleccion = 11)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_imperiali <- asientos
-disprop_imperiali <- disprop
-```
-
-```{r}
-
-# adams
-
-generardato(eleccion = 11)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_adams <- asientos
-disprop_adams <- disprop
-```
-
-```{r}
-
-# danish
-
-generardato(eleccion = 11)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_danish <- asientos
-disprop_danish <- disprop
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
 ```
 
 ### Comparativa entre métodos
@@ -3665,12 +1877,12 @@ fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
 fe <- full_join(fe, resul_adams, by = "Partidos")
 fe <- full_join(fe, resul_huntington, by = "Partidos")
-fe <- full_join(fe, resul_imperiali, by = "Partidos")
-colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
 
 
 
-fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
   key = "Metodo", value = "Asientos"
 )
 fe$Asientos <- replace_na(fe$Asientos, 0)
@@ -3701,7 +1913,7 @@ votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
   geom_tile(aes(fill = Asientos)) +
   scale_fill_gradient(low = "green", high = "red") +
   coord_flip() +
-  geom_text(aes(label = Asientos))+
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
   labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
   guides(fill = "none")
 
@@ -3722,12 +1934,12 @@ Si observamos los otros métodos propuestos vemos que el PP en el caso del méto
 
 #### Desproporción
 ```{r}
-metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+
 
 disprop_2011 <- bind_cols(
   "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
   "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
-  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
 
 
 disprop_2011 <- as.data.table(disprop_2011)
@@ -3741,7 +1953,7 @@ ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
 disprop_mean <- c(
   mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
   mean(disprop_modsainte), mean(disprop_adams),
-  mean(disprop_huntington), mean(disprop_imperiali)
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
 )
 Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
 
@@ -3762,205 +1974,18 @@ Si observamos la desproporción según el método de reparto volvemos a observar
 
 ## Año 2015
 
-
-
-<!-- ### Método D`Hondt -->
-
-```{r}
+```{r }
 generardato(eleccion = 12)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_dhondt <- asientos
-disprop_dhondt <- disprop
-```
-
-
-
-```{r}
-
-# sainte
-
-generardato(eleccion = 12)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_sainte <- asientos
-disprop_sainte <- disprop
-```
-
-```{r}
-
-# modsainte
-
-generardato(eleccion = 12)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_modsainte <- asientos
-disprop_modsainte <- disprop
-```
-
-```{r}
-
-# huntington
-
-generardato(eleccion = 12)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_huntington <- asientos
-disprop_huntington <- disprop
-```
-
-```{r}
-
-# imperiali
-
-generardato(eleccion = 12)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_imperiali <- asientos
-disprop_imperiali <- disprop
-```
-
-```{r}
-
-# adams
-
-generardato(eleccion = 12)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_adams <- asientos
-disprop_adams <- disprop
-```
-
-```{r}
-
-# danish
-
-generardato(eleccion = 12)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_danish <- asientos
-disprop_danish <- disprop
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
 ```
 
 ### Comparativa entre métodos
@@ -3975,12 +2000,12 @@ fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
 fe <- full_join(fe, resul_adams, by = "Partidos")
 fe <- full_join(fe, resul_huntington, by = "Partidos")
-fe <- full_join(fe, resul_imperiali, by = "Partidos")
-colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
 
 
 
-fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
   key = "Metodo", value = "Asientos"
 )
 fe$Asientos <- replace_na(fe$Asientos, 0)
@@ -4011,7 +2036,7 @@ votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
   geom_tile(aes(fill = Asientos)) +
   scale_fill_gradient(low = "green", high = "red") +
   coord_flip() +
-  geom_text(aes(label = Asientos))+
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
   labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
   guides(fill = "none")
 
@@ -4031,12 +2056,12 @@ El partido más votado es el *Partido Popular* seguido por el *PSOE*, pero ya ve
 
 #### Desproporción
 ```{r}
-metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+
 
 disprop_2015 <- bind_cols(
   "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
   "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
-  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
 
 
 disprop_2015 <- as.data.table(disprop_2015)
@@ -4050,7 +2075,7 @@ ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
 disprop_mean <- c(
   mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
   mean(disprop_modsainte), mean(disprop_adams),
-  mean(disprop_huntington), mean(disprop_imperiali)
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
 )
 Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
 
@@ -4069,205 +2094,18 @@ En el caso de la desproporción según el método de reparto este año tenemos n
 
 ## Año 2016
 
-
-
-<!-- ### Método D`Hondt -->
-
-```{r}
+```{r }
 generardato(eleccion = 13)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_dhondt <- asientos
-disprop_dhondt <- disprop
-```
-
-
-
-```{r}
-
-# sainte
-
-generardato(eleccion = 13)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_sainte <- asientos
-disprop_sainte <- disprop
-```
-
-```{r}
-
-# modsainte
-
-generardato(eleccion = 13)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_modsainte <- asientos
-disprop_modsainte <- disprop
-```
-
-```{r}
-
-# huntington
-
-generardato(eleccion = 13)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_huntington <- asientos
-disprop_huntington <- disprop
-```
-
-```{r}
-
-# imperiali
-
-generardato(eleccion = 13)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_imperiali <- asientos
-disprop_imperiali <- disprop
-```
-
-```{r}
-
-# adams
-
-generardato(eleccion = 13)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_adams <- asientos
-disprop_adams <- disprop
-```
-
-```{r}
-
-# danish
-
-generardato(eleccion = 13)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_danish <- asientos
-disprop_danish <- disprop
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
 ```
 
 ### Comparativa entre métodos
@@ -4282,12 +2120,12 @@ fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
 fe <- full_join(fe, resul_adams, by = "Partidos")
 fe <- full_join(fe, resul_huntington, by = "Partidos")
-fe <- full_join(fe, resul_imperiali, by = "Partidos")
-colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
 
 
 
-fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
   key = "Metodo", value = "Asientos"
 )
 fe$Asientos <- replace_na(fe$Asientos, 0)
@@ -4318,7 +2156,7 @@ votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
   geom_tile(aes(fill = Asientos)) +
   scale_fill_gradient(low = "green", high = "red") +
   coord_flip() +
-  geom_text(aes(label = Asientos))+
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
   labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
   guides(fill = "none")
 
@@ -4338,12 +2176,12 @@ Son las primeras elecciones en donde el método de reparto no cambia significati
 
 #### Desproporción
 ```{r }
-metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+
 
 disprop_2016 <- bind_cols(
   "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
   "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
-  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
 
 
 disprop_2016 <- as.data.table(disprop_2016)
@@ -4357,7 +2195,7 @@ ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
 disprop_mean <- c(
   mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
   mean(disprop_modsainte), mean(disprop_adams),
-  mean(disprop_huntington), mean(disprop_imperiali)
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
 )
 Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
 
@@ -4377,204 +2215,18 @@ En el gráfico en que comparamos los métodos de reparto el comportamiento es si
 ## Año 2019, Abril
 
 
-
-<!-- ### Método D`Hondt -->
-
-```{r}
+```{r }
 generardato(eleccion = 14)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_dhondt <- asientos
-disprop_dhondt <- disprop
-```
-
-
-
-```{r}
-
-# sainte
-
-generardato(eleccion = 14)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_sainte <- asientos
-disprop_sainte <- disprop
-```
-
-```{r}
-
-# modsainte
-
-generardato(eleccion = 14)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_modsainte <- asientos
-disprop_modsainte <- disprop
-```
-
-```{r}
-
-# huntington
-
-generardato(eleccion = 14)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_huntington <- asientos
-disprop_huntington <- disprop
-```
-
-```{r}
-
-# imperiali
-
-generardato(eleccion = 14)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_imperiali <- asientos
-disprop_imperiali <- disprop
-```
-
-```{r}
-
-# adams
-
-generardato(eleccion = 14)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_adams <- asientos
-disprop_adams <- disprop
-```
-
-```{r}
-
-# danish
-
-generardato(eleccion = 14)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_danish <- asientos
-disprop_danish <- disprop
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
 ```
 
 ### Comparativa entre métodos
@@ -4589,12 +2241,12 @@ fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
 fe <- full_join(fe, resul_adams, by = "Partidos")
 fe <- full_join(fe, resul_huntington, by = "Partidos")
-fe <- full_join(fe, resul_imperiali, by = "Partidos")
-colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
 
 
 
-fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
   key = "Metodo", value = "Asientos"
 )
 fe$Asientos <- replace_na(fe$Asientos, 0)
@@ -4625,7 +2277,7 @@ votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
   geom_tile(aes(fill = Asientos)) +
   scale_fill_gradient(low = "green", high = "red") +
   coord_flip() +
-  geom_text(aes(label = Asientos))+
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
   labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
   guides(fill = "none")
 
@@ -4645,12 +2297,12 @@ Este año tampoco hay una diferencia significativa de haber utilizado un método
 
 #### Desproporción
 ```{r}
-metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+
 
 disprop_2019_04 <- bind_cols(
   "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
   "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
-  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
 
 
 disprop_2019_04 <- as.data.table(disprop_2019_04)
@@ -4664,7 +2316,7 @@ ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
 disprop_mean <- c(
   mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
   mean(disprop_modsainte), mean(disprop_adams),
-  mean(disprop_huntington), mean(disprop_imperiali)
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
 )
 Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
 
@@ -4685,205 +2337,18 @@ Cuando comparamos la proporcionalidad según el método de reparto sucede algo q
 
 ## Año 2019, Noviembre
 
-
-
-<!-- ### Método D`Hondt -->
-
-```{r}
+```{r }
 generardato(eleccion = 15)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_dhondt <- asientos
-disprop_dhondt <- disprop
-```
-
-
-
-```{r}
-
-# sainte
-
-generardato(eleccion = 15)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_sainte <- asientos
-disprop_sainte <- disprop
-```
-
-```{r}
-
-# modsainte
-
-generardato(eleccion = 15)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_modsainte <- asientos
-disprop_modsainte <- disprop
-```
-
-```{r}
-
-# huntington
-
-generardato(eleccion = 15)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_huntington <- asientos
-disprop_huntington <- disprop
-```
-
-```{r}
-
-# imperiali
-
-generardato(eleccion = 15)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_imperiali <- asientos
-disprop_imperiali <- disprop
-```
-
-```{r}
-
-# adams
-
-generardato(eleccion = 15)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-  asientos$Escanos[is.na(asientos$Escanos)] <- 0
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_adams <- asientos
-disprop_adams <- disprop
-```
-
-```{r}
-
-# danish
-
-generardato(eleccion = 15)
-
-partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
-colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
-
-escanos <- numeric(length = length(colum))
-disprop <- numeric(length = nrow(datos))
-
-for (provincia in seq_len(nrow(datos))) {
-  votos <- unlist(datos[provincia, colum])
-  escannos <- datos[provincia, ncol(datos)]
-
-  asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
-
-  disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
-
-  escanos <- asientos$Escanos + escanos
-}
-asientos$Escanos <- escanos
-asientos <- asientos[asientos$Escanos >= 1, ]
-resul_danish <- asientos
-disprop_danish <- disprop
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
 ```
 
 ### Comparativa entre métodos
@@ -4898,12 +2363,12 @@ fe <- full_join(fe, resul_sainte, by = "Partidos")
 fe <- full_join(fe, resul_modsainte, by = "Partidos")
 fe <- full_join(fe, resul_adams, by = "Partidos")
 fe <- full_join(fe, resul_huntington, by = "Partidos")
-fe <- full_join(fe, resul_imperiali, by = "Partidos")
-colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
 
 
 
-fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali",
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
   key = "Metodo", value = "Asientos"
 )
 fe$Asientos <- replace_na(fe$Asientos, 0)
@@ -4934,7 +2399,7 @@ votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
   geom_tile(aes(fill = Asientos)) +
   scale_fill_gradient(low = "green", high = "red") +
   coord_flip() +
-  geom_text(aes(label = Asientos))+
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
   labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
   guides(fill = "none")
 
@@ -4955,12 +2420,12 @@ En el caso de optar por otro método en ninguno de ellos se alcanzaría la mayor
 
 #### Desproporción
 ```{r}
-metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali")
+
 
 disprop_2019_11 <- bind_cols(
   "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
   "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
-  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
 
 
 disprop_2019_11 <- as.data.table(disprop_2019_11)
@@ -4974,7 +2439,7 @@ ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
 disprop_mean <- c(
   mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
   mean(disprop_modsainte), mean(disprop_adams),
-  mean(disprop_huntington), mean(disprop_imperiali)
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
 )
 Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
 
