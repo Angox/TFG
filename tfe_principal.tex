@@ -900,6 +900,33 @@ Canaria, Fuerteventura, Lanzarote, Tenerife, Hierro, Gomera y La Palma.
   \end{enumerate}
 \end{itemize}
 
+\FloatBarrier
+
+\ifdefined\ifprincipal
+\else
+\setlength{\parindent}{1em}
+\pagestyle{fancy}
+\setcounter{tocdepth}{4}
+\tableofcontents
+
+\fi
+
+\ifdefined\ifdoblecara
+\fancyhead{}{}
+\fancyhead[LE,RO]{\scriptsize\rightmark}
+\fancyfoot[LO,RE]{\scriptsize\slshape \leftmark}
+\fancyfoot[C]{}
+\fancyfoot[LE,RO]{\footnotesize\thepage}
+\else
+\fancyhead{}{}
+\fancyhead[RO]{\scriptsize\rightmark}
+\fancyfoot[LO]{\scriptsize\slshape \leftmark}
+\fancyfoot[C]{}
+\fancyfoot[RO]{\footnotesize\thepage}
+\fi
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
 \hypertarget{muxe9todos-de-reparto-de-escauxf1os}{%
 \chapter{Métodos de reparto de
 escaños}\label{muxe9todos-de-reparto-de-escauxf1os}}
@@ -1409,7 +1436,7 @@ variables dejaremos dos variables fijas y una tercera que irá variando:
   más comprensivo:
 \end{itemize}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-9-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-11-1} \end{center}
 
 \hypertarget{cuxe1lculo-de-la-desproporciuxf3n}{%
 \section{Cálculo de la
@@ -1484,7 +1511,7 @@ desproporción obtenga mejor método será.
 \subsection{D`Hondt variando el número de
 escaños}\label{dhondt-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-13-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-15-1} \end{center}
 
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, en el presente caso se empieza por repartir un único
@@ -1505,7 +1532,7 @@ número de escaños a partir de los 300.
 \subsection{D`Hondt variando el número de
 partidos}\label{dhondt-variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-14-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-16-1} \end{center}
 
 En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 100
@@ -1524,7 +1551,7 @@ variabilidad decreciente cuantos más partidos entren en la elección.
 \subsection{D`Hondt variando la concentración del
 voto}\label{dhondt-variando-la-concentraciuxf3n-del-voto}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-15-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-17-1} \end{center}
 
 En el presente gráfico variamos la concentración del voto en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -1551,7 +1578,7 @@ los partidos.
 \subsection{Sainte-Lague variando el número de
 escaños}\label{sainte-lague-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-18-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-20-1} \end{center}
 
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, en el presente caso se empieza por repartir un único
@@ -1568,7 +1595,7 @@ escaños.
 \subsection{Sainte-Lague variando el número de
 partidos}\label{sainte-lague-variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-19-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-21-1} \end{center}
 
 En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 100
@@ -1587,7 +1614,7 @@ en las elecciones menor va a ser variabilidad que encontremos.
 \subsection{Sainte-Lague variando la concentración del
 voto}\label{sainte-lague-variando-la-concentraciuxf3n-del-voto}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-20-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-22-1} \end{center}
 
 En el presente gráfico variamos la concentración del voto en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -1607,7 +1634,7 @@ la variabilidad es baja sea cual sea la concentración del voto.
 \subsection{Modified Sainte-Lague variando el número de
 escaños}\label{modified-sainte-lague-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-23-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-25-1} \end{center}
 
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, en el presente caso se empieza por repartir un único
@@ -1625,7 +1652,7 @@ igual o mayor a 50 escaños.
 \subsection{Modified Sainte-Lague variando el número de
 partidos}\label{modified-sainte-lague-variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-24-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-26-1} \end{center}
 
 En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 100
@@ -1644,7 +1671,7 @@ las elecciones ficticias.
 \subsection{Modified Sainte-Lague variando la concentración del
 voto}\label{modified-sainte-lague-variando-la-concentraciuxf3n-del-voto}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-25-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-27-1} \end{center}
 
 En el presente gráfico variamos la concentración del voto en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -1667,7 +1694,7 @@ nivel de la concentración del voto entre los partidos.
 \subsection{Imperiali variando el número de
 escaños}\label{imperiali-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-28-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-30-1} \end{center}
 
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, en el presente caso se empieza por repartir un único
@@ -1688,7 +1715,7 @@ de escaños a repartir la desproporción tiende a estabilizarse.
 \subsection{Imperiali variando el número de
 partidos}\label{imperiali-variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-29-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-31-1} \end{center}
 
 En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 100
@@ -1705,7 +1732,7 @@ número muy reducido de partidos.
 \subsection{Imperiali variando la concentración del
 voto}\label{imperiali-variando-la-concentraciuxf3n-del-voto}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-30-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-32-1} \end{center}
 
 En el presente gráfico variamos la concentración del voto en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -1729,7 +1756,7 @@ su desproporción es significativamente mas alta.
 \subsection{Huntington-Hill variando el número de
 escaños}\label{huntington-hill-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-33-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-35-1} \end{center}
 
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, en el presente caso se empieza por repartir un único
@@ -1747,7 +1774,7 @@ estaríamos en niveles de desproporción aceptables.
 \subsection{Huntington-Hill variando el número de
 partidos}\label{huntington-hill-variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-34-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-36-1} \end{center}
 
 En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 100
@@ -1766,7 +1793,7 @@ caso de que muchos partidos se presenten a las elecciones.
 \subsection{Huntington-Hill variando la concentración del
 voto}\label{huntington-hill-variando-la-concentraciuxf3n-del-voto}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-35-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-37-1} \end{center}
 
 En el presente gráfico variamos la concentración del voto en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -1792,7 +1819,7 @@ concentrados en pocos partidos.
 \subsection{Adams variando el número de
 escaños}\label{adams-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-38-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-40-1} \end{center}
 
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, en el presente caso se empieza por repartir un único
@@ -1812,7 +1839,7 @@ aceptable a partir de los 500 escaños aproximadamente.
 \subsection{Adams variando el número de
 partidos}\label{adams-variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-39-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-41-1} \end{center}
 
 En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 100
@@ -1831,7 +1858,7 @@ este método cuando se presenten más de 25 partidos a las elecciones.
 \subsection{Adams variando la concentración del
 voto}\label{adams-variando-la-concentraciuxf3n-del-voto}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-40-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-42-1} \end{center}
 
 En el presente gráfico variamos la concentración del voto en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -1853,7 +1880,7 @@ será peor cuanto mayor concentración de voto se presente.
 \subsection{Danish variando el número de
 escaños}\label{danish-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-43-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-45-1} \end{center}
 
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, en el presente caso se empieza por repartir un único
@@ -1869,7 +1896,7 @@ repartir la desproporción tiende a estabilizarse.
 \subsection{Danish variando el número de
 partidos}\label{danish-variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-44-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-46-1} \end{center}
 
 En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 100
@@ -1888,7 +1915,7 @@ presenten a las elecciones.
 \subsection{Danish variando la concentración del
 voto}\label{danish-variando-la-concentraciuxf3n-del-voto}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-45-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-47-1} \end{center}
 
 En el presente gráfico variamos la concentración del voto en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -1909,7 +1936,7 @@ depende significativamente de la concentración del voto.
 \subsection{LR Hare variando el número de
 escaños}\label{lr-hare-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-48-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-50-1} \end{center}
 
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, en el presente caso se empieza por repartir un único
@@ -1923,7 +1950,7 @@ aceptable de desproporción entre los 100 a 200 escaños.
 \subsection{LR Hare variando el número de
 partidos}\label{lr-hare-variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-49-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-51-1} \end{center}
 
 En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 100
@@ -1943,7 +1970,7 @@ desproporción cuanto más partidos se presenten a las elecciones.
 \subsection{LR Hare variando la concentración del
 voto}\label{lr-hare-variando-la-concentraciuxf3n-del-voto}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-50-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-52-1} \end{center}
 
 En el presente gráfico variamos la concentración del voto en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -1964,7 +1991,7 @@ el mínimo nivel de desproporción.
 \subsection{LR Droop variando el número de
 escaños}\label{lr-droop-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-53-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-55-1} \end{center}
 
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, en el presente caso se empieza por repartir un único
@@ -1984,7 +2011,7 @@ los 200 escaños.
 \subsection{LR Droop variando el número de
 partidos}\label{lr-droop-variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-54-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-56-1} \end{center}
 
 En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 100
@@ -2001,7 +2028,7 @@ cuanto más partidos se presenten a las elecciones.
 \subsection{LR Droop variando la concentración del
 voto}\label{lr-droop-variando-la-concentraciuxf3n-del-voto}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-55-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-57-1} \end{center}
 
 En el presente gráfico variamos la concentración del voto en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -2021,7 +2048,7 @@ en alta para cualquier nivel de concentración.
 \subsection{LR Imperiali variando el número de
 escaños}\label{lr-imperiali-variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-58-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-60-1} \end{center}
 
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, en el presente caso se empieza por repartir un único
@@ -2035,7 +2062,7 @@ deseables a partir de los 200 escaños. .
 \subsection{LR Imperiali variando el número de
 partidos}\label{lr-imperiali-variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-59-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-61-1} \end{center}
 
 En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 100
@@ -2055,7 +2082,7 @@ cuanto más partidos se presenten a las elecciones.
 \subsection{LR Lmperiali variando la concentración del
 voto}\label{lr-lmperiali-variando-la-concentraciuxf3n-del-voto}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-60-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-62-1} \end{center}
 
 En el presente gráfico variamos la concentración del voto en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -2082,7 +2109,7 @@ la concentración de los votos entre los partidos.
 \subsection{Variando el número de
 escaños}\label{variando-el-nuxfamero-de-escauxf1os}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-61-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-63-1} \end{center}
 
 En el presente gráfico comparamos en un mismo lugar los métodos
 anteriormente analizados individualmente.\\
@@ -2094,7 +2121,7 @@ El peor métodos en este caso es el Imperiali, que presenta una curva con
 un descenso mucho más lento que los demás métodos. Todos los demás
 métodos presentan un comportamiento similar.
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-62-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-64-1} \end{center}
 
 En este gráfico nos centramos en la desproporción para un número de
 escaños a repartir de entre 300 y 400 diputados, actualmente en España
@@ -2124,7 +2151,7 @@ utilizar, que sería el método de Sainte-Lague sin modificar.
 \subsection{Variando el número de
 partidos}\label{variando-el-nuxfamero-de-partidos}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-63-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-65-1} \end{center}
 
 En el presente gráfico comparamos la desproporción variando el número de
 partidos en un mismo lugar con los métodos anteriormente analizados
@@ -2140,7 +2167,7 @@ los métodos Danish y LR-Hare. A continuación nos centraremos en la
 desproporción cuando se presentan pocos partidos para analizarlo más
 detenidamente.
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-64-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-66-1} \end{center}
 
 En este gráfico nos centramos en la desproporción para un número de
 partidos entre 2 y 50 partidos.
@@ -2163,7 +2190,7 @@ el mejor método es el Saint-Lague.
 \subsection{Variando la concentración del
 voto}\label{variando-la-concentraciuxf3n-del-voto}}
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-65-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-67-1} \end{center}
 
 En el presente gráfico comparamos la concentración del voto en unas
 elecciones ficticias, comenzamos con una concentración de votos baja, es
@@ -2183,7 +2210,7 @@ desproporción aumenta hasta que alcanza un punto en donde alcanza el
 máximo de desproporción y a partir de ese punto la desproporción va
 bajando alcanzando el mínimo de desproporción.
 
-\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-66-1} \end{center}
+\begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-68-1} \end{center}
 
 En este gráfico nos centramos en los casos en que hay mayor
 concentración de votos de unos pocos partidos, lo que suele suceder.\\
@@ -2331,9 +2358,9 @@ este modo:
 \subsection{Comparativa de asientos
 obtenidos}\label{comparativa-de-asientos-obtenidos}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-73-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-75-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-73-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-75-2} \end{center}
 
 En estas primeras elecciones de 1977 podemos observar que la fuerza más
 votada en las elecciones es el partido \emph{Unión de Centro
@@ -2360,9 +2387,9 @@ escaños más de haber optado por otro método de reparto de votos.
 \hypertarget{desproporciuxf3n}{%
 \subsection{Desproporción}\label{desproporciuxf3n}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-74-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-76-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-74-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-76-2} \end{center}
 
 En el presente gráfico, en el que se mide la desproporción por
 comunidades, observamos que en general entre todos los métodos las
@@ -2396,9 +2423,9 @@ otro mejor, que podría ser o bien el Sainte-Lague,LR-Hare o el Danish.
 \subsection{Comparativa de asientos
 obtenidos}\label{comparativa-de-asientos-obtenidos-1}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-76-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-78-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-76-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-78-2} \end{center}
 
 En estas elecciones de 1979 el partido más votado fué \emph{UCD} seguido
 del \emph{PSOE}, según los distintos métodos de reparto únicamente en el
@@ -2415,9 +2442,9 @@ se encuentran todos los demás.
 \hypertarget{desproporciuxf3n-1}{%
 \subsection{Desproporción}\label{desproporciuxf3n-1}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-77-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-79-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-77-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-79-2} \end{center}
 
 En el presente gráfico vemos como respecto a las anteriores elecciones
 hay una mayor diferencia de desproporción entre comunidades, las
@@ -2443,9 +2470,9 @@ de resto mayor.
 \subsection{Comparativa de asientos
 obtenidos}\label{comparativa-de-asientos-obtenidos-2}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-79-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-81-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-79-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-81-2} \end{center}
 
 En estas elecciones de 1982 el partido más votado es el \emph{PSOE} el
 cual según la mayoría de los métodos de reparto, incluido el método
@@ -2461,9 +2488,9 @@ el Sainte-Lague podría multiplicar sus escaños por 3 o 4.
 \hypertarget{desproporciuxf3n-2}{%
 \subsection{Desproporción}\label{desproporciuxf3n-2}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-80-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-82-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-80-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-82-2} \end{center}
 
 Según la gráfica de desproporción por comunidades es un año en el que
 generalmente no hay mucha diferencia de desproporción entre ellas, este
@@ -2485,9 +2512,9 @@ se encontraría el método Danish, LR-Hare y el Saint-Lague.
 \subsection{Comparativa de asientos
 obtenidos}\label{comparativa-de-asientos-obtenidos-3}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-82-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-84-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-82-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-84-2} \end{center}
 
 En estas elecciones de 1986 el partido más votado fué el \emph{PSOE},
 tal y como sucedió en las anteriores elecciones, son también unas
@@ -2509,9 +2536,9 @@ de optar por el método Danish.
 \hypertarget{desproporciuxf3n-3}{%
 \subsection{Desproporción}\label{desproporciuxf3n-3}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-83-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-85-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-83-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-85-2} \end{center}
 
 Este año en el caso de la desproporción por comunidades podemos observar
 que aumenta la diferencia respecto a las pasadas elecciones, una de las
@@ -2533,9 +2560,9 @@ seguido muy de cerca por el Sainte-Lague.
 \subsection{Comparativa de asientos
 obtenidos}\label{comparativa-de-asientos-obtenidos-4}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-85-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-87-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-85-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-87-2} \end{center}
 
 En estas elecciones de 1989 el partido más votado es, como sucedió el
 las anteriores elecciones, el \emph{PSOE}, vemos como aparece por
@@ -2555,9 +2582,9 @@ de optar por los métodos más proporcionales.
 \hypertarget{desproporciuxf3n-4}{%
 \subsection{Desproporción}\label{desproporciuxf3n-4}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-86-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-88-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-86-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-88-2} \end{center}
 
 Este año aumenta ligeramente la diferencia de desproporción entre
 comunidades, sin encontrar novedades en las comunidades más
@@ -2583,9 +2610,9 @@ sigue muy cerca el método Sainte-Lague.
 \subsection{Comparativa de asientos
 obtenidos}\label{comparativa-de-asientos-obtenidos-5}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-88-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-90-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-88-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-90-2} \end{center}
 
 En las elecciones de 1993 podemos observar como la fuerza del primer
 partido va decreciendo lentamente. Los dos partidos más votados son el
@@ -2606,9 +2633,9 @@ o beneficiado al cambiar el método de reparto.
 \hypertarget{desproporciuxf3n-5}{%
 \subsection{Desproporción}\label{desproporciuxf3n-5}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-89-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-91-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-89-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-91-2} \end{center}
 
 En estas elecciones se observan más picos de desproporción en
 comparación con las elecciones anteriores, especialmente aumenta su
@@ -2633,9 +2660,9 @@ Sainte-Lague.
 \subsection{Comparativa de asientos
 obtenidos}\label{comparativa-de-asientos-obtenidos-6}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-91-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-93-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-91-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-93-2} \end{center}
 
 En estas elecciones de 1996 son las primeras elecciones en donde el
 \emph{PP} son la fuerza más votada, el \emph{PSOE} que ya llevaba una
@@ -2650,9 +2677,9 @@ haber escogido otro método más proporcional.
 \hypertarget{desproporciuxf3n-6}{%
 \subsection{Desproporción}\label{desproporciuxf3n-6}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-92-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-94-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-92-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-94-2} \end{center}
 
 En estas elecciones de 1996 se observa una desproporción similar a las
 elecciones anteriores, en este año el comportamiento de la desproporción
@@ -2678,9 +2705,9 @@ Huntington-Hill, .
 \subsection{Comparativa de asientos
 obtenidos}\label{comparativa-de-asientos-obtenidos-7}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-94-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-96-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-94-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-96-2} \end{center}
 
 En las elecciones del año 2000 el partido más votado vuelve a ser el
 \emph{Partido Popular} seguido del \emph{PSOE}, en estas elecciones
@@ -2697,9 +2724,9 @@ elecciones sigue siendo Izquierda Unida.
 \hypertarget{desproporciuxf3n-7}{%
 \subsection{Desproporción}\label{desproporciuxf3n-7}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-95-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-97-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-95-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-97-2} \end{center}
 
 Observando la desproporción por comunidades tanto el método Adams como
 el Huntington-Hill tienen un comportamiento diferente respecto a los
@@ -2724,9 +2751,9 @@ desproporción muy similar.
 \subsection{Comparativa de asientos
 obtenidos}\label{comparativa-de-asientos-obtenidos-8}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-97-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-99-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-97-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-99-2} \end{center}
 
 En estas elecciones del año 2004 volvemos a ver unas elecciones con un
 claro bipartidismo y con una diferencia de escaños entre partidos cada
@@ -2746,9 +2773,9 @@ por utilizar un método de reparto distinto.
 \hypertarget{desproporciuxf3n-8}{%
 \subsection{Desproporción}\label{desproporciuxf3n-8}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-98-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-100-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-98-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-100-2} \end{center}
 
 Según el gráfico anterior por comunidades sigue la tónica general de las
 anteriores elecciones, únicamente podemos apreciar en estas elecciones
@@ -2770,9 +2797,9 @@ destacar por una desproporción alta ni baja entre todos los métodos.
 \subsection{Comparativa de asientos
 obtenidos}\label{comparativa-de-asientos-obtenidos-9}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-100-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-102-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-100-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-102-2} \end{center}
 
 En estos comicios del año 2008 no hay diferencias significativas en
 términos de escaños, sigue un claro bipartidismo con dos partidos
@@ -2794,9 +2821,9 @@ método Danish.
 \hypertarget{desproporciuxf3n-9}{%
 \subsection{Desproporción}\label{desproporciuxf3n-9}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-101-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-103-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-101-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-103-2} \end{center}
 
 Este es un año que se puede observar una mayor igualdad en el caso de
 las desproporciones, las comunidades no tienen una gran diferencia de
@@ -2817,9 +2844,9 @@ medio-alto de desproporción entre todos los métodos analizados.
 \subsection{Comparativa de asientos
 obtenidos}\label{comparativa-de-asientos-obtenidos-10}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-103-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-105-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-103-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-105-2} \end{center}
 
 Este año 2011 podemos considerarlo como el primer año en el que aunque
 continúe sucediendo un claro bipartidismo empiezan a surgir partidos
@@ -2847,9 +2874,9 @@ pasarían de 5 a 41 escaños y de 11 a 54 escaños respectivamente.
 \hypertarget{desproporciuxf3n-10}{%
 \subsection{Desproporción}\label{desproporciuxf3n-10}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-104-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-106-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-104-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-106-2} \end{center}
 
 Observando el gráfico de la desproporción entre comunidades vemos como
 este año particularmente el comportamiento general de todos los métodos
@@ -2873,9 +2900,9 @@ estas elecciones son el método LR-Hare y Danish.
 \subsection{Comparativa de asientos
 obtenidos}\label{comparativa-de-asientos-obtenidos-11}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-106-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-108-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-106-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-108-2} \end{center}
 
 En estas elecciones del 2014 ya vemos que el bipartidismo que veíamos
 omnipresente en todas las elecciones anteriores ahora ya no ocurre, es
@@ -2899,9 +2926,9 @@ con el Danish.
 \hypertarget{desproporciuxf3n-11}{%
 \subsection{Desproporción}\label{desproporciuxf3n-11}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-107-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-109-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-107-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-109-2} \end{center}
 
 Según el gráfico por comunidades volvemos a ver un comportamiento
 claramente distinto de los demás de los métodos Adams y Huntington-Hill,
@@ -2925,9 +2952,9 @@ tanto sería conveniente plantear el cambio a otro método mejor.
 \subsection{Comparativa de asientos
 obtenidos}\label{comparativa-de-asientos-obtenidos-12}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-109-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-111-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-109-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-111-2} \end{center}
 
 En las elecciones del año 2016 vemos como se va consolidando el modelo
 de las anteriores elecciones, con dos grandes partidos y dos partidos
@@ -2945,9 +2972,9 @@ independientemente del método utilizado.
 \hypertarget{desproporciuxf3n-12}{%
 \subsection{Desproporción}\label{desproporciuxf3n-12}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-110-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-112-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-110-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-112-2} \end{center}
 
 En la desproporción por comunidades vemos el habitual comportamiento
 entre los métodos, con el método Adams y el Huntington-Hill
@@ -2969,9 +2996,9 @@ método de reparto a otro más proporcional.
 \subsection{Comparativa de asientos
 obtenidos}\label{comparativa-de-asientos-obtenidos-13}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-112-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-114-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-112-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-114-2} \end{center}
 
 En estas elecciones de Abril de 2019 vemos como ya no existe el
 bipartidismo, este año podemos agrupar a los partidos políticos en
@@ -2993,9 +3020,9 @@ convertiría en la segunda fuerza en el hemiciclo.
 \hypertarget{desproporciuxf3n-13}{%
 \subsection{Desproporción}\label{desproporciuxf3n-13}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-113-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-115-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-113-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-115-2} \end{center}
 
 Este es un año en el que viendo la desproporción por comunidades es
 especialmente similar independientemente del método utilizado, siguen
@@ -3021,9 +3048,9 @@ bipartidismo claro.
 \subsection{Comparativa de asientos
 obtenidos}\label{comparativa-de-asientos-obtenidos-14}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-115-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-117-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-115-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-117-2} \end{center}
 
 En esta gráfica de las elecciones de Noviembre de 2019 podemos observar
 una ligera recuperación del bipartidismo en donde los dos principales
@@ -3043,9 +3070,9 @@ más proporcional como pueda ser el Danish, son los partidos de
 \hypertarget{desproporciuxf3n-14}{%
 \subsection{Desproporción}\label{desproporciuxf3n-14}}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-116-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-118-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-116-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-118-2} \end{center}
 
 En el gráfico por comunidades obtenemos el mismo comportamiento que en
 las elecciones anteriores sin obtener una diferencia significativa.
@@ -3065,9 +3092,9 @@ largo de los años distinguiendo el método de reparto utilizado y otro en
 el que muestre el promedio de la desproporción a lo largo de todos los
 años analizados para cada método.
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-117-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-119-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-117-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-119-2} \end{center}
 
 En este gráfico comparando la desproporción media por año observamos
 como la desproporción desde las elecciones de 1977 hasta 1989 está en un
@@ -3152,9 +3179,9 @@ más equilibrado para el gobierno de una nación.
 \hypertarget{apuxe9ndice-documentaciuxf3n}{%
 \chapter{Apéndice: Documentación}\label{apuxe9ndice-documentaciuxf3n}}
 
-Se ha seguido la guía de Pedro L. Luque-Calvo: \emph{Escribir un Trabajo
-Fin de Estudios con R Markdown}, link:(\url{http://destio.us.es/calvo})
-como base para generar el trabajo.
+Se ha seguido como base para generar el trabajo la guía de Pedro L.
+Luque-Calvo: \emph{Escribir un Trabajo Fin de Estudios con R Markdown},
+link:(\url{http://destio.us.es/calvo}) .
 
 \hypertarget{acceso-al-cuxf3digo-fuente}{%
 \section{Acceso al código fuente}\label{acceso-al-cuxf3digo-fuente}}

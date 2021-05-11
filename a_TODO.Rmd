@@ -15,6 +15,4 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # TODO o tareas por realizar
 
-- Ampliar los orígenes del sistema electoral Cap1 con la historia desde la constitucion de Cadiz hasta ahora
-- Poner un ejemplo por cada tipo de repartición de escaños.
 
