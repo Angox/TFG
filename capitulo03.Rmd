@@ -76,9 +76,9 @@ knitr::opts_chunk$set(
 
 # Análisis de los métodos de reparto de escaños
 
-  Vamos a simular distintos escenarios para analizarlos según los distintos métodos de reparto de escaños. 
+  En este bloque simularemos distintos escenarios para analizarlos según los distintos métodos de reparto de escaños. 
 
-  Los sistemas que analizaremos en este análisis empírico serán, dentro de los métodos de promedio mayor, el método *D´Hondt*, método *Saint-Lague*, método *Saint-Lague modificado*, el método *Huntington-Hill*, el método *Imperiali*, *Danish* y *Adams*. 
+  Los sistemas que analizaremos en este análisis serán, dentro de los métodos de promedio mayor, el método *D´Hondt*, método *Saint-Lague*, método *Saint-Lague modificado*, el método *Huntington-Hill*, el método *Imperiali*, *Danish* y *Adams*. 
 Dentro de los métodos de resto mayor analizaremos el método *Droop*, *Hare* e *Imperiali*.
 
 
@@ -130,7 +130,7 @@ ggplot(data = dis, mapping = aes(Partidos, Votos, group = Distribucion, color = 
   
 ## Cálculo de la desproporción
 
-En este bloque los resultados son comparados mediante la desproporción, que mide cuánto de los votos que obtienen los partidos se traducen a representación. A continuación presentaremos la función y explicaremos el procedimiento de cálculo:
+En este bloque los resultados son comparados mediante un índice que calcula la desproporción, que mide cuánto de los votos que obtienen los partidos se traducen a representación en escaños. A continuación presentaremos la función y explicaremos el procedimiento de cálculo:
 
 ``` {.R}
 desproporción <-
@@ -257,7 +257,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
   labs(subtitle = "Variando el número de escaños a repartir", title = "Desproporción según D`Hondt", caption = "Elaboración propia: Angel González", x = "Número de Escaños")
 ```
 
-En este caso se nos presenta la desproporción variando el número de de escaños posibles, en el presente caso se empieza por repartir un único escaño hasta los 800 posibles escaños.
+En este caso se nos presenta la desproporción variando el número de de escaños posibles, se empieza por repartir un único escaño hasta los 800 posibles escaños.
 Observamos que la desproporción en el caso de un escaño es relativamente alta, posteriormente cuanto mayor es el número de escaños a repartir la desproporción va bajando hasta casi alcanzar la perfección deseada de un valor de la desproporción de 0.  
 La diferencia de desproporción entre los casos en los que hay pocos escaños a repartir es alta, cuantos mas escaños a repartir la diferencia de desproporción entre sucesivos escaños se va reduciendo, a números altos de escaños a repartir la desproporción tiende a estabilizarse.  
 Para este caso apreciamos que a partir de los 50-100 escaños ya la desproporción es muy baja, siendo recomendable la utilización de un número de escaños a partir de los 300.
@@ -459,7 +459,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
   labs(subtitle = "Variando el número de escaños a repartir", title = "Desproporción según Sainte-Lague", caption = "Elaboración propia: Angel González", x = "Número de Escaños")
 ```
 
-En este caso se nos presenta la desproporción variando el número de de escaños posibles, en el presente caso se empieza por repartir un único escaño hasta los 800 posibles escaños.
+En este caso se nos presenta la desproporción variando el número de de escaños posibles, se empieza por repartir un único escaño hasta los 800 posibles escaños.
 Observamos que la desproporción en el caso de un escaño es muy alta, posteriormente cuanto mayor es el número de escaños a repartir la desproporción va bajando.
 La diferencia de desproporción en los casos en los que hay pocos escaños a repartir es alta, cuantos mas escaños a repartir la diferencia de desproporción entre sucesivos escaños va reduciéndose, a partir de los 50 escaños es aceptable la desproporción aunque sería deseable partir de los 200 escaños.
 
@@ -998,6 +998,8 @@ votos <- trunc(vot[[100]])
 asientos_dhondt <- function(partidos, votos,
                             n_escannos,
                             couta_min = 0) {
+  
+  
   # Cuota mínima
   nv <- sum(votos)
   vn <- votos
@@ -1007,10 +1009,61 @@ asientos_dhondt <- function(partidos, votos,
   # Escaños
   div <- sqrt((1:n_escannos) * ((1:n_escannos) - 1))
   G <- sapply(div, function(x) votos / x)
+  G[is.na(G)] <- 0
   cuota <- G[order(G, decreasing = T)][n_escannos]
   W <- (G >= cuota)
   seats <- rowSums(W)
   o <- seats
+  # Fix seats
+  if(sum(o)>n_escannos){
+    if(n_escannos==1) {
+      G <- cbind("n"=0,votos)
+      cuota <- G[,2][order(G[,2], decreasing = T)][n_escannos]
+      W1 <- (G[,2] >= cuota)
+      seats <- as.numeric(W1)
+      o <- seats
+    } else
+    cuota <- G[,2:n_escannos][order(G[,2:n_escannos], decreasing = T)][n_escannos]
+    W2 <- as.matrix(G[,2:n_escannos] >= cuota)
+    seats <- rowSums(W2)
+    o <- seats
+  }
+  
+  
+  ######
+  # # Cuota mínima
+  # nv <- sum(votos)
+  # vn <- votos
+  # vn[votos <= nv * couta_min] <- 0
+  # votos <- vn
+  # 
+  # # Escaños
+  # div <- sqrt((1:n_escannos) * ((1:n_escannos) - 1))
+  # G <- sapply(div, function(x) votos / x)
+  # cuota <- G[order(G, decreasing = T)][n_escannos]
+  # W <- (G >= cuota)
+  # seats <- rowSums(W)
+  # o <- seats
+  # # Fix seats
+  # if(sum(o)>n_escannos){
+  #   if(n_escannos==1) {
+  #     G <- cbind("n"=0,votos)
+  #     cuota <- G[,2][order(G[,2], decreasing = T)][n_escannos]
+  #     W <- (G[,2] >= cuota)
+  #     seats <- as.numeric(W)
+  #     o <- seats
+  #   } else
+  #     if(n_escannos==2) {
+  #     cuota <- G[,2:n_escannos][order(G[,2:n_escannos], decreasing = T)][n_escannos]
+  #   W <- (G[,2:n_escannos] >= cuota)
+  #   seats <- as.numeric(W)
+  #   o <- seats
+  #   } else
+  #   cuota <- G[,2:n_escannos][order(G[,2:n_escannos], decreasing = T)][n_escannos]
+  #   W <- (G[,2:n_escannos] >= cuota)
+  #   seats <- rowSums(W)
+  #   o <- seats
+  # }
   # Resultados
   data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
@@ -1054,9 +1107,9 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
   labs(subtitle = "Variando el número de escaños a repartir", title = "Desproporción según Huntington-Hill", caption = "Elaboración propia: Angel González", x = "Número de Escaños")
 ```
 
-En este caso se nos presenta la desproporción variando el número de de escaños posibles, en el presente caso se empieza por repartir un único escaño hasta los 800 posibles escaños.
-Observamos que la desproporción en el caso de repartir unos pocos escaños es muy alta,es interesante observar que para un número de escaños entre 1 y 20 la desproporción no cambia, es a partir de los 20 escaños y posteriores donde observamos el descenso de la desproporción, descenso rápido en los primeros escaños que tiende a estabilizarse cuanto mayor número de escaños se repartan.
-Este método de Huntington-Hill también es más lento en alcanzar una desproporción aceptable, podríamos decir que entre los 300 y 400 estaríamos en niveles de desproporción aceptables.
+En este caso se nos presenta la desproporción variando el número de de escaños posibles, se empieza por repartir un único escaño hasta los 800 posibles escaños.
+Observamos que la desproporción en el caso de repartir unos pocos escaños es muy alta, desciende rápidamente en los primeros escaños hasta llegar alrededor de los 50 escaños, en donde el descenso empieza a ser mucho mas suave. A partir de ese punto desciende lentamente y tiende a estabilizarse cuanto mayor número de escaños se reparten.
+Este método de Huntington-Hill para alcanzar una desproporción deseable, podríamos decir que entre los 100 y 200 escaños estaríamos en niveles de desproporción deseables
 
 
 ### Huntington-Hill variando el número de partidos
@@ -1072,7 +1125,7 @@ n_escannos <- 30
 votos <- NULL
 for (i in seq_len(100)) {
   votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
-  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+  votos[[i]] <- trunc(votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100]))
 }
 
 
@@ -1117,8 +1170,8 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
 ```
 
 En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 100 partidos que se presentan a una elección ficticia.  
-Observamos que cuando se presentan de 2 a 24 partidos a las elecciones la desproporción es bastante baja, va aumentando a medida que se presentan más partidos, alcanzando el máximo de desproporción con 50 partidos que se presentan a las elecciones, a partir de 50 partidos la curva comienza a decrecer.  
-Lo particular de este método respecto a otros métodos es que la menor desproporción se obtiene en el caso de que se presenten a las elecciones pocos partidos y no se alcanzan los bajos niveles de desproporción en el caso de que muchos partidos se presenten a las elecciones.
+Observamos que cuando se presentan de 2 a 24 partidos a las elecciones la desproporción es bastante baja, va aumentando significativamente a medida que se presentan más partidos, alcanzando el máximo de desproporción con 50 partidos que se presentan a las elecciones, a partir de los 50 partidos la curva cambia drásticamente, baja mucho la desproporción comienza a decrecer.  
+Lo particular de este método respecto a otros métodos es que la menor desproporción se obtiene en el caso de que se presenten a las elecciones pocos partidos o muchos partidos y que en los 50 partidos alcanza el máximo de desproporción.
 
 
 ### Huntington-Hill variando la concentración del voto
@@ -1182,7 +1235,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
 
 En el presente gráfico variamos la concentración del voto en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande.  
 Observando el gráfico observamos que cuando la concentración del voto es muy baja la desproporción está en un nivel bajo, desproporción que se mantiene baja cuando la concentración de los votos es media, y que a partir de una concentración de votos media-alta la desproporción va aumentando cuanto más diferencia de votos entre partidos se presenten.  
-Así podemos concluir que el reparto de escaños según la ley Huntington-Hill es mejor cuanto menor concentración de voto tengan los partidos entre ellos, presenta un comportamiento diferente respecto a los otros métodos en donde cuanto mayor concentración de votos menor desproporción. No es un buen método para el caso en que los votos estén concentrados en pocos partidos.
+Así podemos concluir que el reparto de escaños según la ley Huntington-Hill es mejor cuanto menor concentración de voto tengan los partidos entre ellos o cuando la concentración de voto sea media, presenta un comportamiento diferente respecto a los otros métodos en donde cuanto mayor concentración de votos menor desproporción. No es un buen método para el caso en que los votos estén concentrados en pocos partidos.
 
 
 ## Adams
@@ -1210,6 +1263,21 @@ asientos_dhondt <- function(partidos, votos,
   W <- (G >= cuota)
   seats <- rowSums(W)
   o <- seats
+  # Fix seats
+  if(sum(o)>n_escannos){
+    if(n_escannos==1) {
+      G <- cbind("n"=0,votos)
+      cuota <- G[,2][order(G[,2], decreasing = T)][n_escannos]
+      W1 <- (G[,2] >= cuota)
+      seats <- as.numeric(W1)
+      o <- seats
+    } else
+    cuota <- G[,2:n_escannos][order(G[,2:n_escannos], decreasing = T)][n_escannos]
+    W2 <- as.matrix(G[,2:n_escannos] >= cuota)
+    seats <- rowSums(W2)
+    o <- seats
+  }
+  
   # Resultados
   data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
@@ -1253,9 +1321,9 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
   labs(subtitle = "Variando el número de escaños a repartir", title = "Desproporción según Adams", caption = "Elaboración propia: Angel González", x = "Número de Escaños")
 ```
 
-En este caso se nos presenta la desproporción variando el número de de escaños posibles, en el presente caso se empieza por repartir un único escaño hasta los 800 posibles escaños.
-Observamos que la desproporción en el caso de un escaño es muy alta, en este método también observamos que la desproporción se mantiene en un mismo nivel hasta los 20 escaños, posteriormente cuanto mayor es el número de escaños a repartir la desproporción va bajando.
-La diferencia de desproporción en los casos en los que hay pocos escaños a repartir es alta, cuantos mas escaños a repartir la diferencia de desproporción entre sucesivos escaños va reduciéndose, a números altos de escaños a repartir la desproporción tiende a estabilizarse. Este método también presenta una desproporción que se reduce más lentamente que otros métodos, comenzando a ser aceptable a partir de los 500 escaños aproximadamente.
+En este caso se nos presenta la desproporción variando el número de de escaños posibles, se empieza por repartir un único escaño hasta los 800 posibles escaños.
+Observamos que la desproporción en el caso de un escaño es muy alta, en este método también observamos una alta desproporción inicial que se mantiene hasta los 50 escaños, posteriormente cuanto mayor es el número de escaños a repartir la desproporción va bajando.
+La diferencia de desproporción en los casos en los que hay pocos escaños a repartir es alta, cuantos mas escaños a repartir la diferencia de desproporción entre sucesivos escaños va reduciéndose, a números altos de escaños a repartir la desproporción tiende a estabilizarse. Este método también presenta una desproporción que se reduce algo más lentamente que otros métodos, comenzando a ser aceptable a partir de los 100 escaños aproximadamente.
 
 ### Adams variando el número de partidos
 
@@ -1315,8 +1383,8 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
 ```
 
 En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 100 partidos que se presentan a una elección ficticia.  
-Observamos que cuando se presentan de 2 a 23  partidos a las elecciones la desproporción es baja y  con una variabilidad alta, como sucedía con el método Huntington-Hill, va aumentando a medida que se presentan más partidos, alcanzando el máximo de desproporción con 50 partidos que se presentan a las elecciones, a partir de los 50 partidos que se presentan a las elecciones la curva comienza a decrecer.  
-En este método Adams obtenemos el mejor resultado cuanto menor número de partidos se presenten a las elecciones, no siendo aconsejable utilizar este método cuando se presenten más de 25 partidos a las elecciones.
+Observamos que cuando se presentan de 2 a 23  partidos a las elecciones la desproporción es baja con una variabilidad alta, como sucedía con el método Huntington-Hill, va aumentando a medida que se presentan más partidos, alcanzando el máximo de desproporción con 50 partidos que se presentan a las elecciones, a partir de los 50 partidosque se presentan a las elecciones hay un corte significativo donde baja mucho la desproporción y la curva comienza a decrecer.  
+En este método Adams obtenemos el mejor resultado cuanto menor número de partidos se presenten a las elecciones o bien cuando se presenten muchos partidos, no siendo aconsejable utilizar este método cuando se presenten entre 25 a 50 partidos a las elecciones.
 
 
 ### Adams variando la concentración del voto
@@ -1379,8 +1447,8 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
 ```
 
 En el presente gráfico variamos la concentración del voto en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande.  
-Observando el gráfico observamos que cuando la concentración del voto es muy baja la desproporción está en un nivel muy bajo, cuanto más concentración de voto entre los partidos comprobamos como la desproporción va aumentando cconstantemente sin decrecer.  
-Así podemos concluir que el reparto de escaños según la ley Adams es mejor cuanto menor concentración de voto los partidos entre ellos, y será peor cuanto mayor concentración de voto se presente.
+Observando el gráfico observamos que cuando la concentración del voto es muy baja la desproporción está en un nivel muy bajo, cuanto más concentración de voto entre los partidos comprobamos como la desproporción va aumentando cada vez más.  
+Así podemos concluir que el reparto de escaños según la ley Adams es mejor cuanto menor concentración de voto tengan los partidos entre ellos, y será peor cuanto mayor concentración de voto se presente.
 
 ## Danish
 ```{r}
@@ -1709,8 +1777,8 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
 ```
 
 En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 100 partidos que se presentan a una elección ficticia.
-Observamos que cuando se presentan un número bajo de partidos a las elecciones, entre 2 a 25, la desproporción es alta, va dispminuyendo a medida que se presentan más partidos, alcanzando el mínimo de desproporción cuantos más partidos se presenten a las elecciones  .
-Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 2 a 25 ) la variabilidad es alta pero decreciente, a partir de los 25 escaños la variabilidad tiende a estabilizarse cuanto mayor número de partidos se presenten en las elecciones.  
+Observamos que cuando se presentan un número bajo de partidos a las elecciones, entre 2 a 25, la desproporción es alta, va disminuyendo a medida que se presentan más partidos, alcanzando el mínimo de desproporción cuantos más partidos se presenten a las elecciones  .
+Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 2 a 25 ) la dispersión es alta pero decreciente, a partir de los 25 escaños la variabilidad tiende a estabilizarse cuanto mayor número de partidos se presenten en las elecciones.  
 Según el método LR Hare obtendremos el mejor resultado en términos de desproporción cuanto más partidos se presenten a las elecciones.
 
 
@@ -1775,7 +1843,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
 ```
 
 En el presente gráfico variamos la concentración del voto en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande.  
-Observando el gráfico comprobamos como la concentración del voto no es significativa para el nivel de desproporción, característica deseable. Puede apreciarse una leve tendencia descendiente al aumentar la concentración del voto, lo que podría dar a entender que a concentraciones del voto extremadamente altas, el de LR-Hare alcanzaría el mínimo nivel de desproporción.
+Observando el gráfico comprobamos como la concentración del voto no es significativa para el nivel de desproporción, característica deseable. Puede apreciarse una leve tendencia descendiente al aumentar la concentración del voto, lo que podría dar a entender que a concentraciones del voto extremadamente altas, el método LR-Hare alcanzaría el mínimo nivel de desproporción.
 
 
 
@@ -1800,13 +1868,15 @@ asientos_dhondt <- function(partidos, votos,
   div <- trunc(nv / (n_escannos + 1)) # Parte entera
   G <- sapply(div, function(x) votos / x)
   o <- trunc(G)
-  if (sum(o) != n_escannos) {
-    resto <- G - o
-    cuota <- resto[order(resto, decreasing = T)][n_escannos - sum(o)]
-    W <- (resto >= cuota) & (cumsum(resto) <= n_escannos - sum(o))
-    seats <- o + rowSums(W)
-    o <- seats
-  }
+  #Fix
+  while(sum(o)<n_escannos){
+    resto <- G-o 
+    faltan <- n_escannos-sum(o)
+    cuota <- resto[order(resto, decreasing = T)][faltan]
+    W <- (resto >= cuota)
+    seats <- rowSums(W)
+    o <- o+seats
+    }
 
   # Resultados
   data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
@@ -1854,7 +1924,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
 En este caso se nos presenta la desproporción variando el número de de escaños posibles, en el presente caso se empieza por repartir un único escaño hasta los 800 posibles escaños.
 La desproporción en el caso de pocos escaños es muy alta, posteriormente cuanto mayor es el número de escaños a repartir la desproporción va bajando constantemente.  
 La diferencia de desproporción entre los casos en los que hay pocos escaños a repartir es alta, cuantos mas escaños a repartir la diferencia de desproporción entre sucesivos escaños va reduciéndose, a números altos de escaños a repartir la desproporción tiende a estabilizarse.  
-Este método LR-Droop presenta una curva con un descenso más acusado que otros métodos anteriormente analizados, alcanza niveles de desproporción aceptables a partir de los 50 escaños y niveles deseables alrededor de los 200 escaños.
+Este método LR-Droop alcanza niveles de desproporción aceptables a partir de los 50 escaños y niveles deseables alrededor de los 200 escaños.
 
 ### LR Droop variando el número de partidos
 
@@ -1914,7 +1984,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
 ```
 
 En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 100 partidos que se presentan a una elección ficticia.
-Gran variabilidad en el caso de que se presenten un número bajo de partidos, hasta los 25 partidos, en esta zona la desproporción es alta. A partir de los 25 partidos que se presentan a las elecciones la variabilidad cambia totalmente respecto a la zona anterior y se vuelve muy estable, la desproporción presenta un descenso paulatino y no muy acusado.  
+Gran variabilidad en el caso de que se presenten un número bajo de partidos, hasta los 25 partidos, en esta zona la desproporción es alta y se mueve en un mismo nivel. A partir de los 25 partidos que se presentan a las elecciones la variabilidad cambia totalmente respecto a la zona anterior y se vuelve estable, con un descenso paulatino y no muy acusado. Se empieza a tener desproporciones bajas a partir de los 50 partidos.  
 Según lo visto, en el método LR-Droop obtendremos el mejor resultado cuanto más partidos se presenten a las elecciones.
 
 
@@ -1979,7 +2049,8 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
 ```
 
 En el presente gráfico variamos la concentración del voto en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande.  
-Observando el gráfico observamos que ya sea la concentración del voto muy baja, media o muy alta,la desproporción se encuentra en un mismo nivel, nivel en términos de desproporción muy bajos, cercanos al 0. Dentro del rango entre que se encuentra la desproporción la variabilidad en alta para cualquier nivel de concentración.  
+Observando el gráfico observamos que ya sea la concentración del voto muy baja, media o muy alta,la desproporción se encuentra en un mismo nivel, nivel en términos de desproporción muy bajos, cercanos al 0. Dentro del rango entre que se encuentra la desproporción la variabilidad es alta para cualquier nivel de concentración.  
+En este puede decirse que el método Droop posee una buena cualidad, puesto que su proporcionalidad no depende de la concentración del voto.
 
 
 ## LR Imperiali
@@ -2003,41 +2074,20 @@ asientos_dhondt <- function(partidos, votos,
   div <- trunc(nv / (n_escannos + 2)) # Parte entera
   G <- sapply(div, function(x) votos / x)
   o <- trunc(G)
-  if (sum(o) != n_escannos) {
-    resto <- G - o
-    cuota <- resto[order(resto, decreasing = T)][n_escannos - sum(o)]
-    W <- (resto >= cuota) & (cumsum(resto) <= n_escannos - sum(o))
-    seats <- o + rowSums(W)
-    o <- seats
-  }
+  #Fix
+  while(sum(o)<n_escannos){
+    resto <- G-o 
+    faltan <- n_escannos-sum(o)
+    cuota <- resto[order(resto, decreasing = T)][faltan]
+    W <- (resto >= cuota)
+    seats <- rowSums(W)
+    o <- o+seats
+    }
 
   # Resultados
   data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
 
-
-
-
-
-
-
-#
-
-####
-
-
-#
-
-
-
-
-
-
-
-
-
-
-#
 ```
 
 ### LR Imperiali variando el número de escaños
@@ -2079,7 +2129,8 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
 ```
 
 En este caso se nos presenta la desproporción variando el número de de escaños posibles, en el presente caso se empieza por repartir un único escaño hasta los 800 posibles escaños.
-La desproporción en el caso que se repartan pocos escaños es muy alta, posteriormente cuanto mayor es el número de escaños a repartir la desproporción baja rápidamente hasta alcanzar niveles aceptables cuando se reparten 100 escaños y niveles deseables a partir de los 200 escaños. .
+No hay diferencia en el comportamiento respecto a los otros métodos de restos mayores.
+La desproporción en el caso que se repartan pocos escaños es muy alta, posteriormente cuanto mayor es el número de escaños a repartir la desproporción baja rápidamente hasta alcanzar niveles aceptables cuando se reparten 100 escaños y niveles deseables a partir de los 200 escaños.
 
 ### LR Imperiali variando el número de partidos
 
@@ -2141,7 +2192,7 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
 En el caso presente únicamente modificamos el número de partidos presentes en la elección, desde un único posible partido hasta 100 partidos que se presentan a una elección ficticia.  
 Observamos que cuando se presentan de 2 a 25 partidos a las elecciones la desproporción se encuentra en los máximos, disminuye a medida que se presentan más partidos, alcanzando el mínimo de desproporción cuantos más partidos se presenten a las elecciones.  
 Podemos apreciar en el gráfico que para un número bajo de partidos que se presentan a las elecciones ( de 2 a 25 ) la variabilidad es alta pero decreciente, a partir de los 25 partidos la variabilidad se estabiliza.  
-Concluimos que según el método LR-Imperiali obtenemos el mejor resultado cuanto más partidos se presenten a las elecciones.
+Concluimos que según el método LR-Imperiali obtenemos el mejor resultado cuanto más partidos se presenten a las elecciones, empieza a presentar una desproporción menor alrededor de los 50 partidos.
 
 
 
@@ -2205,12 +2256,14 @@ ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
 ```
 
 En el presente gráfico variamos la concentración del voto en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande.  
-Observando el gráfico observamos que la desproporción está en un mismo nivel ya se encuentre con una concentración de voto alta o baja. El nivel de desproporción es muy bajo, por lo tanto muy deseable, con valores muy cercanos a 0.
+Observando el gráfico observamos que la desproporción está en un mismo nivel ya se encuentre con una concentración de voto alta o baja. El nivel de desproporción es muy bajo, por lo tanto muy deseable, con valores muy cercanos a 0. Es un método que también presenta una buena cualidad, puesto que su proporcionalidad es prácticamente independientemente de la concentración del voto.
 
 
 ## Comparaciones entre métodos
 
   En este apartado procederemos a agrupar todos los resultados de los métodos utilizados anteriormente. El objetivo es ser capaces de comparar en un mismo gráfico todos los métodos y sacar conclusiones. Se agruparán los datos de los tres escenarios posibles, variando el número de escaños, el número de partidos que se presentan a las elecciones o bien la concentración de los votos entre los partidos.
+  
+Se recomiendan visitar los gráficos interactivos en la siguiente dirección:
 
 ### Variando el número de escaños
 ```{r}
@@ -2252,9 +2305,8 @@ ggplot(data = var_esc, mapping = aes(Escannos, Desproporción)) +
 #                    nudge_x = .7,
 #                    na.rm = TRUE)
 ```
-
 En el presente gráfico comparamos en un mismo lugar los métodos anteriormente analizados individualmente.  
-En esta comparación podemos observar que para todos los métodos a pocos escaños a repartir la desproporción es muy alta, la desproporción baja cuanto mayor número de escaños a repartir, a números altos de escaños no hay diferencia de desproporción entre métodos.  
+En esta comparación podemos observar que para todos los métodos a pocos escaños a repartir la desproporción es muy alta y no hay casi diferencia entre métodos, la desproporción baja cuanto mayor número de escaños a repartir, a números muy altos de escaños la desproporción está muy cercana al 0 y casi no hay diferencia de desproporción entre métodos.  
 El peor métodos en este caso es el Imperiali, que presenta una curva con un descenso mucho más lento que los demás métodos. Todos los demás métodos presentan un comportamiento similar.
 
 
@@ -2291,11 +2343,12 @@ ggplot(data = var_esc[var_esc$Escannos > 300 & var_esc$Escannos < 400, ], mappin
 ```
 
 En este gráfico nos centramos en la desproporción para un número de escaños a repartir de entre 300 y 400 diputados, actualmente en España se reparten 350 diputados.
-El peor método entre los presentados es el método Imperiali, con una diferencia significativa respecto a los demás métodos. Los mejores métodos de reparto podemos agruparlos en un grupo de tres, que son el método de Sainte-Lague en primer lugar, el método Modified Sainte-Lague y el método Danish respectivamente.
-Podemos agrupar los métodos en tres grupos,un grupo que sería el de una desproporción baja, en el que se encontrarían los métodos de Sainte-Lague, Danish y Modified Sainte-Lague.
-Un segundo grupo que sería el que presentaría una desproporción media, con los métodos Adams, Huntington-Hill y D´Hondt, finalizando con un último grupo de desproporción alta, y debido a ello no deseable en el que estaría el método Imperiali.
+El peor método entre los presentados es el método Imperiali, con una diferencia significativa respecto a los demás métodos.
+Podemos agrupar los métodos en dos grupos,un grupo que sería el de una desproporción alta, en el que se encontrarían los métodos de Imperiali, Adams y D´Hondt.
+Un segundo grupo que sería el que presentaría una desproporción baja o media, con los restantes métodos.
 
-Actualmente en España se reparten 350 escaños y se utiliza el método D´Hondt, según los datos obtenidos podemos decir que no es el mejor método que se puede utilizar, es un método que está en el grupo de desproporción media, e incluso no es el mejor método dentro de ese subgrupo, sería interesante según lo observado en la gráfica plantearse un cambio de método a otro mejor, al menos a alguno dentro del subgrupo de desproporción baja, preferentemente el mejor método que podríamos utilizar, que sería el método de Sainte-Lague sin modificar.
+Actualmente en España se reparten 350 escaños y se utiliza el método D´Hondt, según los datos obtenidos podemos concluir que no es el mejor método que se puede utilizar, es un método que está en el grupo de desproporción alta, e incluso no es siempre el mejor método dentro de ese subgrupo, sería interesante según lo observado en la gráfica plantearse un cambio de método a otro mejor, al menos, a alguno dentro del subgrupo de desproporción baja, preferentemente el mejor método que podríamos utilizar dentro de los métodos de promedio mayor, que sería el método de Sainte-Lague sin modificar.
+Hay que tener en cuenta también que debido a que en España no se reparten los 350 diputados por circunscripción única las conclusiones cambiarían levemente. En el caso de que se repartan de 1 a 20 escaños el método D´Hont sigue sin ser uno de los mejores métodos, pero su desproporción es muy similar a los demás métodos por lo que hace al método D´Hont aceptable cuando se trata de repartir pocos escaños.
 
 ### Variando el número de partidos
 ```{r}
@@ -2327,7 +2380,7 @@ ggplot(data = var_par, mapping = aes(Escannos, Desproporción)) +
 
 En el presente gráfico comparamos la desproporción variando el número de partidos en un mismo lugar con los métodos anteriormente analizados individualmente.
 
-Observamos que para un número de partidos bajo hasta los 25 partidos que se presentan a unas elecciones la desproporción es muy variable, a partir de los 25 partidos se estabiliza y podemos sacar algunas conclusiones, en primer lugar el peor método claramente en este caso es el método Adams, mientras que los demás métodos son muy similares en su desproporción, donde la menor desproporción la podemos encontrar entre los métodos Danish y LR-Hare. A continuación nos centraremos en la desproporción cuando se presentan pocos partidos para analizarlo más detenidamente.
+Observamos que para un número de partidos bajo hasta los 25 partidos que se presentan a unas elecciones la desproporción es muy variable, a partir de los 25 partidos se estabiliza y podemos sacar algunas conclusiones, en primer lugar el peor método claramente en este caso es el método Imperiali y Huntington-Hill, mientras que los demás métodos son similares en su desproporción, donde la menor desproporción la podemos encontrar entre los métodos Sainte-Lague y LR-Hare. A continuación nos centraremos en la desproporción cuando se presentan pocos partidos para analizarlo más detenidamente.
 
 
 ```{r}
@@ -2367,7 +2420,7 @@ ggplot(data = var_par[var_par$Escannos < 50, ], mapping = aes(Escannos, Despropo
 En este gráfico nos centramos en la desproporción para un número de partidos entre 2 y 50 partidos.
 
 Observamos que hasta los 20 partidos que se presentan a las elecciones la desproporción es muy variable entre ellos, a partir de los 20 partidos que se presentan en las elecciones podemos extraer algunas conclusiones, se ven dos grupos diferenciados, un grupo en donde la desproporción es estable e incluso decreciente  y otro grupo en el que la desproporción va aumentando, que son los métodos de Adams y Huntington-Hill.  
-En España se utiliza el método D´Hondt, según los datos obtenidos podemos concluir que el método d´Hondt no es el mejor método entre los analizados, se encontraría en un nivel medio entre los métodos posibles, es decir, sería deseable para obtener una mayor proporcionalidad que se cambiase el método de reparto a otro mejor, en este caso observamos que el mejor método es el Saint-Lague.
+En España se utiliza el método D´Hondt, según los datos obtenidos podemos concluir que el método d´Hondt no es el mejor método entre los analizados, se encontraría en un nivel medio-alto entre los métodos posibles, es decir, sería deseable para obtener una mayor proporcionalidad que se cambiase el método de reparto a otro mejor, en este caso observamos que el mejor método dentro del grupo de promedios mayores es el Saint-Lague y dentro del grupo de resto mayor el mejor parado es el método LR-Hare.
 
 ### Variando la concentración del voto
 ```{r}
@@ -2395,11 +2448,12 @@ ggplot(data = var_dis, mapping = aes(Escannos, Desproporción)) +
     legend.box.just = "right",
     legend.margin = margin(6, 6, 6, 6)
   )
+
 ```
 
 En el presente gráfico comparamos la concentración del voto en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande. Todo ello en un mismo lugar con los métodos anteriormente analizados individualmente.  
 
-Observamos que hay dos grupos diferenciados, uno de ellos en los que la desproporción es baja para una menor concentración de votos entre los partidos y que a medida que la concentración aumenta también va aumentando la desproporción, donde se encuentran los métodos de Adams y Huntington-Hill. El otro grupo se caracteriza por en cuanto la concentración del voto es muy baja la desproporción está en un nivel bajo, cuanto más concentración de voto podemos comprobar como la desproporción aumenta hasta que alcanza un punto en donde alcanza el máximo de desproporción y a partir de ese punto la desproporción va bajando alcanzando el mínimo de desproporción.
+Observamos que hay dos grupos diferenciados, uno de ellos en los que la desproporción es baja para una menor concentración de votos entre los partidos y que a medida que la concentración aumenta también va aumentando la desproporción, donde se encuentran los métodos de Adams y Huntington-Hill, también se comporta así el método Imperiali hasta una concentración de votos media. El otro grupo se caracteriza por ya sea la concentración del voto muy baja o muy alta, la desproporción está en un nivel bajo y no varía significativamente.
 
 ```{r}
 # var_dis_dhondt$Metodo <- "D`Hondt"
@@ -2430,9 +2484,9 @@ ggplot(data = var_dis[var_dis$Escannos > 400, ], mapping = aes(Escannos, Desprop
 ```
 
 
-En este gráfico nos centramos en los casos en que hay mayor concentración de votos de unos pocos partidos, lo que suele suceder.  
-Vemos que hay dos grupos diferenciados, uno en el que hay una alta desproporción, que serían los métodos Imperiali, Adams y Huntington-Hill y otro en el que la desproporción es baja.
-En España actualmente la concentración de voto en alta o medio-alta y se utiliza el método de D´Hondt, por lo tanto observando el gráfico podemos decir que el método utilizado en España no es el más óptimo en el caso de la concentración de voto actual en España, sería conveniente realizar un cambio de método y cambiarlo preferentemente por el método Sainte-Lague, que es el mejor entre los métodos del grupo de promedio mayor con desproporción baja. Dentro del grupo de los métodos de resto mayor todos ellos se comportan con una desproporción muy baja.
+En este gráfico nos centramos en los casos en que hay mayor concentración de votos de unos pocos partidos, lo que suele suceder habitualmente.  
+Vemos que hay dos grupos diferenciados, uno en el que hay una alta desproporción, que serían los métodos Imperiali, Adams, D´Hondt y Huntington-Hill y otro en el que la desproporción es baja.
+En España, la concentración de voto suele ser alta o medio-alta y se utiliza como método de reparto el método D´Hondt, por lo tanto observando el gráfico podemos decir que el método utilizado en España no es el más óptimo si se busca obtener un bajo índice de desproporción, sería conveniente realizar un cambio de método y cambiar el método D´Hondt preferentemente por el método Sainte-Lague o Danish, que son los mejores entre los métodos del grupo de promedio mayor con desproporción baja. Dentro del grupo de los métodos de resto mayor todos ellos se comportan con una desproporción muy baja.
 
 
 
@@ -2603,6 +2657,13 @@ graf_bajo <- ggplot(data = despro_bajo, mapping = aes(Escaños, Partidos)) +
 library(grid)
 grid.newpage()
 grid.draw(rbind(ggplotGrob(graf_bajo), ggplotGrob(graf_medio), ggplotGrob(graf_alto), size = "last"))
+
+# 
+# library(plotly)
+# fig <- plot_ly(despro_alto, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion),
+#                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE))
+# fig <- fig %>% add_markers()
+# fig
 ```
 
 
@@ -2611,8 +2672,8 @@ grid.draw(rbind(ggplotGrob(graf_bajo), ggplotGrob(graf_medio), ggplotGrob(graf_a
 
 
 
-En general podemos concluir que una vez comparados todos los métodos tanto modificando el número de escaños a repartir, en número de partidos que se presentan a la elección y la concentración de los votos, concluimos que el mejor método es el Saint-Lague, seguido por el Modified Sainte-Lague y el Danish.
-En el caso del método utilizado actualmente en España, el método D´hondt, podemos decir que es un método que no siendo de los peores se queda en un medio nivel, no siendo ni un método malo ni bueno, es decir, que no es un método que se debiese usar, puesto que no es el mejor en ninguno de las posibles modificaciones que se presentan en este estudio, siendo entonces conveniente para España cambiar el método de reparto de escaños y utilizar el método de Sainte-Lague que es el que consistentemente ha presentado los mejores resultados.
+En general podemos concluir que una vez comparados todos los métodos tanto modificando el número de escaños a repartir, en número de partidos que se presentan a la elección y la concentración de los votos, concluimos que los mejores métodos dentro del grupo de promedios mayores son en primer lugar el método Saint-Lague, seguido por el Modified Sainte-Lague y el Danish.
+En el caso del método utilizado actualmente en España, el método D´hondt, podemos decir que es un método que no siendo de los peores se queda en un nivel medio, es decir, que no es un método que se debiese usar si lo que se busca es obtener el máximo nivel de proporcionalidad, no es el mejor en ninguno de las posibles modificaciones que se presentan en este estudio, siendo entonces conveniente para España cambiar el método de reparto de escaños y utilizar dentro del grupo de promedios mayores el método de Sainte-Lague que es el que consistentemente ha presentado los mejores resultados.
 Entre los métodos de resto mayor todos ellos presentan un comportamiento muy similar por lo que podría utilizarse cualquiera de ellos.
 
 

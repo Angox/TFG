@@ -210,10 +210,25 @@ asientos_huntington <- function(partidos, votos,
   # Escaños
   div <- sqrt((1:n_escannos) * ((1:n_escannos) - 1))
   G <- sapply(div, function(x) votos / x)
+  G[is.na(G)] <- 0
   cuota <- G[order(G, decreasing = T)][n_escannos]
   W <- (G >= cuota)
   seats <- rowSums(W)
   o <- seats
+  # Fix seats
+  if(sum(o)>n_escannos){
+    if(n_escannos==1) {
+      G <- cbind("n"=0,votos)
+      cuota <- G[,2][order(G[,2], decreasing = T)][n_escannos]
+      W1 <- (G[,2] >= cuota)
+      seats <- as.numeric(W1)
+      o <- seats
+    } else
+    cuota <- G[,2:n_escannos][order(G[,2:n_escannos], decreasing = T)][n_escannos]
+    W2 <- as.matrix(G[,2:n_escannos] >= cuota)
+    seats <- rowSums(W2)
+    o <- seats
+  }
   # Resultados
   data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
@@ -231,10 +246,27 @@ asientos_adams <- function(partidos, votos,
   div <- 1:n_escannos - 1
   div[is.na(div)] <- 0
   G <- sapply(div, function(x) votos / x)
+  G[is.na(G)] <- 0
   cuota <- G[order(G, decreasing = T)][n_escannos]
   W <- (G >= cuota)
   seats <- rowSums(W)
   o <- seats
+  
+  # Fix seats
+  if(sum(o)>n_escannos){
+    if(n_escannos==1) {
+      G <- cbind("n"=0,votos)
+      cuota <- G[,2][order(G[,2], decreasing = T)][n_escannos]
+      W1 <- (G[,2] >= cuota)
+      seats <- as.numeric(W1)
+      o <- seats
+    } else
+    cuota <- G[,2:n_escannos][order(G[,2:n_escannos], decreasing = T)][n_escannos]
+    W2 <- as.matrix(G[,2:n_escannos] >= cuota)
+    seats <- rowSums(W2)
+    o <- seats
+  }
+  
   # Resultados
   data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
@@ -275,7 +307,7 @@ asientos_hare <- function(partidos, votos,
   if(sum(o)!=n_escannos){
     resto <- G-o
     cuota <- resto[order(resto, decreasing = T)][n_escannos-sum(o)]
-    W <- (resto >= cuota)&(cumsum(resto)<=n_escannos-sum(o)) 
+    W <- (resto >= cuota)&(cumsum(resto)<=(n_escannos-sum(o))) 
     seats <- o+rowSums(W)
     o <- seats}
   
@@ -296,12 +328,15 @@ asientos_droop <- function(partidos, votos,
   div <- trunc(nv/(n_escannos+1))  # Parte entera
   G <- sapply(div, function(x) votos / x)
   o <- trunc(G)
-  if(sum(o)!=n_escannos){
-    resto <- G-o
-    cuota <- resto[order(resto, decreasing = T)][n_escannos-sum(o)]
-    W <- (resto >= cuota)&(cumsum(resto)<=n_escannos-sum(o)) 
-    seats <- o+rowSums(W)
-    o <- seats}
+  #Fix
+  while(sum(o)<n_escannos){
+    resto <- G-o 
+    faltan <- n_escannos-sum(o)
+    cuota <- resto[order(resto, decreasing = T)][faltan]
+    W <- (resto >= cuota)
+    seats <- rowSums(W)
+    o <- o+seats
+    }
   
   # Resultados
   data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
@@ -320,12 +355,21 @@ asientos_imperialilr <- function(partidos, votos,
   div <- trunc(nv/(n_escannos+2))  # Parte entera
   G <- sapply(div, function(x) votos / x)
   o <- trunc(G)
-  if(sum(o)!=n_escannos){
-    resto <- G-o
-    cuota <- resto[order(resto, decreasing = T)][n_escannos-sum(o)]
-    W <- (resto >= cuota)&(cumsum(resto)<=n_escannos-sum(o)) 
-    seats <- o+rowSums(W)
-    o <- seats}
+  while(sum(o)<n_escannos){
+    resto <- G-o 
+    faltan <- n_escannos-sum(o)
+    cuota <- resto[order(resto, decreasing = T)][faltan]
+    W <- (resto >= cuota)
+    seats <- rowSums(W)
+    o <- o+seats
+    }
+  
+  # if(sum(o)!=n_escannos){
+  #   resto <- G-o
+  #   cuota <- resto[order(resto, decreasing = T)][n_escannos-sum(o)]
+  #   W <- (resto >= cuota)&(cumsum(resto)<=(n_escannos-sum(o))) 
+  #   seats <- o+rowSums(W)
+  #   o <- seats}
   
   # Resultados
   data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
@@ -2517,7 +2561,7 @@ En el gráfico de la desproporción según el método de reparto podemos extraer
 
   * El mejor método es el Saint-Lague por parte de los métodos de promedio mayor y por los métodos de resto mayor el mejor método es el LR-Hare.
   * El peor método entre todos los analizados es con diferencia el método Imperiali.
-  * El método utilizado en España, el método D´Hondt, es el quinto mejor método en términos de proporcionalidad.
+  * El método utilizado en España, el método D´Hondt, es el sexto mejor método en términos de proporcionalidad.
 
 Por lo tanto al preguntarnos si el método utilizado en España es el mejor método en términos de desproporción que se puede utilizar para el reparto de los escaños podemos afirmar que no lo es, de hecho se sitúa en la mitad de la tabla entre todos los métodos analizados, la característica que tiene el método D´Hont es que se sitúa entre los métodos que benefician más a los partidos más votados y de entre ellos es el método más proporcional, por lo que se podría decir que es el método más proporcional entre los métodos que "facilitan la gobernanza". Si nuestro objetivo es obtener la máxima proporcionalidad en vez de facilitar la gobernanza deberíamos plantear un cambio de método, en primer lugar al Sainte-Lague o al Danish en el caso de los métodos de promedio mayor, ambos métodos son casi idénticos en términos de proporcionalidad pero el Sainte-Lague tiene una mejor característica que el Danish, que reparte los escaños de forma que es más fácil gobernar, o bien al método LR-Hare en el caso de los métodos de resto mayor.
 En cambio si queremos facilitar la gobernanza a la vez que tratamos de minimizar la desproporción entre los escaños y los votos, en este caso el método D´Hondt es donde muestra su valor, puesto que es como hemos comentado anteriormente, el método que entra dentro del grupo que benefician más a los partidos más votados y de entre ellos es el método más proporcional, por esta razón se puede considerar el método más equilibrado para el gobierno de una nación.

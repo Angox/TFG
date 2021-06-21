@@ -96,11 +96,10 @@ El método D´Hondt lleva el nombre del matemático y jurista belga Victor D´Ho
 ```{r pressure, echo=FALSE, fig.cap="Método D´Hondt", out.width = '100%'}
  
 knitr::include_graphics("graficos/vanguardia.jpeg")
-
 ```
 <!-- ![Fuente: La Vanguardia](graficos/vanguardia.jpeg "Ley D´Hondt"){width="687"} -->
 
-  Es el sistema más habitualmente utilizado en las democracias actuales Utilizado en países como Albania, Argentina, Austria, Bélgica, Bolivia, Brasil, Bulgaria, Camboya, Cabo Verde, Chile, Colombia, Croacia, República Checa, República Dominicana, Ecuador, Escocia, Eslovenia, España, Estonia, Finlandia, Gales, Guatemala, Hungría, Islandia, Israel, Japón, Kosovo, Luxemburgo, Macedonia, Moldavia, Montenegro, Países Bajos, Paraguay, Perú, Polonia, Portugal, Rumanía, Serbia, Timor del Este, Turquía, Uruguay y parcialmente en Venezuela.
+  Es el sistema más habitualmente utilizado en las democracias actuales. Utilizado en países como Albania, Argentina, Austria, Bélgica, Bolivia, Brasil, Bulgaria, Camboya, Cabo Verde, Chile, Colombia, Croacia, República Checa, República Dominicana, Ecuador, Escocia, Eslovenia, España, Estonia, Finlandia, Gales, Guatemala, Hungría, Islandia, Israel, Japón, Kosovo, Luxemburgo, Macedonia, Moldavia, Montenegro, Países Bajos, Paraguay, Perú, Polonia, Portugal, Rumanía, Serbia, Timor del Este, Turquía, Uruguay y parcialmente en Venezuela.
 
 #### Reparto
 
@@ -136,7 +135,7 @@ El número de votos recibidos por cada lista se divide sucesivamente por cada un
 
 ### Método Sainte-Laguë modificado
 
-  Método utilizado en algunos países como Nepal, Noruega o Suecia. Consiste en utilizar una fórmula distinta para el primer escaño y a partir del segundo utilizar el método habitual.Así, el método modificado cambia la secuencia de divisores de (1, 3, 5, 7, ...) a (1.4, 3, 5, 7, ...). Esto da una preferencia ligeramente mayor a los partidos más grandes sobre los partidos más pequeños que ganarían, por un pequeño margen, un solo escaño si se utilizara el método de Sainte-Laguë sin modificar. Con el método modificado, estos partidos pequeños no obtienen representación, en cambio, estos escaños se le otorgan a un partido más grande. La forma para el primer escaño es:
+  Método utilizado en algunos países como Nepal o Suecia. Consiste en utilizar una fórmula distinta para el primer escaño y a partir del segundo utilizar el método habitual.Así, el método modificado cambia la secuencia de divisores de (1, 3, 5, 7, ...) a (1.4, 3, 5, 7, ...). Esto da una preferencia ligeramente mayor a los partidos más grandes sobre los partidos más pequeños que ganarían, por un pequeño margen, un solo escaño si se utilizara el método de Sainte-Laguë sin modificar. Con el método modificado, estos partidos pequeños no obtienen representación, en cambio, estos escaños se le otorgan a un partido más grande. La forma para el primer escaño es:
 
 $\textrm{Cociente[s=0]} = \frac{V}{1.4}$ donde:  
 
@@ -145,9 +144,9 @@ $V$: Representa el número total de votos recibidos por la lista.
 ### Método Imperiali
 
 Otro método de promedio mayor se llama Imperiali ( no debe confundirse con la cuota Imperiali, que es un método del resto mayor). Los divisores son 1, 1,5, 2, 2,5, 3, 3,5 y así sucesivamente. Está diseñado para desfavorecer a los partidos más pequeños, se utiliza solo en las elecciones municipales belgas. Este método (a diferencia de otros métodos enumerados) no es estrictamente proporcional, si es que existe una asignación perfectamente proporcional, mediante este método no se garantiza encontrarla. 
-Método utilizado en Bélgica en las elecciones municipales.[^4]
+Método utilizado en Bélgica en las elecciones municipales.[^5]
 
-[^4]: *BJPS1992.pdf* , \<<https://www.tcd.ie/Political_Science/people/michael_gallagher/BJPS1992.pdf>\> [accessed 4 May 2021]
+[^5]: *BJPS1992.pdf* , \<<https://www.tcd.ie/Political_Science/people/michael_gallagher/BJPS1992.pdf>\> [accessed 4 May 2021]
 
 ### Método Huntington-Hill
 
@@ -214,7 +213,7 @@ Sin umbral, todos los partidos que han recibido al menos un voto, también recib
 
 Es un método para distribuir los escaños proporcionalmente para un sistema de listas de partidos. Son una alternativa a los métodos de promedio mayor. 
 
-El método del resto mayor requiere que el número de votos de cada partido se divida por una cuota que represente el número de votos necesarios para un escaño (es decir, normalmente el número total de votos emitidos dividido por el número de escaños, o alguna fórmula similar). El resultado para cada partido consistirá normalmente en la parte entera más un resto  A cada partido se le asigna primero un número de escaños igual a su número entero. Esto generalmente dejará algunos escaños sin asignar: los partidos se clasificarán entonces sobre la base de los restos, y a los partidos con los restos más grandes se les asigna cada uno un escaño adicional hasta que se hayan asignado todos los escaños. De ahí el nombre del método.
+El método del resto mayor requiere que el número de votos de cada partido se divida por una cuota que represente el número de votos necesarios para un escaño (es decir, normalmente el número total de votos emitidos dividido por el número de escaños, o alguna fórmula similar). El resultado para cada partido consistirá normalmente en la parte entera más un resto. A cada partido se le asigna primero un número de escaños igual a su número entero. Esto generalmente dejará algunos escaños sin asignar: los partidos se clasificarán entonces sobre la base de los restos, y a los partidos con los restos más grandes se les asigna cada uno un escaño adicional hasta que se hayan asignado todos los escaños. De ahí el nombre del método.
 Hay distintos modelos para calcular el cociente, los más utilizados son el cociente Hare, Droop e Imperiali.
 
 ### Cociente Droop

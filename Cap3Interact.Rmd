@@ -1,0 +1,2326 @@
+---
+title: "Capítulo 3 Interactivo"
+author: "Angel González Rizo"
+date: "2021"
+output: html_document
+---
+<!-- --- -->
+<!-- author: "Angel Gonzalez Rizo" -->
+<!-- date: "2021" -->
+<!-- documentclass: book -->
+<!-- forprint: true  # true: imprime a dos caras, false: libro digital -->
+<!-- fontsize: 12pt # 10pt,11pt -->
+<!-- geometry: margin = 2.5cm  -->
+<!-- bibliography: ["bib/library.bib", "bib/paquetes.bib"] -->
+<!-- # metodobib -> true: natbib (descomentar: citation_package: natbib)  -->
+<!-- #           -> false: pandoc (comentar: citation_package: natbib) -->
+<!-- metodobib: true -->
+<!-- #natbib: plainnat, abbrvnat, unsrtnat -->
+<!-- biblio-style: "plainnat" -->
+<!-- #Método 2 (pandoc): descomente una línea de las 2 siguientes en caso de usarlo -->
+<!-- csl: methods-in-ecology-and-evolution.csl      # no numera mejor en las citas -->
+<!-- #csl: acm-sig-proceedings-long-author-list.csl  # numera peor en las citas -->
+<!-- link-citations: yes -->
+<!-- output:  -->
+<!--   pdf_document: -->
+<!--     keep_tex: no -->
+<!--     number_sections: yes -->
+<!--     citation_package: natbib  # comentado usa: pandoc-citeproc -->
+<!--     #toc: yes -->
+<!--     fig_caption: yes -->
+<!--     template: latex/templateMemoriaTFE.tex -->
+<!--     includes: -->
+<!--       #before_body: portadas/latex_paginatitulo_modTFE.tex -->
+<!--       #in_header: latex/latex_preambulo.tex -->
+<!--       #after_body: latex/latex_antes_enddoc.tex -->
+<!-- editor_options:  -->
+<!--   chunk_output_type: inline -->
+<!-- --- -->
+
+
+
+```{r include=FALSE}
+knitr::opts_chunk$set(
+  fig.path = "figurasR/",
+  echo = FALSE, warning = FALSE, message = FALSE,
+  fig.pos = "H", fig.align = "center", out.width = "95%",
+  cache = FALSE
+)
+```
+
+
+<!-- \setcounter{chapter}{2} -->
+<!-- \setcounter{chapter}{2} escribir 2 para capítulo 3  -->
+<!-- \pagenumbering{arabic} -->
+
+\ifdefined\ifprincipal
+\else
+\setlength{\parindent}{1em}
+\pagestyle{fancy}
+\setcounter{tocdepth}{4}
+\tableofcontents
+<!-- \nocite{*} -->
+\fi
+
+\ifdefined\ifdoblecara
+\fancyhead{}{}
+\fancyhead[LE,RO]{\scriptsize\rightmark}
+\fancyfoot[LO,RE]{\scriptsize\slshape \leftmark}
+\fancyfoot[C]{}
+\fancyfoot[LE,RO]{\footnotesize\thepage}
+\else
+\fancyhead{}{}
+\fancyhead[RO]{\scriptsize\rightmark}
+\fancyfoot[LO]{\scriptsize\slshape \leftmark}
+\fancyfoot[C]{}
+\fancyfoot[RO]{\footnotesize\thepage}
+\fi
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+
+
+
+  
+```{r include=FALSE}
+library(ggplot2)
+library(plotly)
+
+# Fijar número de partidos
+partidos <- paste("Partido_", seq_len(20), sep = "")
+
+# Modificar la concentración del voto
+votos <- trunc(rep(x = 10e5, length(partidos)))
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+vot <- NULL
+for (i in seq_len(1000)) {
+  vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
+}
+vot_igualdad_media <- vot[[100]]
+dis1 <- data.frame("Votos" = 10 * vot[[1]], "Partidos" = seq_len(length(vot[[1]])), "Distribucion" = "Igualdad Alta")
+
+dis2 <- data.frame("Votos" = vot[[100]], "Partidos" = seq_len(length(vot[[100]])), "Distribucion" = "Igualdad Media")
+
+dis3 <- data.frame("Votos" = vot[[300]], "Partidos" = seq_len(length(vot[[300]])), "Distribucion" = "Igualdad Baja")
+
+dis <- rbind(dis1, dis2, dis3)
+dis$Distribucion <- as.factor(dis$Distribucion)
+
+# var_dis_sl <- dis1
+
+ggplot(data = dis, mapping = aes(Partidos, Votos, group = Distribucion, color = Distribucion)) +
+  geom_point() +
+  labs(title = "concentración del voto", caption = "Elaboración propia: Angel González", x = "Partido_i")
+```
+  
+ 
+
+
+
+
+```{r include=FALSE}
+
+library(ggplot2)
+library(data.table)
+library(ggthemes)
+
+n_partidos <- seq_len(50)[-1]
+
+densidad <- rep(length(n_partidos), 100)
+
+n_escannos <- seq_len(350)
+```
+
+```{r include=FALSE}
+
+# Variables
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 350
+votos <- trunc(vot[[100]])
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 1:n_escannos
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+```
+
+
+```{r include=FALSE}
+# D`Hondt Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 800
+votos <- vot_igualdad_media
+
+resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
+resul1 <- as.data.table(resul)
+```
+
+<!-- ### D`Hondt Desproporción -->
+
+```{r include=FALSE}
+desproporción <-
+  function(s, v) {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    #        l_v <- length(v)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s / s_s
+    p_v <- v / s_v
+
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
+    #            nm <- 'Rae'
+
+    # return(list(measure=nm, value=o))
+    o
+  }
+
+
+
+dis <- apply(X = resul1[, 1:800], MARGIN = 2, FUN = function(x) desproporción(s = x, v = votos))
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_esc_dhondt <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Desproporción según D`Hondt", caption = "Elaboración propia: Angel González", x = "Número de Escaños")
+```
+
+
+
+```{r include=FALSE}
+# D`Hondt Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+partidos <- NULL
+for (i in seq_len(100)) {
+  partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
+}
+# partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 30
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+}
+
+
+
+resul <- NULL
+for (i in seq_len(length(partidos))) {
+  if (i == 1) {
+    next
+  }
+  n_escannos <- 50 # Variable
+  # votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul) # Podriamos no utilizar esto y seguir utilizando listas(mejor)
+# Arreglar tabla poniendo NA donde se necesita
+for (i in 3:(ncol(resul1) - 2)) {
+  resul1[[i - 2]][i:nrow(resul1)] <- NA
+}
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(length(partidos))
+for (i in seq_len(length(partidos) - 1)) {
+  dis[i] <- desproporción(s = as.vector(na.omit(resul1[[i]])), v = votos[[i + 1]])
+}
+
+
+
+dis[100] <- dis[99]
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_par_dhondt <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de partidos", title = "Desproporción según D`Hondt", caption = "Elaboración propia: Angel González", x = "Número de Partidos")
+```
+
+
+
+```{r include=FALSE}
+# D`Hondt Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 500
+
+
+# Modificar la densidad de los votos
+votos <- trunc(rep(x = 10e5, length(partidos)))
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+vot <- NULL
+for (i in seq_len(1000)) {
+  vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
+}
+
+
+
+
+
+
+
+
+
+
+# Aplicarlo
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  # n_escannos <- i # Variable
+  votos <- vot[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(ncol(resul1))
+for (i in seq_len(ncol(resul1))) {
+  dis[i] <- desproporción(s = resul1[[i]], v = vot[[i]])
+}
+
+
+
+
+
+
+
+
+#       Concentración (menor a mayor)")
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_dis_dhondt <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la concentración del voto", title = "Desproporción según D`Hondt", caption = "Elaboración propia: Angel González", x = "Concentración (menor a mayor)")
+```
+
+
+```{r include=FALSE}
+
+# Variables
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 5
+votos <- trunc(vot[[100]])
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 2 * (1:n_escannos) - 1
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+```
+
+
+```{r include=FALSE}
+# Sainte-Lague Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 800
+votos <- vot_igualdad_media
+
+
+
+
+
+
+
+
+resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
+resul1 <- as.data.table(resul)
+```
+
+<!-- ### Sainte-Lague Desproporción -->
+  
+```{r include=FALSE}
+
+dis <- apply(X = resul1[, 1:800], MARGIN = 2, FUN = function(x) desproporción(s = x, v = votos))
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_esc_sl <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Desproporción según Sainte-Lague", caption = "Elaboración propia: Angel González", x = "Número de Escaños")
+```
+
+
+
+```{r include=FALSE}
+# Sainte-Lague Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+partidos <- NULL
+for (i in seq_len(100)) {
+  partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
+}
+# partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 30
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+}
+
+
+
+resul <- NULL
+for (i in seq_len(length(partidos))) {
+  if (i == 1) {
+    next
+  }
+  n_escannos <- 50 # Variable
+  # votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+# Arreglar tabla poniendo NA donde se necesita
+for (i in 3:(ncol(resul1) - 2)) {
+  resul1[[i - 2]][i:nrow(resul1)] <- NA
+}
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(length(partidos))
+for (i in seq_len(length(partidos) - 1)) {
+  dis[i] <- desproporción(s = as.vector(na.omit(resul1[[i]])), v = votos[[i + 1]])
+}
+
+
+
+dis[100] <- dis[99]
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_par_sl <- dis1
+
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de partidos", title = "Desproporción según Sainte-Lague", caption = "Elaboración propia: Angel González", x = "Número de Partidos")
+```
+
+
+
+```{r include=FALSE}
+# Sainte-Lague Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 500
+
+
+# Modificar la densidad de los votos
+votos <- trunc(rep(x = 10e5, length(partidos)))
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+vot <- NULL
+for (i in seq_len(1000)) {
+  vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
+}
+
+
+
+
+
+
+
+
+
+
+# Aplicarlo
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  # n_escannos <- i # Variable
+  votos <- vot[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(ncol(resul1))
+for (i in seq_len(ncol(resul1))) {
+  dis[i] <- desproporción(s = resul1[[i]], v = vot[[i]])
+}
+
+
+
+
+
+
+
+
+#       Concentración (menor a mayor)")
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_dis_sl <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la concentración del voto", title = "Desproporción según Sainte-Lague", caption = "Elaboración propia: Angel González", x = "Concentración (menor a mayor)")
+```
+
+
+```{r include=FALSE}
+
+# Variables
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 5
+votos <- trunc(vot[[100]])
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- c(1, (10 * (2:n_escannos) - 5) / 7)
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+```
+
+
+
+```{r include=FALSE}
+# Modified Sainte-Lague Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 800
+votos <- vot_igualdad_media
+
+
+
+
+
+
+
+
+resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
+resul1 <- as.data.table(resul)
+```
+
+<!-- ### Modified Sainte-Lague Desproporción -->
+  
+```{r include=FALSE}
+
+dis <- apply(X = resul1[, 1:800], MARGIN = 2, FUN = function(x) desproporción(s = x, v = votos))
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_esc_msl <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Desproporción según Modified Sainte-Lague", caption = "Elaboración propia: Angel González", x = "Número de Escaños")
+```
+
+
+
+```{r include=FALSE}
+# Modified Sainte-Lague Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+partidos <- NULL
+for (i in seq_len(100)) {
+  partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
+}
+# partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 30
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+}
+
+
+
+resul <- NULL
+for (i in seq_len(length(partidos))) {
+  if (i == 1) {
+    next
+  }
+  n_escannos <- 50 # Variable
+  # votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+# Arreglar tabla poniendo NA donde se necesita
+for (i in 3:(ncol(resul1) - 2)) {
+  resul1[[i - 2]][i:nrow(resul1)] <- NA
+}
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(length(partidos))
+for (i in seq_len(length(partidos) - 1)) {
+  dis[i] <- desproporción(s = as.vector(na.omit(resul1[[i]])), v = votos[[i + 1]])
+}
+
+
+
+dis[100] <- dis[99]
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_par_msl <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de partidos", title = "Desproporción según Modified Sainte-Lague", caption = "Elaboración propia: Angel González", x = "Número de Partidos")
+```
+
+
+
+```{r include=FALSE}
+# Modified Sainte-Lague Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 500
+
+
+# Modificar la densidad de los votos
+votos <- trunc(rep(x = 10e5, length(partidos)))
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+vot <- NULL
+for (i in seq_len(1000)) {
+  vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
+}
+
+
+
+
+
+
+
+
+
+
+# Aplicarlo
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  # n_escannos <- i # Variable
+  votos <- vot[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(ncol(resul1))
+for (i in seq_len(ncol(resul1))) {
+  dis[i] <- desproporción(s = resul1[[i]], v = vot[[i]])
+}
+
+
+
+
+
+
+
+
+#       Concentración (menor a mayor)")
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_dis_msl <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la concentración del voto", title = "Desproporción según Modified Sainte-Lague", caption = "Elaboración propia: Angel González", x = "Concentración (menor a mayor)")
+```
+
+
+```{r include=FALSE}
+
+# Variables
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 5
+votos <- trunc(vot[[100]])
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- ((1:n_escannos) + 1) / 2
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+```
+
+
+
+```{r include=FALSE}
+# Imperiali Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 800
+votos <- vot_igualdad_media
+
+
+
+
+
+
+
+
+resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
+resul1 <- as.data.table(resul)
+```
+
+<!-- ### Imperiali Desproporción -->
+  
+```{r include=FALSE}
+
+dis <- apply(X = resul1[, 1:800], MARGIN = 2, FUN = function(x) desproporción(s = x, v = votos))
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_esc_imp <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Desproporción según Imperiali", caption = "Elaboración propia: Angel González", x = "Número de Escaños")
+```
+
+
+
+```{r include=FALSE}
+# Imperiali Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+partidos <- NULL
+for (i in seq_len(100)) {
+  partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
+}
+# partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 30
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+}
+
+
+
+resul <- NULL
+for (i in seq_len(length(partidos))) {
+  if (i == 1) {
+    next
+  }
+  n_escannos <- 50 # Variable
+  # votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+# Arreglar tabla poniendo NA donde se necesita
+for (i in 3:(ncol(resul1) - 2)) {
+  resul1[[i - 2]][i:nrow(resul1)] <- NA
+}
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(length(partidos))
+for (i in seq_len(length(partidos) - 1)) {
+  dis[i] <- desproporción(s = as.vector(na.omit(resul1[[i]])), v = votos[[i + 1]])
+}
+
+
+
+dis[100] <- dis[99]
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_par_imp <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de partidos", title = "Desproporción según Imperiali", caption = "Elaboración propia: Angel González", x = "Número de Partidos")
+```
+
+
+
+```{r include=FALSE}
+# Imperiali Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 500
+
+
+# Modificar la densidad de los votos
+votos <- trunc(rep(x = 10e5, length(partidos)))
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+vot <- NULL
+for (i in seq_len(1000)) {
+  vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
+}
+
+
+
+
+
+
+
+
+
+
+# Aplicarlo
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  # n_escannos <- i # Variable
+  votos <- vot[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(ncol(resul1))
+for (i in seq_len(ncol(resul1))) {
+  dis[i] <- desproporción(s = resul1[[i]], v = vot[[i]])
+}
+
+
+
+
+
+
+
+
+#       Concentración (menor a mayor)")
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_dis_imp <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la concentración del voto", title = "Desproporción según Imperiali", caption = "Elaboración propia: Angel González", x = "Concentración (menor a mayor)")
+```
+
+
+```{r include=FALSE}
+
+# Variables
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 5
+votos <- trunc(vot[[100]])
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  
+  
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- sqrt((1:n_escannos) * ((1:n_escannos) - 1))
+  G <- sapply(div, function(x) votos / x)
+  G[is.na(G)] <- 0
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Fix seats
+  if(sum(o)>n_escannos){
+    if(n_escannos==1) {
+      G <- cbind("n"=0,votos)
+      cuota <- G[,2][order(G[,2], decreasing = T)][n_escannos]
+      W1 <- (G[,2] >= cuota)
+      seats <- as.numeric(W1)
+      o <- seats
+    } else
+    cuota <- G[,2:n_escannos][order(G[,2:n_escannos], decreasing = T)][n_escannos]
+    W2 <- as.matrix(G[,2:n_escannos] >= cuota)
+    seats <- rowSums(W2)
+    o <- seats
+  }
+  
+  
+  ######
+  # # Cuota mínima
+  # nv <- sum(votos)
+  # vn <- votos
+  # vn[votos <= nv * couta_min] <- 0
+  # votos <- vn
+  # 
+  # # Escaños
+  # div <- sqrt((1:n_escannos) * ((1:n_escannos) - 1))
+  # G <- sapply(div, function(x) votos / x)
+  # cuota <- G[order(G, decreasing = T)][n_escannos]
+  # W <- (G >= cuota)
+  # seats <- rowSums(W)
+  # o <- seats
+  # # Fix seats
+  # if(sum(o)>n_escannos){
+  #   if(n_escannos==1) {
+  #     G <- cbind("n"=0,votos)
+  #     cuota <- G[,2][order(G[,2], decreasing = T)][n_escannos]
+  #     W <- (G[,2] >= cuota)
+  #     seats <- as.numeric(W)
+  #     o <- seats
+  #   } else
+  #     if(n_escannos==2) {
+  #     cuota <- G[,2:n_escannos][order(G[,2:n_escannos], decreasing = T)][n_escannos]
+  #   W <- (G[,2:n_escannos] >= cuota)
+  #   seats <- as.numeric(W)
+  #   o <- seats
+  #   } else
+  #   cuota <- G[,2:n_escannos][order(G[,2:n_escannos], decreasing = T)][n_escannos]
+  #   W <- (G[,2:n_escannos] >= cuota)
+  #   seats <- rowSums(W)
+  #   o <- seats
+  # }
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+```
+
+
+
+```{r include=FALSE}
+# Huntington-Hill Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 800
+votos <- vot_igualdad_media
+
+
+
+
+
+
+
+
+resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
+resul1 <- as.data.table(resul)
+```
+
+<!-- ### Huntington-Hill Desproporción -->
+  
+```{r include=FALSE}
+
+dis <- apply(X = resul1[, 1:800], MARGIN = 2, FUN = function(x) desproporción(s = x, v = votos))
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_esc_hh <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Desproporción según Huntington-Hill", caption = "Elaboración propia: Angel González", x = "Número de Escaños")
+```
+
+
+
+```{r include=FALSE}
+# Huntington-Hill Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+partidos <- NULL
+for (i in seq_len(100)) {
+  partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
+}
+# partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 30
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- trunc(votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100]))
+}
+
+
+
+resul <- NULL
+for (i in seq_len(length(partidos))) {
+  if (i == 1) {
+    next
+  }
+  n_escannos <- 50 # Variable
+  # votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+# Arreglar tabla poniendo NA donde se necesita
+for (i in 3:(ncol(resul1) - 2)) {
+  resul1[[i - 2]][i:nrow(resul1)] <- NA
+}
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(length(partidos))
+for (i in seq_len(length(partidos) - 1)) {
+  dis[i] <- desproporción(s = as.vector(na.omit(resul1[[i]])), v = votos[[i + 1]])
+}
+
+
+
+dis[100] <- dis[99]
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_par_hh <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de partidos", title = "Desproporción según Huntington-Hill", caption = "Elaboración propia: Angel González", x = "Número de Partidos")
+```
+
+
+
+```{r include=FALSE}
+# Huntington-Hill Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 500
+
+
+# Modificar la densidad de los votos
+votos <- trunc(rep(x = 10e5, length(partidos)))
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+vot <- NULL
+for (i in seq_len(1000)) {
+  vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
+}
+
+
+
+
+
+
+
+
+
+
+# Aplicarlo
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  # n_escannos <- i # Variable
+  votos <- vot[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(ncol(resul1))
+for (i in seq_len(ncol(resul1))) {
+  dis[i] <- desproporción(s = resul1[[i]], v = vot[[i]])
+}
+
+
+
+
+
+
+
+
+#       Concentración (menor a mayor)")
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_dis_hh <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la concentración del voto", title = "Desproporción según Huntington-Hill", caption = "Elaboración propia: Angel González", x = "Concentración (menor a mayor)")
+```
+
+
+```{r include=FALSE}
+
+# Variables
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 5
+votos <- trunc(vot[[100]])
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 1:n_escannos - 1
+  div[is.na(div)] <- 0
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Fix seats
+  if(sum(o)>n_escannos){
+    if(n_escannos==1) {
+      G <- cbind("n"=0,votos)
+      cuota <- G[,2][order(G[,2], decreasing = T)][n_escannos]
+      W1 <- (G[,2] >= cuota)
+      seats <- as.numeric(W1)
+      o <- seats
+    } else
+    cuota <- G[,2:n_escannos][order(G[,2:n_escannos], decreasing = T)][n_escannos]
+    W2 <- as.matrix(G[,2:n_escannos] >= cuota)
+    seats <- rowSums(W2)
+    o <- seats
+  }
+  
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+```
+
+
+
+```{r include=FALSE}
+# Adams Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 800
+votos <- vot_igualdad_media
+
+
+
+
+
+
+
+
+resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
+resul1 <- as.data.table(resul)
+```
+
+<!-- ### Adams Desproporción -->
+
+```{r include=FALSE}
+
+dis <- apply(X = resul1[, 1:800], MARGIN = 2, FUN = function(x) desproporción(s = x, v = votos))
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_esc_ad <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Desproporción según Adams", caption = "Elaboración propia: Angel González", x = "Número de Escaños")
+```
+
+
+
+```{r include=FALSE}
+# Adams Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+partidos <- NULL
+for (i in seq_len(100)) {
+  partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
+}
+# partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 30
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+}
+
+
+
+resul <- NULL
+for (i in seq_len(length(partidos))) {
+  if (i == 1) {
+    next
+  }
+  n_escannos <- 50 # Variable
+  # votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+# Arreglar tabla poniendo NA donde se necesita
+for (i in 3:(ncol(resul1) - 2)) {
+  resul1[[i - 2]][i:nrow(resul1)] <- NA
+}
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(length(partidos))
+for (i in seq_len(length(partidos) - 1)) {
+  dis[i] <- desproporción(s = as.vector(na.omit(resul1[[i]])), v = votos[[i + 1]])
+}
+
+
+
+dis[100] <- dis[99]
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_par_ad <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de partidos", title = "Desproporción según Adams", caption = "Elaboración propia: Angel González", x = "Número de Partidos")
+```
+
+
+
+```{r include=FALSE}
+# Adams Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 500
+
+
+# Modificar la densidad de los votos
+votos <- trunc(rep(x = 10e5, length(partidos)))
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+vot <- NULL
+for (i in seq_len(1000)) {
+  vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
+}
+
+
+
+
+
+
+
+
+
+
+# Aplicarlo
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  # n_escannos <- i # Variable
+  votos <- vot[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(ncol(resul1))
+for (i in seq_len(ncol(resul1))) {
+  dis[i] <- desproporción(s = resul1[[i]], v = vot[[i]])
+}
+
+
+
+
+
+
+
+
+#       Concentración (menor a mayor)")
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_dis_ad <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la concentración del voto", title = "Desproporción según Adams", caption = "Elaboración propia: Angel González", x = "Concentración (menor a mayor)")
+```
+
+
+```{r include=FALSE}
+
+# Variables
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 5
+votos <- trunc(vot[[100]])
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 3 * (1:n_escannos) - 2
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+```
+
+
+
+```{r include=FALSE}
+# Danish Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 800
+votos <- vot_igualdad_media
+
+
+
+
+
+
+
+
+resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
+resul1 <- as.data.table(resul)
+```
+
+<!-- ### Danish Desproporción -->
+  
+```{r include=FALSE}
+
+dis <- apply(X = resul1[, 1:800], MARGIN = 2, FUN = function(x) desproporción(s = x, v = votos))
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_esc_dan <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Desproporción según Danish", caption = "Elaboración propia: Angel González", x = "Número de Escaños")
+```
+
+
+
+```{r include=FALSE}
+# Danish Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+partidos <- NULL
+for (i in seq_len(100)) {
+  partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
+}
+# partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 30
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+}
+
+
+
+resul <- NULL
+for (i in seq_len(length(partidos))) {
+  if (i == 1) {
+    next
+  }
+  n_escannos <- 50 # Variable
+  # votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+# Arreglar tabla poniendo NA donde se necesita
+for (i in 3:(ncol(resul1) - 2)) {
+  resul1[[i - 2]][i:nrow(resul1)] <- NA
+}
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(length(partidos))
+for (i in seq_len(length(partidos) - 1)) {
+  dis[i] <- desproporción(s = as.vector(na.omit(resul1[[i]])), v = votos[[i + 1]])
+}
+
+
+
+dis[100] <- dis[99]
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_par_dan <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de partidos", title = "Desproporción según Danish", caption = "Elaboración propia: Angel González", x = "Número de Partidos")
+```
+
+
+```{r include=FALSE}
+# Danish Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 500
+
+
+# Modificar la densidad de los votos
+votos <- trunc(rep(x = 10e5, length(partidos)))
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+vot <- NULL
+for (i in seq_len(1000)) {
+  vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
+}
+
+
+
+
+
+
+
+
+
+
+# Aplicarlo
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  # n_escannos <- i # Variable
+  votos <- vot[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(ncol(resul1))
+for (i in seq_len(ncol(resul1))) {
+  dis[i] <- desproporción(s = resul1[[i]], v = vot[[i]])
+}
+
+
+
+
+
+
+
+
+#       Concentración (menor a mayor)")
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_dis_dan <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la concentración del voto", title = "Desproporción según Danish", caption = "Elaboración propia: Angel González", x = "Concentración (menor a mayor)")
+```
+
+```{r include=FALSE}
+
+# Variables
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 5
+votos <- trunc(vot[[100]])
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- trunc(nv / n_escannos) # Parte entera
+  G <- sapply(div, function(x) votos / x)
+  o <- trunc(G)
+  if (sum(o) != n_escannos) {
+    resto <- G - o
+    cuota <- resto[order(resto, decreasing = T)][n_escannos - sum(o)]
+    W <- (resto >= cuota) & (cumsum(resto) <= n_escannos - sum(o))
+    seats <- o + rowSums(W)
+    o <- seats
+  }
+
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+```
+
+
+
+```{r include=FALSE}
+# LR Hare Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 800
+votos <- vot_igualdad_media
+
+
+
+resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
+resul1 <- as.data.table(resul)
+```
+
+<!-- ### LR Hare Desproporción -->
+  
+```{r include=FALSE}
+
+dis <- apply(X = resul1[, 1:800], MARGIN = 2, FUN = function(x) desproporción(s = x, v = votos))
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_esc_hare <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Desproporción según LR Hare", caption = "Elaboración propia: Angel González", x = "Número de Escaños")
+```
+
+
+
+```{r include=FALSE}
+# LR Hare Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+partidos <- NULL
+for (i in seq_len(100)) {
+  partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
+}
+# partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 30
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+}
+
+
+
+resul <- NULL
+for (i in seq_len(length(partidos))) {
+  if (i == 1) {
+    next
+  }
+  n_escannos <- 50 # Variable
+  # votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+# Arreglar tabla poniendo NA donde se necesita
+for (i in 3:(ncol(resul1) - 2)) {
+  resul1[[i - 2]][i:nrow(resul1)] <- NA
+}
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(length(partidos))
+for (i in seq_len(length(partidos) - 1)) {
+  dis[i] <- desproporción(s = as.vector(na.omit(resul1[[i]])), v = votos[[i + 1]])
+}
+
+
+
+dis[100] <- dis[99]
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_par_hare <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de partidos", title = "Desproporción según LR Hare", caption = "Elaboración propia: Angel González", x = "Número de Partidos")
+```
+
+
+
+```{r include=FALSE}
+# LR Hare Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 500
+
+
+# Modificar la densidad de los votos
+votos <- trunc(rep(x = 10e5, length(partidos)))
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+vot <- NULL
+for (i in seq_len(1000)) {
+  vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
+}
+
+
+
+
+
+
+
+
+
+
+# Aplicarlo
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  # n_escannos <- i # Variable
+  votos <- vot[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(ncol(resul1))
+for (i in seq_len(ncol(resul1))) {
+  dis[i] <- desproporción(s = resul1[[i]], v = vot[[i]])
+}
+
+
+
+
+
+
+
+
+#       Concentración (menor a mayor)")
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_dis_hare <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la concentración del voto", title = "Desproporción según LR Hare", caption = "Elaboración propia: Angel González", x = "Concentración (menor a mayor)")
+```
+
+
+```{r include=FALSE}
+
+# Variables
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 5
+votos <- trunc(vot[[100]])
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- trunc(nv / (n_escannos + 1)) # Parte entera
+  G <- sapply(div, function(x) votos / x)
+  o <- trunc(G)
+  #Fix
+  while(sum(o)<n_escannos){
+    resto <- G-o 
+    faltan <- n_escannos-sum(o)
+    cuota <- resto[order(resto, decreasing = T)][faltan]
+    W <- (resto >= cuota)
+    seats <- rowSums(W)
+    o <- o+seats
+    }
+
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+```
+
+
+
+```{r include=FALSE}
+# LR Droop Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 800
+votos <- vot_igualdad_media
+
+
+
+
+
+
+
+
+resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
+resul1 <- as.data.table(resul)
+```
+
+<!-- ### LR Droop Desproporción -->
+  
+```{r include=FALSE}
+
+dis <- apply(X = resul1[, 1:800], MARGIN = 2, FUN = function(x) desproporción(s = x, v = votos))
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_esc_Droop <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Desproporción según LR Droop", caption = "Elaboración propia: Angel González", x = "Número de Escaños")
+```
+
+
+```{r include=FALSE}
+# LR Droop Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+partidos <- NULL
+for (i in seq_len(100)) {
+  partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
+}
+# partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 30
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+}
+
+
+
+resul <- NULL
+for (i in seq_len(length(partidos))) {
+  if (i == 1) {
+    next
+  }
+  n_escannos <- 50 # Variable
+  # votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+# Arreglar tabla poniendo NA donde se necesita
+for (i in 3:(ncol(resul1) - 2)) {
+  resul1[[i - 2]][i:nrow(resul1)] <- NA
+}
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(length(partidos))
+for (i in seq_len(length(partidos) - 1)) {
+  dis[i] <- desproporción(s = as.vector(na.omit(resul1[[i]])), v = votos[[i + 1]])
+}
+
+
+
+dis[100] <- dis[99]
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_par_Droop <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de partidos", title = "Desproporción según LR Droop", caption = "Elaboración propia: Angel González", x = "Número de Partidos")
+```
+
+
+
+```{r include=FALSE}
+# LR Droop Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 500
+
+
+# Modificar la densidad de los votos
+votos <- trunc(rep(x = 10e5, length(partidos)))
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+vot <- NULL
+for (i in seq_len(1000)) {
+  vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
+}
+
+
+
+
+
+
+
+
+
+
+# Aplicarlo
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  # n_escannos <- i # Variable
+  votos <- vot[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(ncol(resul1))
+for (i in seq_len(ncol(resul1))) {
+  dis[i] <- desproporción(s = resul1[[i]], v = vot[[i]])
+}
+
+
+
+
+
+
+
+
+#       Concentración (menor a mayor)")
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_dis_Droop <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la concentración del voto", title = "Desproporción según LR Droop", caption = "Elaboración propia: Angel González", x = "Concentración (menor a mayor)")
+```
+
+
+```{r include=FALSE}
+
+# Variables
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 5
+votos <- trunc(vot[[100]])
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- trunc(nv / (n_escannos + 2)) # Parte entera
+  G <- sapply(div, function(x) votos / x)
+  o <- trunc(G)
+  #Fix
+  while(sum(o)<n_escannos){
+    resto <- G-o 
+    faltan <- n_escannos-sum(o)
+    cuota <- resto[order(resto, decreasing = T)][faltan]
+    W <- (resto >= cuota)
+    seats <- rowSums(W)
+    o <- o+seats
+    }
+
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+```
+
+
+
+```{r include=FALSE}
+# LR imperialilr Prueba fijo densidad, fijo votos, fijo n_partidos, distintos escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 800
+votos <- vot_igualdad_media
+
+
+
+
+
+
+
+
+resul <- lapply(seq_len(n_escannos), function(x) asientos_dhondt(partidos, votos, x, couta_min = 0)$Escanos)
+resul1 <- as.data.table(resul)
+```
+
+<!-- ### LR imperialilr Desproporción -->
+  
+```{r include=FALSE}
+
+dis <- apply(X = resul1[, 1:800], MARGIN = 2, FUN = function(x) desproporción(s = x, v = votos))
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_esc_imperialilr <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de escaños a repartir", title = "Desproporción según LR imperiali", caption = "Elaboración propia: Angel González", x = "Número de Escaños")
+```
+
+
+
+```{r include=FALSE}
+# LR imperialilr Prueba fijo densidad, fijo votos, var n_partidos, fijo escaños
+partidos <- NULL
+for (i in seq_len(100)) {
+  partidos[[i]] <- paste("Partido_", seq_len(i), sep = "")
+}
+# partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 30
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+}
+
+
+
+resul <- NULL
+for (i in seq_len(length(partidos))) {
+  if (i == 1) {
+    next
+  }
+  n_escannos <- 50 # Variable
+  # votos <- votos[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos[[i]], votos[[i]], n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+# Arreglar tabla poniendo NA donde se necesita
+for (i in 3:(ncol(resul1) - 2)) {
+  resul1[[i - 2]][i:nrow(resul1)] <- NA
+}
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(length(partidos))
+for (i in seq_len(length(partidos) - 1)) {
+  dis[i] <- desproporción(s = as.vector(na.omit(resul1[[i]])), v = votos[[i + 1]])
+}
+
+
+
+dis[100] <- dis[99]
+
+
+
+
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_par_imperialilr <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando el número de partidos", title = "Desproporción según LR imperiali", caption = "Elaboración propia: Angel González", x = "Número de Partidos")
+```
+
+
+
+```{r include=FALSE}
+# LR imperialilr Prueba var densidad, fijo votos, fijo n_partidos, fijo escaños
+partidos <- paste("Partido_", seq_len(20), sep = "")
+n_escannos <- 500
+
+
+# Modificar la densidad de los votos
+votos <- trunc(rep(x = 10e5, length(partidos)))
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+vot <- NULL
+for (i in seq_len(1000)) {
+  vot[[i]] <- votos * dexp(seq_len(length(partidos)), rate = expon[i])
+}
+
+
+
+# Aplicarlo
+resul <- NULL
+for (i in seq_len(n_escannos)) {
+  # n_escannos <- i # Variable
+  votos <- vot[[i]] # Fijo
+  resul[[i]] <- asientos_dhondt(partidos, votos, n_escannos, couta_min = 0)$Escanos
+}
+
+resul1 <- as.data.table(resul)
+
+# Analizar la desproporción columna a columna
+dis <- seq_len(ncol(resul1))
+for (i in seq_len(ncol(resul1))) {
+  dis[i] <- desproporción(s = resul1[[i]], v = vot[[i]])
+}
+
+
+
+
+
+
+
+
+#       Concentración (menor a mayor)")
+
+dis1 <- data.frame("Desproporción" = dis, "Escannos" = seq_len(length(dis)))
+var_dis_imperialilr <- dis1
+
+ggplot(data = dis1, mapping = aes(Escannos, Desproporción)) +
+  geom_point(data = dis1, mapping = aes(color = Desproporción), show.legend = F) +
+  scale_fill_gradient(low = "red", high = "yellow") +
+  labs(subtitle = "Variando la concentración del voto", title = "Desproporción según LR imperiali", caption = "Elaboración propia: Angel González", x = "Concentración (menor a mayor)")
+```
+
+
+## Comparaciones entre métodos
+
+  En este apartado procederemos a agrupar todos los resultados de los métodos utilizados anteriormente. El objetivo es ser capaces de comparar en un mismo gráfico todos los métodos y sacar conclusiones. Se agruparán los datos de los tres escenarios posibles, variando el número de escaños, el número de partidos que se presentan a las elecciones o bien la concentración de los votos entre los partidos.
+
+### Variando el número de escaños
+```{r}
+var_esc_dhondt$Metodo <- "D`Hondt"
+var_esc_sl$Metodo <- "Sainte-Lague"
+var_esc_msl$Metodo <- "Modified Sainte-Lague"
+var_esc_imp$Metodo <- "Imperiali"
+var_esc_hh$Metodo <- "Huntington-Hill"
+var_esc_ad$Metodo <- "Adams"
+var_esc_dan$Metodo <- "Danish"
+var_esc_hare$Metodo <- "LR-Hare"
+var_esc_Droop$Metodo <- "LR-Droop"
+var_esc_imperialilr$Metodo <- "LR-Imperiali"
+
+var_esc <- rbind(var_esc_dhondt, var_esc_sl, var_esc_msl, var_esc_imp, var_esc_hh, var_esc_ad, var_esc_dan, var_esc_hare, var_esc_Droop, var_esc_imperialilr)
+
+# ggplot(data = var_esc, mapping = aes(Escannos, Desproporción)) +
+#   # geom_point(data = var_esc, mapping = aes(fill = "Metodo"), show.legend = F) +
+#   geom_point() +
+#   facet_grid(cols = vars(Metodo)) +
+#   scale_fill_gradient(low = "red", high = "yellow") +
+#   labs(subtitle = "Variando la concentración del voto", title = "Desproporción según Danish", caption = "Elaboración propia: Angel González", x = "Concentración (menor a mayor)")
+
+library(ggrepel)
+# ggplot(data = var_esc, mapping = aes(Escannos, Desproporción)) +
+#   geom_line(aes(colour = factor(Metodo)), size = 1) +
+#   labs(subtitle = "Variando el número de escaños a repartir", title = "Desproporción ", caption = "Elaboración propia: Angel González", x = "Número de Escaños") +
+#   # labs(title = "Variando la concentración del voto", subtitle = "Desproporción", caption = "Elaboración propia: Angel González", x = "Número de Escaños")+
+#   guides(color = guide_legend(title = "Método")) +
+#   theme(
+#     legend.position = c(.95, .95),
+#     legend.justification = c("right", "top"),
+#     legend.box.just = "right",
+#     legend.margin = margin(6, 6, 6, 6)
+#   )
+# +geom_label_repel(data = var_esc[var_esc$Escannos == 100,],
+#                    aes(label = factor(Metodo)),
+#                    max.overlaps = 100,
+#                    nudge_x = .7,
+#                    na.rm = TRUE)
+
+fig <- plot_ly(var_esc, x = ~Escannos, y = ~Desproporción, color = ~Metodo) 
+fig <- fig %>% add_lines()
+fig <- fig %>% layout(title = "Desproporción: Variando el número de escaños a repartir",
+         xaxis = list(title = "Número de Escaños"),
+         yaxis = list (title = "Desproporción"))
+
+fig
+```
+
+En el presente gráfico comparamos en un mismo lugar los métodos anteriormente analizados individualmente.  
+En esta comparación podemos observar que para todos los métodos a pocos escaños a repartir la desproporción es muy alta y no hay casi diferencia entre métodos, la desproporción baja cuanto mayor número de escaños a repartir, a números muy altos de escaños la desproporción está muy cercana al 0 y casi no hay diferencia de desproporción entre métodos.  
+El peor métodos en este caso es el Imperiali, que presenta una curva con un descenso mucho más lento que los demás métodos. Todos los demás métodos presentan un comportamiento similar.
+
+
+```{r}
+# var_esc_dhondt$Metodo <- "D`Hondt"
+# var_esc_sl$Metodo <- "Sainte-Lague"
+# var_esc_msl$Metodo <- "Modified Sainte-Lague"
+# var_esc_imp$Metodo <- "Imperiali"
+# var_esc_hh$Metodo <- "Huntington-Hill"
+# var_esc_ad$Metodo <- "Adams"
+# var_esc_dan$Metodo <- "Danish"
+# var_esc_hare$Metodo <- "LR-Hare"
+# var_esc_Droop$Metodo <- "LR-Droop"
+#
+# var_esc <- rbind(var_esc_dhondt, var_esc_sl, var_esc_msl, var_esc_imp, var_esc_hh, var_esc_ad, var_esc_dan,var_esc_hare,var_esc_Droop)
+
+# ggplot(data = var_esc, mapping = aes(Escannos, Desproporción)) +
+#   # geom_point(data = var_esc, mapping = aes(fill = "Metodo"), show.legend = F) +
+#   geom_point() +
+#   facet_grid(cols = vars(Metodo)) +
+#   scale_fill_gradient(low = "red", high = "yellow") +
+#   labs(subtitle = "Variando la concentración del voto", title = "Desproporción según Danish", caption = "Elaboración propia: Angel González", x = "Concentración (menor a mayor)")
+
+# ggplot(data = var_esc[var_esc$Escannos > 300 & var_esc$Escannos < 400, ], mapping = aes(Escannos, Desproporción)) +
+#   geom_line(aes(colour = factor(Metodo))) +
+#   labs(subtitle = "Variando el número de escaños a repartir", title = "Desproporción ", caption = "Elaboración propia: Angel González", x = "Número de Escaños") +
+#   guides(color = guide_legend(title = "Método")) +
+#   theme(
+#     legend.position = c(.99, .99),
+#     legend.justification = c("right", "top"),
+#     legend.box.just = "right",
+#     legend.margin = margin(3, 3, 3, 3)
+#   )
+
+fig <- plot_ly(var_esc[var_esc$Escannos > 300 & var_esc$Escannos < 400, ], x = ~Escannos, y = ~Desproporción, color = ~Metodo) 
+fig <- fig %>% add_lines()
+fig <- fig %>% layout(title = "Desproporción: Variando el número de escaños a repartir",
+         xaxis = list(title = "Número de Escaños"),
+         yaxis = list (title = "Desproporción"))
+
+fig
+```
+
+En este gráfico nos centramos en la desproporción para un número de escaños a repartir de entre 300 y 400 diputados, actualmente en España se reparten 350 diputados.
+El peor método entre los presentados es el método Imperiali, con una diferencia significativa respecto a los demás métodos.
+Podemos agrupar los métodos en dos grupos,un grupo que sería el de una desproporción alta, en el que se encontrarían los métodos de Imperiali, Adams y D´Hondt.
+Un segundo grupo que sería el que presentaría una desproporción baja o media, con los restantes métodos.
+
+Actualmente en España se reparten 350 escaños y se utiliza el método D´Hondt, según los datos obtenidos podemos concluir que no es el mejor método que se puede utilizar, es un método que está en el grupo de desproporción alta, e incluso no es siempre el mejor método dentro de ese subgrupo, sería interesante según lo observado en la gráfica plantearse un cambio de método a otro mejor, al menos, a alguno dentro del subgrupo de desproporción baja, preferentemente el mejor método que podríamos utilizar dentro de los métodos de promedio mayor, que sería el método de Sainte-Lague sin modificar.
+Hay que tener en cuenta también que debido a que en España no se reparten los 350 diputados por circunscripción única las conclusiones cambiarían levemente. En el caso de que se repartan de 1 a 20 escaños el método D´Hont sigue sin ser uno de los mejores métodos, pero su desproporción es muy similar a los demás métodos por lo que hace al método D´Hont aceptable cuando se trata de repartir pocos escaños.
+
+### Variando el número de partidos
+```{r}
+var_par_dhondt$Metodo <- "D`Hondt"
+var_par_sl$Metodo <- "Sainte-Lague"
+var_par_msl$Metodo <- "Modified Sainte-Lague"
+var_par_imp$Metodo <- "Imperiali"
+var_par_hh$Metodo <- "Huntington-Hill"
+var_par_ad$Metodo <- "Adams"
+var_par_dan$Metodo <- "Danish"
+var_par_hare$Metodo <- "LR-Hare"
+var_par_Droop$Metodo <- "LR-Droop"
+var_par_imperialilr$Metodo <- "LR-Imperiali"
+
+var_par <- rbind(var_par_dhondt, var_par_sl, var_par_msl, var_par_imp, var_par_hh, var_par_ad, var_par_dan, var_par_hare, var_par_Droop, var_par_imperialilr)
+
+
+# ggplot(data = var_par, mapping = aes(Escannos, Desproporción)) +
+#   geom_point(aes(colour = factor(Metodo))) +
+#   labs(subtitle = "Variando el número de partidos", title = "Desproporción", caption = "Elaboración propia: Angel González", x = "Número de partidos") +
+#   guides(color = guide_legend(title = "Método")) +
+#   theme(
+#     legend.position = c(.95, .95),
+#     legend.justification = c("right", "top"),
+#     legend.box.just = "right",
+#     legend.margin = margin(6, 6, 6, 6)
+#   )
+
+fig <- plot_ly(var_par, x = ~Escannos, y = ~Desproporción, color = ~Metodo) 
+fig <- fig %>% add_lines()
+fig <- fig %>% layout(title = "Desproporción: Variando el número de partidos",
+         xaxis = list(title = "Número de partidos"),
+         yaxis = list (title = "Desproporción"))
+
+fig
+```
+
+En el presente gráfico comparamos la desproporción variando el número de partidos en un mismo lugar con los métodos anteriormente analizados individualmente.
+
+Observamos que para un número de partidos bajo hasta los 25 partidos que se presentan a unas elecciones la desproporción es muy variable, a partir de los 25 partidos se estabiliza y podemos sacar algunas conclusiones, en primer lugar el peor método claramente en este caso es el método Imperiali y Huntington-Hill, mientras que los demás métodos son similares en su desproporción, donde la menor desproporción la podemos encontrar entre los métodos Sainte-Lague y LR-Hare. A continuación nos centraremos en la desproporción cuando se presentan pocos partidos para analizarlo más detenidamente.
+
+
+```{r}
+# var_par_dhondt$Metodo <- "D`Hondt"
+# var_par_sl$Metodo <- "Sainte-Lague"
+# var_par_msl$Metodo <- "Modified Sainte-Lague"
+# var_par_imp$Metodo <- "Imperiali"
+# var_par_hh$Metodo <- "Huntington-Hill"
+# var_par_ad$Metodo <- "Adams"
+# var_par_dan$Metodo <- "Danish"
+# var_par_hare$Metodo <- "LR-Hare"
+#
+# var_par <- rbind(var_par_dhondt, var_par_sl, var_par_msl, var_par_imp, var_par_hh, var_par_ad, var_par_dan,var_par_hare)
+
+
+# ggplot(data = var_par[var_par$Escannos < 50, ], mapping = aes(Escannos, Desproporción)) +
+#   geom_point(aes(colour = factor(Metodo))) +
+#   geom_line(aes(colour = factor(Metodo)), size = 1) +
+#   labs(subtitle = "Variando el número de partidos", title = "Desproporción", caption = "Elaboración propia: Angel González", x = "Número de partidos") +
+#   guides(color = guide_legend(title = "Método")) +
+#   theme(
+#     legend.position = c(.95, .95),
+#     legend.justification = c("right", "top"),
+#     legend.box.just = "right",
+#     legend.margin = margin(6, 6, 6, 6)
+#   ) +
+#   geom_label_repel(
+#     data = var_par[var_par$Escannos == 34, ],
+#     aes(label = factor(Metodo)),
+#     max.overlaps = 100,
+#     nudge_x = .9,
+#     na.rm = TRUE,
+#     force_pull = 0
+#   )
+
+fig <- plot_ly(var_par[var_par$Escannos < 50, ], x = ~Escannos, y = ~Desproporción, color = ~Metodo) 
+fig <- fig %>% add_lines()
+fig <- fig %>% layout(title = "Desproporción: Variando el número de partidos",
+         xaxis = list(title = "Número de partidos"),
+         yaxis = list (title = "Desproporción"))
+
+fig
+```
+
+En este gráfico nos centramos en la desproporción para un número de partidos entre 2 y 50 partidos.
+
+Observamos que hasta los 20 partidos que se presentan a las elecciones la desproporción es muy variable entre ellos, a partir de los 20 partidos que se presentan en las elecciones podemos extraer algunas conclusiones, se ven dos grupos diferenciados, un grupo en donde la desproporción es estable e incluso decreciente  y otro grupo en el que la desproporción va aumentando, que son los métodos de Adams y Huntington-Hill.  
+En España se utiliza el método D´Hondt, según los datos obtenidos podemos concluir que el método d´Hondt no es el mejor método entre los analizados, se encontraría en un nivel medio-alto entre los métodos posibles, es decir, sería deseable para obtener una mayor proporcionalidad que se cambiase el método de reparto a otro mejor, en este caso observamos que el mejor método dentro del grupo de promedios mayores es el Saint-Lague y dentro del grupo de resto mayor el mejor parado es el método LR-Hare.
+
+### Variando la concentración del voto
+```{r}
+var_dis_dhondt$Metodo <- "D`Hondt"
+var_dis_sl$Metodo <- "Sainte-Lague"
+var_dis_msl$Metodo <- "Modified Sainte-Lague"
+var_dis_imp$Metodo <- "Imperiali"
+var_dis_hh$Metodo <- "Huntington-Hill"
+var_dis_ad$Metodo <- "Adams"
+var_dis_dan$Metodo <- "Danish"
+var_dis_hare$Metodo <- "LR-Hare"
+var_dis_Droop$Metodo <- "LR-Droop"
+var_dis_imperialilr$Metodo <- "LR-Imperiali"
+
+var_dis <- rbind(var_dis_dhondt, var_dis_sl, var_dis_msl, var_dis_imp, var_dis_hh, var_dis_ad, var_dis_dan, var_dis_hare, var_dis_Droop, var_dis_imperialilr)
+
+
+# ggplot(data = var_dis, mapping = aes(Escannos, Desproporción)) +
+#   geom_point(aes(colour = factor(Metodo))) +
+#   labs(subtitle = "Variando la distribucion de los votos", title = "Desproporción", caption = "Elaboración propia: Angel González", x = "Concentración (menor a mayor)") +
+#   guides(color = guide_legend(title = "Método")) +
+#   theme(
+#     legend.position = c(.95, .95),
+#     legend.justification = c("right", "top"),
+#     legend.box.just = "right",
+#     legend.margin = margin(6, 6, 6, 6)
+#   )
+
+fig <- plot_ly(var_dis, x = ~Escannos, y = ~Desproporción, color = ~Metodo) 
+fig <- fig %>% add_lines()
+fig <- fig %>% layout(title = "Desproporción: Variando la distribucion de los votos",
+         xaxis = list(title = "Concentración (menor a mayor)"),
+         yaxis = list (title = "Desproporción"))
+
+fig
+```
+
+En el presente gráfico comparamos la concentración del voto en unas elecciones ficticias, comenzamos con una concentración de votos baja, es decir, la diferencia de votos entre partidos es baja, hasta acabar con una concentración de votos alta, en donde la diferencia de votos entre partidos es muy grande. Todo ello en un mismo lugar con los métodos anteriormente analizados individualmente.  
+
+Observamos que hay dos grupos diferenciados, uno de ellos en los que la desproporción es baja para una menor concentración de votos entre los partidos y que a medida que la concentración aumenta también va aumentando la desproporción, donde se encuentran los métodos de Adams y Huntington-Hill, también se comporta así el método Imperiali hasta una concentración de votos media. El otro grupo se caracteriza por ya sea la concentración del voto muy baja o muy alta, la desproporción está en un nivel bajo y no varía significativamente.
+
+```{r}
+# var_dis_dhondt$Metodo <- "D`Hondt"
+# var_dis_sl$Metodo <- "Sainte-Lague"
+# var_dis_msl$Metodo <- "Modified Sainte-Lague"
+# var_dis_imp$Metodo <- "Imperiali"
+# var_dis_hh$Metodo <- "Huntington-Hill"
+# var_dis_ad$Metodo <- "Adams"
+# var_dis_dan$Metodo <- "Danish"
+# var_dis_hare$Metodo <- "LR-Hare"
+#
+# var_dis <- rbind(var_dis_dhondt, var_dis_sl, var_dis_msl, var_dis_imp, var_dis_hh, var_dis_ad, var_dis_dan,var_dis_hare)
+
+ var_dis$Metodo <- as.factor(var_dis$Metodo)
+# ggplot(data = var_dis[var_dis$Escannos > 400, ], mapping = aes(Escannos, Desproporción)) +
+#   geom_point(aes(colour = Metodo, shape = Metodo)) +
+#   scale_shape_manual(values = c(1:10)) +
+#   # geom_line(aes(colour = factor(Metodo)), size = 1)+
+#   labs(subtitle = "Variando la distribucion de los votos", title = "Desproporción", caption = "Elaboración propia: Angel González", x = "Concentración (menor a mayor)") +
+#   # guides(color = guide_legend(title = "Método")) +
+#   # guides(fill = FALSE)  +
+#   theme(
+#     legend.position = c(.95, .95),
+#     legend.justification = c("right", "top"),
+#     legend.box.just = "right",
+#     legend.margin = margin(6, 6, 6, 6)
+#   )
+
+fig <- plot_ly(var_dis[var_dis$Escannos > 400, ], x = ~Escannos, y = ~Desproporción, color = ~Metodo) 
+fig <- fig %>% add_lines()
+fig <- fig %>% layout(title = "Desproporción: Variando la distribucion de los votos",
+         xaxis = list(title = "Concentración (menor a mayor)"),
+         yaxis = list (title = "Desproporción"))
+
+fig
+```
+
+
+En este gráfico nos centramos en los casos en que hay mayor concentración de votos de unos pocos partidos, lo que suele suceder habitualmente.  
+Vemos que hay dos grupos diferenciados, uno en el que hay una alta desproporción, que serían los métodos Imperiali, Adams, D´Hondt y Huntington-Hill y otro en el que la desproporción es baja.
+En España, la concentración de voto suele ser alta o medio-alta y se utiliza como método de reparto el método D´Hondt, por lo tanto observando el gráfico podemos decir que el método utilizado en España no es el más óptimo si se busca obtener un bajo índice de desproporción, sería conveniente realizar un cambio de método y cambiar el método D´Hondt preferentemente por el método Sainte-Lague o Danish, que son los mejores entre los métodos del grupo de promedio mayor con desproporción baja. Dentro del grupo de los métodos de resto mayor todos ellos se comportan con una desproporción muy baja.
+
+
+
