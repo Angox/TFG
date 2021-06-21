@@ -2263,7 +2263,7 @@ Observando el gráfico observamos que la desproporción está en un mismo nivel 
 
   En este apartado procederemos a agrupar todos los resultados de los métodos utilizados anteriormente. El objetivo es ser capaces de comparar en un mismo gráfico todos los métodos y sacar conclusiones. Se agruparán los datos de los tres escenarios posibles, variando el número de escaños, el número de partidos que se presentan a las elecciones o bien la concentración de los votos entre los partidos.
   
-Se recomiendan visitar los gráficos interactivos en la siguiente dirección:
+Se recomiendan visitar los gráficos interactivos en la siguiente dirección:<https://rpubs.com/angox/cap3int>
 
 ### Variando el número de escaños
 ```{r}

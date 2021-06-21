@@ -1,6 +1,6 @@
 ---
 title: "Capítulo 3 Interactivo"
-author: "Angel González Rizo"
+author: "Angel González "
 date: "2021"
 output: html_document
 ---
