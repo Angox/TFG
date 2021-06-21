@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.2.24)  1 MAY 2021 19:25
-=======
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.2.24)  1 MAY 2021 17:58
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.2.24)  21 JUN 2021 13:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -318,11 +314,26 @@ Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 (c:/texlive/2019/texmf-dist/tex/latex/graphics/dvipsnam.def
 File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
-)) (c:/texlive/2019/texmf-dist/tex/latex/parskip/parskip.sty
+)) (c:/texlive/2019/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2020/01/13 v3.5 verbatim text (tvz,hv)
+\FV@CodeLineNo=\count271
+\FV@InFile=\read2
+\FV@TabBox=\box47
+\c@FancyVerbLine=\count272
+\FV@StepNumber=\count273
+\FV@OutFile=\write3
+) (c:/texlive/2019/texmf-dist/tex/latex/framed/framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip56
+\fb@frw=\dimen157
+\fb@frh=\dimen158
+\FrameRule=\dimen159
+\FrameSep=\dimen160
+) (c:/texlive/2019/texmf-dist/tex/latex/parskip/parskip.sty
 Package: parskip 2020-01-22 v2.0d non-zero parskip adjustments
 (c:/texlive/2019/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count271
+\etb@tempcnta=\count274
 )) (c:/texlive/2019/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2020/02/28 3.41 The Babel package
 (c:/texlive/2019/texmf-dist/tex/generic/babel/switch.def
@@ -331,35 +342,35 @@ File: switch.def 2020/02/28 3.41 Babel switching mechanism
 Language: spanish.ldf 2016/03/03 v5.0p Spanish support from the babel system
 (c:/texlive/2019/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2020/02/28 3.41 Babel common definitions
-\babel@savecnt=\count272
-\U@D=\dimen157
+\babel@savecnt=\count275
+\U@D=\dimen161
 (c:/texlive/2019/texmf-dist/tex/generic/babel/txtbabel.def)
-\bbl@readstream=\read2
-\bbl@dirlevel=\count273
+\bbl@readstream=\read3
+\bbl@dirlevel=\count276
 )
 \es@quottoks=\toks25
-\es@quotdepth=\count274
+\es@quotdepth=\count277
 )) (c:/texlive/2019/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count275
+\c@float@type=\count278
 \float@exts=\toks26
-\float@box=\box47
+\float@box=\box48
 \@float@everytoks=\toks27
-\@floatcapt=\box48
+\@floatcapt=\box49
 ) (c:/texlive/2019/texmf-dist/tex/latex/placeins/placeins.sty
 Package: placeins 2005/04/18  v 2.2
 ) (c:/texlive/2019/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footer
 s
-\f@nch@headwidth=\skip56
-\f@nch@O@elh=\skip57
-\f@nch@O@erh=\skip58
-\f@nch@O@olh=\skip59
-\f@nch@O@orh=\skip60
-\f@nch@O@elf=\skip61
-\f@nch@O@erf=\skip62
-\f@nch@O@olf=\skip63
-\f@nch@O@orf=\skip64
+\f@nch@headwidth=\skip57
+\f@nch@O@elh=\skip58
+\f@nch@O@erh=\skip59
+\f@nch@O@olh=\skip60
+\f@nch@O@orh=\skip61
+\f@nch@O@elf=\skip62
+\f@nch@O@erf=\skip63
+\f@nch@O@olf=\skip64
+\f@nch@O@orf=\skip65
 ) (c:/texlive/2019/texmf-dist/tex/latex/chngcntr/chngcntr.sty
 Package: chngcntr 2018/04/09 v1.1a change counter resetting
 ) (c:/texlive/2019/texmf-dist/tex/latex/base/fontenc.sty
@@ -370,16 +381,16 @@ Package: pdfpages 2020/01/28 v0.5q Insert pages of external PDF documents (AM)
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 ) (c:/texlive/2019/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count276
-\calc@Bcount=\count277
-\calc@Adimen=\dimen158
-\calc@Bdimen=\dimen159
-\calc@Askip=\skip65
-\calc@Bskip=\skip66
+\calc@Acount=\count279
+\calc@Bcount=\count280
+\calc@Adimen=\dimen162
+\calc@Bdimen=\dimen163
+\calc@Askip=\skip66
+\calc@Bskip=\skip67
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count278
-\calc@Cskip=\skip67
+\calc@Ccount=\count281
+\calc@Cskip=\skip68
 ) (c:/texlive/2019/texmf-dist/tex/latex/eso-pic/eso-pic.sty
 Package: eso-pic 2018/04/12 v2.0h eso-pic (RN)
 ) (c:/texlive/2019/texmf-dist/tex/latex/graphics/graphicx.sty
@@ -393,30 +404,30 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 105.
 )
-\Gin@req@height=\dimen160
-\Gin@req@width=\dimen161
+\Gin@req@height=\dimen164
+\Gin@req@width=\dimen165
 )
-\AM@pagewidth=\dimen162
-\AM@pageheight=\dimen163
+\AM@pagewidth=\dimen166
+\AM@pageheight=\dimen167
 (c:/texlive/2019/texmf-dist/tex/latex/pdfpages/pppdftex.def
 File: pppdftex.def 2020/01/28 v0.5q Pdfpages driver for pdfTeX (AM)
 )
-\AM@pagebox=\box49
+\AM@pagebox=\box50
 \AM@global@opts=\toks28
-\AM@pagecnt=\count279
+\AM@pagecnt=\count282
 \AM@toc@title=\toks29
-\c@AM@survey=\count280
-\AM@templatesizebox=\box50
+\c@AM@survey=\count283
+\AM@templatesizebox=\box51
 ) (c:/texlive/2019/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (c:/texlive/
 2019/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (c:/texlive/2019/texmf-dist/te
 x/latex/pgf/utilities/pgfrcs.sty (c:/texlive/2019/texmf-dist/tex/generic/pgf/ut
 ilities/pgfutil-common.tex
 \pgfutil@everybye=\toks30
-\pgfutil@tempdima=\dimen164
-\pgfutil@tempdimb=\dimen165
+\pgfutil@tempdima=\dimen168
+\pgfutil@tempdimb=\dimen169
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.tex)
 ) (c:/texlive/2019/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
-\pgfutil@abb=\box51
+\pgfutil@abb=\box52
 (c:/texlive/2019/texmf-dist/tex/latex/ms/everyshi.sty
 Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
 )) (c:/texlive/2019/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (c:/te
@@ -434,26 +445,26 @@ Package: pgfsys 2020/01/08 v3.1.5b (3.1.5b)
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
 \pgfkeys@tmptoks=\toks33
 ))
-\pgf@x=\dimen166
-\pgf@y=\dimen167
-\pgf@xa=\dimen168
-\pgf@ya=\dimen169
-\pgf@xb=\dimen170
-\pgf@yb=\dimen171
-\pgf@xc=\dimen172
-\pgf@yc=\dimen173
-\pgf@xd=\dimen174
-\pgf@yd=\dimen175
-\w@pgf@writea=\write3
-\r@pgf@reada=\read3
-\c@pgf@counta=\count281
-\c@pgf@countb=\count282
-\c@pgf@countc=\count283
-\c@pgf@countd=\count284
+\pgf@x=\dimen170
+\pgf@y=\dimen171
+\pgf@xa=\dimen172
+\pgf@ya=\dimen173
+\pgf@xb=\dimen174
+\pgf@yb=\dimen175
+\pgf@xc=\dimen176
+\pgf@yc=\dimen177
+\pgf@xd=\dimen178
+\pgf@yd=\dimen179
+\w@pgf@writea=\write4
+\r@pgf@reada=\read4
+\c@pgf@counta=\count284
+\c@pgf@countb=\count285
+\c@pgf@countc=\count286
+\c@pgf@countd=\count287
 \t@pgf@toka=\toks34
 \t@pgf@tokb=\toks35
 \t@pgf@tokc=\toks36
-\pgf@sys@id@count=\count285
+\pgf@sys@id@count=\count288
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2020/01/08 v3.1.5b (3.1.5b)
 )
@@ -465,8 +476,8 @@ File: pgfsys-common-pdf.def 2020/01/08 v3.1.5b (3.1.5b)
 )))
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfsyssoftpath@smallbuffer@items=\count286
-\pgfsyssoftpath@bigbuffer@items=\count287
+\pgfsyssoftpath@smallbuffer@items=\count289
+\pgfsyssoftpath@bigbuffer@items=\count290
 )
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
 File: pgfsysprotocol.code.tex 2020/01/08 v3.1.5b (3.1.5b)
@@ -476,9 +487,9 @@ Package: pgfcore 2020/01/08 v3.1.5b (3.1.5b)
 019/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex (c:/texlive/2019/texmf
 -dist/tex/generic/pgf/math/pgfmathutil.code.tex) (c:/texlive/2019/texmf-dist/te
 x/generic/pgf/math/pgfmathparser.code.tex
-\pgfmath@dimen=\dimen176
-\pgfmath@count=\count288
-\pgfmath@box=\box52
+\pgfmath@dimen=\dimen180
+\pgfmath@count=\count291
+\pgfmath@box=\box53
 \pgfmath@toks=\toks37
 \pgfmath@stack@operand=\toks38
 \pgfmath@stack@operation=\toks39
@@ -500,54 +511,54 @@ x)
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithm
 etics.code.tex))) (c:/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmathfloat
 .code.tex
-\c@pgfmathroundto@lastzeros=\count289
+\c@pgfmathroundto@lastzeros=\count292
 )) (c:/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (c:/texliv
 e/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
 File: pgfcorepoints.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@picminx=\dimen177
-\pgf@picmaxx=\dimen178
-\pgf@picminy=\dimen179
-\pgf@picmaxy=\dimen180
-\pgf@pathminx=\dimen181
-\pgf@pathmaxx=\dimen182
-\pgf@pathminy=\dimen183
-\pgf@pathmaxy=\dimen184
-\pgf@xx=\dimen185
-\pgf@xy=\dimen186
-\pgf@yx=\dimen187
-\pgf@yy=\dimen188
-\pgf@zx=\dimen189
-\pgf@zy=\dimen190
+\pgf@picminx=\dimen181
+\pgf@picmaxx=\dimen182
+\pgf@picminy=\dimen183
+\pgf@picmaxy=\dimen184
+\pgf@pathminx=\dimen185
+\pgf@pathmaxx=\dimen186
+\pgf@pathminy=\dimen187
+\pgf@pathmaxy=\dimen188
+\pgf@xx=\dimen189
+\pgf@xy=\dimen190
+\pgf@yx=\dimen191
+\pgf@yy=\dimen192
+\pgf@zx=\dimen193
+\pgf@zy=\dimen194
 )
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.cod
 e.tex
 File: pgfcorepathconstruct.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@path@lastx=\dimen191
-\pgf@path@lasty=\dimen192
+\pgf@path@lastx=\dimen195
+\pgf@path@lasty=\dimen196
 )
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.te
 x
 File: pgfcorepathusage.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@shorten@end@additional=\dimen193
-\pgf@shorten@start@additional=\dimen194
+\pgf@shorten@end@additional=\dimen197
+\pgf@shorten@start@additional=\dimen198
 ) (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
 File: pgfcorescopes.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfpic=\box53
-\pgf@hbox=\box54
-\pgf@layerbox@main=\box55
-\pgf@picture@serial@count=\count290
+\pgfpic=\box54
+\pgf@hbox=\box55
+\pgf@layerbox@main=\box56
+\pgf@picture@serial@count=\count293
 )
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code
 .tex
 File: pgfcoregraphicstate.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgflinewidth=\dimen195
+\pgflinewidth=\dimen199
 )
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.c
 ode.tex
 File: pgfcoretransformations.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@pt@x=\dimen196
-\pgf@pt@y=\dimen197
-\pgf@pt@temp=\dimen198
+\pgf@pt@x=\dimen256
+\pgf@pt@y=\dimen257
+\pgf@pt@temp=\dimen258
 ) (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
 File: pgfcorequick.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ) (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.te
@@ -559,18 +570,18 @@ de.tex
 File: pgfcorepathprocessing.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ) (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
 File: pgfcorearrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfarrowsep=\dimen199
+\pgfarrowsep=\dimen259
 ) (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@max=\dimen256
-\pgf@sys@shading@range@num=\count291
-\pgf@shadingcount=\count292
+\pgf@max=\dimen260
+\pgf@sys@shading@range@num=\count294
+\pgf@shadingcount=\count295
 ) (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
 File: pgfcoreimage.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
 File: pgfcoreexternal.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfexternal@startupbox=\box56
+\pgfexternal@startupbox=\box57
 )) (c:/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.te
 x
 File: pgfcorelayers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
@@ -586,15 +597,15 @@ File: pgfcorerdf.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ))) (c:/texlive/2019/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.te
 x
 File: pgfmoduleshapes.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfnodeparttextbox=\box57
+\pgfnodeparttextbox=\box58
 ) (c:/texlive/2019/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
 File: pgfmoduleplot.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )
 (c:/texlive/2019/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.st
 y
 Package: pgfcomp-version-0-65 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@nodesepstart=\dimen257
-\pgf@nodesepend=\dimen258
+\pgf@nodesepstart=\dimen261
+\pgf@nodesepend=\dimen262
 )
 (c:/texlive/2019/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.st
 y
@@ -607,8 +618,8 @@ th.code.tex)) (c:/texlive/2019/texmf-dist/tex/generic/pgf/utilities/pgffor.code
 .tex
 Package: pgffor 2020/01/08 v3.1.5b (3.1.5b)
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
-\pgffor@iter=\dimen259
-\pgffor@skip=\dimen260
+\pgffor@iter=\dimen263
+\pgffor@skip=\dimen264
 \pgffor@stack=\toks40
 \pgffor@toks=\toks41
 )) (c:/texlive/2019/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
@@ -617,32 +628,32 @@ Package: tikz 2020/01/08 v3.1.5b (3.1.5b)
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.co
 de.tex
 File: pgflibraryplothandlers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@plot@mark@count=\count293
-\pgfplotmarksize=\dimen261
+\pgf@plot@mark@count=\count296
+\pgfplotmarksize=\dimen265
 )
-\tikz@lastx=\dimen262
-\tikz@lasty=\dimen263
-\tikz@lastxsaved=\dimen264
-\tikz@lastysaved=\dimen265
-\tikz@lastmovetox=\dimen266
-\tikz@lastmovetoy=\dimen267
-\tikzleveldistance=\dimen268
-\tikzsiblingdistance=\dimen269
-\tikz@figbox=\box58
-\tikz@figbox@bg=\box59
-\tikz@tempbox=\box60
-\tikz@tempbox@bg=\box61
-\tikztreelevel=\count294
-\tikznumberofchildren=\count295
-\tikznumberofcurrentchild=\count296
-\tikz@fig@count=\count297
+\tikz@lastx=\dimen266
+\tikz@lasty=\dimen267
+\tikz@lastxsaved=\dimen268
+\tikz@lastysaved=\dimen269
+\tikz@lastmovetox=\dimen270
+\tikz@lastmovetoy=\dimen271
+\tikzleveldistance=\dimen272
+\tikzsiblingdistance=\dimen273
+\tikz@figbox=\box59
+\tikz@figbox@bg=\box60
+\tikz@tempbox=\box61
+\tikz@tempbox@bg=\box62
+\tikztreelevel=\count297
+\tikznumberofchildren=\count298
+\tikznumberofcurrentchild=\count299
+\tikz@fig@count=\count300
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfmatrixcurrentrow=\count298
-\pgfmatrixcurrentcolumn=\count299
-\pgf@matrix@numberofcolumns=\count300
+\pgfmatrixcurrentrow=\count301
+\pgfmatrixcurrentcolumn=\count302
+\pgf@matrix@numberofcolumns=\count303
 )
-\tikz@expandcount=\count301
+\tikz@expandcount=\count304
 
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzli
 brarytopaths.code.tex
@@ -652,10 +663,10 @@ Package: epigraph 2020/01/02 v1.5e typesetting epigraphs
 (c:/texlive/2019/texmf-dist/tex/latex/nextpage/nextpage.sty
 Package: nextpage 2009/09/03 v1.1a additional page commands
 )
-\beforeepigraphskip=\skip68
-\afterepigraphskip=\skip69
-\epigraphwidth=\skip70
-\epigraphrule=\skip71
+\beforeepigraphskip=\skip69
+\afterepigraphskip=\skip70
+\epigraphwidth=\skip71
+\epigraphrule=\skip72
 ) (./portadas/latex_paginatitulo_mod_ST02_add.sty) (./cpimod.sty
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: 
@@ -695,13 +706,13 @@ File: here_the_logos 2004/09/21 KTH logo English, BW
 File: here_the_logos 2004/09/21 KTH logo Swedish, BW
 File: here_the_logos 2004/09/21 KTH logo Swedish, colour
 File: here_the_logos 2004/09/21 KTH logo Swedish, colour
-\titlep@getextwidth=\skip72
-\titlep@gewhitemargin=\skip73
-\titlep@geleftmargin=\skip74
-\titlep@gemarginsep=\skip75
-\titlep@getextheight=\skip76
-\titlep@getopmargin=\skip77
-\tmpl@ngth=\skip78
+\titlep@getextwidth=\skip73
+\titlep@gewhitemargin=\skip74
+\titlep@geleftmargin=\skip75
+\titlep@gemarginsep=\skip76
+\titlep@getextheight=\skip77
+\titlep@getopmargin=\skip78
+\tmpl@ngth=\skip79
 ) (c:/texlive/2019/texmf-dist/tex/latex/emptypage/emptypage.sty
 Package: emptypage 2010/05/30 v1.2 Suppress page numbers and headings on empty 
 pages
@@ -710,14 +721,14 @@ f-dist/tex/latex/l3kernel/expl3.sty
 Package: expl3 2020-02-25 L3 programming layer (loader) 
 (c:/texlive/2019/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-02-23 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count302
-\l__pdf_internal_box=\box62
+\l__kernel_color_stack_int=\count305
+\l__pdf_internal_box=\box63
 )) (c:/texlive/2019/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 Package: xparse 2020-02-25 L3 Experimental document command parser
-\l__xparse_current_arg_int=\count303
-\g__xparse_grabber_int=\count304
-\l__xparse_m_args_int=\count305
-\l__xparse_v_nesting_int=\count306
+\l__xparse_current_arg_int=\count306
+\g__xparse_grabber_int=\count307
+\l__xparse_m_args_int=\count308
+\l__xparse_v_nesting_int=\count309
 )
 Package: lipsum 2019/01/02 v2.2 150 paragraphs of Lorem Ipsum dummy text
 (c:/texlive/2019/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex
@@ -729,17 +740,17 @@ Package: amsthm 2017/10/31 v2.20.4
 \thm@headfont=\toks44
 \thm@notefont=\toks45
 \thm@headpunct=\toks46
-\thm@preskip=\skip79
-\thm@postskip=\skip80
-\thm@headsep=\skip81
+\thm@preskip=\skip80
+\thm@postskip=\skip81
+\thm@headsep=\skip82
 \dth@everypar=\toks47
 )
-\c@dummy=\count307
-\c@problem=\count308
-\c@exerciseT=\count309
-\c@exampleT=\count310
-\c@vocabulary=\count311
-\c@definitionT=\count312
+\c@dummy=\count310
+\c@problem=\count311
+\c@exerciseT=\count312
+\c@exampleT=\count313
+\c@vocabulary=\count314
+\c@definitionT=\count315
 (c:/texlive/2019/texmf-dist/tex/latex/mdframed/mdframed.sty
 Package: mdframed 2013/07/01 1.9b: mdframed
 (c:/texlive/2019/texmf-dist/tex/latex/zref/zref-abspage.sty
@@ -750,155 +761,155 @@ Package zref Info: New property list: main on input line 763.
 Package zref Info: New property: default on input line 764.
 Package zref Info: New property: page on input line 765.
 )
-\c@abspage=\count313
+\c@abspage=\count316
 Package zref Info: New property: abspage on input line 66.
 ) (c:/texlive/2019/texmf-dist/tex/latex/needspace/needspace.sty
 Package: needspace 2010/09/12 v1.3d reserve vertical space
 )
-\mdf@templength=\skip82
-\c@mdf@globalstyle@cnt=\count314
-\mdf@skipabove@length=\skip83
-\mdf@skipbelow@length=\skip84
-\mdf@leftmargin@length=\skip85
-\mdf@rightmargin@length=\skip86
-\mdf@innerleftmargin@length=\skip87
-\mdf@innerrightmargin@length=\skip88
-\mdf@innertopmargin@length=\skip89
-\mdf@innerbottommargin@length=\skip90
-\mdf@splittopskip@length=\skip91
-\mdf@splitbottomskip@length=\skip92
-\mdf@outermargin@length=\skip93
-\mdf@innermargin@length=\skip94
-\mdf@linewidth@length=\skip95
-\mdf@innerlinewidth@length=\skip96
-\mdf@middlelinewidth@length=\skip97
-\mdf@outerlinewidth@length=\skip98
-\mdf@roundcorner@length=\skip99
-\mdf@footenotedistance@length=\skip100
-\mdf@userdefinedwidth@length=\skip101
-\mdf@needspace@length=\skip102
-\mdf@frametitleaboveskip@length=\skip103
-\mdf@frametitlebelowskip@length=\skip104
-\mdf@frametitlerulewidth@length=\skip105
-\mdf@frametitleleftmargin@length=\skip106
-\mdf@frametitlerightmargin@length=\skip107
-\mdf@shadowsize@length=\skip108
-\mdf@extratopheight@length=\skip109
-\mdf@subtitleabovelinewidth@length=\skip110
-\mdf@subtitlebelowlinewidth@length=\skip111
-\mdf@subtitleaboveskip@length=\skip112
-\mdf@subtitlebelowskip@length=\skip113
-\mdf@subtitleinneraboveskip@length=\skip114
-\mdf@subtitleinnerbelowskip@length=\skip115
-\mdf@subsubtitleabovelinewidth@length=\skip116
-\mdf@subsubtitlebelowlinewidth@length=\skip117
-\mdf@subsubtitleaboveskip@length=\skip118
-\mdf@subsubtitlebelowskip@length=\skip119
-\mdf@subsubtitleinneraboveskip@length=\skip120
-\mdf@subsubtitleinnerbelowskip@length=\skip121
+\mdf@templength=\skip83
+\c@mdf@globalstyle@cnt=\count317
+\mdf@skipabove@length=\skip84
+\mdf@skipbelow@length=\skip85
+\mdf@leftmargin@length=\skip86
+\mdf@rightmargin@length=\skip87
+\mdf@innerleftmargin@length=\skip88
+\mdf@innerrightmargin@length=\skip89
+\mdf@innertopmargin@length=\skip90
+\mdf@innerbottommargin@length=\skip91
+\mdf@splittopskip@length=\skip92
+\mdf@splitbottomskip@length=\skip93
+\mdf@outermargin@length=\skip94
+\mdf@innermargin@length=\skip95
+\mdf@linewidth@length=\skip96
+\mdf@innerlinewidth@length=\skip97
+\mdf@middlelinewidth@length=\skip98
+\mdf@outerlinewidth@length=\skip99
+\mdf@roundcorner@length=\skip100
+\mdf@footenotedistance@length=\skip101
+\mdf@userdefinedwidth@length=\skip102
+\mdf@needspace@length=\skip103
+\mdf@frametitleaboveskip@length=\skip104
+\mdf@frametitlebelowskip@length=\skip105
+\mdf@frametitlerulewidth@length=\skip106
+\mdf@frametitleleftmargin@length=\skip107
+\mdf@frametitlerightmargin@length=\skip108
+\mdf@shadowsize@length=\skip109
+\mdf@extratopheight@length=\skip110
+\mdf@subtitleabovelinewidth@length=\skip111
+\mdf@subtitlebelowlinewidth@length=\skip112
+\mdf@subtitleaboveskip@length=\skip113
+\mdf@subtitlebelowskip@length=\skip114
+\mdf@subtitleinneraboveskip@length=\skip115
+\mdf@subtitleinnerbelowskip@length=\skip116
+\mdf@subsubtitleabovelinewidth@length=\skip117
+\mdf@subsubtitlebelowlinewidth@length=\skip118
+\mdf@subsubtitleaboveskip@length=\skip119
+\mdf@subsubtitlebelowskip@length=\skip120
+\mdf@subsubtitleinneraboveskip@length=\skip121
+\mdf@subsubtitleinnerbelowskip@length=\skip122
 (c:/texlive/2019/texmf-dist/tex/latex/mdframed/md-frame-0.mdf
 File: md-frame-0.mdf 2013/07/01\ 1.9b: md-frame-0
 )
-\mdf@frametitlebox=\box63
-\mdf@footnotebox=\box64
-\mdf@splitbox@one=\box65
-\mdf@splitbox@two=\box66
-\mdf@splitbox@save=\box67
-\mdfsplitboxwidth=\skip122
-\mdfsplitboxtotalwidth=\skip123
-\mdfsplitboxheight=\skip124
-\mdfsplitboxdepth=\skip125
-\mdfsplitboxtotalheight=\skip126
-\mdfframetitleboxwidth=\skip127
-\mdfframetitleboxtotalwidth=\skip128
-\mdfframetitleboxheight=\skip129
-\mdfframetitleboxdepth=\skip130
-\mdfframetitleboxtotalheight=\skip131
-\mdffootnoteboxwidth=\skip132
-\mdffootnoteboxtotalwidth=\skip133
-\mdffootnoteboxheight=\skip134
-\mdffootnoteboxdepth=\skip135
-\mdffootnoteboxtotalheight=\skip136
-\mdftotallinewidth=\skip137
-\mdfboundingboxwidth=\skip138
-\mdfboundingboxtotalwidth=\skip139
-\mdfboundingboxheight=\skip140
-\mdfboundingboxdepth=\skip141
-\mdfboundingboxtotalheight=\skip142
-\mdf@freevspace@length=\skip143
-\mdf@horizontalwidthofbox@length=\skip144
-\mdf@verticalmarginwhole@length=\skip145
-\mdf@horizontalspaceofbox=\skip146
-\mdfsubtitleheight=\skip147
-\mdfsubsubtitleheight=\skip148
-\c@mdfcountframes=\count315
+\mdf@frametitlebox=\box64
+\mdf@footnotebox=\box65
+\mdf@splitbox@one=\box66
+\mdf@splitbox@two=\box67
+\mdf@splitbox@save=\box68
+\mdfsplitboxwidth=\skip123
+\mdfsplitboxtotalwidth=\skip124
+\mdfsplitboxheight=\skip125
+\mdfsplitboxdepth=\skip126
+\mdfsplitboxtotalheight=\skip127
+\mdfframetitleboxwidth=\skip128
+\mdfframetitleboxtotalwidth=\skip129
+\mdfframetitleboxheight=\skip130
+\mdfframetitleboxdepth=\skip131
+\mdfframetitleboxtotalheight=\skip132
+\mdffootnoteboxwidth=\skip133
+\mdffootnoteboxtotalwidth=\skip134
+\mdffootnoteboxheight=\skip135
+\mdffootnoteboxdepth=\skip136
+\mdffootnoteboxtotalheight=\skip137
+\mdftotallinewidth=\skip138
+\mdfboundingboxwidth=\skip139
+\mdfboundingboxtotalwidth=\skip140
+\mdfboundingboxheight=\skip141
+\mdfboundingboxdepth=\skip142
+\mdfboundingboxtotalheight=\skip143
+\mdf@freevspace@length=\skip144
+\mdf@horizontalwidthofbox@length=\skip145
+\mdf@verticalmarginwhole@length=\skip146
+\mdf@horizontalspaceofbox=\skip147
+\mdfsubtitleheight=\skip148
+\mdfsubsubtitleheight=\skip149
+\c@mdfcountframes=\count318
 
 ****** mdframed patching \endmdf@trivlist
 
 ****** -- success******
 
-\mdf@envdepth=\count316
-\c@mdf@env@i=\count317
-\c@mdf@env@ii=\count318
-\c@mdf@zref@counter=\count319
+\mdf@envdepth=\count319
+\c@mdf@env@i=\count320
+\c@mdf@env@ii=\count321
+\c@mdf@zref@counter=\count322
 Package zref Info: New property: mdf@pagevalue on input line 895.
 )
-\c@notation=\count320
+\c@notation=\count323
 (c:/texlive/2019/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
 Package: tcolorbox 2019/11/15 version 4.22 text color boxes
 (c:/texlive/2019/texmf-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2019/11/10 v1.5r LaTeX2e package for verbatim enhancements
 \every@verbatim=\toks48
 \verbatim@line=\toks49
-\verbatim@in@stream=\read4
+\verbatim@in@stream=\read5
 ) (c:/texlive/2019/texmf-dist/tex/latex/environ/environ.sty
 Package: environ 2014/05/04 v0.3 A new way to define environments
 (c:/texlive/2019/texmf-dist/tex/latex/trimspaces/trimspaces.sty
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 ))
-\tcb@titlebox=\box68
-\tcb@upperbox=\box69
-\tcb@lowerbox=\box70
-\tcb@phantombox=\box71
-\c@tcbbreakpart=\count321
-\c@tcblayer=\count322
-\tcolorbox@number=\count323
-\tcb@temp=\box72
+\tcb@titlebox=\box69
+\tcb@upperbox=\box70
+\tcb@lowerbox=\box71
+\tcb@phantombox=\box72
+\c@tcbbreakpart=\count324
+\c@tcblayer=\count325
+\tcolorbox@number=\count326
 \tcb@temp=\box73
 \tcb@temp=\box74
 \tcb@temp=\box75
-\tcb@out=\write4
-\tcb@record@out=\write5
+\tcb@temp=\box76
+\tcb@out=\write5
+\tcb@record@out=\write6
 )
 (c:/texlive/2019/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzli
 brarytrees.code.tex
 File: tikzlibrarytrees.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ) (c:/texlive/2019/texmf-dist/tex/latex/tools/array.sty
 Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
-\col@sep=\dimen270
-\ar@mcellbox=\box76
-\extrarowheight=\dimen271
+\col@sep=\dimen274
+\ar@mcellbox=\box77
+\extrarowheight=\dimen275
 \NC@list=\toks50
-\extratabsurround=\skip149
-\backup@length=\skip150
-\ar@cellbox=\box77
+\extratabsurround=\skip150
+\backup@length=\skip151
+\ar@cellbox=\box78
 ) (c:/texlive/2019/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
-\multirow@colwidth=\skip151
-\multirow@cntb=\count324
-\multirow@dima=\skip152
-\bigstrutjot=\dimen272
+\multirow@colwidth=\skip152
+\multirow@cntb=\count327
+\multirow@dima=\skip153
+\bigstrutjot=\dimen276
 ) (c:/texlive/2019/texmf-dist/tex/latex/wrapfig/wrapfig.sty
-\wrapoverhang=\dimen273
-\WF@size=\dimen274
-\c@WF@wrappedlines=\count325
-\WF@box=\box78
+\wrapoverhang=\dimen277
+\WF@size=\dimen278
+\c@WF@wrappedlines=\count328
+\WF@box=\box79
 \WF@everypar=\toks51
 Package: wrapfig 2003/01/31  v 3.6
 ) (c:/texlive/2019/texmf-dist/tex/latex/colortbl/colortbl.sty
 Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
 \everycr=\toks52
-\minrowclearance=\skip153
+\minrowclearance=\skip154
 ) (c:/texlive/2019/texmf-dist/tex/latex/pdflscape/pdflscape.sty
 Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
 (c:/texlive/2019/texmf-dist/tex/latex/graphics/lscape.sty
@@ -909,36 +920,36 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
 (c:/texlive/2019/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
-\@vwid@box=\box79
-\sift@deathcycles=\count326
-\@vwid@loff=\dimen275
-\@vwid@roff=\dimen276
+\@vwid@box=\box80
+\sift@deathcycles=\count329
+\@vwid@loff=\dimen279
+\@vwid@roff=\dimen280
 )
-\c@taburow=\count327
-\tabu@nbcols=\count328
-\tabu@cnt=\count329
-\tabu@Xcol=\count330
-\tabu@alloc=\count331
-\tabu@nested=\count332
-\tabu@target=\dimen277
-\tabu@spreadtarget=\dimen278
-\tabu@naturalX=\dimen279
-\tabucolX=\dimen280
-\tabu@Xsum=\dimen281
-\extrarowdepth=\dimen282
-\abovetabulinesep=\dimen283
-\belowtabulinesep=\dimen284
-\tabustrutrule=\dimen285
+\c@taburow=\count330
+\tabu@nbcols=\count331
+\tabu@cnt=\count332
+\tabu@Xcol=\count333
+\tabu@alloc=\count334
+\tabu@nested=\count335
+\tabu@target=\dimen281
+\tabu@spreadtarget=\dimen282
+\tabu@naturalX=\dimen283
+\tabucolX=\dimen284
+\tabu@Xsum=\dimen285
+\extrarowdepth=\dimen286
+\abovetabulinesep=\dimen287
+\belowtabulinesep=\dimen288
+\tabustrutrule=\dimen289
 \tabu@thebody=\toks53
 \tabu@footnotes=\toks54
-\tabu@box=\box80
-\tabu@arstrutbox=\box81
-\tabu@hleads=\box82
-\tabu@vleads=\box83
-\tabu@cellskip=\skip154
+\tabu@box=\box81
+\tabu@arstrutbox=\box82
+\tabu@hleads=\box83
+\tabu@vleads=\box84
+\tabu@cellskip=\skip155
 ) (c:/texlive/2019/texmf-dist/tex/latex/threeparttable/threeparttable.sty
 Package: threeparttable 2003/06/13  v 3.0
-\@tempboxb=\box84
+\@tempboxb=\box85
 ) (c:/texlive/2019/texmf-dist/tex/latex/subfig/subfig.sty
 Package: subfig 2005/06/28 ver: 1.3 subfig package
 (c:/texlive/2019/texmf-dist/tex/latex/caption/caption.sty
@@ -946,50 +957,50 @@ Package: caption 2020/01/03 v3.4h Customizing captions (AR)
 (c:/texlive/2019/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 61.
-\captionmargin=\dimen286
-\captionmargin@=\dimen287
-\captionwidth=\dimen288
-\caption@tempdima=\dimen289
-\caption@indent=\dimen290
-\caption@parindent=\dimen291
-\caption@hangindent=\dimen292
+\captionmargin=\dimen290
+\captionmargin@=\dimen291
+\captionwidth=\dimen292
+\caption@tempdima=\dimen293
+\caption@indent=\dimen294
+\caption@parindent=\dimen295
+\caption@hangindent=\dimen296
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count333
-\c@continuedfloat=\count334
+\c@caption@flags=\count336
+\c@continuedfloat=\count337
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: threeparttable package is loaded.
 Package caption Info: wrapfig package is loaded.
 )
-\c@KVtest=\count335
-\sf@farskip=\skip155
-\sf@captopadj=\dimen293
-\sf@capskip=\skip156
-\sf@nearskip=\skip157
-\c@subfigure=\count336
-\c@subfigure@save=\count337
-\c@lofdepth=\count338
-\c@subtable=\count339
-\c@subtable@save=\count340
-\c@lotdepth=\count341
-\sf@top=\skip158
-\sf@bottom=\skip159
+\c@KVtest=\count338
+\sf@farskip=\skip156
+\sf@captopadj=\dimen297
+\sf@capskip=\skip157
+\sf@nearskip=\skip158
+\c@subfigure=\count339
+\c@subfigure@save=\count340
+\c@lofdepth=\count341
+\c@subtable=\count342
+\c@subtable@save=\count343
+\c@lotdepth=\count344
+\sf@top=\skip159
+\sf@bottom=\skip160
 ) (c:/texlive/2019/texmf-dist/tex/latex/tools/dcolumn.sty
 Package: dcolumn 2014/10/28 v1.06 decimal alignment package (DPC)
 ) (c:/texlive/2019/texmf-dist/tex/latex/graphics/rotating.sty
 Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
-\c@r@tfl@t=\count342
-\rotFPtop=\skip160
-\rotFPbot=\skip161
-\rot@float@box=\box85
+\c@r@tfl@t=\count345
+\rotFPtop=\skip161
+\rotFPbot=\skip162
+\rot@float@box=\box86
 \rot@mess@toks=\toks55
 ) (c:/texlive/2019/texmf-dist/tex/latex/realboxes/realboxes.sty
 Package: realboxes 2011/08/08 v0.2 Change box commands to read there content as
  real boxes
 (c:/texlive/2019/texmf-dist/tex/latex/collectbox/collectbox.sty
 Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
-\collectedbox=\box86
+\collectedbox=\box87
 ) (c:/texlive/2019/texmf-dist/tex/latex/adjustbox/adjcalc.sty
 Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
 -ends (calc, etex, pgfmath)
@@ -1000,62 +1011,62 @@ xmf-dist/tex/generic/xkeyval/xkvutils.tex
 \XKV@toks=\toks56
 \XKV@tempa@toks=\toks57
 )
-\XKV@depth=\count343
+\XKV@depth=\count346
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 )))) (c:/texlive/2019/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen294
-\lightrulewidth=\dimen295
-\cmidrulewidth=\dimen296
-\belowrulesep=\dimen297
-\belowbottomsep=\dimen298
-\aboverulesep=\dimen299
-\abovetopsep=\dimen300
-\cmidrulesep=\dimen301
-\cmidrulekern=\dimen302
-\defaultaddspace=\dimen303
-\@cmidla=\count344
-\@cmidlb=\count345
-\@aboverulesep=\dimen304
-\@belowrulesep=\dimen305
-\@thisruleclass=\count346
-\@lastruleclass=\count347
-\@thisrulewidth=\dimen306
+\heavyrulewidth=\dimen298
+\lightrulewidth=\dimen299
+\cmidrulewidth=\dimen300
+\belowrulesep=\dimen301
+\belowbottomsep=\dimen302
+\aboverulesep=\dimen303
+\abovetopsep=\dimen304
+\cmidrulesep=\dimen305
+\cmidrulekern=\dimen306
+\defaultaddspace=\dimen307
+\@cmidla=\count347
+\@cmidlb=\count348
+\@aboverulesep=\dimen308
+\@belowrulesep=\dimen309
+\@thisruleclass=\count349
+\@lastruleclass=\count350
+\@thisrulewidth=\dimen310
 ) (c:/texlive/2019/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
-\LTleft=\skip162
-\LTright=\skip163
-\LTpre=\skip164
-\LTpost=\skip165
-\LTchunksize=\count348
-\LTcapwidth=\dimen307
-\LT@head=\box87
-\LT@firsthead=\box88
-\LT@foot=\box89
-\LT@lastfoot=\box90
-\LT@cols=\count349
-\LT@rows=\count350
-\c@LT@tables=\count351
-\c@LT@chunks=\count352
+\LTleft=\skip163
+\LTright=\skip164
+\LTpre=\skip165
+\LTpost=\skip166
+\LTchunksize=\count351
+\LTcapwidth=\dimen311
+\LT@head=\box88
+\LT@firsthead=\box89
+\LT@foot=\box90
+\LT@lastfoot=\box91
+\LT@cols=\count352
+\LT@rows=\count353
+\c@LT@tables=\count354
+\c@LT@chunks=\count355
 \LT@p@ftn=\toks58
 ) (c:/texlive/2019/texmf-dist/tex/latex/threeparttablex/threeparttablex.sty
 Package: threeparttablex 2013/07/23 v0.3 by daleif
-\TPTL@width=\skip166
+\TPTL@width=\skip167
 ) (c:/texlive/2019/texmf-dist/tex/generic/ulem/ulem.sty
-\UL@box=\box91
-\UL@hyphenbox=\box92
-\UL@skip=\skip167
+\UL@box=\box92
+\UL@hyphenbox=\box93
+\UL@skip=\skip168
 \UL@hook=\toks59
-\UL@height=\dimen308
-\UL@pe=\count353
-\UL@pixel=\dimen309
-\ULC@box=\box93
+\UL@height=\dimen312
+\UL@pe=\count356
+\UL@pixel=\dimen313
+\ULC@box=\box94
 Package: ulem 2019/11/18
-\ULdepth=\dimen310
+\ULdepth=\dimen314
 ) (c:/texlive/2019/texmf-dist/tex/latex/makecell/makecell.sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
-\rotheadsize=\dimen311
-\c@nlinenum=\count354
+\rotheadsize=\dimen315
+\c@nlinenum=\count357
 \TeXr@lab=\toks60
 ) (./tfe_principal.aux
 LaTeX Info: Redefining \. on input line 22.
@@ -1063,32 +1074,32 @@ LaTeX Info: Redefining \% on input line 22.
 )
 \openout1 = `tfe_principal.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 493.
-LaTeX Font Info:    ... okay on input line 493.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 493.
-LaTeX Font Info:    ... okay on input line 493.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 493.
-LaTeX Font Info:    ... okay on input line 493.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 493.
-LaTeX Font Info:    ... okay on input line 493.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 493.
-LaTeX Font Info:    ... okay on input line 493.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 493.
-LaTeX Font Info:    ... okay on input line 493.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 493.
-LaTeX Font Info:    ... okay on input line 493.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 493.
-LaTeX Font Info:    ... okay on input line 493.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 493.
-LaTeX Font Info:    ... okay on input line 493.
-LaTeX Info: Redefining \microtypecontext on input line 493.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 533.
+LaTeX Font Info:    ... okay on input line 533.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 533.
+LaTeX Font Info:    ... okay on input line 533.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 533.
+LaTeX Font Info:    ... okay on input line 533.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 533.
+LaTeX Font Info:    ... okay on input line 533.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 533.
+LaTeX Font Info:    ... okay on input line 533.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 533.
+LaTeX Font Info:    ... okay on input line 533.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 533.
+LaTeX Font Info:    ... okay on input line 533.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 533.
+LaTeX Font Info:    ... okay on input line 533.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 533.
+LaTeX Font Info:    ... okay on input line 533.
+LaTeX Info: Redefining \microtypecontext on input line 533.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `basictext'.
-LaTeX Info: Redefining \showhyphens on input line 493.
+LaTeX Info: Redefining \showhyphens on input line 533.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1130,8 +1141,8 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\AtBeginShipoutBox=\box94
-Package hyperref Info: Link coloring OFF on input line 493.
+\AtBeginShipoutBox=\box95
+Package hyperref Info: Link coloring OFF on input line 533.
 (c:/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 (c:/texlive/2019/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1139,27 +1150,27 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (c:/texlive/2019/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count355
+\c@section@level=\count358
 )
-LaTeX Info: Redefining \ref on input line 493.
-LaTeX Info: Redefining \pageref on input line 493.
-LaTeX Info: Redefining \nameref on input line 493.
+LaTeX Info: Redefining \ref on input line 533.
+LaTeX Info: Redefining \pageref on input line 533.
+LaTeX Info: Redefining \nameref on input line 533.
 (./tfe_principal.out) (./tfe_principal.out)
-\@outlinefile=\write6
-\openout6 = `tfe_principal.out'.
+\@outlinefile=\write7
+\openout7 = `tfe_principal.out'.
 
 (c:/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count356
-\scratchdimen=\dimen312
-\scratchbox=\box95
-\nofMPsegments=\count357
-\nofMParguments=\count358
+\scratchcounter=\count359
+\scratchdimen=\dimen316
+\scratchbox=\box96
+\nofMPsegments=\count360
+\nofMParguments=\count361
 \everyMPshowfont=\toks61
-\MPscratchCnt=\count359
-\MPscratchDim=\dimen313
-\MPnumerator=\count360
-\makeMPintoPDFobject=\count361
+\MPscratchCnt=\count362
+\MPscratchDim=\dimen317
+\MPnumerator=\count363
+\makeMPintoPDFobject=\count364
 \everyMPtoPDFconversion=\toks62
 ) (c:/texlive/2019/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -1169,8 +1180,8 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Info: Redefining \. on input line 493.
-LaTeX Info: Redefining \% on input line 493.
+LaTeX Info: Redefining \. on input line 533.
+LaTeX Info: Redefining \% on input line 533.
 ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
@@ -1180,48 +1191,48 @@ Package: ltcaption 2018/08/26 v1.4a longtable captions (AR)
 )
 Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
-<logo.png, id=320, 301.125pt x 262.9825pt>
+<logo.png, id=553, 301.125pt x 262.9825pt>
 File: logo.png Graphic file (type png)
 <use logo.png>
-Package pdftex.def Info: logo.png  used on input line 509.
+Package pdftex.def Info: logo.png  used on input line 549.
 (pdftex.def)             Requested size: 227.63055pt x 227.63321pt.
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/12'.
 (microtype)             Ignoring protrusion settings for this character.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 5
-49.
+89.
 (c:/texlive/2019/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 5
-49.
+89.
 (c:/texlive/2019/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-549.
+589.
 (c:/texlive/2019/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-549.
+589.
 (c:/texlive/2019/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 549.
+(Font)              <12> on input line 589.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 549.
+(Font)              <8> on input line 589.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 549.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 549
+(Font)              <6> on input line 589.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 589
 .
 (c:/texlive/2019/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (c:/texlive/2019/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 549
+LaTeX Font Info:    Trying to load font information for U+msb on input line 589
 .
 (c:/texlive/2019/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1233,8 +1244,6 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 
 {c:/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./logo.png>] [2
 
-] [1] [2
-
 ] (./tfe_principal.toc
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
@@ -1242,9 +1251,11 @@ LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
 0.
 (c:/texlive/2019/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [3])
-\tf@toc=\write7
-\openout7 = `tfe_principal.toc'.
+) [1
+
+] [2] [3])
+\tf@toc=\write8
+\openout8 = `tfe_principal.toc'.
 
 [4] [5
 
@@ -1256,1973 +1267,1073 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-<<<<<<< HEAD
-l.701 
-=======
-l.705 
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
+l.749 
        [1
 
 
 ]
-<<<<<<< HEAD
-LaTeX Info: Redefining \. on input line 766.
-LaTeX Info: Redefining \% on input line 766.
-LaTeX Info: Redefining \. on input line 766.
-LaTeX Info: Redefining \% on input line 766.
-=======
-LaTeX Info: Redefining \. on input line 770.
-LaTeX Info: Redefining \% on input line 770.
-LaTeX Info: Redefining \. on input line 770.
-LaTeX Info: Redefining \% on input line 770.
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
+LaTeX Info: Redefining \. on input line 806.
+LaTeX Info: Redefining \% on input line 806.
+LaTeX Info: Redefining \. on input line 806.
+LaTeX Info: Redefining \% on input line 806.
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-<<<<<<< HEAD
-l.766   C
-         ada una de las provincias les corresponden inicialmente al menos dos [
-2]
-LaTeX Info: Redefining \. on input line 846.
-LaTeX Info: Redefining \% on input line 846.
-LaTeX Info: Redefining \. on input line 846.
-LaTeX Info: Redefining \% on input line 846.
+l.806 
+       [2]
+LaTeX Info: Redefining \. on input line 887.
+LaTeX Info: Redefining \% on input line 887.
+LaTeX Info: Redefining \. on input line 887.
+LaTeX Info: Redefining \% on input line 887.
 [3]
-LaTeX Info: Redefining \. on input line 866.
-LaTeX Info: Redefining \% on input line 866.
-LaTeX Info: Redefining \. on input line 866.
-LaTeX Info: Redefining \% on input line 866.
+LaTeX Info: Redefining \. on input line 927.
+LaTeX Info: Redefining \% on input line 927.
+LaTeX Info: Redefining \. on input line 927.
+LaTeX Info: Redefining \% on input line 927.
 [4]
 Cap\'{\i }tulo 2.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 892.
+(Font)              <10> on input line 955.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 892.
+(Font)              <7> on input line 955.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 892.
-=======
-l.770   C
-         ada una de las provincias les corresponden inicialmente al menos dos [
-2]
-LaTeX Info: Redefining \. on input line 850.
-LaTeX Info: Redefining \% on input line 850.
-LaTeX Info: Redefining \. on input line 850.
-LaTeX Info: Redefining \% on input line 850.
-[3]
-LaTeX Info: Redefining \. on input line 870.
-LaTeX Info: Redefining \% on input line 870.
-LaTeX Info: Redefining \. on input line 870.
-LaTeX Info: Redefining \% on input line 870.
-[4]
-Cap\'{\i }tulo 2.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 896.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 896.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 896.
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
+(Font)              <5> on input line 955.
+<graficos/vanguardia.jpeg, id=776, 409.53pt x 166.37157pt>
+File: graficos/vanguardia.jpeg Graphic file (type jpg)
+<use graficos/vanguardia.jpeg>
+Package pdftex.def Info: graficos/vanguardia.jpeg  used on input line 964.
+(pdftex.def)             Requested size: 452.9679pt x 184.02979pt.
 [5
 
 ]
-
-<<<<<<< HEAD
-LaTeX Warning: Command \' invalid in math mode on input line 970.
-
-
-LaTeX Warning: Command \' invalid in math mode on input line 970.
-
-
-LaTeX Warning: Command \' invalid in math mode on input line 974.
-
-
-LaTeX Warning: Command \' invalid in math mode on input line 984.
-
-LaTeX Info: Redefining \. on input line 986.
-LaTeX Info: Redefining \% on input line 986.
-LaTeX Info: Redefining \. on input line 986.
-LaTeX Info: Redefining \% on input line 986.
-[6]
-
-LaTeX Warning: Command \~ invalid in math mode on input line 1001.
-
-LaTeX Info: Redefining \. on input line 1052.
-LaTeX Info: Redefining \% on input line 1052.
-LaTeX Info: Redefining \. on input line 1052.
-LaTeX Info: Redefining \% on input line 1052.
+LaTeX Info: Redefining \. on input line 1016.
+LaTeX Info: Redefining \% on input line 1016.
+LaTeX Info: Redefining \. on input line 1016.
+LaTeX Info: Redefining \% on input line 1016.
+[6 <./graficos/vanguardia.jpeg>]
+LaTeX Info: Redefining \. on input line 1083.
+LaTeX Info: Redefining \% on input line 1083.
+LaTeX Info: Redefining \. on input line 1083.
+LaTeX Info: Redefining \% on input line 1083.
 [7]
 
-LaTeX Warning: Command \~ invalid in math mode on input line 1101.
-
-LaTeX Info: Redefining \. on input line 1116.
-LaTeX Info: Redefining \% on input line 1116.
-LaTeX Info: Redefining \. on input line 1116.
-LaTeX Info: Redefining \% on input line 1116.
-=======
-LaTeX Warning: Command \' invalid in math mode on input line 974.
+LaTeX Warning: Command \' invalid in math mode on input line 1087.
 
 
-LaTeX Warning: Command \' invalid in math mode on input line 974.
+LaTeX Warning: Command \' invalid in math mode on input line 1087.
 
 
-LaTeX Warning: Command \' invalid in math mode on input line 978.
+LaTeX Warning: Command \' invalid in math mode on input line 1097.
 
 
-LaTeX Warning: Command \' invalid in math mode on input line 988.
+LaTeX Warning: Command \' invalid in math mode on input line 1119.
 
-LaTeX Info: Redefining \. on input line 990.
-LaTeX Info: Redefining \% on input line 990.
-LaTeX Info: Redefining \. on input line 990.
-LaTeX Info: Redefining \% on input line 990.
-[6]
-
-LaTeX Warning: Command \~ invalid in math mode on input line 1005.
-
-LaTeX Info: Redefining \. on input line 1056.
-LaTeX Info: Redefining \% on input line 1056.
-LaTeX Info: Redefining \. on input line 1056.
-LaTeX Info: Redefining \% on input line 1056.
-[7]
-
-LaTeX Warning: Command \~ invalid in math mode on input line 1105.
-
-LaTeX Info: Redefining \. on input line 1120.
-LaTeX Info: Redefining \% on input line 1120.
-LaTeX Info: Redefining \. on input line 1120.
-LaTeX Info: Redefining \% on input line 1120.
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
+LaTeX Info: Redefining \. on input line 1164.
+LaTeX Info: Redefining \% on input line 1164.
+LaTeX Info: Redefining \. on input line 1164.
+LaTeX Info: Redefining \% on input line 1164.
 [8]
-LaTeX Info: Redefining \. on input line 1195.
-LaTeX Info: Redefining \% on input line 1195.
-LaTeX Info: Redefining \. on input line 1195.
-LaTeX Info: Redefining \% on input line 1195.
+LaTeX Info: Redefining \. on input line 1231.
+LaTeX Info: Redefining \% on input line 1231.
+LaTeX Info: Redefining \. on input line 1231.
+LaTeX Info: Redefining \% on input line 1231.
 [9]
-<<<<<<< HEAD
-LaTeX Info: Redefining \. on input line 1201.
-LaTeX Info: Redefining \% on input line 1201.
-LaTeX Info: Redefining \. on input line 1201.
-LaTeX Info: Redefining \% on input line 1201.
-=======
-LaTeX Info: Redefining \. on input line 1205.
-LaTeX Info: Redefining \% on input line 1205.
-LaTeX Info: Redefining \. on input line 1205.
-LaTeX Info: Redefining \% on input line 1205.
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
+
+LaTeX Warning: Command \~ invalid in math mode on input line 1235.
+
+LaTeX Info: Redefining \. on input line 1310.
+LaTeX Info: Redefining \% on input line 1310.
+LaTeX Info: Redefining \. on input line 1310.
+LaTeX Info: Redefining \% on input line 1310.
 [10]
-Cap\'{\i }tulo 3.
-<figurasR/unnamed-chunk-9-1.pdf, id=543, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-9-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-9-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-9-1.pdf  used on input line 123
-<<<<<<< HEAD
-0.
-=======
-4.
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-[11
-
- <./figurasR/unnamed-chunk-9-1.pdf>]
-<figurasR/unnamed-chunk-10-1.pdf, id=558, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-10-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-10-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-10-1.pdf  used on input line 12
-<<<<<<< HEAD
-46.
-=======
-51.
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-11-1.pdf, id=559, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-11-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-11-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-11-1.pdf  used on input line 12
-<<<<<<< HEAD
-65.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1279.
-LaTeX Info: Redefining \% on input line 1279.
-LaTeX Info: Redefining \. on input line 1279.
-LaTeX Info: Redefining \% on input line 1279.
-[12 <./figurasR/unnamed-chunk-10-1.pdf> <./figurasR/unnamed-chunk-11-1.pdf>]
-<figurasR/unnamed-chunk-14-1.pdf, id=570, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-14-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-14-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-14-1.pdf  used on input line 12
-87.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-15-1.pdf, id=571, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-15-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-15-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-15-1.pdf  used on input line 13
-03.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1303.
-LaTeX Info: Redefining \% on input line 1303.
-LaTeX Info: Redefining \. on input line 1303.
-LaTeX Info: Redefining \% on input line 1303.
-[13 <./figurasR/unnamed-chunk-14-1.pdf>]
-<figurasR/unnamed-chunk-16-1.pdf, id=587, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-16-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-16-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-16-1.pdf  used on input line 13
-22.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1338.
-LaTeX Info: Redefining \% on input line 1338.
-LaTeX Info: Redefining \. on input line 1338.
-LaTeX Info: Redefining \% on input line 1338.
-[14 <./figurasR/unnamed-chunk-15-1.pdf> <./figurasR/unnamed-chunk-16-1.pdf>]
-<figurasR/unnamed-chunk-19-1.pdf, id=605, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-19-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-19-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-19-1.pdf  used on input line 13
-44.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-20-1.pdf, id=606, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-20-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-20-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-20-1.pdf  used on input line 13
-60.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1374.
-LaTeX Info: Redefining \% on input line 1374.
-LaTeX Info: Redefining \. on input line 1374.
-LaTeX Info: Redefining \% on input line 1374.
-[15 <./figurasR/unnamed-chunk-19-1.pdf> <./figurasR/unnamed-chunk-20-1.pdf>]
-<figurasR/unnamed-chunk-21-1.pdf, id=626, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-21-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-21-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-21-1.pdf  used on input line 13
-79.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-24-1.pdf, id=627, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-24-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-24-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-24-1.pdf  used on input line 14
-01.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1412.
-LaTeX Info: Redefining \% on input line 1412.
-LaTeX Info: Redefining \. on input line 1412.
-LaTeX Info: Redefining \% on input line 1412.
-[16 <./figurasR/unnamed-chunk-21-1.pdf> <./figurasR/unnamed-chunk-24-1.pdf>]
-<figurasR/unnamed-chunk-25-1.pdf, id=647, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-25-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-25-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-25-1.pdf  used on input line 14
-17.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-26-1.pdf, id=648, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-26-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-26-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-26-1.pdf  used on input line 14
-33.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1447.
-LaTeX Info: Redefining \% on input line 1447.
-LaTeX Info: Redefining \. on input line 1447.
-LaTeX Info: Redefining \% on input line 1447.
-[17 <./figurasR/unnamed-chunk-25-1.pdf> <./figurasR/unnamed-chunk-26-1.pdf>]
-<figurasR/unnamed-chunk-29-1.pdf, id=667, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-29-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-29-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-29-1.pdf  used on input line 14
-55.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-30-1.pdf, id=668, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-30-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-30-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-30-1.pdf  used on input line 14
-70.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1481.
-LaTeX Info: Redefining \% on input line 1481.
-LaTeX Info: Redefining \. on input line 1481.
-LaTeX Info: Redefining \% on input line 1481.
-[18 <./figurasR/unnamed-chunk-29-1.pdf> <./figurasR/unnamed-chunk-30-1.pdf>]
-<figurasR/unnamed-chunk-31-1.pdf, id=688, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-31-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-31-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-31-1.pdf  used on input line 14
-91.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-34-1.pdf, id=689, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-34-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-34-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-34-1.pdf  used on input line 15
-18.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1518.
-LaTeX Info: Redefining \% on input line 1518.
-LaTeX Info: Redefining \. on input line 1518.
-LaTeX Info: Redefining \% on input line 1518.
-[19 <./figurasR/unnamed-chunk-31-1.pdf>]
-<figurasR/unnamed-chunk-35-1.pdf, id=703, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-35-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-35-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-35-1.pdf  used on input line 15
-36.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1550.
-LaTeX Info: Redefining \% on input line 1550.
-LaTeX Info: Redefining \. on input line 1550.
-LaTeX Info: Redefining \% on input line 1550.
-[20 <./figurasR/unnamed-chunk-34-1.pdf> <./figurasR/unnamed-chunk-35-1.pdf>]
-<figurasR/unnamed-chunk-36-1.pdf, id=723, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-36-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-36-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-36-1.pdf  used on input line 15
-55.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-39-1.pdf, id=724, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-39-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-39-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-39-1.pdf  used on input line 15
-79.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1590.
-LaTeX Info: Redefining \% on input line 1590.
-LaTeX Info: Redefining \. on input line 1590.
-LaTeX Info: Redefining \% on input line 1590.
-[21 <./figurasR/unnamed-chunk-36-1.pdf> <./figurasR/unnamed-chunk-39-1.pdf>]
-<figurasR/unnamed-chunk-40-1.pdf, id=744, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-40-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-40-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-40-1.pdf  used on input line 15
-95.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-41-1.pdf, id=745, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-41-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-41-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-41-1.pdf  used on input line 16
-17.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1624.
-LaTeX Info: Redefining \% on input line 1624.
-LaTeX Info: Redefining \. on input line 1624.
-LaTeX Info: Redefining \% on input line 1624.
-[22 <./figurasR/unnamed-chunk-40-1.pdf> <./figurasR/unnamed-chunk-41-1.pdf>]
-<figurasR/unnamed-chunk-42-1.pdf, id=764, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-42-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-42-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-42-1.pdf  used on input line 16
-43.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-43-1.pdf, id=765, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-43-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-43-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-43-1.pdf  used on input line 16
-54.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1670.
-LaTeX Info: Redefining \% on input line 1670.
-LaTeX Info: Redefining \. on input line 1670.
-LaTeX Info: Redefining \% on input line 1670.
-[23 <./figurasR/unnamed-chunk-42-1.pdf> <./figurasR/unnamed-chunk-43-1.pdf>]
-<figurasR/unnamed-chunk-44-1.pdf, id=782, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-44-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-44-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-44-1.pdf  used on input line 16
-84.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-45-1.pdf, id=783, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-45-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-45-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-45-1.pdf  used on input line 16
-98.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1698.
-LaTeX Info: Redefining \% on input line 1698.
-LaTeX Info: Redefining \. on input line 1698.
-LaTeX Info: Redefining \% on input line 1698.
-[24 <./figurasR/unnamed-chunk-44-1.pdf>]
-<figurasR/unnamed-chunk-46-1.pdf, id=794, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-46-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-46-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-46-1.pdf  used on input line 17
-22.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1741.
-LaTeX Info: Redefining \% on input line 1741.
-LaTeX Info: Redefining \. on input line 1741.
-LaTeX Info: Redefining \% on input line 1741.
-[25 <./figurasR/unnamed-chunk-45-1.pdf> <./figurasR/unnamed-chunk-46-1.pdf>]
-<figurasR/unnamed-chunk-47-1.pdf, id=811, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-47-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-47-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-47-1.pdf  used on input line 17
-42.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1801.
-LaTeX Info: Redefining \% on input line 1801.
-LaTeX Info: Redefining \. on input line 1801.
-LaTeX Info: Redefining \% on input line 1801.
-[26 <./figurasR/unnamed-chunk-47-1.pdf>]
-Cap\'{\i }tulo 4.
-<figurasR/unnamed-chunk-59-1.pdf, id=823, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-59-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-59-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-59-1.pdf  used on input line 18
-13.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-59-2.pdf, id=824, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-59-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-59-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-59-2.pdf  used on input line 18
-15.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-59-3.pdf, id=825, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-59-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-59-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-59-3.pdf  used on input line 18
-17.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-[27
-
- <./figurasR/unnamed-chunk-59-1.pdf> <./figurasR/unnamed-chunk-59-2.pdf>]
-<figurasR/unnamed-chunk-60-1.pdf, id=845, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-60-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-60-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-60-1.pdf  used on input line 18
-44.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-60-2.pdf, id=846, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-60-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-60-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-60-2.pdf  used on input line 18
-46.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1846.
-LaTeX Info: Redefining \% on input line 1846.
-LaTeX Info: Redefining \. on input line 1846.
-LaTeX Info: Redefining \% on input line 1846.
-[28 <./figurasR/unnamed-chunk-59-3.pdf> <./figurasR/unnamed-chunk-60-1.pdf>]
-<figurasR/unnamed-chunk-68-1.pdf, id=864, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-68-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-68-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-68-1.pdf  used on input line 18
-82.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1882.
-LaTeX Info: Redefining \% on input line 1882.
-LaTeX Info: Redefining \. on input line 1882.
-LaTeX Info: Redefining \% on input line 1882.
-[29 <./figurasR/unnamed-chunk-60-2.pdf>]
-<figurasR/unnamed-chunk-68-2.pdf, id=875, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-68-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-68-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-68-2.pdf  used on input line 18
-84.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-68-3.pdf, id=876, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-68-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-68-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-68-3.pdf  used on input line 18
-86.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1899.
-LaTeX Info: Redefining \% on input line 1899.
-LaTeX Info: Redefining \. on input line 1899.
-LaTeX Info: Redefining \% on input line 1899.
-[30 <./figurasR/unnamed-chunk-68-1.pdf> <./figurasR/unnamed-chunk-68-2.pdf> <./
-figurasR/unnamed-chunk-68-3.pdf>]
-<figurasR/unnamed-chunk-69-1.pdf, id=900, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-69-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-69-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-69-1.pdf  used on input line 19
-03.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-69-2.pdf, id=901, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-69-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-69-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-69-2.pdf  used on input line 19
-05.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-77-1.pdf, id=902, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-77-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-77-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-77-1.pdf  used on input line 19
-29.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1929.
-LaTeX Info: Redefining \% on input line 1929.
-LaTeX Info: Redefining \. on input line 1929.
-LaTeX Info: Redefining \% on input line 1929.
-[31 <./figurasR/unnamed-chunk-69-1.pdf> <./figurasR/unnamed-chunk-69-2.pdf>]
-<figurasR/unnamed-chunk-77-2.pdf, id=921, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-77-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-77-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-77-2.pdf  used on input line 19
-31.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-77-3.pdf, id=922, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-77-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-77-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-77-3.pdf  used on input line 19
-33.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1945.
-LaTeX Info: Redefining \% on input line 1945.
-LaTeX Info: Redefining \. on input line 1945.
-LaTeX Info: Redefining \% on input line 1945.
-[32 <./figurasR/unnamed-chunk-77-1.pdf> <./figurasR/unnamed-chunk-77-2.pdf> <./
-figurasR/unnamed-chunk-77-3.pdf>]
-<figurasR/unnamed-chunk-78-1.pdf, id=946, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-78-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-78-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-78-1.pdf  used on input line 19
-49.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-78-2.pdf, id=947, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-78-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-78-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-78-2.pdf  used on input line 19
-51.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-86-1.pdf, id=948, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-86-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-86-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-86-1.pdf  used on input line 19
-75.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1975.
-LaTeX Info: Redefining \% on input line 1975.
-LaTeX Info: Redefining \. on input line 1975.
-LaTeX Info: Redefining \% on input line 1975.
-[33 <./figurasR/unnamed-chunk-78-1.pdf> <./figurasR/unnamed-chunk-78-2.pdf>]
-<figurasR/unnamed-chunk-86-2.pdf, id=966, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-86-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-86-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-86-2.pdf  used on input line 19
-77.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-86-3.pdf, id=967, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-86-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-86-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-86-3.pdf  used on input line 19
-79.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1996.
-LaTeX Info: Redefining \% on input line 1996.
-LaTeX Info: Redefining \. on input line 1996.
-LaTeX Info: Redefining \% on input line 1996.
-[34 <./figurasR/unnamed-chunk-86-1.pdf> <./figurasR/unnamed-chunk-86-2.pdf> <./
-figurasR/unnamed-chunk-86-3.pdf>]
-<figurasR/unnamed-chunk-87-1.pdf, id=992, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-87-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-87-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-87-1.pdf  used on input line 20
-00.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-87-2.pdf, id=993, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-87-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-87-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-87-2.pdf  used on input line 20
-02.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-95-1.pdf, id=994, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-95-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-95-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-95-1.pdf  used on input line 20
-26.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2026.
-LaTeX Info: Redefining \% on input line 2026.
-LaTeX Info: Redefining \. on input line 2026.
-LaTeX Info: Redefining \% on input line 2026.
-[35 <./figurasR/unnamed-chunk-87-1.pdf> <./figurasR/unnamed-chunk-87-2.pdf>]
-<figurasR/unnamed-chunk-95-2.pdf, id=1012, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-95-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-95-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-95-2.pdf  used on input line 20
-28.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-95-3.pdf, id=1013, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-95-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-95-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-95-3.pdf  used on input line 20
-30.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2046.
-LaTeX Info: Redefining \% on input line 2046.
-LaTeX Info: Redefining \. on input line 2046.
-LaTeX Info: Redefining \% on input line 2046.
-[36 <./figurasR/unnamed-chunk-95-1.pdf> <./figurasR/unnamed-chunk-95-2.pdf> <./
-figurasR/unnamed-chunk-95-3.pdf>]
-<figurasR/unnamed-chunk-96-1.pdf, id=1037, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-96-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-96-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-96-1.pdf  used on input line 20
-50.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-96-2.pdf, id=1038, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-96-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-96-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-96-2.pdf  used on input line 20
-52.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-104-1.pdf, id=1039, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-104-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-104-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-104-1.pdf  used on input line 2
-080.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2080.
-LaTeX Info: Redefining \% on input line 2080.
-LaTeX Info: Redefining \. on input line 2080.
-LaTeX Info: Redefining \% on input line 2080.
-[37 <./figurasR/unnamed-chunk-96-1.pdf> <./figurasR/unnamed-chunk-96-2.pdf>]
-<figurasR/unnamed-chunk-104-2.pdf, id=1058, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-104-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-104-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-104-2.pdf  used on input line 2
-082.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-104-3.pdf, id=1059, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-104-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-104-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-104-3.pdf  used on input line 2
-084.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2101.
-LaTeX Info: Redefining \% on input line 2101.
-LaTeX Info: Redefining \. on input line 2101.
-LaTeX Info: Redefining \% on input line 2101.
-[38 <./figurasR/unnamed-chunk-104-1.pdf> <./figurasR/unnamed-chunk-104-2.pdf> <
-./figurasR/unnamed-chunk-104-3.pdf>]
-<figurasR/unnamed-chunk-105-1.pdf, id=1083, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-105-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-105-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-105-1.pdf  used on input line 2
-105.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-105-2.pdf, id=1084, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-105-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-105-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-105-2.pdf  used on input line 2
-107.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-113-1.pdf, id=1085, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-113-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-113-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-113-1.pdf  used on input line 2
-132.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2132.
-LaTeX Info: Redefining \% on input line 2132.
-LaTeX Info: Redefining \. on input line 2132.
-LaTeX Info: Redefining \% on input line 2132.
-[39 <./figurasR/unnamed-chunk-105-1.pdf> <./figurasR/unnamed-chunk-105-2.pdf>]
-<figurasR/unnamed-chunk-113-2.pdf, id=1104, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-113-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-113-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-113-2.pdf  used on input line 2
-134.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-113-3.pdf, id=1105, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-113-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-113-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-113-3.pdf  used on input line 2
-136.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2146.
-LaTeX Info: Redefining \% on input line 2146.
-LaTeX Info: Redefining \. on input line 2146.
-LaTeX Info: Redefining \% on input line 2146.
-[40 <./figurasR/unnamed-chunk-113-1.pdf> <./figurasR/unnamed-chunk-113-2.pdf> <
-./figurasR/unnamed-chunk-113-3.pdf>]
-<figurasR/unnamed-chunk-114-1.pdf, id=1129, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-114-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-114-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-114-1.pdf  used on input line 2
-148.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-114-2.pdf, id=1130, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-114-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-114-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-114-2.pdf  used on input line 2
-150.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-122-1.pdf, id=1131, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-122-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-122-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-122-1.pdf  used on input line 2
-175.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2175.
-LaTeX Info: Redefining \% on input line 2175.
-LaTeX Info: Redefining \. on input line 2175.
-LaTeX Info: Redefining \% on input line 2175.
-[41 <./figurasR/unnamed-chunk-114-1.pdf> <./figurasR/unnamed-chunk-114-2.pdf>]
-<figurasR/unnamed-chunk-122-2.pdf, id=1149, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-122-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-122-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-122-2.pdf  used on input line 2
-177.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-122-3.pdf, id=1150, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-122-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-122-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-122-3.pdf  used on input line 2
-179.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2192.
-LaTeX Info: Redefining \% on input line 2192.
-LaTeX Info: Redefining \. on input line 2192.
-LaTeX Info: Redefining \% on input line 2192.
-[42 <./figurasR/unnamed-chunk-122-1.pdf> <./figurasR/unnamed-chunk-122-2.pdf> <
-./figurasR/unnamed-chunk-122-3.pdf>]
-<figurasR/unnamed-chunk-123-1.pdf, id=1174, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-123-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-123-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-123-1.pdf  used on input line 2
-196.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-123-2.pdf, id=1175, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-123-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-123-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-123-2.pdf  used on input line 2
-198.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-131-1.pdf, id=1176, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-131-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-131-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-131-1.pdf  used on input line 2
-226.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2226.
-LaTeX Info: Redefining \% on input line 2226.
-LaTeX Info: Redefining \. on input line 2226.
-LaTeX Info: Redefining \% on input line 2226.
-[43 <./figurasR/unnamed-chunk-123-1.pdf> <./figurasR/unnamed-chunk-123-2.pdf>]
-<figurasR/unnamed-chunk-131-2.pdf, id=1195, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-131-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-131-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-131-2.pdf  used on input line 2
-228.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-131-3.pdf, id=1196, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-131-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-131-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-131-3.pdf  used on input line 2
-230.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2245.
-LaTeX Info: Redefining \% on input line 2245.
-LaTeX Info: Redefining \. on input line 2245.
-LaTeX Info: Redefining \% on input line 2245.
-[44 <./figurasR/unnamed-chunk-131-1.pdf> <./figurasR/unnamed-chunk-131-2.pdf> <
-./figurasR/unnamed-chunk-131-3.pdf>]
-<figurasR/unnamed-chunk-132-1.pdf, id=1220, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-132-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-132-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-132-1.pdf  used on input line 2
-249.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-132-2.pdf, id=1221, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-132-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-132-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-132-2.pdf  used on input line 2
-251.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-140-1.pdf, id=1222, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-140-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-140-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-140-1.pdf  used on input line 2
-273.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2273.
-LaTeX Info: Redefining \% on input line 2273.
-LaTeX Info: Redefining \. on input line 2273.
-LaTeX Info: Redefining \% on input line 2273.
-[45 <./figurasR/unnamed-chunk-132-1.pdf> <./figurasR/unnamed-chunk-132-2.pdf>]
-<figurasR/unnamed-chunk-140-2.pdf, id=1241, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-140-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-140-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-140-2.pdf  used on input line 2
-275.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-140-3.pdf, id=1242, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-140-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-140-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-140-3.pdf  used on input line 2
-277.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2294.
-LaTeX Info: Redefining \% on input line 2294.
-LaTeX Info: Redefining \. on input line 2294.
-LaTeX Info: Redefining \% on input line 2294.
-[46 <./figurasR/unnamed-chunk-140-1.pdf> <./figurasR/unnamed-chunk-140-2.pdf> <
-./figurasR/unnamed-chunk-140-3.pdf>]
-<figurasR/unnamed-chunk-141-1.pdf, id=1266, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-141-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-141-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-141-1.pdf  used on input line 2
-298.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-141-2.pdf, id=1267, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-141-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-141-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-141-2.pdf  used on input line 2
-300.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-149-1.pdf, id=1268, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-149-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-149-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-149-1.pdf  used on input line 2
-324.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2324.
-LaTeX Info: Redefining \% on input line 2324.
-LaTeX Info: Redefining \. on input line 2324.
-LaTeX Info: Redefining \% on input line 2324.
-[47 <./figurasR/unnamed-chunk-141-1.pdf> <./figurasR/unnamed-chunk-141-2.pdf>]
-<figurasR/unnamed-chunk-149-2.pdf, id=1286, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-149-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-149-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-149-2.pdf  used on input line 2
-326.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-149-3.pdf, id=1287, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-149-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-149-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-149-3.pdf  used on input line 2
-328.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2351.
-LaTeX Info: Redefining \% on input line 2351.
-LaTeX Info: Redefining \. on input line 2351.
-LaTeX Info: Redefining \% on input line 2351.
-[48 <./figurasR/unnamed-chunk-149-1.pdf> <./figurasR/unnamed-chunk-149-2.pdf> <
-./figurasR/unnamed-chunk-149-3.pdf>]
-<figurasR/unnamed-chunk-150-1.pdf, id=1311, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-150-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-150-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-150-1.pdf  used on input line 2
-355.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-150-2.pdf, id=1312, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-150-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-150-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-150-2.pdf  used on input line 2
-357.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2373.
-LaTeX Info: Redefining \% on input line 2373.
-LaTeX Info: Redefining \. on input line 2373.
-LaTeX Info: Redefining \% on input line 2373.
-[49 <./figurasR/unnamed-chunk-150-1.pdf> <./figurasR/unnamed-chunk-150-2.pdf>]
-<figurasR/unnamed-chunk-158-1.pdf, id=1330, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-158-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-158-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-158-1.pdf  used on input line 2
-384.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-158-2.pdf, id=1331, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-158-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-158-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-158-2.pdf  used on input line 2
-386.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-158-3.pdf, id=1332, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-158-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-158-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-158-3.pdf  used on input line 2
-388.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2388.
-LaTeX Info: Redefining \% on input line 2388.
-LaTeX Info: Redefining \. on input line 2388.
-LaTeX Info: Redefining \% on input line 2388.
-[50 <./figurasR/unnamed-chunk-158-1.pdf> <./figurasR/unnamed-chunk-158-2.pdf>]
-<figurasR/unnamed-chunk-159-1.pdf, id=1351, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-159-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-159-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-159-1.pdf  used on input line 2
-412.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-159-2.pdf, id=1352, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-159-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-159-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-159-2.pdf  used on input line 2
-414.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2414.
-LaTeX Info: Redefining \% on input line 2414.
-LaTeX Info: Redefining \. on input line 2414.
-LaTeX Info: Redefining \% on input line 2414.
-[51 <./figurasR/unnamed-chunk-158-3.pdf> <./figurasR/unnamed-chunk-159-1.pdf>]
-<figurasR/unnamed-chunk-167-1.pdf, id=1371, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-167-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-167-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-167-1.pdf  used on input line 2
-439.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-167-2.pdf, id=1372, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-167-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-167-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-167-2.pdf  used on input line 2
-441.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2441.
-LaTeX Info: Redefining \% on input line 2441.
-LaTeX Info: Redefining \. on input line 2441.
-LaTeX Info: Redefining \% on input line 2441.
-[52 <./figurasR/unnamed-chunk-159-2.pdf> <./figurasR/unnamed-chunk-167-1.pdf>]
-<figurasR/unnamed-chunk-167-3.pdf, id=1391, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-167-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-167-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-167-3.pdf  used on input line 2
-443.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-168-1.pdf, id=1392, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-168-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-168-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-168-1.pdf  used on input line 2
-461.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2461.
-LaTeX Info: Redefining \% on input line 2461.
-LaTeX Info: Redefining \. on input line 2461.
-LaTeX Info: Redefining \% on input line 2461.
-[53 <./figurasR/unnamed-chunk-167-2.pdf> <./figurasR/unnamed-chunk-167-3.pdf>]
-<figurasR/unnamed-chunk-168-2.pdf, id=1409, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-168-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-168-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-168-2.pdf  used on input line 2
-463.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-176-1.pdf, id=1410, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-176-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-176-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-176-1.pdf  used on input line 2
-488.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2488.
-LaTeX Info: Redefining \% on input line 2488.
-LaTeX Info: Redefining \. on input line 2488.
-LaTeX Info: Redefining \% on input line 2488.
-[54 <./figurasR/unnamed-chunk-168-1.pdf> <./figurasR/unnamed-chunk-168-2.pdf>]
-<figurasR/unnamed-chunk-176-2.pdf, id=1427, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-176-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-176-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-176-2.pdf  used on input line 2
-490.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-176-3.pdf, id=1428, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-176-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-176-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-176-3.pdf  used on input line 2
-492.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2509.
-LaTeX Info: Redefining \% on input line 2509.
-LaTeX Info: Redefining \. on input line 2509.
-LaTeX Info: Redefining \% on input line 2509.
-[55 <./figurasR/unnamed-chunk-176-1.pdf> <./figurasR/unnamed-chunk-176-2.pdf> <
-./figurasR/unnamed-chunk-176-3.pdf>]
-<figurasR/unnamed-chunk-177-1.pdf, id=1453, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-177-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-177-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-177-1.pdf  used on input line 2
-513.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-177-2.pdf, id=1454, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-177-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-177-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-177-2.pdf  used on input line 2
-515.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-185-1.pdf, id=1455, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-185-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-185-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-185-1.pdf  used on input line 2
-543.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2543.
-LaTeX Info: Redefining \% on input line 2543.
-LaTeX Info: Redefining \. on input line 2543.
-LaTeX Info: Redefining \% on input line 2543.
-[56 <./figurasR/unnamed-chunk-177-1.pdf> <./figurasR/unnamed-chunk-177-2.pdf>]
-<figurasR/unnamed-chunk-185-2.pdf, id=1473, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-185-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-185-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-185-2.pdf  used on input line 2
-545.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-185-3.pdf, id=1474, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-185-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-185-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-185-3.pdf  used on input line 2
-547.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2562.
-LaTeX Info: Redefining \% on input line 2562.
-LaTeX Info: Redefining \. on input line 2562.
-LaTeX Info: Redefining \% on input line 2562.
-[57 <./figurasR/unnamed-chunk-185-1.pdf> <./figurasR/unnamed-chunk-185-2.pdf> <
-./figurasR/unnamed-chunk-185-3.pdf>]
-<figurasR/unnamed-chunk-186-1.pdf, id=1499, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-186-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-186-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-186-1.pdf  used on input line 2
-566.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-186-2.pdf, id=1500, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-186-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-186-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-186-2.pdf  used on input line 2
-568.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-187-1.pdf, id=1501, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-187-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-187-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-187-1.pdf  used on input line 2
-582.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2582.
-LaTeX Info: Redefining \% on input line 2582.
-LaTeX Info: Redefining \. on input line 2582.
-LaTeX Info: Redefining \% on input line 2582.
-[58 <./figurasR/unnamed-chunk-186-1.pdf> <./figurasR/unnamed-chunk-186-2.pdf>]
-<figurasR/unnamed-chunk-187-2.pdf, id=1519, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-187-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-187-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-187-2.pdf  used on input line 2
-584.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2624.
-LaTeX Info: Redefining \% on input line 2624.
-LaTeX Info: Redefining \. on input line 2624.
-LaTeX Info: Redefining \% on input line 2624.
-[59 <./figurasR/unnamed-chunk-187-1.pdf> <./figurasR/unnamed-chunk-187-2.pdf>]
-LaTeX Info: Redefining \. on input line 2626.
-LaTeX Info: Redefining \% on input line 2626.
-LaTeX Info: Redefining \. on input line 2626.
-LaTeX Info: Redefining \% on input line 2626.
-[60] (./tfe_principal.bbl
-=======
-70.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1270.
-LaTeX Info: Redefining \% on input line 1270.
-LaTeX Info: Redefining \. on input line 1270.
-LaTeX Info: Redefining \% on input line 1270.
-[12 <./figurasR/unnamed-chunk-10-1.pdf>]
-<figurasR/unnamed-chunk-14-1.pdf, id=573, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-14-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-14-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-14-1.pdf  used on input line 12
-92.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1304.
-LaTeX Info: Redefining \% on input line 1304.
-LaTeX Info: Redefining \. on input line 1304.
-LaTeX Info: Redefining \% on input line 1304.
-[13 <./figurasR/unnamed-chunk-11-1.pdf> <./figurasR/unnamed-chunk-14-1.pdf>]
-<figurasR/unnamed-chunk-15-1.pdf, id=593, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-15-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-15-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-15-1.pdf  used on input line 13
-09.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-16-1.pdf, id=594, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-16-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-16-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-16-1.pdf  used on input line 13
-28.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1342.
-LaTeX Info: Redefining \% on input line 1342.
-LaTeX Info: Redefining \. on input line 1342.
-LaTeX Info: Redefining \% on input line 1342.
-[14 <./figurasR/unnamed-chunk-15-1.pdf> <./figurasR/unnamed-chunk-16-1.pdf>]
-<figurasR/unnamed-chunk-19-1.pdf, id=613, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-19-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-19-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-19-1.pdf  used on input line 13
-50.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-20-1.pdf, id=614, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-20-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-20-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-20-1.pdf  used on input line 13
-67.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1381.
-LaTeX Info: Redefining \% on input line 1381.
-LaTeX Info: Redefining \. on input line 1381.
-LaTeX Info: Redefining \% on input line 1381.
-[15 <./figurasR/unnamed-chunk-19-1.pdf> <./figurasR/unnamed-chunk-20-1.pdf>]
-<figurasR/unnamed-chunk-21-1.pdf, id=634, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-21-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-21-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-21-1.pdf  used on input line 13
-86.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-24-1.pdf, id=635, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-24-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-24-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-24-1.pdf  used on input line 14
-09.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1409.
-LaTeX Info: Redefining \% on input line 1409.
-LaTeX Info: Redefining \. on input line 1409.
-LaTeX Info: Redefining \% on input line 1409.
-[16 <./figurasR/unnamed-chunk-21-1.pdf>]
-<figurasR/unnamed-chunk-25-1.pdf, id=648, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-25-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-25-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-25-1.pdf  used on input line 14
-26.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-26-1.pdf, id=649, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-26-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-26-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-26-1.pdf  used on input line 14
-42.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1442.
-LaTeX Info: Redefining \% on input line 1442.
-LaTeX Info: Redefining \. on input line 1442.
-LaTeX Info: Redefining \% on input line 1442.
-[17 <./figurasR/unnamed-chunk-24-1.pdf> <./figurasR/unnamed-chunk-25-1.pdf>]
-<figurasR/unnamed-chunk-29-1.pdf, id=670, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-29-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-29-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-29-1.pdf  used on input line 14
-65.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1479.
-LaTeX Info: Redefining \% on input line 1479.
-LaTeX Info: Redefining \. on input line 1479.
-LaTeX Info: Redefining \% on input line 1479.
-[18 <./figurasR/unnamed-chunk-26-1.pdf> <./figurasR/unnamed-chunk-29-1.pdf>]
-<figurasR/unnamed-chunk-30-1.pdf, id=689, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-30-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-30-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-30-1.pdf  used on input line 14
-81.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-31-1.pdf, id=690, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-31-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-31-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-31-1.pdf  used on input line 15
-02.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1516.
-LaTeX Info: Redefining \% on input line 1516.
-LaTeX Info: Redefining \. on input line 1516.
-LaTeX Info: Redefining \% on input line 1516.
-[19 <./figurasR/unnamed-chunk-30-1.pdf> <./figurasR/unnamed-chunk-31-1.pdf>]
-<figurasR/unnamed-chunk-34-1.pdf, id=709, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-34-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-34-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-34-1.pdf  used on input line 15
-30.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-35-1.pdf, id=710, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-35-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-35-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-35-1.pdf  used on input line 15
-49.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1549.
-LaTeX Info: Redefining \% on input line 1549.
-LaTeX Info: Redefining \. on input line 1549.
-LaTeX Info: Redefining \% on input line 1549.
-[20 <./figurasR/unnamed-chunk-34-1.pdf>]
-<figurasR/unnamed-chunk-36-1.pdf, id=725, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-36-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-36-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-36-1.pdf  used on input line 15
-68.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1584.
-LaTeX Info: Redefining \% on input line 1584.
-LaTeX Info: Redefining \. on input line 1584.
-LaTeX Info: Redefining \% on input line 1584.
-[21 <./figurasR/unnamed-chunk-35-1.pdf> <./figurasR/unnamed-chunk-36-1.pdf>]
-<figurasR/unnamed-chunk-39-1.pdf, id=743, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-39-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-39-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-39-1.pdf  used on input line 15
-92.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-40-1.pdf, id=744, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-40-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-40-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-40-1.pdf  used on input line 16
-09.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1623.
-LaTeX Info: Redefining \% on input line 1623.
-LaTeX Info: Redefining \. on input line 1623.
-LaTeX Info: Redefining \% on input line 1623.
-[22 <./figurasR/unnamed-chunk-39-1.pdf> <./figurasR/unnamed-chunk-40-1.pdf>]
-<figurasR/unnamed-chunk-41-1.pdf, id=764, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-41-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-41-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-41-1.pdf  used on input line 16
-31.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-42-1.pdf, id=765, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-42-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-42-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-42-1.pdf  used on input line 16
-58.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1658.
-LaTeX Info: Redefining \% on input line 1658.
-LaTeX Info: Redefining \. on input line 1658.
-LaTeX Info: Redefining \% on input line 1658.
-[23 <./figurasR/unnamed-chunk-41-1.pdf>]
-<figurasR/unnamed-chunk-43-1.pdf, id=779, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-43-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-43-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-43-1.pdf  used on input line 16
-69.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1694.
-LaTeX Info: Redefining \% on input line 1694.
-LaTeX Info: Redefining \. on input line 1694.
-LaTeX Info: Redefining \% on input line 1694.
-[24 <./figurasR/unnamed-chunk-42-1.pdf> <./figurasR/unnamed-chunk-43-1.pdf>]
-<figurasR/unnamed-chunk-44-1.pdf, id=795, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-44-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-44-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-44-1.pdf  used on input line 16
-99.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-45-1.pdf, id=796, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-45-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-45-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-45-1.pdf  used on input line 17
-13.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1725.
-LaTeX Info: Redefining \% on input line 1725.
-LaTeX Info: Redefining \. on input line 1725.
-LaTeX Info: Redefining \% on input line 1725.
-[25 <./figurasR/unnamed-chunk-44-1.pdf> <./figurasR/unnamed-chunk-45-1.pdf>]
-<figurasR/unnamed-chunk-46-1.pdf, id=812, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-46-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-46-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-46-1.pdf  used on input line 17
-37.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-47-1.pdf, id=813, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-47-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-47-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-47-1.pdf  used on input line 17
-58.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1758.
-LaTeX Info: Redefining \% on input line 1758.
-LaTeX Info: Redefining \. on input line 1758.
-LaTeX Info: Redefining \% on input line 1758.
-[26 <./figurasR/unnamed-chunk-46-1.pdf>]
-LaTeX Info: Redefining \. on input line 1818.
-LaTeX Info: Redefining \% on input line 1818.
-LaTeX Info: Redefining \. on input line 1818.
-LaTeX Info: Redefining \% on input line 1818.
-[27 <./figurasR/unnamed-chunk-47-1.pdf>] [28
+LaTeX Info: Redefining \. on input line 1392.
+LaTeX Info: Redefining \% on input line 1392.
+LaTeX Info: Redefining \. on input line 1392.
+LaTeX Info: Redefining \% on input line 1392.
+[11] [12
 
 ]
-Cap\'{\i }tulo 4.
-<figurasR/unnamed-chunk-59-1.pdf, id=839, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-59-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-59-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-59-1.pdf  used on input line 18
+Cap\'{\i }tulo 3.
+<figurasR/unnamed-chunk-12-1.pdf, id=858, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-12-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-12-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-12-1.pdf  used on input line 14
+35.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+[13]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
+447.
+(c:/texlive/2019/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1449.
+LaTeX Info: Redefining \. on input line 1494.
+LaTeX Info: Redefining \% on input line 1494.
+LaTeX Info: Redefining \. on input line 1494.
+LaTeX Info: Redefining \% on input line 1494.
+[14 <./figurasR/unnamed-chunk-12-1.pdf>]
+<figurasR/unnamed-chunk-16-1.pdf, id=878, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-16-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-16-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-16-1.pdf  used on input line 15
+10.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+<figurasR/unnamed-chunk-17-1.pdf, id=879, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-17-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-17-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-17-1.pdf  used on input line 15
 30.
 (pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-59-2.pdf, id=840, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-59-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-59-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-59-2.pdf  used on input line 18
-32.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-59-3.pdf, id=841, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-59-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-59-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-59-3.pdf  used on input line 18
-34.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-[29 <./figurasR/unnamed-chunk-59-1.pdf> <./figurasR/unnamed-chunk-59-2.pdf>]
-<figurasR/unnamed-chunk-60-1.pdf, id=862, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-60-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-60-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-60-1.pdf  used on input line 18
-61.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-60-2.pdf, id=863, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-60-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-60-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-60-2.pdf  used on input line 18
-63.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1863.
-LaTeX Info: Redefining \% on input line 1863.
-LaTeX Info: Redefining \. on input line 1863.
-LaTeX Info: Redefining \% on input line 1863.
-[30 <./figurasR/unnamed-chunk-59-3.pdf> <./figurasR/unnamed-chunk-60-1.pdf>]
-<figurasR/unnamed-chunk-68-1.pdf, id=881, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-68-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-68-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-68-1.pdf  used on input line 18
-99.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1899.
-LaTeX Info: Redefining \% on input line 1899.
-LaTeX Info: Redefining \. on input line 1899.
-LaTeX Info: Redefining \% on input line 1899.
-[31 <./figurasR/unnamed-chunk-60-2.pdf>]
-<figurasR/unnamed-chunk-68-2.pdf, id=892, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-68-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-68-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-68-2.pdf  used on input line 19
-01.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-68-3.pdf, id=893, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-68-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-68-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-68-3.pdf  used on input line 19
-03.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1916.
-LaTeX Info: Redefining \% on input line 1916.
-LaTeX Info: Redefining \. on input line 1916.
-LaTeX Info: Redefining \% on input line 1916.
-[32 <./figurasR/unnamed-chunk-68-1.pdf> <./figurasR/unnamed-chunk-68-2.pdf> <./
-figurasR/unnamed-chunk-68-3.pdf>]
-<figurasR/unnamed-chunk-69-1.pdf, id=917, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-69-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-69-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-69-1.pdf  used on input line 19
-20.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-69-2.pdf, id=918, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-69-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-69-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-69-2.pdf  used on input line 19
-22.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-77-1.pdf, id=919, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-77-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-77-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-77-1.pdf  used on input line 19
-47.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1947.
-LaTeX Info: Redefining \% on input line 1947.
-LaTeX Info: Redefining \. on input line 1947.
-LaTeX Info: Redefining \% on input line 1947.
-[33 <./figurasR/unnamed-chunk-69-1.pdf> <./figurasR/unnamed-chunk-69-2.pdf>]
-<figurasR/unnamed-chunk-77-2.pdf, id=937, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-77-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-77-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-77-2.pdf  used on input line 19
+LaTeX Info: Redefining \. on input line 1530.
+LaTeX Info: Redefining \% on input line 1530.
+LaTeX Info: Redefining \. on input line 1530.
+LaTeX Info: Redefining \% on input line 1530.
+[15 <./figurasR/unnamed-chunk-16-1.pdf>]
+<figurasR/unnamed-chunk-18-1.pdf, id=892, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-18-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-18-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-18-1.pdf  used on input line 15
 49.
 (pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-77-3.pdf, id=938, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-77-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-77-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-77-3.pdf  used on input line 19
-51.
+LaTeX Info: Redefining \. on input line 1568.
+LaTeX Info: Redefining \% on input line 1568.
+LaTeX Info: Redefining \. on input line 1568.
+LaTeX Info: Redefining \% on input line 1568.
+[16 <./figurasR/unnamed-chunk-17-1.pdf> <./figurasR/unnamed-chunk-18-1.pdf>]
+<figurasR/unnamed-chunk-21-1.pdf, id=909, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-21-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-21-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-21-1.pdf  used on input line 15
+76.
 (pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1963.
-LaTeX Info: Redefining \% on input line 1963.
-LaTeX Info: Redefining \. on input line 1963.
-LaTeX Info: Redefining \% on input line 1963.
-[34 <./figurasR/unnamed-chunk-77-1.pdf> <./figurasR/unnamed-chunk-77-2.pdf> <./
-figurasR/unnamed-chunk-77-3.pdf>]
-<figurasR/unnamed-chunk-78-1.pdf, id=962, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-78-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-78-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-78-1.pdf  used on input line 19
-67.
+<figurasR/unnamed-chunk-22-1.pdf, id=910, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-22-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-22-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-22-1.pdf  used on input line 15
+92.
 (pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-78-2.pdf, id=963, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-78-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-78-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-78-2.pdf  used on input line 19
-69.
+LaTeX Info: Redefining \. on input line 1606.
+LaTeX Info: Redefining \% on input line 1606.
+LaTeX Info: Redefining \. on input line 1606.
+LaTeX Info: Redefining \% on input line 1606.
+[17 <./figurasR/unnamed-chunk-21-1.pdf> <./figurasR/unnamed-chunk-22-1.pdf>]
+<figurasR/unnamed-chunk-23-1.pdf, id=929, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-23-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-23-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-23-1.pdf  used on input line 16
+11.
 (pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-86-1.pdf, id=964, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-86-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-86-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-86-1.pdf  used on input line 19
-93.
+<figurasR/unnamed-chunk-26-1.pdf, id=930, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-26-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-26-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-26-1.pdf  used on input line 16
+31.
 (pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 1993.
-LaTeX Info: Redefining \% on input line 1993.
-LaTeX Info: Redefining \. on input line 1993.
-LaTeX Info: Redefining \% on input line 1993.
-[35 <./figurasR/unnamed-chunk-78-1.pdf> <./figurasR/unnamed-chunk-78-2.pdf>]
-<figurasR/unnamed-chunk-86-2.pdf, id=984, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-86-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-86-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-86-2.pdf  used on input line 19
-95.
+LaTeX Info: Redefining \. on input line 1631.
+LaTeX Info: Redefining \% on input line 1631.
+LaTeX Info: Redefining \. on input line 1631.
+LaTeX Info: Redefining \% on input line 1631.
+[18 <./figurasR/unnamed-chunk-23-1.pdf>]
+<figurasR/unnamed-chunk-27-1.pdf, id=942, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-27-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-27-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-27-1.pdf  used on input line 16
+49.
 (pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-86-3.pdf, id=985, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-86-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-86-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-86-3.pdf  used on input line 19
-97.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2014.
-LaTeX Info: Redefining \% on input line 2014.
-LaTeX Info: Redefining \. on input line 2014.
-LaTeX Info: Redefining \% on input line 2014.
-[36 <./figurasR/unnamed-chunk-86-1.pdf> <./figurasR/unnamed-chunk-86-2.pdf> <./
-figurasR/unnamed-chunk-86-3.pdf>]
-<figurasR/unnamed-chunk-87-1.pdf, id=1009, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-87-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-87-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-87-1.pdf  used on input line 20
-18.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-87-2.pdf, id=1010, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-87-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-87-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-87-2.pdf  used on input line 20
-20.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-95-1.pdf, id=1011, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-95-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-95-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-95-1.pdf  used on input line 20
-44.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2044.
-LaTeX Info: Redefining \% on input line 2044.
-LaTeX Info: Redefining \. on input line 2044.
-LaTeX Info: Redefining \% on input line 2044.
-[37 <./figurasR/unnamed-chunk-87-1.pdf> <./figurasR/unnamed-chunk-87-2.pdf>]
-<figurasR/unnamed-chunk-95-2.pdf, id=1029, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-95-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-95-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-95-2.pdf  used on input line 20
-46.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-95-3.pdf, id=1030, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-95-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-95-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-95-3.pdf  used on input line 20
-48.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2064.
-LaTeX Info: Redefining \% on input line 2064.
-LaTeX Info: Redefining \. on input line 2064.
-LaTeX Info: Redefining \% on input line 2064.
-[38 <./figurasR/unnamed-chunk-95-1.pdf> <./figurasR/unnamed-chunk-95-2.pdf> <./
-figurasR/unnamed-chunk-95-3.pdf>]
-<figurasR/unnamed-chunk-96-1.pdf, id=1054, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-96-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-96-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-96-1.pdf  used on input line 20
+LaTeX Info: Redefining \. on input line 1663.
+LaTeX Info: Redefining \% on input line 1663.
+LaTeX Info: Redefining \. on input line 1663.
+LaTeX Info: Redefining \% on input line 1663.
+[19 <./figurasR/unnamed-chunk-26-1.pdf> <./figurasR/unnamed-chunk-27-1.pdf>]
+<figurasR/unnamed-chunk-28-1.pdf, id=959, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-28-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-28-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-28-1.pdf  used on input line 16
 68.
 (pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-96-2.pdf, id=1055, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-96-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-96-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-96-2.pdf  used on input line 20
-70.
+<figurasR/unnamed-chunk-31-1.pdf, id=960, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-31-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-31-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-31-1.pdf  used on input line 16
+91.
 (pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-104-1.pdf, id=1056, 867.24pt x 361.35pt>
+LaTeX Info: Redefining \. on input line 1707.
+LaTeX Info: Redefining \% on input line 1707.
+LaTeX Info: Redefining \. on input line 1707.
+LaTeX Info: Redefining \% on input line 1707.
+[20 <./figurasR/unnamed-chunk-28-1.pdf> <./figurasR/unnamed-chunk-31-1.pdf>]
+<figurasR/unnamed-chunk-32-1.pdf, id=978, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-32-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-32-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-32-1.pdf  used on input line 17
+12.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+<figurasR/unnamed-chunk-33-1.pdf, id=979, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-33-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-33-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-33-1.pdf  used on input line 17
+29.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+LaTeX Info: Redefining \. on input line 1729.
+LaTeX Info: Redefining \% on input line 1729.
+LaTeX Info: Redefining \. on input line 1729.
+LaTeX Info: Redefining \% on input line 1729.
+[21 <./figurasR/unnamed-chunk-32-1.pdf>]
+<figurasR/unnamed-chunk-36-1.pdf, id=991, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-36-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-36-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-36-1.pdf  used on input line 17
+53.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+LaTeX Info: Redefining \. on input line 1766.
+LaTeX Info: Redefining \% on input line 1766.
+LaTeX Info: Redefining \. on input line 1766.
+LaTeX Info: Redefining \% on input line 1766.
+[22 <./figurasR/unnamed-chunk-33-1.pdf> <./figurasR/unnamed-chunk-36-1.pdf>]
+<figurasR/unnamed-chunk-37-1.pdf, id=1008, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-37-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-37-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-37-1.pdf  used on input line 17
+71.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+<figurasR/unnamed-chunk-38-1.pdf, id=1009, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-38-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-38-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-38-1.pdf  used on input line 17
+90.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+LaTeX Info: Redefining \. on input line 1808.
+LaTeX Info: Redefining \% on input line 1808.
+LaTeX Info: Redefining \. on input line 1808.
+LaTeX Info: Redefining \% on input line 1808.
+[23 <./figurasR/unnamed-chunk-37-1.pdf> <./figurasR/unnamed-chunk-38-1.pdf>]
+<figurasR/unnamed-chunk-41-1.pdf, id=1028, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-41-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-41-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-41-1.pdf  used on input line 18
+16.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+<figurasR/unnamed-chunk-42-1.pdf, id=1029, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-42-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-42-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-42-1.pdf  used on input line 18
+36.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+LaTeX Info: Redefining \. on input line 1836.
+LaTeX Info: Redefining \% on input line 1836.
+LaTeX Info: Redefining \. on input line 1836.
+LaTeX Info: Redefining \% on input line 1836.
+[24 <./figurasR/unnamed-chunk-41-1.pdf>]
+<figurasR/unnamed-chunk-43-1.pdf, id=1042, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-43-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-43-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-43-1.pdf  used on input line 18
+55.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+LaTeX Info: Redefining \. on input line 1869.
+LaTeX Info: Redefining \% on input line 1869.
+LaTeX Info: Redefining \. on input line 1869.
+LaTeX Info: Redefining \% on input line 1869.
+[25 <./figurasR/unnamed-chunk-42-1.pdf> <./figurasR/unnamed-chunk-43-1.pdf>]
+<figurasR/unnamed-chunk-46-1.pdf, id=1058, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-46-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-46-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-46-1.pdf  used on input line 18
+77.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+<figurasR/unnamed-chunk-47-1.pdf, id=1059, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-47-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-47-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-47-1.pdf  used on input line 18
+93.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+LaTeX Info: Redefining \. on input line 1907.
+LaTeX Info: Redefining \% on input line 1907.
+LaTeX Info: Redefining \. on input line 1907.
+LaTeX Info: Redefining \% on input line 1907.
+[26 <./figurasR/unnamed-chunk-46-1.pdf> <./figurasR/unnamed-chunk-47-1.pdf>]
+<figurasR/unnamed-chunk-48-1.pdf, id=1077, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-48-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-48-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-48-1.pdf  used on input line 19
+12.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+<figurasR/unnamed-chunk-51-1.pdf, id=1078, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-51-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-51-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-51-1.pdf  used on input line 19
+33.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+LaTeX Info: Redefining \. on input line 1942.
+LaTeX Info: Redefining \% on input line 1942.
+LaTeX Info: Redefining \. on input line 1942.
+LaTeX Info: Redefining \% on input line 1942.
+[27 <./figurasR/unnamed-chunk-48-1.pdf> <./figurasR/unnamed-chunk-51-1.pdf>]
+<figurasR/unnamed-chunk-52-1.pdf, id=1096, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-52-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-52-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-52-1.pdf  used on input line 19
+47.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+<figurasR/unnamed-chunk-53-1.pdf, id=1097, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-53-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-53-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-53-1.pdf  used on input line 19
+67.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+LaTeX Info: Redefining \. on input line 1980.
+LaTeX Info: Redefining \% on input line 1980.
+LaTeX Info: Redefining \. on input line 1980.
+LaTeX Info: Redefining \% on input line 1980.
+[28 <./figurasR/unnamed-chunk-52-1.pdf> <./figurasR/unnamed-chunk-53-1.pdf>]
+<figurasR/unnamed-chunk-56-1.pdf, id=1114, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-56-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-56-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-56-1.pdf  used on input line 19
+88.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+<figurasR/unnamed-chunk-57-1.pdf, id=1115, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-57-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-57-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-57-1.pdf  used on input line 20
+08.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+LaTeX Info: Redefining \. on input line 2008.
+LaTeX Info: Redefining \% on input line 2008.
+LaTeX Info: Redefining \. on input line 2008.
+LaTeX Info: Redefining \% on input line 2008.
+[29 <./figurasR/unnamed-chunk-56-1.pdf>]
+<figurasR/unnamed-chunk-58-1.pdf, id=1129, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-58-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-58-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-58-1.pdf  used on input line 20
+25.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+<figurasR/unnamed-chunk-61-1.pdf, id=1130, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-61-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-61-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-61-1.pdf  used on input line 20
+45.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+LaTeX Info: Redefining \. on input line 2045.
+LaTeX Info: Redefining \% on input line 2045.
+LaTeX Info: Redefining \. on input line 2045.
+LaTeX Info: Redefining \% on input line 2045.
+[30 <./figurasR/unnamed-chunk-57-1.pdf> <./figurasR/unnamed-chunk-58-1.pdf>]
+<figurasR/unnamed-chunk-62-1.pdf, id=1148, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-62-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-62-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-62-1.pdf  used on input line 20
+59.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+LaTeX Info: Redefining \. on input line 2077.
+LaTeX Info: Redefining \% on input line 2077.
+LaTeX Info: Redefining \. on input line 2077.
+LaTeX Info: Redefining \% on input line 2077.
+[31 <./figurasR/unnamed-chunk-61-1.pdf> <./figurasR/unnamed-chunk-62-1.pdf>]
+<figurasR/unnamed-chunk-63-1.pdf, id=1165, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-63-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-63-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-63-1.pdf  used on input line 20
+79.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+<figurasR/unnamed-chunk-64-1.pdf, id=1166, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-64-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-64-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-64-1.pdf  used on input line 21
+06.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+LaTeX Info: Redefining \. on input line 2106.
+LaTeX Info: Redefining \% on input line 2106.
+LaTeX Info: Redefining \. on input line 2106.
+LaTeX Info: Redefining \% on input line 2106.
+[32 <./figurasR/unnamed-chunk-63-1.pdf>]
+<figurasR/unnamed-chunk-65-1.pdf, id=1179, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-65-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-65-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-65-1.pdf  used on input line 21
+18.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+LaTeX Info: Redefining \. on input line 2143.
+LaTeX Info: Redefining \% on input line 2143.
+LaTeX Info: Redefining \. on input line 2143.
+LaTeX Info: Redefining \% on input line 2143.
+[33 <./figurasR/unnamed-chunk-64-1.pdf> <./figurasR/unnamed-chunk-65-1.pdf>]
+<figurasR/unnamed-chunk-66-1.pdf, id=1194, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-66-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-66-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-66-1.pdf  used on input line 21
+48.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+<figurasR/unnamed-chunk-67-1.pdf, id=1195, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-67-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-67-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-67-1.pdf  used on input line 21
+64.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+LaTeX Info: Redefining \. on input line 2183.
+LaTeX Info: Redefining \% on input line 2183.
+LaTeX Info: Redefining \. on input line 2183.
+LaTeX Info: Redefining \% on input line 2183.
+[34 <./figurasR/unnamed-chunk-66-1.pdf> <./figurasR/unnamed-chunk-67-1.pdf>]
+<figurasR/unnamed-chunk-68-1.pdf, id=1211, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-68-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-68-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-68-1.pdf  used on input line 21
+88.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+<figurasR/unnamed-chunk-69-1.pdf, id=1212, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-69-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-69-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-69-1.pdf  used on input line 22
+08.
+(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
+LaTeX Info: Redefining \. on input line 2208.
+LaTeX Info: Redefining \% on input line 2208.
+LaTeX Info: Redefining \. on input line 2208.
+LaTeX Info: Redefining \% on input line 2208.
+[35 <./figurasR/unnamed-chunk-68-1.pdf>]
+LaTeX Info: Redefining \. on input line 2274.
+LaTeX Info: Redefining \% on input line 2274.
+LaTeX Info: Redefining \. on input line 2274.
+LaTeX Info: Redefining \% on input line 2274.
+[36 <./figurasR/unnamed-chunk-69-1.pdf>]
+Cap\'{\i }tulo 4.
+[37
+
+]
+LaTeX Info: Redefining \. on input line 2349.
+LaTeX Info: Redefining \% on input line 2349.
+LaTeX Info: Redefining \. on input line 2349.
+LaTeX Info: Redefining \% on input line 2349.
+[38]
+<figurasR/unnamed-chunk-76-1.pdf, id=1247, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-76-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-76-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-76-1.pdf  used on input line 23
+58.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-76-2.pdf, id=1248, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-76-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-76-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-76-2.pdf  used on input line 23
+60.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-77-1.pdf, id=1249, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-77-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-77-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-77-1.pdf  used on input line 23
+87.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2387.
+LaTeX Info: Redefining \% on input line 2387.
+LaTeX Info: Redefining \. on input line 2387.
+LaTeX Info: Redefining \% on input line 2387.
+[39 <./figurasR/unnamed-chunk-76-1.pdf> <./figurasR/unnamed-chunk-76-2.pdf>]
+<figurasR/unnamed-chunk-77-2.pdf, id=1269, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-77-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-77-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-77-2.pdf  used on input line 23
+89.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-79-1.pdf, id=1270, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-79-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-79-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-79-1.pdf  used on input line 24
+23.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2423.
+LaTeX Info: Redefining \% on input line 2423.
+LaTeX Info: Redefining \. on input line 2423.
+LaTeX Info: Redefining \% on input line 2423.
+[40 <./figurasR/unnamed-chunk-77-1.pdf> <./figurasR/unnamed-chunk-77-2.pdf>]
+<figurasR/unnamed-chunk-79-2.pdf, id=1286, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-79-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-79-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-79-2.pdf  used on input line 24
+25.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-80-1.pdf, id=1287, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-80-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-80-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-80-1.pdf  used on input line 24
+42.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2442.
+LaTeX Info: Redefining \% on input line 2442.
+LaTeX Info: Redefining \. on input line 2442.
+LaTeX Info: Redefining \% on input line 2442.
+[41 <./figurasR/unnamed-chunk-79-1.pdf> <./figurasR/unnamed-chunk-79-2.pdf>]
+<figurasR/unnamed-chunk-80-2.pdf, id=1306, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-80-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-80-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-80-2.pdf  used on input line 24
+44.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-82-1.pdf, id=1307, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-82-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-82-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-82-1.pdf  used on input line 24
+70.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2470.
+LaTeX Info: Redefining \% on input line 2470.
+LaTeX Info: Redefining \. on input line 2470.
+LaTeX Info: Redefining \% on input line 2470.
+[42 <./figurasR/unnamed-chunk-80-1.pdf> <./figurasR/unnamed-chunk-80-2.pdf>]
+<figurasR/unnamed-chunk-82-2.pdf, id=1323, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-82-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-82-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-82-2.pdf  used on input line 24
+72.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-83-1.pdf, id=1324, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-83-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-83-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-83-1.pdf  used on input line 24
+88.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2488.
+LaTeX Info: Redefining \% on input line 2488.
+LaTeX Info: Redefining \. on input line 2488.
+LaTeX Info: Redefining \% on input line 2488.
+[43 <./figurasR/unnamed-chunk-82-1.pdf> <./figurasR/unnamed-chunk-82-2.pdf>]
+<figurasR/unnamed-chunk-83-2.pdf, id=1342, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-83-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-83-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-83-2.pdf  used on input line 24
+90.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-85-1.pdf, id=1343, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-85-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-85-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-85-1.pdf  used on input line 25
+12.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2512.
+LaTeX Info: Redefining \% on input line 2512.
+LaTeX Info: Redefining \. on input line 2512.
+LaTeX Info: Redefining \% on input line 2512.
+[44 <./figurasR/unnamed-chunk-83-1.pdf> <./figurasR/unnamed-chunk-83-2.pdf>]
+<figurasR/unnamed-chunk-85-2.pdf, id=1359, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-85-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-85-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-85-2.pdf  used on input line 25
+14.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-86-1.pdf, id=1360, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-86-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-86-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-86-1.pdf  used on input line 25
+36.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2536.
+LaTeX Info: Redefining \% on input line 2536.
+LaTeX Info: Redefining \. on input line 2536.
+LaTeX Info: Redefining \% on input line 2536.
+[45 <./figurasR/unnamed-chunk-85-1.pdf> <./figurasR/unnamed-chunk-85-2.pdf>]
+<figurasR/unnamed-chunk-86-2.pdf, id=1378, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-86-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-86-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-86-2.pdf  used on input line 25
+38.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-88-1.pdf, id=1379, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-88-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-88-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-88-1.pdf  used on input line 25
+60.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2560.
+LaTeX Info: Redefining \% on input line 2560.
+LaTeX Info: Redefining \. on input line 2560.
+LaTeX Info: Redefining \% on input line 2560.
+[46 <./figurasR/unnamed-chunk-86-1.pdf> <./figurasR/unnamed-chunk-86-2.pdf>]
+<figurasR/unnamed-chunk-88-2.pdf, id=1396, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-88-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-88-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-88-2.pdf  used on input line 25
+62.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-89-1.pdf, id=1397, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-89-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-89-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-89-1.pdf  used on input line 25
+82.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2582.
+LaTeX Info: Redefining \% on input line 2582.
+LaTeX Info: Redefining \. on input line 2582.
+LaTeX Info: Redefining \% on input line 2582.
+[47 <./figurasR/unnamed-chunk-88-1.pdf> <./figurasR/unnamed-chunk-88-2.pdf>]
+<figurasR/unnamed-chunk-89-2.pdf, id=1416, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-89-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-89-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-89-2.pdf  used on input line 25
+84.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-91-1.pdf, id=1417, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-91-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-91-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-91-1.pdf  used on input line 26
+10.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2610.
+LaTeX Info: Redefining \% on input line 2610.
+LaTeX Info: Redefining \. on input line 2610.
+LaTeX Info: Redefining \% on input line 2610.
+[48 <./figurasR/unnamed-chunk-89-1.pdf> <./figurasR/unnamed-chunk-89-2.pdf>]
+<figurasR/unnamed-chunk-91-2.pdf, id=1433, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-91-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-91-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-91-2.pdf  used on input line 26
+12.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-92-1.pdf, id=1434, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-92-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-92-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-92-1.pdf  used on input line 26
+33.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2633.
+LaTeX Info: Redefining \% on input line 2633.
+LaTeX Info: Redefining \. on input line 2633.
+LaTeX Info: Redefining \% on input line 2633.
+[49 <./figurasR/unnamed-chunk-91-1.pdf> <./figurasR/unnamed-chunk-91-2.pdf>]
+<figurasR/unnamed-chunk-92-2.pdf, id=1452, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-92-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-92-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-92-2.pdf  used on input line 26
+35.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-94-1.pdf, id=1453, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-94-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-94-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-94-1.pdf  used on input line 26
+60.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2660.
+LaTeX Info: Redefining \% on input line 2660.
+LaTeX Info: Redefining \. on input line 2660.
+LaTeX Info: Redefining \% on input line 2660.
+[50 <./figurasR/unnamed-chunk-92-1.pdf> <./figurasR/unnamed-chunk-92-2.pdf>]
+<figurasR/unnamed-chunk-94-2.pdf, id=1469, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-94-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-94-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-94-2.pdf  used on input line 26
+62.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-95-1.pdf, id=1470, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-95-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-95-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-95-1.pdf  used on input line 26
+77.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2677.
+LaTeX Info: Redefining \% on input line 2677.
+LaTeX Info: Redefining \. on input line 2677.
+LaTeX Info: Redefining \% on input line 2677.
+[51 <./figurasR/unnamed-chunk-94-1.pdf> <./figurasR/unnamed-chunk-94-2.pdf>]
+<figurasR/unnamed-chunk-95-2.pdf, id=1488, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-95-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-95-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-95-2.pdf  used on input line 26
+79.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-97-1.pdf, id=1489, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-97-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-97-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-97-1.pdf  used on input line 27
+05.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2705.
+LaTeX Info: Redefining \% on input line 2705.
+LaTeX Info: Redefining \. on input line 2705.
+LaTeX Info: Redefining \% on input line 2705.
+[52 <./figurasR/unnamed-chunk-95-1.pdf> <./figurasR/unnamed-chunk-95-2.pdf>]
+<figurasR/unnamed-chunk-97-2.pdf, id=1505, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-97-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-97-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-97-2.pdf  used on input line 27
+07.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-98-1.pdf, id=1506, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-98-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-98-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-98-1.pdf  used on input line 27
+24.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2724.
+LaTeX Info: Redefining \% on input line 2724.
+LaTeX Info: Redefining \. on input line 2724.
+LaTeX Info: Redefining \% on input line 2724.
+[53 <./figurasR/unnamed-chunk-97-1.pdf> <./figurasR/unnamed-chunk-97-2.pdf>]
+<figurasR/unnamed-chunk-98-2.pdf, id=1526, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-98-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-98-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-98-2.pdf  used on input line 27
+26.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-100-1.pdf, id=1527, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-100-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-100-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-100-1.pdf  used on input line 2
+751.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2751.
+LaTeX Info: Redefining \% on input line 2751.
+LaTeX Info: Redefining \. on input line 2751.
+LaTeX Info: Redefining \% on input line 2751.
+[54 <./figurasR/unnamed-chunk-98-1.pdf> <./figurasR/unnamed-chunk-98-2.pdf>]
+<figurasR/unnamed-chunk-100-2.pdf, id=1543, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-100-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-100-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-100-2.pdf  used on input line 2
+753.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-101-1.pdf, id=1544, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-101-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-101-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-101-1.pdf  used on input line 2
+773.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2773.
+LaTeX Info: Redefining \% on input line 2773.
+LaTeX Info: Redefining \. on input line 2773.
+LaTeX Info: Redefining \% on input line 2773.
+[55 <./figurasR/unnamed-chunk-100-1.pdf> <./figurasR/unnamed-chunk-100-2.pdf>]
+<figurasR/unnamed-chunk-101-2.pdf, id=1562, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-101-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-101-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-101-2.pdf  used on input line 2
+775.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-103-1.pdf, id=1563, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-103-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-103-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-103-1.pdf  used on input line 2
+797.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2797.
+LaTeX Info: Redefining \% on input line 2797.
+LaTeX Info: Redefining \. on input line 2797.
+LaTeX Info: Redefining \% on input line 2797.
+[56 <./figurasR/unnamed-chunk-101-1.pdf> <./figurasR/unnamed-chunk-101-2.pdf>]
+<figurasR/unnamed-chunk-103-2.pdf, id=1579, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-103-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-103-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-103-2.pdf  used on input line 2
+799.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-104-1.pdf, id=1580, 867.24pt x 361.35pt>
 File: figurasR/unnamed-chunk-104-1.pdf Graphic file (type pdf)
 <use figurasR/unnamed-chunk-104-1.pdf>
 Package pdftex.def Info: figurasR/unnamed-chunk-104-1.pdf  used on input line 2
-098.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2098.
-LaTeX Info: Redefining \% on input line 2098.
-LaTeX Info: Redefining \. on input line 2098.
-LaTeX Info: Redefining \% on input line 2098.
-[39 <./figurasR/unnamed-chunk-96-1.pdf> <./figurasR/unnamed-chunk-96-2.pdf>]
-<figurasR/unnamed-chunk-104-2.pdf, id=1074, 867.24pt x 361.35pt>
+821.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2821.
+LaTeX Info: Redefining \% on input line 2821.
+LaTeX Info: Redefining \. on input line 2821.
+LaTeX Info: Redefining \% on input line 2821.
+[57 <./figurasR/unnamed-chunk-103-1.pdf> <./figurasR/unnamed-chunk-103-2.pdf>]
+<figurasR/unnamed-chunk-104-2.pdf, id=1598, 867.24pt x 361.35pt>
 File: figurasR/unnamed-chunk-104-2.pdf Graphic file (type pdf)
 <use figurasR/unnamed-chunk-104-2.pdf>
 Package pdftex.def Info: figurasR/unnamed-chunk-104-2.pdf  used on input line 2
-100.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-104-3.pdf, id=1075, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-104-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-104-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-104-3.pdf  used on input line 2
-102.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2119.
-LaTeX Info: Redefining \% on input line 2119.
-LaTeX Info: Redefining \. on input line 2119.
-LaTeX Info: Redefining \% on input line 2119.
-[40 <./figurasR/unnamed-chunk-104-1.pdf> <./figurasR/unnamed-chunk-104-2.pdf> <
-./figurasR/unnamed-chunk-104-3.pdf>]
-<figurasR/unnamed-chunk-105-1.pdf, id=1100, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-105-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-105-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-105-1.pdf  used on input line 2
-123.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-105-2.pdf, id=1101, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-105-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-105-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-105-2.pdf  used on input line 2
-125.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-113-1.pdf, id=1102, 867.24pt x 361.35pt>
+823.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-106-1.pdf, id=1599, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-106-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-106-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-106-1.pdf  used on input line 2
+844.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2844.
+LaTeX Info: Redefining \% on input line 2844.
+LaTeX Info: Redefining \. on input line 2844.
+LaTeX Info: Redefining \% on input line 2844.
+[58 <./figurasR/unnamed-chunk-104-1.pdf> <./figurasR/unnamed-chunk-104-2.pdf>]
+<figurasR/unnamed-chunk-106-2.pdf, id=1615, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-106-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-106-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-106-2.pdf  used on input line 2
+846.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-107-1.pdf, id=1616, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-107-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-107-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-107-1.pdf  used on input line 2
+874.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2874.
+LaTeX Info: Redefining \% on input line 2874.
+LaTeX Info: Redefining \. on input line 2874.
+LaTeX Info: Redefining \% on input line 2874.
+[59 <./figurasR/unnamed-chunk-106-1.pdf> <./figurasR/unnamed-chunk-106-2.pdf>]
+<figurasR/unnamed-chunk-107-2.pdf, id=1635, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-107-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-107-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-107-2.pdf  used on input line 2
+876.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-109-1.pdf, id=1636, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-109-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-109-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-109-1.pdf  used on input line 2
+900.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2900.
+LaTeX Info: Redefining \% on input line 2900.
+LaTeX Info: Redefining \. on input line 2900.
+LaTeX Info: Redefining \% on input line 2900.
+[60 <./figurasR/unnamed-chunk-107-1.pdf> <./figurasR/unnamed-chunk-107-2.pdf>]
+<figurasR/unnamed-chunk-109-2.pdf, id=1653, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-109-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-109-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-109-2.pdf  used on input line 2
+902.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-110-1.pdf, id=1654, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-110-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-110-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-110-1.pdf  used on input line 2
+926.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2926.
+LaTeX Info: Redefining \% on input line 2926.
+LaTeX Info: Redefining \. on input line 2926.
+LaTeX Info: Redefining \% on input line 2926.
+[61 <./figurasR/unnamed-chunk-109-1.pdf> <./figurasR/unnamed-chunk-109-2.pdf>]
+<figurasR/unnamed-chunk-110-2.pdf, id=1672, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-110-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-110-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-110-2.pdf  used on input line 2
+928.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-112-1.pdf, id=1673, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-112-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-112-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-112-1.pdf  used on input line 2
+952.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2952.
+LaTeX Info: Redefining \% on input line 2952.
+LaTeX Info: Redefining \. on input line 2952.
+LaTeX Info: Redefining \% on input line 2952.
+[62 <./figurasR/unnamed-chunk-110-1.pdf> <./figurasR/unnamed-chunk-110-2.pdf>]
+<figurasR/unnamed-chunk-112-2.pdf, id=1689, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-112-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-112-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-112-2.pdf  used on input line 2
+954.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-113-1.pdf, id=1690, 867.24pt x 361.35pt>
 File: figurasR/unnamed-chunk-113-1.pdf Graphic file (type pdf)
 <use figurasR/unnamed-chunk-113-1.pdf>
 Package pdftex.def Info: figurasR/unnamed-chunk-113-1.pdf  used on input line 2
-150.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2150.
-LaTeX Info: Redefining \% on input line 2150.
-LaTeX Info: Redefining \. on input line 2150.
-LaTeX Info: Redefining \% on input line 2150.
-[41 <./figurasR/unnamed-chunk-105-1.pdf> <./figurasR/unnamed-chunk-105-2.pdf>]
-<figurasR/unnamed-chunk-113-2.pdf, id=1121, 867.24pt x 361.35pt>
+972.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2972.
+LaTeX Info: Redefining \% on input line 2972.
+LaTeX Info: Redefining \. on input line 2972.
+LaTeX Info: Redefining \% on input line 2972.
+[63 <./figurasR/unnamed-chunk-112-1.pdf> <./figurasR/unnamed-chunk-112-2.pdf>]
+<figurasR/unnamed-chunk-113-2.pdf, id=1708, 867.24pt x 361.35pt>
 File: figurasR/unnamed-chunk-113-2.pdf Graphic file (type pdf)
 <use figurasR/unnamed-chunk-113-2.pdf>
 Package pdftex.def Info: figurasR/unnamed-chunk-113-2.pdf  used on input line 2
-152.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-113-3.pdf, id=1122, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-113-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-113-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-113-3.pdf  used on input line 2
-154.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2164.
-LaTeX Info: Redefining \% on input line 2164.
-LaTeX Info: Redefining \. on input line 2164.
-LaTeX Info: Redefining \% on input line 2164.
-[42 <./figurasR/unnamed-chunk-113-1.pdf> <./figurasR/unnamed-chunk-113-2.pdf> <
-./figurasR/unnamed-chunk-113-3.pdf>]
-<figurasR/unnamed-chunk-114-1.pdf, id=1146, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-114-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-114-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-114-1.pdf  used on input line 2
-166.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-114-2.pdf, id=1147, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-114-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-114-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-114-2.pdf  used on input line 2
-168.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-122-1.pdf, id=1148, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-122-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-122-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-122-1.pdf  used on input line 2
-193.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2193.
-LaTeX Info: Redefining \% on input line 2193.
-LaTeX Info: Redefining \. on input line 2193.
-LaTeX Info: Redefining \% on input line 2193.
-[43 <./figurasR/unnamed-chunk-114-1.pdf> <./figurasR/unnamed-chunk-114-2.pdf>]
-<figurasR/unnamed-chunk-122-2.pdf, id=1166, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-122-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-122-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-122-2.pdf  used on input line 2
-195.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-122-3.pdf, id=1167, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-122-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-122-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-122-3.pdf  used on input line 2
-197.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2210.
-LaTeX Info: Redefining \% on input line 2210.
-LaTeX Info: Redefining \. on input line 2210.
-LaTeX Info: Redefining \% on input line 2210.
-[44 <./figurasR/unnamed-chunk-122-1.pdf> <./figurasR/unnamed-chunk-122-2.pdf> <
-./figurasR/unnamed-chunk-122-3.pdf>]
-<figurasR/unnamed-chunk-123-1.pdf, id=1191, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-123-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-123-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-123-1.pdf  used on input line 2
-214.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-123-2.pdf, id=1192, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-123-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-123-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-123-2.pdf  used on input line 2
-216.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-131-1.pdf, id=1193, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-131-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-131-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-131-1.pdf  used on input line 2
-244.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2244.
-LaTeX Info: Redefining \% on input line 2244.
-LaTeX Info: Redefining \. on input line 2244.
-LaTeX Info: Redefining \% on input line 2244.
-[45 <./figurasR/unnamed-chunk-123-1.pdf> <./figurasR/unnamed-chunk-123-2.pdf>]
-<figurasR/unnamed-chunk-131-2.pdf, id=1211, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-131-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-131-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-131-2.pdf  used on input line 2
-246.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-131-3.pdf, id=1212, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-131-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-131-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-131-3.pdf  used on input line 2
-248.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2263.
-LaTeX Info: Redefining \% on input line 2263.
-LaTeX Info: Redefining \. on input line 2263.
-LaTeX Info: Redefining \% on input line 2263.
-[46 <./figurasR/unnamed-chunk-131-1.pdf> <./figurasR/unnamed-chunk-131-2.pdf> <
-./figurasR/unnamed-chunk-131-3.pdf>]
-<figurasR/unnamed-chunk-132-1.pdf, id=1237, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-132-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-132-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-132-1.pdf  used on input line 2
-267.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-132-2.pdf, id=1238, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-132-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-132-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-132-2.pdf  used on input line 2
-269.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-140-1.pdf, id=1239, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-140-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-140-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-140-1.pdf  used on input line 2
-291.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2291.
-LaTeX Info: Redefining \% on input line 2291.
-LaTeX Info: Redefining \. on input line 2291.
-LaTeX Info: Redefining \% on input line 2291.
-[47 <./figurasR/unnamed-chunk-132-1.pdf> <./figurasR/unnamed-chunk-132-2.pdf>]
-<figurasR/unnamed-chunk-140-2.pdf, id=1258, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-140-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-140-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-140-2.pdf  used on input line 2
-293.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-140-3.pdf, id=1259, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-140-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-140-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-140-3.pdf  used on input line 2
-295.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2312.
-LaTeX Info: Redefining \% on input line 2312.
-LaTeX Info: Redefining \. on input line 2312.
-LaTeX Info: Redefining \% on input line 2312.
-[48 <./figurasR/unnamed-chunk-140-1.pdf> <./figurasR/unnamed-chunk-140-2.pdf> <
-./figurasR/unnamed-chunk-140-3.pdf>]
-<figurasR/unnamed-chunk-141-1.pdf, id=1283, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-141-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-141-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-141-1.pdf  used on input line 2
-316.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-141-2.pdf, id=1284, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-141-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-141-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-141-2.pdf  used on input line 2
-318.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-149-1.pdf, id=1285, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-149-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-149-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-149-1.pdf  used on input line 2
-342.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2342.
-LaTeX Info: Redefining \% on input line 2342.
-LaTeX Info: Redefining \. on input line 2342.
-LaTeX Info: Redefining \% on input line 2342.
-[49 <./figurasR/unnamed-chunk-141-1.pdf> <./figurasR/unnamed-chunk-141-2.pdf>]
-<figurasR/unnamed-chunk-149-2.pdf, id=1303, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-149-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-149-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-149-2.pdf  used on input line 2
-344.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-149-3.pdf, id=1304, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-149-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-149-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-149-3.pdf  used on input line 2
-346.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2369.
-LaTeX Info: Redefining \% on input line 2369.
-LaTeX Info: Redefining \. on input line 2369.
-LaTeX Info: Redefining \% on input line 2369.
-[50 <./figurasR/unnamed-chunk-149-1.pdf> <./figurasR/unnamed-chunk-149-2.pdf> <
-./figurasR/unnamed-chunk-149-3.pdf>]
-<figurasR/unnamed-chunk-150-1.pdf, id=1328, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-150-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-150-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-150-1.pdf  used on input line 2
-373.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-150-2.pdf, id=1329, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-150-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-150-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-150-2.pdf  used on input line 2
-375.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2392.
-LaTeX Info: Redefining \% on input line 2392.
-LaTeX Info: Redefining \. on input line 2392.
-LaTeX Info: Redefining \% on input line 2392.
-[51 <./figurasR/unnamed-chunk-150-1.pdf> <./figurasR/unnamed-chunk-150-2.pdf>]
-<figurasR/unnamed-chunk-158-1.pdf, id=1346, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-158-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-158-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-158-1.pdf  used on input line 2
-403.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-158-2.pdf, id=1347, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-158-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-158-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-158-2.pdf  used on input line 2
-405.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-158-3.pdf, id=1348, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-158-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-158-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-158-3.pdf  used on input line 2
-407.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2407.
-LaTeX Info: Redefining \% on input line 2407.
-LaTeX Info: Redefining \. on input line 2407.
-LaTeX Info: Redefining \% on input line 2407.
-[52 <./figurasR/unnamed-chunk-158-1.pdf> <./figurasR/unnamed-chunk-158-2.pdf>]
-<figurasR/unnamed-chunk-159-1.pdf, id=1368, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-159-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-159-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-159-1.pdf  used on input line 2
-431.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-159-2.pdf, id=1369, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-159-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-159-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-159-2.pdf  used on input line 2
-433.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2433.
-LaTeX Info: Redefining \% on input line 2433.
-LaTeX Info: Redefining \. on input line 2433.
-LaTeX Info: Redefining \% on input line 2433.
-[53 <./figurasR/unnamed-chunk-158-3.pdf> <./figurasR/unnamed-chunk-159-1.pdf>]
-<figurasR/unnamed-chunk-167-1.pdf, id=1388, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-167-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-167-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-167-1.pdf  used on input line 2
-458.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-167-2.pdf, id=1389, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-167-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-167-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-167-2.pdf  used on input line 2
-460.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2460.
-LaTeX Info: Redefining \% on input line 2460.
-LaTeX Info: Redefining \. on input line 2460.
-LaTeX Info: Redefining \% on input line 2460.
-[54 <./figurasR/unnamed-chunk-159-2.pdf> <./figurasR/unnamed-chunk-167-1.pdf>]
-<figurasR/unnamed-chunk-167-3.pdf, id=1408, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-167-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-167-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-167-3.pdf  used on input line 2
-462.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-168-1.pdf, id=1409, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-168-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-168-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-168-1.pdf  used on input line 2
-480.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2480.
-LaTeX Info: Redefining \% on input line 2480.
-LaTeX Info: Redefining \. on input line 2480.
-LaTeX Info: Redefining \% on input line 2480.
-[55 <./figurasR/unnamed-chunk-167-2.pdf> <./figurasR/unnamed-chunk-167-3.pdf>]
-<figurasR/unnamed-chunk-168-2.pdf, id=1426, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-168-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-168-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-168-2.pdf  used on input line 2
-482.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-176-1.pdf, id=1427, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-176-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-176-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-176-1.pdf  used on input line 2
-507.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2507.
-LaTeX Info: Redefining \% on input line 2507.
-LaTeX Info: Redefining \. on input line 2507.
-LaTeX Info: Redefining \% on input line 2507.
-[56 <./figurasR/unnamed-chunk-168-1.pdf> <./figurasR/unnamed-chunk-168-2.pdf>]
-<figurasR/unnamed-chunk-176-2.pdf, id=1444, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-176-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-176-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-176-2.pdf  used on input line 2
-509.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-176-3.pdf, id=1445, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-176-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-176-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-176-3.pdf  used on input line 2
-511.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2528.
-LaTeX Info: Redefining \% on input line 2528.
-LaTeX Info: Redefining \. on input line 2528.
-LaTeX Info: Redefining \% on input line 2528.
-[57 <./figurasR/unnamed-chunk-176-1.pdf> <./figurasR/unnamed-chunk-176-2.pdf> <
-./figurasR/unnamed-chunk-176-3.pdf>]
-<figurasR/unnamed-chunk-177-1.pdf, id=1469, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-177-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-177-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-177-1.pdf  used on input line 2
-532.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-177-2.pdf, id=1470, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-177-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-177-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-177-2.pdf  used on input line 2
-534.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-185-1.pdf, id=1471, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-185-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-185-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-185-1.pdf  used on input line 2
-562.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2562.
-LaTeX Info: Redefining \% on input line 2562.
-LaTeX Info: Redefining \. on input line 2562.
-LaTeX Info: Redefining \% on input line 2562.
-[58 <./figurasR/unnamed-chunk-177-1.pdf> <./figurasR/unnamed-chunk-177-2.pdf>]
-<figurasR/unnamed-chunk-185-2.pdf, id=1489, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-185-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-185-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-185-2.pdf  used on input line 2
-564.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-185-3.pdf, id=1490, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-185-3.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-185-3.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-185-3.pdf  used on input line 2
-566.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2581.
-LaTeX Info: Redefining \% on input line 2581.
-LaTeX Info: Redefining \. on input line 2581.
-LaTeX Info: Redefining \% on input line 2581.
-[59 <./figurasR/unnamed-chunk-185-1.pdf> <./figurasR/unnamed-chunk-185-2.pdf> <
-./figurasR/unnamed-chunk-185-3.pdf>]
-<figurasR/unnamed-chunk-186-1.pdf, id=1516, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-186-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-186-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-186-1.pdf  used on input line 2
-585.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-186-2.pdf, id=1517, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-186-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-186-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-186-2.pdf  used on input line 2
-587.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-<figurasR/unnamed-chunk-187-1.pdf, id=1518, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-187-1.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-187-1.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-187-1.pdf  used on input line 2
-601.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2601.
-LaTeX Info: Redefining \% on input line 2601.
-LaTeX Info: Redefining \. on input line 2601.
-LaTeX Info: Redefining \% on input line 2601.
-[60 <./figurasR/unnamed-chunk-186-1.pdf> <./figurasR/unnamed-chunk-186-2.pdf>]
-<figurasR/unnamed-chunk-187-2.pdf, id=1536, 867.24pt x 361.35pt>
-File: figurasR/unnamed-chunk-187-2.pdf Graphic file (type pdf)
-<use figurasR/unnamed-chunk-187-2.pdf>
-Package pdftex.def Info: figurasR/unnamed-chunk-187-2.pdf  used on input line 2
-603.
-(pdftex.def)             Requested size: 430.31812pt x 179.30164pt.
-LaTeX Info: Redefining \. on input line 2643.
-LaTeX Info: Redefining \% on input line 2643.
-LaTeX Info: Redefining \. on input line 2643.
-LaTeX Info: Redefining \% on input line 2643.
-[61 <./figurasR/unnamed-chunk-187-1.pdf> <./figurasR/unnamed-chunk-187-2.pdf>]
-LaTeX Info: Redefining \. on input line 2645.
-LaTeX Info: Redefining \% on input line 2645.
-LaTeX Info: Redefining \. on input line 2645.
-LaTeX Info: Redefining \% on input line 2645.
-[62] (./tfe_principal.bbl
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
-Underfull \hbox (badness 3601) in paragraph at lines 49--53
-\T1/lmr/m/n/12 (+20) j.  URL []$http : / / www . juntadeandalucia . es / instit
+974.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-115-1.pdf, id=1709, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-115-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-115-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-115-1.pdf  used on input line 2
+996.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 2996.
+LaTeX Info: Redefining \% on input line 2996.
+LaTeX Info: Redefining \. on input line 2996.
+LaTeX Info: Redefining \% on input line 2996.
+[64 <./figurasR/unnamed-chunk-113-1.pdf> <./figurasR/unnamed-chunk-113-2.pdf>]
+<figurasR/unnamed-chunk-115-2.pdf, id=1725, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-115-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-115-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-115-2.pdf  used on input line 2
+998.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-116-1.pdf, id=1726, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-116-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-116-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-116-1.pdf  used on input line 3
+020.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 3020.
+LaTeX Info: Redefining \% on input line 3020.
+LaTeX Info: Redefining \. on input line 3020.
+LaTeX Info: Redefining \% on input line 3020.
+[65 <./figurasR/unnamed-chunk-115-1.pdf> <./figurasR/unnamed-chunk-115-2.pdf>]
+<figurasR/unnamed-chunk-116-2.pdf, id=1745, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-116-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-116-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-116-2.pdf  used on input line 3
+022.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-118-1.pdf, id=1746, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-118-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-118-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-118-1.pdf  used on input line 3
+048.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 3048.
+LaTeX Info: Redefining \% on input line 3048.
+LaTeX Info: Redefining \. on input line 3048.
+LaTeX Info: Redefining \% on input line 3048.
+[66 <./figurasR/unnamed-chunk-116-1.pdf> <./figurasR/unnamed-chunk-116-2.pdf>]
+<figurasR/unnamed-chunk-118-2.pdf, id=1762, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-118-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-118-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-118-2.pdf  used on input line 3
+050.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-119-1.pdf, id=1763, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-119-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-119-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-119-1.pdf  used on input line 3
+070.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 3070.
+LaTeX Info: Redefining \% on input line 3070.
+LaTeX Info: Redefining \. on input line 3070.
+LaTeX Info: Redefining \% on input line 3070.
+[67 <./figurasR/unnamed-chunk-118-1.pdf> <./figurasR/unnamed-chunk-118-2.pdf>]
+<figurasR/unnamed-chunk-119-2.pdf, id=1782, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-119-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-119-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-119-2.pdf  used on input line 3
+072.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+<figurasR/unnamed-chunk-120-1.pdf, id=1783, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-120-1.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-120-1.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-120-1.pdf  used on input line 3
+092.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 3092.
+LaTeX Info: Redefining \% on input line 3092.
+LaTeX Info: Redefining \. on input line 3092.
+LaTeX Info: Redefining \% on input line 3092.
+[68 <./figurasR/unnamed-chunk-119-1.pdf> <./figurasR/unnamed-chunk-119-2.pdf>]
+<figurasR/unnamed-chunk-120-2.pdf, id=1799, 867.24pt x 361.35pt>
+File: figurasR/unnamed-chunk-120-2.pdf Graphic file (type pdf)
+<use figurasR/unnamed-chunk-120-2.pdf>
+Package pdftex.def Info: figurasR/unnamed-chunk-120-2.pdf  used on input line 3
+094.
+(pdftex.def)             Requested size: 452.9679pt x 188.73566pt.
+LaTeX Info: Redefining \. on input line 3146.
+LaTeX Info: Redefining \% on input line 3146.
+LaTeX Info: Redefining \. on input line 3146.
+LaTeX Info: Redefining \% on input line 3146.
+[69 <./figurasR/unnamed-chunk-120-1.pdf> <./figurasR/unnamed-chunk-120-2.pdf>]
+LaTeX Info: Redefining \. on input line 3175.
+LaTeX Info: Redefining \% on input line 3175.
+LaTeX Info: Redefining \. on input line 3175.
+LaTeX Info: Redefining \% on input line 3175.
+[70]
+Cap\'{\i }tulo 5.
+[71
+
+]
+LaTeX Info: Redefining \. on input line 3258.
+LaTeX Info: Redefining \% on input line 3258.
+LaTeX Info: Redefining \. on input line 3258.
+LaTeX Info: Redefining \% on input line 3258.
+[72]
+Ap\'{e}ndice A.
+[73
+
+]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+LaTeX Info: Redefining \. on input line 3403.
+LaTeX Info: Redefining \% on input line 3403.
+LaTeX Info: Redefining \. on input line 3403.
+LaTeX Info: Redefining \% on input line 3403.
+[74]
+LaTeX Info: Redefining \. on input line 3404.
+LaTeX Info: Redefining \% on input line 3404.
+LaTeX Info: Redefining \. on input line 3404.
+LaTeX Info: Redefining \% on input line 3404.
+[75] [76
+
+] (./tfe_principal.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 9--12
+\T1/lmr/m/n/12 (+20) org / Bookshelves / Applied _ Mathematics / Math _ in _ So
+ciety _ (Lippman ) /04 % 3A _
+ []
+
+
+Underfull \hbox (badness 2600) in paragraph at lines 54--58
+\T1/lmr/m/n/12 (+20) k.  URL []$http : / / www . juntadeandalucia . es / instit
 utodeestadisticaycartogra^^\a / iea /
  []
 
 
-Underfull \hbox (badness 1205) in paragraph at lines 74--77
+Underfull \hbox (badness 1158) in paragraph at lines 79--82
 []\T1/lmr/m/n/12 (+20) LOREG. Ley Or-gá-ni-ca del Ré-gi-men Elec-to-ral Ge-ne-r
-al., o.  URL []$http : / / www .
+al., p.  URL []$http : / / www .
  []
 
+[77
 
-Underfull \hbox (badness 3009) in paragraph at lines 79--84
-[]\T1/lmr/m/n/12 (+20) (PDF) Ret-hin-king the D'Hondt met-hod, p.  URL []$https
+]
+Underfull \hbox (badness 3058) in paragraph at lines 84--89
+[]\T1/lmr/m/n/12 (+20) (PDF) Ret-hin-king the D'Hondt met-hod, q.  URL []$https
  : / / www . researchgate .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 79--84
+Underfull \hbox (badness 10000) in paragraph at lines 84--89
 \T1/lmr/m/n/12 (+20) net / publication / 334703296 _ Rethinking _ the _ D '[] H
 ondt _ method$[].  ISSN:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 79--84
+Underfull \hbox (badness 10000) in paragraph at lines 84--89
 \T1/lmr/m/n/12 (+20) http://dx.doi.org/10.1080/2474736X.2019.1625712 Li-brary C
 a-ta-log:
  []
 
-[63
 
-
-
-]
-Underfull \hbox (badness 2035) in paragraph at lines 86--91
-\T1/lmr/m/n/12 (+20) ta-dís-ti-ca / Car-to-gra-fía sec-cio-nes cen-sa-les y ca-
-lle-je-ro de Cen-so Elec-to-ral, q.
+Underfull \hbox (badness 1881) in paragraph at lines 91--96
+[]\T1/lmr/m/n/12 (+20) Productos y Ser-vi-cios / Pu-bli-ca-cio-nes / Pro-duc-to
+s y Ser-vi-cios / In-for-ma-cion
  []
 
 
-Underfull \hbox (badness 1371) in paragraph at lines 86--91
+Underfull \hbox (badness 1221) in paragraph at lines 91--96
+\T1/lmr/m/n/12 (+20) es-ta-dís-ti-ca / Car-to-gra-fía sec-cio-nes cen-sa-les y 
+ca-lle-je-ro de Cen-so Elec-to-ral, r.
+ []
+
+
+Underfull \hbox (badness 1371) in paragraph at lines 91--96
 \T1/lmr/m/n/12 (+20) URL []$https : / / www . ine . es / ss / Satellite ? L = e
 s _ ES & c = Page & cid = 1259952026632 & p =
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 93--96
-[]\T1/lmr/m/n/12 (+20) Simulador elec-to-ral - Brai-num, r.  URL []$http : / / 
+Underfull \hbox (badness 10000) in paragraph at lines 98--101
+[]\T1/lmr/m/n/12 (+20) Simulador elec-to-ral - Brai-num, s.  URL []$http : / / 
 www . brainum . es /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 142--146
+\T1/lmr/m/n/12 (+20) Mathematics _ for _ Everyday _ Life _ (Inigo _ et _ al ) /
+09 % 3A _ _Apportionment / 9 . 02 %
  []
 
 
@@ -3231,52 +2342,31 @@ Make it at least 14.49998pt.
 We now make it that large for the rest of the document.
 This may cause the page layout to be inconsistent, however.
 
-<<<<<<< HEAD
-[62] [63] [64]) [65]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2656.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2656.
-=======
-[64] [65] [66]) [67]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2675.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2675.
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
+[78] [79] [80]) [81]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3434.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3434.
 (./tfe_principal.aux
 LaTeX Info: Redefining \. on input line 22.
 LaTeX Info: Redefining \% on input line 22.
 )
-<<<<<<< HEAD
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2656.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2656.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 3434.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3434.
 
 Package rerunfilecheck Info: File `tfe_principal.out' has not changed.
-(rerunfilecheck)             Checksum: 809AAD0B4714D31F3A66F2F845A335B6;12033.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2656.
+(rerunfilecheck)             Checksum: 58A68728329A48FED702D14782FC1419;25569.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 3434.
  ) 
 Here is how much of TeX's memory you used:
- 32728 strings out of 481228
- 600016 string characters out of 5921397
- 979042 words of memory out of 5000000
- 46678 multiletter control sequences out of 15000+600000
-=======
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2675.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2675.
-
-Package rerunfilecheck Info: File `tfe_principal.out' has not changed.
-(rerunfilecheck)             Checksum: 809AAD0B4714D31F3A66F2F845A335B6;12033.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2675.
- ) 
-Here is how much of TeX's memory you used:
- 32733 strings out of 481228
- 600148 string characters out of 5921397
- 979117 words of memory out of 5000000
- 46679 multiletter control sequences out of 15000+600000
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
- 626481 words of font info for 155 fonts, out of 8000000 for 9000
+ 33339 strings out of 481228
+ 608893 string characters out of 5921397
+ 990469 words of memory out of 5000000
+ 47217 multiletter control sequences out of 15000+600000
+ 628303 words of font info for 167 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,12n,75p,976b,625s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{c:/texlive/2019/te
-xmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/texlive/2019/texmf-dist/fonts/enc
-/dvips/lm/lm-mathsy.enc}{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-ec.en
+ 60i,12n,77p,976b,644s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/texlive/2019/tex
+mf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{c:/texlive/2019/texmf-dist/fonts/enc/dvi
+ps/lm/lm-mathit.enc}{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.en
 c}{c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{c:/texlive/2019
 /texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}<c:/texlive/2019/texmf-dist/fonts/type
 1/public/lm/lmbx12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmbxi1
@@ -3290,19 +2380,14 @@ ic/lm/lmr17.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/
 texlive/2019/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/texlive/2019/texmf-d
 ist/fonts/type1/public/lm/lmri10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/pu
 blic/lm/lmri12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmro8.pfb>
-<c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-<<<<<<< HEAD
-Output written on tfe_principal.pdf (71 pages, 57494075 bytes).
+<c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/texlive/2019/t
+exmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/texlive/2019/texmf-dist/fonts/ty
+pe1/public/lm/lmtt12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmtt
+i10.pfb>
+Output written on tfe_principal.pdf (89 pages, 80376561 bytes).
 PDF statistics:
- 1873 PDF objects out of 2073 (max. 8388607)
- 1559 compressed objects within 16 object streams
- 411 named destinations out of 1000 (max. 500000)
-=======
-Output written on tfe_principal.pdf (75 pages, 57493611 bytes).
-PDF statistics:
- 1892 PDF objects out of 2073 (max. 8388607)
- 1574 compressed objects within 16 object streams
- 415 named destinations out of 1000 (max. 500000)
->>>>>>> 1785fae23468563489ffcede1e929c7ec5386bbb
- 17546 words of extra memory for PDF output out of 20736 (max. 10000000)
+ 2211 PDF objects out of 2487 (max. 8388607)
+ 1882 compressed objects within 19 object streams
+ 448 named destinations out of 1000 (max. 500000)
+ 17990 words of extra memory for PDF output out of 20736 (max. 10000000)
 

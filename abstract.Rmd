@@ -2,5 +2,5 @@
 output: pdf_document
 ---
 
-In this end-of-degree work, we have tried to analyse the different methods of distributing seats, focusing on them from a perspective where the methods are analysed by experimentally varying the seats to be distributed, the number of parties running for election or the concentration of the vote.
-It also analyses the degree of disproportionality resulting from having held elections in Spain according to the different methods of seat distribution.
+In this end-of-degree project, an attempt has been made to analyze the different methods for the distribution of seats, focusing on it from a perspective where each method is analyzed by experimentally varying the seats to be distributed, the number of parties that stand for election or the concentration of the vote.
+Another block analyzes the degree of disproportion and the different seats obtained that result from having carried out the elections in Spain according to the different methods of distribution of seats.

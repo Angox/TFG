@@ -70,9 +70,123 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
-# Apéndice: Título del Apéndice
+# Apéndice: Documentación
+
+Se ha seguido como base para generar el trabajo la guía de Pedro L. Luque-Calvo: *Escribir un Trabajo Fin de Estudios con R Markdown*,  link:(<http://destio.us.es/calvo>) .
+
+## Acceso al código fuente
+
+Los archivos necesarios para generar el trabajo ha sido publicado para su acceso libre en el repositorio GitHub en la siguiente dirección:
+
+> <https://github.com/Angox/TFG>
+
+## Organización de los documentos
+
+``` {.R}
++-- abstract.Rmd
++-- acm-sig-proceedings-long-author-list.csl
++-- apendice01.Rmd
++-- apendice02.Rmd
++-- a_NEWS.Rmd
++-- a_README.Rmd
++-- a_TODO.Rmd
++-- bib
+|   +-- library.bib
+|   +-- Mibiblioteca.bib
+|   +-- paquetemio.bib
+|   \-- paquetes.bib
++-- capitulo01.aux
++-- capitulo01.log
++-- capitulo01.out
++-- capitulo01.pdf
++-- capitulo01.Rmd
++-- capitulo01.toc
++-- capitulo02.pdf
++-- capitulo02.Rmd
++-- capitulo03.pdf
++-- capitulo03.Rmd
++-- capitulo03.tex
++-- capitulo04.Rmd
++-- capitulo05.log
++-- capitulo05.pdf
++-- capitulo05.Rmd
++-- cpimod.sty
++-- Datos
+|   +-- Congreso
++-- figurasR
++-- graficos
++-- latex
++-- logo.png
++-- methods-in-ecology-and-evolution.csl
++-- modelos
++-- portadas
++-- prologo.Rmd
++-- README.md
++-- references.bib
++-- resumen.Rmd
++-- tfe_principal.log
++-- tfe_principal.pdf
++-- tfe_principal.Rmd
++-- tfe_principal.tex
++-- tfe_principal_imprimir2caras.pdf
++-- tfe_principal_librodigital.pdf
+\-- TFG_Git.Rproj
+```
 
 
-## Primera sección
+- El archivo que genera todo el trabajo es *tfe_principal.Rmd*, que ejecuta los siguientes archivos:
+  - Apartado resumen: *resumen.Rmd*
+  - Apartado abstract: *abstract.Rmd*
+  - Capítulo 1: *capitulo01.Rmd*
+  - Capítulo 2: *capitulo02.Rmd*
+  - Capítulo 3: *capitulo03.Rmd*
+  - Capítulo 4: *capitulo04.Rmd*
+  - Capítulo 5: *capitulo05.Rmd*
+  - Apéndice: *apendice01.Rmd*
+  
+  
+- Bibliografía: Se utilizan los archivos que se encuentran en la carpeta *+-- bib*
+
+- Los datos de los resultados de las elecciones al congreso se encuentran en:  
+  +-- Datos    
+  |   +-- Congreso  
+ Los datos han sido obtenidos del ministerio de interior de España en el siguiente link: <http://www.infoelectoral.mir.es/infoelectoral/>
+
+
+### Librerías utilizadas
+
+
+\renewcommand{\arraystretch}{0.6} <!-- decrease line spacing for the table -->
+```{r Reproducibility-SessionInfo-R-packages, echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", out.width='100%', results='asis'}
+
+library("knitr")
+library(devtools)
+library(dplyr)
+library(tibble)
+library(kableExtra)
+library(fs)
+
+df_session_packages <- devtools::session_info()$packages %>% 
+  as.data.frame(.) %>% 
+  filter(attached == TRUE) %>% 
+  dplyr::select(loadedversion, date) %>% 
+  rownames_to_column
+
+colnames(df_session_packages) <- c("Package", "Loaded version", "Date")
+
+kable(
+  df_session_packages, 
+  booktabs = T, 
+  align = "l",
+  caption = "Librerías utilizadas", # complete caption for main document
+  caption.short = " " # "(ref:Reproducibility-SessionInfo-R-packages-caption)" # short caption for LoT
+) %>% 
+  kable_styling(full_width = F,
+                latex_options = c(
+                  "hold_position" # stop table floating
+                ) 
+  ) 
+```
+\renewcommand{\arraystretch}{1} <!-- reset row height/line spacing -->
 
 

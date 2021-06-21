@@ -103,11 +103,11 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
 ```
 
 
-<!-- \cleardoublepage    -->
+<!-- \cleardoublepage -->
 <!-- \listoffigures -->
 <!-- \addcontentsline{toc}{section}{Índice de Figuras} -->
 
-<!-- \cleardoublepage    -->
+<!-- \cleardoublepage -->
 
 <!-- \listoftables -->
 <!-- \addcontentsline{toc}{section}{Índice de Cuadros} -->
@@ -140,15 +140,20 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
 ```{r child = 'capitulo02.Rmd'}
 ```
 
-<!-- \FloatBarrier -->
+\FloatBarrier
 
-<!-- ```{r child = 'capitulo03.Rmd'} -->
-<!-- ``` -->
+```{r child = 'capitulo03.Rmd'}
+```
 
-<!-- \FloatBarrier -->
+\FloatBarrier
 
-<!-- ```{r child = 'capitulo04.Rmd'} -->
-<!-- ``` -->
+```{r child = 'capitulo04.Rmd'}
+```
+
+\FloatBarrier
+
+```{r child = 'capitulo05.Rmd'}
+```
 
 <!-- \FloatBarrier -->
 
@@ -157,12 +162,12 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
 <!-- ``` -->
 
 
-<!-- \FloatBarrier -->
+\FloatBarrier
 
-<!-- \appendix -->
+\appendix
 
-<!-- ```{r child = 'apendice01.Rmd'} -->
-<!-- ``` -->
+```{r child = 'apendice01.Rmd'}
+```
 
 
 

@@ -16,27 +16,28 @@ csl: methods-in-ecology-and-evolution.csl      # no numera mejor en las citas
 #csl: acm-sig-proceedings-long-author-list.csl  # numera peor en las citas
 link-citations: yes
 output: 
-  pdf_document:
-    keep_tex: no
+  pdf_document: 
+    keep_tex: yes
     number_sections: yes
-    citation_package: natbib  # comentado usa: pandoc-citeproc
-    #toc: yes
+    citation_package: natbib
     fig_caption: yes
     template: latex/templateMemoriaTFE.tex
-    includes:
-      #before_body: portadas/latex_paginatitulo_modTFE.tex
-      #in_header: latex/latex_preambulo.tex
-      #after_body: latex/latex_antes_enddoc.tex
+    includes: null
+    fig_width: 12
+    fig_height: 5
+editor_options: 
+  chunk_output_type: inline
 ---
 
 
 
 ```{r include=FALSE}
-knitr::opts_chunk$set(fig.path = 'figurasR/',
-                      echo = FALSE, warning = FALSE, message = FALSE,
-                      fig.pos="H",fig.align="center",out.width="95%",
-                      cache=FALSE)
-
+knitr::opts_chunk$set(
+  fig.path = "figurasR/",
+  echo = FALSE, warning = FALSE, message = FALSE,
+  fig.pos = "H", fig.align = "center", out.width = "100%",
+  cache = FALSE
+)
 ```
 
 
@@ -70,6 +71,2500 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
 \renewcommand{\footrulewidth}{0.4pt}
 
 
-# Título del Capítulo
+# Elecciones españolas según distintos métodos de reparto de escaños.
 
-## Primera sección
+  A continuación analizaremos el reparto de escaños para el congreso de las distintas elecciones en España desde el 1977. Aplicando diferentes métodos de reparto de escaños, analizaremos los resultados obtenidos en cada elección. Una vez obtenidos el reparto de escaños según los distintos métodos procederemos a obtener la proporcionalidad para cada método y así analizar la desproporción tanto por comunidades autónomas como por España en su conjunto.
+  
+## Procedimiento
+
+  Para ser capaces de realizar el análisis pretendido se ha procedido de este modo:
+  
+  
+  - En primer lugar se han obtenido los resultados de las elecciones al congreso de la página web del ministerio del interior[^4], desde el año 1977 hasta las últimas elecciones del 2019.
+  
+[^4]: [Consulta de resultados electorales Ministerio del interior](http://www.infoelectoral.mir.es/min/ "Ministerio del interior")
+  
+  - Creación de las distintas funciones para los distintos métodos de reparto de escaños así como la función para calcular la desproporción. Se han empleado distintas librerías de *R* tal y como *openxlsx* para leer los diferentes resultados electorales, *electoral* como apoyo para escribir las funciones, *data.table*, *dplyr* y *tidyr* para manipular los datos, *ggplot2* y *ggpol* para la creación de los distintos gráficos. Como muestra se presenta la función para el método D´Hondt:
+  
+  \pagebreak
+  
+``` {.R}
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 1:n_escannos
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+```
+
+  - Una vez obtenidos los resultados electorales y creado las funciones necesarias, se procede a aplicar las funciones creadas con los resultados electorales.
+  
+  - Creación de los gráficos y análisis de los resultados, tanto para el reparto de escaños como para los resultados de la desproporción por comunidades autónomas y España en su conjunto.
+  
+  
+```{r}
+library(data.table)
+# Variables
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 1:n_escannos
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_sainte <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 2 * (1:n_escannos) - 1
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_modsainte <- function(partidos, votos,
+                               n_escannos,
+                               couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- c(1, (10 * (2:n_escannos) - 5) / 7)
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_imperiali <- function(partidos, votos,
+                               n_escannos,
+                               couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- ((1:n_escannos) + 1) / 2
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_huntington <- function(partidos, votos,
+                                n_escannos,
+                                couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- sqrt((1:n_escannos) * ((1:n_escannos) - 1))
+  G <- sapply(div, function(x) votos / x)
+  G[is.na(G)] <- 0
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Fix seats
+  if(sum(o)>n_escannos){
+    if(n_escannos==1) {
+      G <- cbind("n"=0,votos)
+      cuota <- G[,2][order(G[,2], decreasing = T)][n_escannos]
+      W1 <- (G[,2] >= cuota)
+      seats <- as.numeric(W1)
+      o <- seats
+    } else
+    cuota <- G[,2:n_escannos][order(G[,2:n_escannos], decreasing = T)][n_escannos]
+    W2 <- as.matrix(G[,2:n_escannos] >= cuota)
+    seats <- rowSums(W2)
+    o <- seats
+  }
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_adams <- function(partidos, votos,
+                           n_escannos,
+                           couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 1:n_escannos - 1
+  div[is.na(div)] <- 0
+  G <- sapply(div, function(x) votos / x)
+  G[is.na(G)] <- 0
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  
+  # Fix seats
+  if(sum(o)>n_escannos){
+    if(n_escannos==1) {
+      G <- cbind("n"=0,votos)
+      cuota <- G[,2][order(G[,2], decreasing = T)][n_escannos]
+      W1 <- (G[,2] >= cuota)
+      seats <- as.numeric(W1)
+      o <- seats
+    } else
+    cuota <- G[,2:n_escannos][order(G[,2:n_escannos], decreasing = T)][n_escannos]
+    W2 <- as.matrix(G[,2:n_escannos] >= cuota)
+    seats <- rowSums(W2)
+    o <- seats
+  }
+  
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_danish <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 3 * (1:n_escannos) - 2
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_hare <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+  
+  # Escaños
+  div <- trunc(nv/n_escannos)  # Parte entera
+  G <- sapply(div, function(x) votos / x)
+  o <- trunc(G)
+  if(sum(o)!=n_escannos){
+    resto <- G-o
+    cuota <- resto[order(resto, decreasing = T)][n_escannos-sum(o)]
+    W <- (resto >= cuota)&(cumsum(resto)<=(n_escannos-sum(o))) 
+    seats <- o+rowSums(W)
+    o <- seats}
+  
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_droop <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+  
+  # Escaños
+  div <- trunc(nv/(n_escannos+1))  # Parte entera
+  G <- sapply(div, function(x) votos / x)
+  o <- trunc(G)
+  #Fix
+  while(sum(o)<n_escannos){
+    resto <- G-o 
+    faltan <- n_escannos-sum(o)
+    cuota <- resto[order(resto, decreasing = T)][faltan]
+    W <- (resto >= cuota)
+    seats <- rowSums(W)
+    o <- o+seats
+    }
+  
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_imperialilr <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+  
+  # Escaños
+  div <- trunc(nv/(n_escannos+2))  # Parte entera
+  G <- sapply(div, function(x) votos / x)
+  o <- trunc(G)
+  while(sum(o)<n_escannos){
+    resto <- G-o 
+    faltan <- n_escannos-sum(o)
+    cuota <- resto[order(resto, decreasing = T)][faltan]
+    W <- (resto >= cuota)
+    seats <- rowSums(W)
+    o <- o+seats
+    }
+  
+  # if(sum(o)!=n_escannos){
+  #   resto <- G-o
+  #   cuota <- resto[order(resto, decreasing = T)][n_escannos-sum(o)]
+  #   W <- (resto >= cuota)&(cumsum(resto)<=(n_escannos-sum(o))) 
+  #   seats <- o+rowSums(W)
+  #   o <- seats}
+  
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+```
+
+```{r Funcion desproporción}
+
+desproporción <- function(s, v) {
+  s <- as.vector(s)
+  v <- as.vector(v)
+  l_s <- length(s)
+  s_s <- sum(s)
+  s_v <- sum(v)
+  p_s <- s / s_s
+  p_v <- v / s_v
+  o <- (1 / l_s) * sum(abs(p_s - p_v))
+  o
+}
+```
+
+```{r }
+library(openxlsx)
+library(electoral)
+setwd("~/Universidad/TFG/TFG_Git")
+
+generardato <- function(eleccion) {
+  datos <- read.xlsx(xlsxFile = paste("Datos/Congreso/", list.files(path = "~/Universidad/TFG/TFG_Git/Datos/Congreso")[eleccion], sep = ""))
+  # Eliminar fila con nombres y sustituirlos por las siglas
+  datos[3, ][!is.na(datos[1, ])] <- datos[1, ][!is.na(datos[1, ])]
+  datos <- datos[-nrow(datos), ]
+  colnames(datos) <- datos[3, ]
+  datos <- datos[-c(1, 2, 3), ]
+  # Columnas como números
+  datos[, 4:ncol(datos)] <- apply(datos[, 4:ncol(datos)], 2, as.numeric)
+  row.names(datos) <- NULL
+  # Quedarnos con las columnas deseadas
+  datos$asientos <- rowSums(datos[, (colnames(datos) %in% c("Diputados"))])
+  datos <- datos[, !(colnames(datos) %in% c("Diputados"))]
+  if (eleccion == 1) datos[15, 15] <- 23866
+  datos <<- datos
+}
+```
+
+
+```{r crear funciones}
+dhondt <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_dhondt <<- asientos
+  disprop_dhondt <<- disprop
+}
+# sainte
+sainte <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_sainte <<- asientos
+  disprop_sainte <<- disprop
+}
+# modsainte
+modsainte <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_modsainte <<- asientos
+  disprop_modsainte <<- disprop
+}
+# huntington
+huntington <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+    asientos$Escanos[is.na(asientos$Escanos)] <- 0
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_huntington <<- asientos
+  disprop_huntington <<- disprop
+}
+# imperiali
+imperiali <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_imperiali <<- asientos
+  disprop_imperiali <<- disprop
+}
+# adams
+adams <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+    asientos$Escanos[is.na(asientos$Escanos)] <- 0
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_adams <<- asientos
+  disprop_adams <<- disprop
+}
+# danish
+danish <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_danish <<- asientos
+  disprop_danish <<- disprop
+}
+# hare
+hare <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_hare(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_hare <<- asientos
+  disprop_hare <<- disprop
+}
+# droop
+droop <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_droop(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_droop <<- asientos
+  disprop_droop <<- disprop
+}
+# imperialilr
+imperialilr <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_imperialilr(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_imperialilr <<- asientos
+  disprop_imperialilr <<- disprop
+}
+```
+ \newpage
+
+## Año 1977
+
+
+
+
+
+
+```{r }
+generardato(eleccion = 1)
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
+```
+
+
+
+
+### Comparativa de asientos obtenidos
+
+```{r}
+
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(ggpol)
+
+
+fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
+fe <- full_join(fe, resul_sainte, by = "Partidos")
+fe <- full_join(fe, resul_modsainte, by = "Partidos")
+fe <- full_join(fe, resul_adams, by = "Partidos")
+fe <- full_join(fe, resul_huntington, by = "Partidos")
+fe <- full_join(fe, resul_imperiali, by = "Partidos")
+fe <- full_join(fe, resul_hare, by = "Partidos")
+fe <- full_join(fe, resul_droop, by = "Partidos")
+fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
+
+
+
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
+  key = "Metodo", value = "Asientos"
+)
+fe$Asientos <- replace_na(fe$Asientos, 0)
+fe1 <- as.data.table(fe)
+Asientos_1977 <- fe1
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+
+filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[fe$Partidos %in% filtro, ]
+
+#ggplot(fe, aes(Metodo, Asientos)) +
+#  geom_col(position = "dodge", aes(fill = Metodo)) +
+#facet_grid(~Partidos)+
+#  labs(title = "Asientos según método de reparto",subtitle = "En los 6 partidos más votados",caption = "Elaboración propia: Angel González",x=NULL)+
+#  guides(fill = "none")+theme(axis.text.x = element_text(angle = 45,hjust = 1))
+
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
+  geom_tile(aes(fill = Asientos)) +
+  scale_fill_gradient(low = "green", high = "red") +
+  coord_flip() +
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  guides(fill = "none")
+
+
+
+
+hemiciclo <- ggplot(fe) + 
+  geom_parliament(aes(seats = Asientos, fill = Partidos), color = "black") + 
+  scale_fill_manual(values=1+seq_len(length(fe[fe$Metodo=="D´Hondt",]$Partidos))  , labels = fe[fe$Metodo=="D´Hondt",]$Partidos) +
+  coord_fixed() + 
+  theme_void()+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  facet_wrap(Metodo~.)+theme(legend.position = c(0.7, 0.1),
+                             legend.key.size = unit(.2, "cm"),
+  legend.key.width = unit(0.2,"cm") ,legend.text = element_text(size=6, face="bold"));hemiciclo;votos_recap
+```
+
+
+
+En estas primeras elecciones de 1977 podemos observar que la fuerza más votada en las elecciones es el partido *Unión de Centro democrático* seguido del *PSOE*. Observamos que según el método vigente en España, el método D´Hondt, el partido *UCD*, que ganaría las elecciones, tendría una gran diferencia de votos respecto a los demás partidos, por lo que facilitaría la gobernanza.  
+
+Comparando entre métodos de reparto observamos que el que más escaños da a los partidos grandes es el método imperiali, que beneficia mucho a los partidos más votados y penaliza mucho en escaños a los partidos tanto medianos como poco votados. El método actual en España también tiene un comportamiento similar al Imperiali aunque no tan acusado. En la otra parte de la balanza encontramos al método Adams, el cual da muy pocos escaños al partidos más votado y a los partidos medianos les beneficia.  
+
+En estas elecciones no se obtiene la mayoría absoluta en ningún método excepto en el método Imperiali, en los demás métodos el partido ganador debería de aliarse con uno o más partidos para obtener la mayoría absoluta, los grandes perdedores en términos de escaños obtenidos son el partido comunista y Alianza Popular, que podrían obtener hasta 10 escaños más de haber optado por otro método de reparto de votos.  
+
+
+
+
+
+### Desproporción
+```{r}
+metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
+
+disprop_1977 <- bind_cols(
+  "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
+  "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+
+
+disprop_1977 <- as.data.table(disprop_1977)
+dde <- as.data.table(gather(disprop_1977,all_of(metodos),key="Metodos",value = "Disprop"))
+ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
+  geom_col(position="dodge",aes(Metodos,fill=Comunidad),color="black")+
+   labs(title = "Desproporción por Comunidades ",subtitle = "Según método de reparto",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  theme(legend.position = "bottom")
+
+
+disprop_mean <- c(
+  mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
+  mean(disprop_modsainte), mean(disprop_adams),
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
+)
+Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
+
+Disproporc <- Disproporc[order(Disproporc$c), ]
+
+ggplot(Disproporc, aes(reorder(m, -c), c)) +
+  geom_col(aes(fill = disprop_mean)) +
+  coord_flip()+
+   labs(title = "Desproporción según método de reparto",caption = "Elaboración propia: Angel González",x="Métodos",y="Desproporción")+
+  guides(fill="none")
+```
+
+En el presente gráfico, en el que se mide la desproporción por comunidades, observamos que en general entre todos los métodos las comunidades más desproporcionadas son las ciudades de Ceuta y Melilla, resultado lógico en tanto que al repartirse un único escaño es el partido más votado únicamente el que obtiene el escaño. Es común entre todos los métodos que la comunidad de Madrid sea la comunidad más proporcionada, esto es debido a que es la comunidad en la que se reparten más asientos y también la más poblada, por lo que cuando se reparten los asientos por provincias, al utilizar el método D´Hondt, como hemos visto beneficia a los lugares con más población.  
+En general los métodos que presentan una menor diferencia de desproporción entre las distintas comunidades autónomas son el método Danish, LR-Hare y el Saint-Lague, en cambio las que presentan una mayor diferencia entre comunidades son el método Imperiali, Adams y el Huntington-Hill.  
+
+
+Si nos centramos en el gráfico de la desproporción media según el método de reparto podemos observar que la menor desproporción se encuentra en los métodos LR-Hare, Danish y Sainte-Lague, mientras que la mayor desproporción se encuentran en el método Imperiali y Adams. Especial caso hacemos al método D´Hondt al ser el método utilizado actualmente en España, observamos que ni es el mejor método ni tampoco es de los peores, debido a ello sería conveniente cambiar el método de reparto a otro mejor, que podría ser o bien el Sainte-Lague,LR-Hare o el Danish.  
+
+## Año 1979
+
+```{r }
+generardato(eleccion = 2)
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
+```
+
+
+
+
+### Comparativa de asientos obtenidos
+
+```{r}
+
+
+fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
+fe <- full_join(fe, resul_sainte, by = "Partidos")
+fe <- full_join(fe, resul_modsainte, by = "Partidos")
+fe <- full_join(fe, resul_adams, by = "Partidos")
+fe <- full_join(fe, resul_huntington, by = "Partidos")
+fe <- full_join(fe, resul_imperiali, by = "Partidos")
+fe <- full_join(fe, resul_hare, by = "Partidos")
+fe <- full_join(fe, resul_droop, by = "Partidos")
+fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
+
+
+
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
+  key = "Metodo", value = "Asientos"
+)
+fe$Asientos <- replace_na(fe$Asientos, 0)
+fe1 <- as.data.table(fe)
+Asientos_1979 <- fe1
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+
+filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[fe$Partidos %in% filtro, ]
+
+#ggplot(fe, aes(Metodo, Asientos)) +
+#  geom_col(position = "dodge", aes(fill = Metodo)) +
+#facet_grid(~Partidos)+
+#  labs(title = "Asientos según método de reparto",subtitle = "En los 6 partidos más votados",caption = "Elaboración propia: Angel González",x=NULL)+
+#  guides(fill = "none")+theme(axis.text.x = element_text(angle = 45,hjust = 1))
+
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
+  geom_tile(aes(fill = Asientos)) +
+  scale_fill_gradient(low = "green", high = "red") +
+  coord_flip() +
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  guides(fill = "none")
+
+hemiciclo <- ggplot(fe) + 
+  geom_parliament(aes(seats = Asientos, fill = Partidos), color = "black") + 
+  scale_fill_manual(values=1+seq_len(length(fe[fe$Metodo=="D´Hondt",]$Partidos))  , labels = fe[fe$Metodo=="D´Hondt",]$Partidos) +
+  coord_fixed() + 
+  theme_void()+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  facet_wrap(Metodo~.)+theme(legend.position = c(0.7, 0.1),
+                             legend.key.size = unit(.2, "cm"),
+  legend.key.width = unit(0.2,"cm") ,legend.text = element_text(size=6, face="bold"));hemiciclo;votos_recap
+```
+
+En estas elecciones de 1979 el partido más votado fué *UCD* seguido del *PSOE*, según los distintos métodos de reparto únicamente en el método Imperiali *UCD* conseguiría la mayoría absoluta, en todos los demás métodos de reparto no se alcanza la mayoría absoluta, los partidos más castigados por utilizar el método D´Hondt son el partido comunista y coalición Democrática, que podrían hasta doblar el número de asientos obtenidos dependiendo del método de reparto que se haya realizado. En estas elecciones podemos decir que hay dos grandes partidos y dos medianos, UCD y el PSOE son los más grandes y el partido comunista y coalición democrática son los partidos medianos, después ya se encuentran todos los demás.
+
+### Desproporción
+```{r}
+
+
+disprop_1979 <- bind_cols(
+  "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
+  "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+
+
+disprop_1979 <- as.data.table(disprop_1979)
+dde <- as.data.table(gather(disprop_1979,all_of(metodos),key="Metodos",value = "Disprop"))
+ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
+  geom_col(position="dodge",aes(Metodos,fill=Comunidad),color="black")+
+   labs(title = "Desproporción por Comunidades ",subtitle = "Según método de reparto",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  theme(legend.position = "bottom")
+
+
+disprop_mean <- c(
+  mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
+  mean(disprop_modsainte), mean(disprop_adams),
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
+)
+Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
+
+Disproporc <- Disproporc[order(Disproporc$c), ]
+
+ggplot(Disproporc, aes(reorder(m, -c), c)) +
+  geom_col(aes(fill = disprop_mean)) +
+  coord_flip()+
+   labs(title = "Desproporción según método de reparto",caption = "Elaboración propia: Angel González",x="Métodos",y="Desproporción")+
+  guides(fill="none")
+```
+
+En el presente gráfico vemos como respecto a las anteriores elecciones hay una mayor diferencia de desproporción entre comunidades, las ciudades de Ceuta y Melilla siguen presentando la mayor desproporción como es habitual y la comunidad de Madrid la menor desproporción. El comportamiento de la desproporción en las comunidades se puede agrupar en dos grupos, un grupo compuesto por los métodos Huntington-Hill y Adams, y otro grupo con los restantes métodos.  
+
+Según la desproporción media los peores métodos de reparto se pueden agrupar en tres, el método Imperiali, el Huntington-Hill, y el Adams, y los mejores métodos de reparto en tres métodos, el LR-Hare, Danish y el Sainte-Lague. En el caso del método D´Hondt se encuentra en un término medio, por lo que sería conveniente cambiar el método de reparto a uno más proporcional, que puede ser el Danish o el Sainte-Lague dentro de los métodos de promedio mayor o bien por el LR-Hare de entre los métodos de resto mayor.  
+
+## Año 1982
+
+
+
+```{r }
+generardato(eleccion = 3)
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
+```
+
+
+
+### Comparativa de asientos obtenidos
+
+```{r}
+
+
+fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
+fe <- full_join(fe, resul_sainte, by = "Partidos")
+fe <- full_join(fe, resul_modsainte, by = "Partidos")
+fe <- full_join(fe, resul_adams, by = "Partidos")
+fe <- full_join(fe, resul_huntington, by = "Partidos")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
+
+
+
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
+  key = "Metodo", value = "Asientos"
+)
+fe$Asientos <- replace_na(fe$Asientos, 0)
+fe1 <- as.data.table(fe)
+Asientos_1982 <- fe1
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+
+filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[fe$Partidos %in% filtro, ]
+
+#ggplot(fe, aes(Metodo, Asientos)) +
+#  geom_col(position = "dodge", aes(fill = Metodo)) +
+#facet_grid(~Partidos)+
+#  labs(title = "Asientos según método de reparto",subtitle = "En los 6 partidos más votados",caption = "Elaboración propia: Angel González",x=NULL)+
+#  guides(fill = "none")+theme(axis.text.x = element_text(angle = 45,hjust = 1))
+
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
+  geom_tile(aes(fill = Asientos)) +
+  scale_fill_gradient(low = "green", high = "red") +
+  coord_flip() +
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  guides(fill = "none")
+
+hemiciclo <- ggplot(fe) + 
+  geom_parliament(aes(seats = Asientos, fill = Partidos), color = "black") + 
+  scale_fill_manual(values=1+seq_len(length(fe[fe$Metodo=="D´Hondt",]$Partidos))  , labels = fe[fe$Metodo=="D´Hondt",]$Partidos) +
+  coord_fixed() + 
+  theme_void()+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  facet_wrap(Metodo~.)+theme(legend.position = c(0.7, 0.1),
+                             legend.key.size = unit(.2, "cm"),
+  legend.key.width = unit(0.2,"cm") ,legend.text = element_text(size=6, face="bold"));hemiciclo;votos_recap
+```
+
+En estas elecciones de 1982 el partido más votado es el *PSOE* el cual según la mayoría de los métodos de reparto, incluido el método D´Hondt, alcanza la mayoría absoluta. Son unas elecciones en los que el voto se concentra únicamente en dos partidos, que son el *PSOE* y *Alianza Popular*, pero con una gran diferencia de asientos entre ellos, donde el *PSOE* casi dobla en escaños a *Alianza Popular*. El partido menos beneficiado en este año es *UCD*, que según el método D´Hondt obtendría 11 escaños mientras que si se optase por otro método más proporcional como puede ser el método Danish o bien el Sainte-Lague podría multiplicar sus escaños por 3 o 4.
+
+### Desproporción
+```{r}
+
+
+disprop_1982 <- bind_cols(
+  "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
+  "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+
+
+disprop_1982 <- as.data.table(disprop_1982)
+dde <- as.data.table(gather(disprop_1982,all_of(metodos),key="Metodos",value = "Disprop"))
+ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
+  geom_col(position="dodge",aes(Metodos,fill=Comunidad),color="black")+
+   labs(title = "Desproporción por Comunidades ",subtitle = "Según método de reparto",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  theme(legend.position = "bottom")
+
+
+disprop_mean <- c(
+  mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
+  mean(disprop_modsainte), mean(disprop_adams),
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
+)
+Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
+
+Disproporc <- Disproporc[order(Disproporc$c), ]
+
+ggplot(Disproporc, aes(reorder(m, -c), c)) +
+  geom_col(aes(fill = disprop_mean)) +
+  coord_flip()+
+   labs(title = "Desproporción según método de reparto",caption = "Elaboración propia: Angel González",x="Métodos",y="Desproporción")+
+  guides(fill="none")
+```
+
+
+Según la gráfica de desproporción por comunidades es un año en el que generalmente no hay mucha diferencia de desproporción entre ellas, este año las comunidades más desproporcionadas son la comunidad Foral de Navarra y Cantabria sin contar las usuales de Ceuta y Melilla,mientras que las comunidades más proporcionadas son la comunidad de Madrid y la región de Murcia.  
+
+Según la desproporción media, se reconocen tres grupos distintos, un grupo muy desproporcionado, con el método Adams como el más desproporcionado, otro grupo medio en donde se encontraría el método D´Hondt y un último grupo el cual sería el más proporcionado en el que se encontraría el método Danish, LR-Hare y el Saint-Lague.   
+
+## Año 1986
+
+
+
+```{r }
+generardato(eleccion = 4)
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
+```
+
+
+
+### Comparativa de asientos obtenidos
+
+```{r }
+
+
+fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
+fe <- full_join(fe, resul_sainte, by = "Partidos")
+fe <- full_join(fe, resul_modsainte, by = "Partidos")
+fe <- full_join(fe, resul_adams, by = "Partidos")
+fe <- full_join(fe, resul_huntington, by = "Partidos")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
+
+
+
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
+  key = "Metodo", value = "Asientos"
+)
+fe$Asientos <- replace_na(fe$Asientos, 0)
+fe1 <- as.data.table(fe)
+Asientos_1986 <- fe1
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+
+filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[fe$Partidos %in% filtro, ]
+
+#ggplot(fe, aes(Metodo, Asientos)) +
+#  geom_col(position = "dodge", aes(fill = Metodo)) +
+#facet_grid(~Partidos)+
+#  labs(title = "Asientos según método de reparto",subtitle = "En los 6 partidos más votados",caption = "Elaboración propia: Angel González",x=NULL)+
+#  guides(fill = "none")+theme(axis.text.x = element_text(angle = 45,hjust = 1))
+
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
+  geom_tile(aes(fill = Asientos)) +
+  scale_fill_gradient(low = "green", high = "red") +
+  coord_flip() +
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  guides(fill = "none")
+
+hemiciclo <- ggplot(fe) + 
+  geom_parliament(aes(seats = Asientos, fill = Partidos), color = "black") + 
+  scale_fill_manual(values=1+seq_len(length(fe[fe$Metodo=="D´Hondt",]$Partidos))  , labels = fe[fe$Metodo=="D´Hondt",]$Partidos) +
+  coord_fixed() + 
+  theme_void()+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  facet_wrap(Metodo~.)+theme(legend.position = c(0.7, 0.1),
+                             legend.key.size = unit(.2, "cm"),
+  legend.key.width = unit(0.2,"cm") ,legend.text = element_text(size=6, face="bold"));hemiciclo;votos_recap
+```
+
+En estas elecciones de 1986 el partido más votado fué el *PSOE*, tal y como sucedió en las anteriores elecciones, son también unas elecciones en donde hay únicamente dos partidos mayoritarios, *PSOE* y *Coalición Popular*, ocurre en estas elecciones el mismo escenario que en las anteriores elecciones, en donde el primer partido casi dobla en escaños al segundo partido, aunque en este caso ya se puede apreciar que la diferencia se va reduciendo entre los dos grandes partidos, en general el PSOE alcanza la mayoría absoluta pero en este año si utilizásemos los métodos más proporcionados es interesante observar como perdería la mayoría absoluta tanto utilizando el método Danish como el Sainte-Lague.  
+Este año también reconocemos un partido que podría decirse de nivel de votos medio que queda muy dañado por el método de reparto D´Hondt, es el partido *Centro Democrático y Social*, el cual de utilizar los métodos más proporcionados podría hasta duplicar sus escaños en el caso de optar por el método Danish.  
+
+### Desproporción
+```{r}
+
+
+disprop_1986 <- bind_cols(
+  "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
+  "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+
+
+disprop_1986 <- as.data.table(disprop_1986)
+dde <- as.data.table(gather(disprop_1986,all_of(metodos),key="Metodos",value = "Disprop"))
+ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
+  geom_col(position="dodge",aes(Metodos,fill=Comunidad),color="black")+
+   labs(title = "Desproporción por Comunidades ",subtitle = "Según método de reparto",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  theme(legend.position = "bottom")
+
+
+disprop_mean <- c(
+  mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
+  mean(disprop_modsainte), mean(disprop_adams),
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop,na.rm = T),mean(disprop_imperialilr)
+)
+Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
+
+Disproporc <- Disproporc[order(Disproporc$c), ]
+
+ggplot(Disproporc, aes(reorder(m, -c), c)) +
+  geom_col(aes(fill = disprop_mean)) +
+  coord_flip()+
+   labs(title = "Desproporción según método de reparto",caption = "Elaboración propia: Angel González",x="Métodos",y="Desproporción")+
+  guides(fill="none")
+```
+
+Este año en el caso de la desproporción por comunidades podemos observar que aumenta la diferencia respecto a las pasadas elecciones, una de las comunidades más proporcionadas es la comunidad de Asturias mientras que Aragón pasa a ser ahora una de las que más desproporción presenta. En los extremos no hay novedades, Madrid sigue siendo la más proporcionada y las ciudades de Ceuta y Melilla las que menos proporcionadas resultan.  
+
+Según el método de reparto este año el método Imperiali es el más desproporcionado con una gran diferencia respecto a los restantes métodos, los demás métodos se sitúan en un mismo grupo, en donde los métodos más proporcionados este año son los métodos LR-Hare y Danish seguido muy de cerca por el Sainte-Lague.  
+
+## Año 1989
+
+```{r }
+generardato(eleccion = 5)
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
+```
+
+
+
+### Comparativa de asientos obtenidos
+
+```{r}
+
+
+fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
+fe <- full_join(fe, resul_sainte, by = "Partidos")
+fe <- full_join(fe, resul_modsainte, by = "Partidos")
+fe <- full_join(fe, resul_adams, by = "Partidos")
+fe <- full_join(fe, resul_huntington, by = "Partidos")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
+
+
+
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
+  key = "Metodo", value = "Asientos"
+)
+fe$Asientos <- replace_na(fe$Asientos, 0)
+fe1 <- as.data.table(fe)
+Asientos_1989 <- fe1
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+
+filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[fe$Partidos %in% filtro, ]
+
+#ggplot(fe, aes(Metodo, Asientos)) +
+#  geom_col(position = "dodge", aes(fill = Metodo)) +
+#facet_grid(~Partidos)+
+#  labs(title = "Asientos según método de reparto",subtitle = "En los 6 partidos más votados",caption = "Elaboración propia: Angel González",x=NULL)+
+#  guides(fill = "none")+theme(axis.text.x = element_text(angle = 45,hjust = 1))
+
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
+  geom_tile(aes(fill = Asientos)) +
+  scale_fill_gradient(low = "green", high = "red") +
+  coord_flip() +
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  guides(fill = "none")
+
+hemiciclo <- ggplot(fe) + 
+  geom_parliament(aes(seats = Asientos, fill = Partidos), color = "black") + 
+  scale_fill_manual(values=1+seq_len(length(fe[fe$Metodo=="D´Hondt",]$Partidos))  , labels = fe[fe$Metodo=="D´Hondt",]$Partidos) +
+  coord_fixed() + 
+  theme_void()+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  facet_wrap(Metodo~.)+theme(legend.position = c(0.7, 0.1),
+                             legend.key.size = unit(.2, "cm"),
+  legend.key.width = unit(0.2,"cm") ,legend.text = element_text(size=6, face="bold"));hemiciclo;votos_recap
+```
+
+En estas elecciones de 1989 el partido más votado es, como sucedió el las anteriores elecciones, el *PSOE*, vemos como aparece por primera vez el *Partido Popular* como segunda fuerza tomando el puesto que antes tenía *Coalición Popular*, estas elecciones también son muy bipartidistas aunque se va debilitando ese bipartidismo, ahora podemos decir que hay dos partidos hegemónicos, PSOE y PP, y tres partidos medianos, los cuales serían el Centro Democrático y Social, Izquierda Unida y Convergencia y Unión, de todos estos partidos los más desfavorecidos por la utilización del método D´Hondt son IU y Centro Democrático, los cuales de haber utilizado los métodos más proporcionales podrían hasta duplicar su presencia en el congreso. Por la otra parte en el caso del PSOE pasaría de alcanzar la mayoría absoluta justa con 175 escaños a perder la mayoría absoluta en el caso de optar por los métodos más proporcionales.
+
+### Desproporción
+```{r}
+
+
+disprop_1989 <- bind_cols(
+  "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
+  "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+
+
+disprop_1989 <- as.data.table(disprop_1989)
+dde <- as.data.table(gather(disprop_1989,all_of(metodos),key="Metodos",value = "Disprop"))
+ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
+  geom_col(position="dodge",aes(Metodos,fill=Comunidad),color="black")+
+   labs(title = "Desproporción por Comunidades ",subtitle = "Según método de reparto",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  theme(legend.position = "bottom")
+
+
+disprop_mean <- c(
+  mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
+  mean(disprop_modsainte), mean(disprop_adams),
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
+)
+Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
+
+Disproporc <- Disproporc[order(Disproporc$c), ]
+
+ggplot(Disproporc, aes(reorder(m, -c), c)) +
+  geom_col(aes(fill = disprop_mean)) +
+  coord_flip()+
+   labs(title = "Desproporción según método de reparto",caption = "Elaboración propia: Angel González",x="Métodos",y="Desproporción")+
+  guides(fill="none")
+```
+
+Este año aumenta ligeramente la diferencia de desproporción entre comunidades, sin encontrar novedades en las comunidades más proporcionales, Madrid, y las más desproporcionadas, las ciudades de Ceuta y Melilla. Observando los métodos de reparto hay dos grupos diferenciados, uno en el que se encuentran el método Adams, LR-Imperiali y el método de Huntington-Hill, en los cuales no se encuentran comunidades con picos de desproporción pero por el lado contrario su desproporción media es alta, y otro grupo que serían los restantes métodos los cuales todos presentan unos mismos picos máximos como míninos.  
+
+Estas elecciones de 1989 la desproporción media se agrupa en tres grupos, de alta, media y baja desproporción, el más desproporcionado vuelve a ser el método Imperiali, el método D´Hondt sigue en el grupo medio y el método más proporcionado vuelve a ser el Danish aunque le sigue muy cerca el método Sainte-Lague.  
+
+
+
+## Año 1993
+
+```{r }
+generardato(eleccion = 6)
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
+```
+
+
+
+### Comparativa de asientos obtenidos
+
+```{r}
+
+
+fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
+fe <- full_join(fe, resul_sainte, by = "Partidos")
+fe <- full_join(fe, resul_modsainte, by = "Partidos")
+fe <- full_join(fe, resul_adams, by = "Partidos")
+fe <- full_join(fe, resul_huntington, by = "Partidos")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
+
+
+
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
+  key = "Metodo", value = "Asientos"
+)
+fe$Asientos <- replace_na(fe$Asientos, 0)
+fe1 <- as.data.table(fe)
+Asientos_1993 <- fe1
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+
+filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[fe$Partidos %in% filtro, ]
+
+#ggplot(fe, aes(Metodo, Asientos)) +
+#  geom_col(position = "dodge", aes(fill = Metodo)) +
+#facet_grid(~Partidos)+
+#  labs(title = "Asientos según método de reparto",subtitle = "En los 6 partidos más votados",caption = "Elaboración propia: Angel González",x=NULL)+
+#  guides(fill = "none")+theme(axis.text.x = element_text(angle = 45,hjust = 1))
+
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
+  geom_tile(aes(fill = Asientos)) +
+  scale_fill_gradient(low = "green", high = "red") +
+  coord_flip() +
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  guides(fill = "none")
+
+hemiciclo <- ggplot(fe) + 
+  geom_parliament(aes(seats = Asientos, fill = Partidos), color = "black") + 
+  scale_fill_manual(values=1+seq_len(length(fe[fe$Metodo=="D´Hondt",]$Partidos))  , labels = fe[fe$Metodo=="D´Hondt",]$Partidos) +
+  coord_fixed() + 
+  theme_void()+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  facet_wrap(Metodo~.)+theme(legend.position = c(0.7, 0.1),
+                             legend.key.size = unit(.2, "cm"),
+  legend.key.width = unit(0.2,"cm") ,legend.text = element_text(size=6, face="bold"));hemiciclo;votos_recap
+```
+
+En las elecciones de 1993 podemos observar como la fuerza del primer partido va decreciendo lentamente. Los dos partidos más votados son el *PSOE* y el *PP* respectivamente, la diferencia estas elecciones es que el PSOE ha perdido la mayoría absoluta según el método D´Hondt y en cambio el *PP* ha aumentado su presencia significativamente y está ya relativamente cerca de alcanzar al *PSOE*. De haber utilizado los métodos más proporcionales resultaría en una menor diferencia de escaños entre estos dos grandes partidos, el partido más castigado en estas elecciones sigue siendo *IU*, el cual podría haber obtenido de 1.5 a 2 veces más asientos de haber cambiado de método de reparto.
+Son unas elecciones en donde hay dos partidos hegemónicos y dos partidos medianos que son *IU* y *CIU*, como hemos visto *IU* es un partido muy castigado por el método de reparto actual, en cambio *CIU* no se vería agraviado o beneficiado al cambiar el método de reparto.
+
+### Desproporción
+```{r}
+
+
+disprop_1993 <- bind_cols(
+  "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
+  "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+
+
+disprop_1993 <- as.data.table(disprop_1993)
+dde <- as.data.table(gather(disprop_1993,all_of(metodos),key="Metodos",value = "Disprop"))
+ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
+  geom_col(position="dodge",aes(Metodos,fill=Comunidad),color="black")+
+   labs(title = "Desproporción por Comunidades ",subtitle = "Según método de reparto",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  theme(legend.position = "bottom")
+
+
+disprop_mean <- c(
+  mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
+  mean(disprop_modsainte), mean(disprop_adams),
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
+)
+Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
+
+Disproporc <- Disproporc[order(Disproporc$c), ]
+
+ggplot(Disproporc, aes(reorder(m, -c), c)) +
+  geom_col(aes(fill = disprop_mean)) +
+  coord_flip()+
+   labs(title = "Desproporción según método de reparto",caption = "Elaboración propia: Angel González",x="Métodos",y="Desproporción")+
+  guides(fill="none")
+```
+
+En estas elecciones se observan más picos de desproporción en comparación con las elecciones anteriores, especialmente aumenta su desproporción el Pais Vasco y Aragón, no hay novedades en los máximos ni en los mínimos. Siguen dos grupos con un comportamiento similar, en un grupo los métodos de Adams, Huntington-Hill y LR-Imperiali y los restantes en el otro grupo.  
+
+Este año en el caso de la desproporción media según el método de reparto vemos que hay diferencias en los métodos más desproporcionales, usualmente el método más desproporcionado ha sido el Imperiali, en estas elecciones esto cambia, de hecho mejora en dos puestos. Los más desproporcionados este año entonces son los métodos Adams y de Huntington-Hill, en el caso de los más proporcionados no hay novedades, siguen siendo los métodos LR-Hare y Danish seguido muy de cerca por el Sainte-Lague.  
+
+## Año 1996
+
+
+```{r }
+generardato(eleccion = 7)
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
+```
+
+
+
+### Comparativa de asientos obtenidos
+
+```{r}
+
+
+fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
+fe <- full_join(fe, resul_sainte, by = "Partidos")
+fe <- full_join(fe, resul_modsainte, by = "Partidos")
+fe <- full_join(fe, resul_adams, by = "Partidos")
+fe <- full_join(fe, resul_huntington, by = "Partidos")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
+
+
+
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
+  key = "Metodo", value = "Asientos"
+)
+fe$Asientos <- replace_na(fe$Asientos, 0)
+fe1 <- as.data.table(fe)
+Asientos_1996 <- fe1
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+
+filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[fe$Partidos %in% filtro, ]
+
+#ggplot(fe, aes(Metodo, Asientos)) +
+#  geom_col(position = "dodge", aes(fill = Metodo)) +
+#facet_grid(~Partidos)+
+#  labs(title = "Asientos según método de reparto",subtitle = "En los 6 partidos más votados",caption = "Elaboración propia: Angel González",x=NULL)+
+#  guides(fill = "none")+theme(axis.text.x = element_text(angle = 45,hjust = 1))
+
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
+  geom_tile(aes(fill = Asientos)) +
+  scale_fill_gradient(low = "green", high = "red") +
+  coord_flip() +
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  guides(fill = "none")
+
+hemiciclo <- ggplot(fe) + 
+  geom_parliament(aes(seats = Asientos, fill = Partidos), color = "black") + 
+  scale_fill_manual(values=1+seq_len(length(fe[fe$Metodo=="D´Hondt",]$Partidos))  , labels = fe[fe$Metodo=="D´Hondt",]$Partidos) +
+  coord_fixed() + 
+  theme_void()+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  facet_wrap(Metodo~.)+theme(legend.position = c(0.7, 0.1),
+                             legend.key.size = unit(.2, "cm"),
+  legend.key.width = unit(0.2,"cm") ,legend.text = element_text(size=6, face="bold"));hemiciclo;votos_recap
+```
+
+En estas elecciones de 1996 son las primeras elecciones en donde el *PP* son la fuerza más votada, el *PSOE* que ya llevaba una tendencia descendiente a lo largo de las últimas elecciones al final pierde el primer puesto a favor del *PP*. Sigue presentandose un bipartidismo significativo, seguidamente de dos partidos medianos, todavía el PP a pesar de ganar las elecciones no alcanza la mayoría absoluta en ninguno de los métodos analizados. Izquierda Unida sigue siendo el partido más castigado, podría duplicar el número de escaños de haber escogido otro método más proporcional.
+
+### Desproporción
+```{r}
+
+
+disprop_1996 <- bind_cols(
+  "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
+  "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+
+
+disprop_1996 <- as.data.table(disprop_1996)
+dde <- as.data.table(gather(disprop_1996,all_of(metodos),key="Metodos",value = "Disprop"))
+ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
+  geom_col(position="dodge",aes(Metodos,fill=Comunidad),color="black")+
+   labs(title = "Desproporción por Comunidades ",subtitle = "Según método de reparto",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  theme(legend.position = "bottom")
+
+
+disprop_mean <- c(
+  mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
+  mean(disprop_modsainte), mean(disprop_adams),
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
+)
+Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
+
+Disproporc <- Disproporc[order(Disproporc$c), ]
+
+ggplot(Disproporc, aes(reorder(m, -c), c)) +
+  geom_col(aes(fill = disprop_mean)) +
+  coord_flip()+
+   labs(title = "Desproporción según método de reparto",caption = "Elaboración propia: Angel González",x="Métodos",y="Desproporción")+
+  guides(fill="none")
+```
+
+
+En estas elecciones de 1996 se observa una desproporción similar a las elecciones anteriores, en este año el comportamiento de la desproporción por provincias se puede agrupar en tres grupos, uno en el que estaría el método LR-Imperiali, con una desproporción muy marcada en la comunidad Foral de Navarra, otro en los que estarían los métodos Adams y Huntington-Hill, y el tercero con los métodos restantes.  
+
+Este año en el caso de la desproporción media según el método de reparto vemos que hay diferencias en los métodos con más desproporción respecto a la anterior elección, el método más desproporcionado vuelve a ser el Imperiali. En el caso de los más proporcionados cambia también, el método Danish pasa a un cuarto puesto superado por el método Sainte-Lague, los mejores son el método LR-Imperiali y LR-Hare. Los más desproporcionados este año son el método anteriormente citado, Imperiali, seguido muy de cerca por los métodos Adams y de Huntington-Hill, .
+
+
+## Año 2000
+
+
+```{r }
+generardato(eleccion = 8)
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
+```
+
+
+
+### Comparativa de asientos obtenidos
+
+```{r}
+
+
+fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
+fe <- full_join(fe, resul_sainte, by = "Partidos")
+fe <- full_join(fe, resul_modsainte, by = "Partidos")
+fe <- full_join(fe, resul_adams, by = "Partidos")
+fe <- full_join(fe, resul_huntington, by = "Partidos")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
+
+
+
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
+  key = "Metodo", value = "Asientos"
+)
+fe$Asientos <- replace_na(fe$Asientos, 0)
+fe1 <- as.data.table(fe)
+Asientos_2000 <- fe1
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+
+filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[fe$Partidos %in% filtro, ]
+
+#ggplot(fe, aes(Metodo, Asientos)) +
+#  geom_col(position = "dodge", aes(fill = Metodo)) +
+#facet_grid(~Partidos)+
+#  labs(title = "Asientos según método de reparto",subtitle = "En los 6 partidos más votados",caption = "Elaboración propia: Angel González",x=NULL)+
+#  guides(fill = "none")+theme(axis.text.x = element_text(angle = 45,hjust = 1))
+
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
+  geom_tile(aes(fill = Asientos)) +
+  scale_fill_gradient(low = "green", high = "red") +
+  coord_flip() +
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+theme(axis.text.x = element_text(size = 6))+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  guides(fill = "none")
+
+hemiciclo <- ggplot(fe) + 
+  geom_parliament(aes(seats = Asientos, fill = Partidos), color = "black") + 
+  scale_fill_manual(values=1+seq_len(length(fe[fe$Metodo=="D´Hondt",]$Partidos))  , labels = fe[fe$Metodo=="D´Hondt",]$Partidos) +
+  coord_fixed() + 
+  theme_void()+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  facet_wrap(Metodo~.)+theme(legend.position = c(0.7, 0.1),
+                             legend.key.size = unit(.2, "cm"),
+  legend.key.width = unit(0.2,"cm") ,legend.text = element_text(size=6, face="bold"));hemiciclo;votos_recap
+```
+
+En las elecciones del año 2000 el partido más votado vuelve a ser el *Partido Popular* seguido del *PSOE*, en estas elecciones según el método D´Hondt utilizado en España el *PP* conseguiría una mayoría absoluta holgada, es una elección con un claro bipartidismo donde se podría decir que no existen partidos medianos. 
+Si optásemos por otro método de reparto más proporcional como puede ser el método Danish o el Sainte-Lague el PP alcanzaría la mayoría absoluta o se quedaría a muy pocos escaños de alcanzarla, en cambio veríamos a muchos partidos pequeños con menos de tres votos casi duplicar su presencia en escaños. El partido más castigado por utilizar el método D´Hondt en estas elecciones sigue siendo Izquierda Unida.
+
+### Desproporción
+```{r}
+
+
+disprop_2000 <- bind_cols(
+  "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
+  "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+
+
+disprop_2000 <- as.data.table(disprop_2000)
+dde <- as.data.table(gather(disprop_2000,all_of(metodos),key="Metodos",value = "Disprop"))
+ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
+  geom_col(position="dodge",aes(Metodos,fill=Comunidad),color="black")+
+   labs(title = "Desproporción por Comunidades ",subtitle = "Según método de reparto",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  theme(legend.position = "bottom")
+
+
+disprop_mean <- c(
+  mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
+  mean(disprop_modsainte), mean(disprop_adams),
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
+)
+Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
+
+Disproporc <- Disproporc[order(Disproporc$c), ]
+
+ggplot(Disproporc, aes(reorder(m, -c), c)) +
+  geom_col(aes(fill = disprop_mean)) +
+  coord_flip()+
+   labs(title = "Desproporción según método de reparto",caption = "Elaboración propia: Angel González",x="Métodos",y="Desproporción")+
+  guides(fill="none")
+```
+
+Observando la desproporción por comunidades tanto el método Adams como el Huntington-Hill tienen un comportamiento diferente respecto a los demás, siguen siendo los más desproporcionados las ciudades de Ceuta y Melilla, y la más proporcionada la Comunidad de Madrid, este año es especialmente alta la desproporción de las Islas Baleares respecto a anteriores elecciones.
+
+Si miramos la gráfica de la desproporción según el método de reparto se pueden agrupar los métodos en dos grupos, uno con gran desproporción en el que estarían incluidos los métodos Adams, Imperiali y Huntington-Hill, y el otro grupo restante con una desproporción media baja. Seguimos observando que el método D´Hont no es el mejor aunque en estas elecciones se puede considerar un método aceptable siendo los mejores el método LR-Hare, Danish y Saint-Lague, todos ellos con una desproporción muy similar.
+
+
+## Año 2004
+
+```{r }
+generardato(eleccion = 9)
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
+```
+
+
+
+### Comparativa de asientos obtenidos
+
+```{r}
+
+
+fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
+fe <- full_join(fe, resul_sainte, by = "Partidos")
+fe <- full_join(fe, resul_modsainte, by = "Partidos")
+fe <- full_join(fe, resul_adams, by = "Partidos")
+fe <- full_join(fe, resul_huntington, by = "Partidos")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
+
+
+
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
+  key = "Metodo", value = "Asientos"
+)
+fe$Asientos <- replace_na(fe$Asientos, 0)
+fe1 <- as.data.table(fe)
+Asientos_2004 <- fe1
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+
+filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[fe$Partidos %in% filtro, ]
+
+#ggplot(fe, aes(Metodo, Asientos)) +
+#  geom_col(position = "dodge", aes(fill = Metodo)) +
+#facet_grid(~Partidos)+
+#  labs(title = "Asientos según método de reparto",subtitle = "En los 6 partidos más votados",caption = "Elaboración propia: Angel González",x=NULL)+
+#  guides(fill = "none")+theme(axis.text.x = element_text(angle = 45,hjust = 1))
+
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
+  geom_tile(aes(fill = Asientos)) +
+  scale_fill_gradient(low = "green", high = "red") +
+  coord_flip() +
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  guides(fill = "none")
+
+hemiciclo <- ggplot(fe) + 
+  geom_parliament(aes(seats = Asientos, fill = Partidos), color = "black") + 
+  scale_fill_manual(values=1+seq_len(length(fe[fe$Metodo=="D´Hondt",]$Partidos))  , labels = fe[fe$Metodo=="D´Hondt",]$Partidos) +
+  coord_fixed() + 
+  theme_void()+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  facet_wrap(Metodo~.)+theme(legend.position = c(0.7, 0.1),
+                             legend.key.size = unit(.2, "cm"),
+  legend.key.width = unit(0.2,"cm") ,legend.text = element_text(size=6, face="bold"));hemiciclo;votos_recap
+```
+
+En estas elecciones del año 2004 volvemos a ver unas elecciones con un claro bipartidismo y con una diferencia de escaños entre partidos cada vez menor, en estas elecciones el partido más votado cambia y el *PSOE* obtiene los mayores votos, seguido del *PP* que pierde la mayoría absoluta según D´Hont que tenía en las anteriores elecciones. 
+En ningún método el *PSOE* alcanzaría la mayoría absoluta por lo que deberá de realizar alianzas con otros partidos para así alcanzar la mayoría absoluta, si optásemos por los métodos mas proporcionales veríamos una reducción muy significativa de la diferencia de escaños entre partidos que pasaría de una diferencia de 16 escaños a 6 escaños en el caso de optar por el método Danish, en cambio el partido más castigado por el método D´Hondt es *Izquierda Unida*, que hasta podría ver duplicado o triplicado su presencia en el congreso si se opta por utilizar un método de reparto distinto.
+
+### Desproporción
+```{r}
+
+
+disprop_2004 <- bind_cols(
+  "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
+  "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+
+
+disprop_2004 <- as.data.table(disprop_2004)
+dde <- as.data.table(gather(disprop_2004,all_of(metodos),key="Metodos",value = "Disprop"))
+ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
+  geom_col(position="dodge",aes(Metodos,fill=Comunidad),color="black")+
+   labs(title = "Desproporción por Comunidades ",subtitle = "Según método de reparto",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  theme(legend.position = "bottom")
+
+
+disprop_mean <- c(
+  mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
+  mean(disprop_modsainte), mean(disprop_adams),
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
+)
+Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
+
+Disproporc <- Disproporc[order(Disproporc$c), ]
+
+ggplot(Disproporc, aes(reorder(m, -c), c)) +
+  geom_col(aes(fill = disprop_mean)) +
+  coord_flip()+
+   labs(title = "Desproporción según método de reparto",caption = "Elaboración propia: Angel González",x="Métodos",y="Desproporción")+
+  guides(fill="none")
+```
+
+Según el gráfico anterior por comunidades sigue la tónica general de las anteriores elecciones, únicamente podemos apreciar en estas elecciones una reducción de la desproporción entre comunidades, es decir, una menor diferencia de desproporción entre ellas. Siguen dos grupos con comportamiento similar, un grupo donde se encuentran los métodos Adams, Huntington-Hill y LR-Imperiali, y en otro grupo los restantes.
+En el caso de agrupar la desproporción por métodos observamos que el método Imperiali vuelve a ser el más desproporcionado este año mientras que en la parte de los métodos mas proporcionados el método mejor sería el LR-Imperiali, LR-Hare y Sainte-Lague, el método D´Hondt utilizado en España sigue siendo un método que se encuentra en un nivel medio, sin destacar por una desproporción alta ni baja entre todos los métodos.
+
+
+
+## Año 2008
+
+```{r }
+generardato(eleccion = 10)
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
+```
+
+
+
+### Comparativa de asientos obtenidos
+
+```{r}
+
+
+fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
+fe <- full_join(fe, resul_sainte, by = "Partidos")
+fe <- full_join(fe, resul_modsainte, by = "Partidos")
+fe <- full_join(fe, resul_adams, by = "Partidos")
+fe <- full_join(fe, resul_huntington, by = "Partidos")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
+
+
+
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
+  key = "Metodo", value = "Asientos"
+)
+fe$Asientos <- replace_na(fe$Asientos, 0)
+fe1 <- as.data.table(fe)
+Asientos_2008 <- fe1
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+
+filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[fe$Partidos %in% filtro, ]
+
+#ggplot(fe, aes(Metodo, Asientos)) +
+#  geom_col(position = "dodge", aes(fill = Metodo)) +
+#facet_grid(~Partidos)+
+#  labs(title = "Asientos según método de reparto",subtitle = "En los 6 partidos más votados",caption = "Elaboración propia: Angel González",x=NULL)+
+#  guides(fill = "none")+theme(axis.text.x = element_text(angle = 45,hjust = 1))
+
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
+  geom_tile(aes(fill = Asientos)) +
+  scale_fill_gradient(low = "green", high = "red") +
+  coord_flip() +
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  guides(fill = "none")
+
+hemiciclo <- ggplot(fe) + 
+  geom_parliament(aes(seats = Asientos, fill = Partidos), color = "black") + 
+  scale_fill_manual(values=1+seq_len(length(fe[fe$Metodo=="D´Hondt",]$Partidos))  , labels = fe[fe$Metodo=="D´Hondt",]$Partidos) +
+  coord_fixed() + 
+  theme_void()+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  facet_wrap(Metodo~.)+theme(legend.position = c(0.7, 0.1),
+                             legend.key.size = unit(.2, "cm"),
+  legend.key.width = unit(0.2,"cm") ,legend.text = element_text(size=6, face="bold"));hemiciclo;votos_recap
+```
+
+En estos comicios del año 2008 no hay diferencias significativas en términos de escaños, sigue un claro bipartidismo con dos partidos hegemónicos, en primer lugar el más votado en estas elecciones que sigue siendo el *PSOE* seguido por el *PP*, la diferencia de escaños entre ellos continúa siendo prácticamente la misma pero en este año el bipartidismo es cada vez más pronunciado, aumentando ambos partidos su presencia en el congreso.
+Para el partido más votado únicamente en dos casos podría obtener la mayoría absoluta, que sería en el caso de optar por el método Imperiali, una mayoría absoluta justa al llegar sólo a los 175 escaños o bien por el métodos LR-Imperiali que alcanzaría los 180 escaños. 
+Utilizando los métodos de reparto más proporcionales como son el Danish y el Sainte-Lague la diferencia entre los partidos más votados se reduciría a la vez que obtendrían un menor número de escaños, el partido más perjudicado sigue siendo Izquierda Unida que podría hasta más que quintuplicar su presencia en el congreso de haber optado por el método Danish.
+
+### Desproporción
+```{r}
+
+
+disprop_2008 <- bind_cols(
+  "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
+  "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+
+
+disprop_2008 <- as.data.table(disprop_2008)
+dde <- as.data.table(gather(disprop_2008,all_of(metodos),key="Metodos",value = "Disprop"))
+ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
+  geom_col(position="dodge",aes(Metodos,fill=Comunidad),color="black")+
+   labs(title = "Desproporción por Comunidades ",subtitle = "Según método de reparto",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  theme(legend.position = "bottom")
+
+
+disprop_mean <- c(
+  mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
+  mean(disprop_modsainte), mean(disprop_adams),
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop,na.rm = T),mean(disprop_imperialilr)
+)
+Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
+
+Disproporc <- Disproporc[order(Disproporc$c), ]
+
+ggplot(Disproporc, aes(reorder(m, -c), c)) +
+  geom_col(aes(fill = disprop_mean)) +
+  coord_flip()+
+   labs(title = "Desproporción según método de reparto",caption = "Elaboración propia: Angel González",x="Métodos",y="Desproporción")+
+  guides(fill="none")
+```
+
+Este es un año que se puede observar una mayor igualdad en el caso de las desproporciones, las comunidades no tienen una gran diferencia de proporcionalidad entre ellas sin contar con las habituales de Ceuta y Melilla, además no encontramos grandes diferencias entre los métodos.  
+Si observamos la gráfica de la desproporción según el método de reparto es llamativo este año que únicamente tenemos un método especialmente despropocionado que es el Imperiali, en cambio todos los demás métodos están en un mismo nivel con una baja diferencia entre ellos, el mejor método en estas elecciones es el método LR-Imperiali, el método D´Hont utilizado en España no presenta diferencias y se encuentra en un nivel medio-alto de desproporción entre todos los métodos analizados.
+
+## Año 2011
+
+
+```{r }
+generardato(eleccion = 11)
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
+```
+
+
+
+### Comparativa de asientos obtenidos
+
+```{r}
+
+
+fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
+fe <- full_join(fe, resul_sainte, by = "Partidos")
+fe <- full_join(fe, resul_modsainte, by = "Partidos")
+fe <- full_join(fe, resul_adams, by = "Partidos")
+fe <- full_join(fe, resul_huntington, by = "Partidos")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
+
+
+
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
+  key = "Metodo", value = "Asientos"
+)
+fe$Asientos <- replace_na(fe$Asientos, 0)
+fe1 <- as.data.table(fe)
+Asientos_2011 <- fe1
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+
+filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[fe$Partidos %in% filtro, ]
+
+#ggplot(fe, aes(Metodo, Asientos)) +
+#  geom_col(position = "dodge", aes(fill = Metodo)) +
+#facet_grid(~Partidos)+
+#  labs(title = "Asientos según método de reparto",subtitle = "En los 6 partidos más votados",caption = "Elaboración propia: Angel González",x=NULL)+
+#  guides(fill = "none")+theme(axis.text.x = element_text(angle = 45,hjust = 1))
+
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
+  geom_tile(aes(fill = Asientos)) +
+  scale_fill_gradient(low = "green", high = "red") +
+  coord_flip() +
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  guides(fill = "none")
+
+hemiciclo <- ggplot(fe) + 
+  geom_parliament(aes(seats = Asientos, fill = Partidos), color = "black") + 
+  scale_fill_manual(values=1+seq_len(length(fe[fe$Metodo=="D´Hondt",]$Partidos))  , labels = fe[fe$Metodo=="D´Hondt",]$Partidos) +
+  coord_fixed() + 
+  theme_void()+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  facet_wrap(Metodo~.)+theme(legend.position = c(0.7, 0.1),
+                             legend.key.size = unit(.2, "cm"),
+  legend.key.width = unit(0.2,"cm") ,legend.text = element_text(size=6, face="bold"));hemiciclo;votos_recap
+```
+
+Este año 2011 podemos considerarlo como el primer año en el que aunque continúe sucediendo un claro bipartidismo empiezan a surgir partidos medianos con cada vez más presencia en el congreso, en este año es la aparición de *UPyD*. 
+El partido más votado en estas elecciones es el Partido Popular, que además obtiene la mayoría absoluta de forma holgada según el método D´Hondt utilizado en España, le sigue el *PSOE* a una diferencia muy significativa, casi duplica la presencia en el congreso del *PP* respecto al *PSOE*.
+Si observamos los otros métodos propuestos vemos que el *PP* en el caso del método Danish no llegaría a obtener la mayoría absoluta pero si utilizásemos el método de Sainte-Lague sí que alcanzaríamos la mayoría absoluta con 176 escaños. Los partidos más perjudicados por utilizar el método D´Hont son en estas elecciones *UPyD* y *IU*, los cuales de haber optado por el método Danish podrían duplicar su presencia en el congreso. Es llamativo el resultado de las elecciones según el método Adams y Huntington-Hill, son métodos que dan escaños a los partidos con menos votos en detrimento de los partidos más votados, en estas elecciones vemos como el resultado cambiaría radicalmente, el *PP* de ser el partido más votado con mucha diferencia pasaría a reducir la diferencia de escaños a la mitad pero la diferencia más notoria está en los partidos medianos *UPyD* y *IU*, que pasarían de 5 a 41 escaños y de 11 a 54 escaños respectivamente.
+
+### Desproporción
+```{r}
+
+
+disprop_2011 <- bind_cols(
+  "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
+  "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+
+
+disprop_2011 <- as.data.table(disprop_2011)
+dde <- as.data.table(gather(disprop_2011,all_of(metodos),key="Metodos",value = "Disprop"))
+ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
+  geom_col(position="dodge",aes(Metodos,fill=Comunidad),color="black")+
+   labs(title = "Desproporción por Comunidades ",subtitle = "Según método de reparto",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  theme(legend.position = "bottom")
+
+
+disprop_mean <- c(
+  mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
+  mean(disprop_modsainte), mean(disprop_adams),
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
+)
+Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
+
+Disproporc <- Disproporc[order(Disproporc$c), ]
+
+ggplot(Disproporc, aes(reorder(m, -c), c)) +
+  geom_col(aes(fill = disprop_mean)) +
+  coord_flip()+
+   labs(title = "Desproporción según método de reparto",caption = "Elaboración propia: Angel González",x="Métodos",y="Desproporción")+
+  guides(fill="none")
+
+```
+
+Observando el gráfico de la desproporción entre comunidades vemos como este año particularmente el comportamiento general de todos los métodos es similar a diferencia de las anteriores elecciones en donde los métodos Adams y Huntington-Hill presentaban un comportamiento claramente distinto respecto a los restantes métodos, este año el comportamiento de todos los métodos es similar.
+
+Si observamos la desproporción según el método de reparto volvemos a observar dos grupos bien diferenciados, uno en el que hay una gran desproporción, donde estarían los métodos Huntington-Hill, Adams e Imperiali, y otro grupo con los restantes métodos con una proporcionalidad baja. El método D´Hondt utilizado en España se encontraría en el grupo de desproporción media, los mejores métodos en estas elecciones son el método LR-Hare y Danish.
+
+
+## Año 2015
+
+```{r }
+generardato(eleccion = 12)
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
+```
+
+
+
+### Comparativa de asientos obtenidos
+
+```{r}
+
+
+fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
+fe <- full_join(fe, resul_sainte, by = "Partidos")
+fe <- full_join(fe, resul_modsainte, by = "Partidos")
+fe <- full_join(fe, resul_adams, by = "Partidos")
+fe <- full_join(fe, resul_huntington, by = "Partidos")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
+
+
+
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
+  key = "Metodo", value = "Asientos"
+)
+fe$Asientos <- replace_na(fe$Asientos, 0)
+fe1 <- as.data.table(fe)
+Asientos_2015 <- fe1
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+
+filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[fe$Partidos %in% filtro, ]
+
+#ggplot(fe, aes(Metodo, Asientos)) +
+#  geom_col(position = "dodge", aes(fill = Metodo)) +
+#facet_grid(~Partidos)+
+#  labs(title = "Asientos según método de reparto",subtitle = "En los 6 partidos más votados",caption = "Elaboración propia: Angel González",x=NULL)+
+#  guides(fill = "none")+theme(axis.text.x = element_text(angle = 45,hjust = 1))
+
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
+  geom_tile(aes(fill = Asientos)) +
+  scale_fill_gradient(low = "green", high = "red") +
+  coord_flip() +
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  guides(fill = "none")
+
+hemiciclo <- ggplot(fe) + 
+  geom_parliament(aes(seats = Asientos, fill = Partidos), color = "black") + 
+  scale_fill_manual(values=1+seq_len(length(fe[fe$Metodo=="D´Hondt",]$Partidos))  , labels = fe[fe$Metodo=="D´Hondt",]$Partidos) +
+  coord_fixed() + 
+  theme_void()+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  facet_wrap(Metodo~.)+theme(legend.position = c(0.7, 0.1),
+                             legend.key.size = unit(.2, "cm"),
+  legend.key.width = unit(0.2,"cm") ,legend.text = element_text(size=6, face="bold"));hemiciclo;votos_recap
+```
+
+En estas elecciones del 2014 ya vemos que el bipartidismo que veíamos omnipresente en todas las elecciones anteriores ahora ya no ocurre, es el primer año en el que se puede afirmar que ya no hay un bipartidismo claro.
+El partido más votado es el *Partido Popular* seguido por el *PSOE*, pero ya vemos que este año aparecen dos nuevos partidos medianos, que son *Podemos* y *Ciudadanos.* El partido más votado no obtiene la mayoría absoluta en ningún método, es interesante observar como entre Podemos y Ciudadanos en el caso de utilizar el método D´Hondt el primero superaría en dos escaños al segundo, mientras que de haber utilizado el método Danish, Ciudadanos superaría a Podemos en dos escaños. En el caso de optar por el método Danish, el partido más votado, el *PP*, perdería bastantes escaños y su diferencia respecto al segundo se vería reducida significativamente. En el caso de los partidos medianos verían su presencia en el congreso aumentar levemente pero en ningún caso supondría un cambio significativo. El partido más perjudicado este año vuelve a ser *Izquierda Unida*, que podría pasar de obtener 2 escaños con el método D´Hondt a 11 escaños con el Danish.
+
+### Desproporción
+```{r}
+
+
+disprop_2015 <- bind_cols(
+  "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
+  "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+
+
+disprop_2015 <- as.data.table(disprop_2015)
+dde <- as.data.table(gather(disprop_2015,all_of(metodos),key="Metodos",value = "Disprop"))
+ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
+  geom_col(position="dodge",aes(Metodos,fill=Comunidad),color="black")+
+   labs(title = "Desproporción por Comunidades ",subtitle = "Según método de reparto",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  theme(legend.position = "bottom")
+
+
+disprop_mean <- c(
+  mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
+  mean(disprop_modsainte), mean(disprop_adams),
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
+)
+Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
+
+Disproporc <- Disproporc[order(Disproporc$c), ]
+
+ggplot(Disproporc, aes(reorder(m, -c), c)) +
+  geom_col(aes(fill = disprop_mean)) +
+  coord_flip()+
+   labs(title = "Desproporción según método de reparto",caption = "Elaboración propia: Angel González",x="Métodos",y="Desproporción")+
+  guides(fill="none")
+```
+
+Según el gráfico por comunidades volvemos a ver un comportamiento claramente distinto de los demás de los métodos Adams y Huntington-Hill, es un año en el que la diferencia de desproporción entre las distintas comunidades aumentan. Siguen presentandose las mayores desproporciones en Ceuta y Melilla y la menor desproporción en la comunidad de Madrid.
+
+En el caso de la desproporción según el método de reparto este año tenemos nuevamente dos grupos diferenciados, en un grupo con una desproporción alta estaría el método Imperiali, LR-Droop y LR-Imperiali, respectivamente, y todos los métodos restantes se encontrarían en el grupo de desproporción baja, el mejor método este año es el LR-Hare y el Sainte-Lague, encontramos que el método D´Hondt utilizado en España es el peor método posible dentro del grupo con baja desproporción, por lo tanto sería conveniente plantear el cambio a otro método mejor.
+
+## Año 2016
+
+```{r }
+generardato(eleccion = 13)
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
+```
+
+
+
+### Comparativa de asientos obtenidos
+
+```{r}
+
+
+fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
+fe <- full_join(fe, resul_sainte, by = "Partidos")
+fe <- full_join(fe, resul_modsainte, by = "Partidos")
+fe <- full_join(fe, resul_adams, by = "Partidos")
+fe <- full_join(fe, resul_huntington, by = "Partidos")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
+
+
+
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
+  key = "Metodo", value = "Asientos"
+)
+fe$Asientos <- replace_na(fe$Asientos, 0)
+fe1 <- as.data.table(fe)
+Asientos_2016 <- fe1
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+
+filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[fe$Partidos %in% filtro, ]
+
+#ggplot(fe, aes(Metodo, Asientos)) +
+#  geom_col(position = "dodge", aes(fill = Metodo)) +
+#facet_grid(~Partidos)+
+#  labs(title = "Asientos según método de reparto",subtitle = "En los 6 partidos más votados",caption = "Elaboración propia: Angel González",x=NULL)+
+#  guides(fill = "none")+theme(axis.text.x = element_text(angle = 45,hjust = 1))
+
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
+  geom_tile(aes(fill = Asientos)) +
+  scale_fill_gradient(low = "green", high = "red") +
+  coord_flip() +
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  guides(fill = "none")
+
+hemiciclo <- ggplot(fe) + 
+  geom_parliament(aes(seats = Asientos, fill = Partidos), color = "black") + 
+  scale_fill_manual(values=1+seq_len(length(fe[fe$Metodo=="D´Hondt",]$Partidos))  , labels = fe[fe$Metodo=="D´Hondt",]$Partidos) +
+  coord_fixed() + 
+  theme_void()+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  facet_wrap(Metodo~.)+theme(legend.position = c(0.7, 0.1),
+                             legend.key.size = unit(.2, "cm"),
+  legend.key.width = unit(0.2,"cm") ,legend.text = element_text(size=6, face="bold"));hemiciclo;votos_recap
+```
+
+En las elecciones del año 2016 vemos como se va consolidando el modelo de las anteriores elecciones, con dos grandes partidos y dos partidos medianos. La fuerza política más votada este año es el *Partido Popular* seguido del *PSOE*, en ningún método el *PP* alcanzaría la mayoría absoluta, son unas elecciones que no presentan diferencias significativas al cambiar de método de reparto, en el caso de utilizar el método Danish respecto al D´Hondt resultaría en un menor número de escaños para el *PP* y una ligera subida de escaños de *Podemos* y *Ciudadanos.*
+Son las primeras elecciones en donde el método de reparto no cambia significativamente el reparto de escaños, es notorio que en este año el *PSOE* obtenga casi los mismos votos independientemente del método utilizado.
+
+### Desproporción
+```{r }
+
+
+disprop_2016 <- bind_cols(
+  "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
+  "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+
+
+disprop_2016 <- as.data.table(disprop_2016)
+dde <- as.data.table(gather(disprop_2016,all_of(metodos),key="Metodos",value = "Disprop"))
+ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
+  geom_col(position="dodge",aes(Metodos,fill=Comunidad),color="black")+
+   labs(title = "Desproporción por Comunidades ",subtitle = "Según método de reparto",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  theme(legend.position = "bottom")
+
+
+disprop_mean <- c(
+  mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
+  mean(disprop_modsainte), mean(disprop_adams),
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr)
+)
+Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
+
+Disproporc <- Disproporc[order(Disproporc$c), ]
+
+ggplot(Disproporc, aes(reorder(m, -c), c)) +
+  geom_col(aes(fill = disprop_mean)) +
+  coord_flip()+
+   labs(title = "Desproporción según método de reparto",caption = "Elaboración propia: Angel González",x="Métodos",y="Desproporción")+
+  guides(fill="none")
+```
+
+En la desproporción por comunidades vemos el habitual comportamiento entre los métodos, con el método Adams y el Huntington-Hill comportándose diferente a los demás. Respecto a las diferencias de desproporción entre comunidades este año es especialmente similar el comportamiento aunque con distinta magnitud entre los distintos métodos.
+En el gráfico en que comparamos los métodos de reparto el comportamiento es similar al anterior año, con un método que es significativamente desproporcionado respecto a los demás, el método Imperiali, y los demás métodos muy similares entre ellos siendo el mejor el método LR-Hare y Sainte-Lague, el método utilizado en España, el D´Hondt, vuelve a ser de los peores por lo que cada vez sería más necesario proponer un cambio de método de reparto a otro más proporcional.
+
+
+## Año 2019, Abril
+
+
+```{r }
+generardato(eleccion = 14)
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
+```
+
+
+
+### Comparativa de asientos obtenidos
+
+```{r}
+
+
+fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
+fe <- full_join(fe, resul_sainte, by = "Partidos")
+fe <- full_join(fe, resul_modsainte, by = "Partidos")
+fe <- full_join(fe, resul_adams, by = "Partidos")
+fe <- full_join(fe, resul_huntington, by = "Partidos")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
+
+
+
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
+  key = "Metodo", value = "Asientos"
+)
+fe$Asientos <- replace_na(fe$Asientos, 0)
+fe1 <- as.data.table(fe)
+Asientos_2019_04 <- fe1
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+
+filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[fe$Partidos %in% filtro, ]
+
+#ggplot(fe, aes(Metodo, Asientos)) +
+#  geom_col(position = "dodge", aes(fill = Metodo)) +
+#facet_grid(~Partidos)+
+#  labs(title = "Asientos según método de reparto",subtitle = "En los 6 partidos más votados",caption = "Elaboración propia: Angel González",x=NULL)+
+#  guides(fill = "none")+theme(axis.text.x = element_text(angle = 45,hjust = 1))
+
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
+  geom_tile(aes(fill = Asientos)) +
+  scale_fill_gradient(low = "green", high = "red") +
+  coord_flip() +
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  guides(fill = "none")
+
+hemiciclo <- ggplot(fe) + 
+  geom_parliament(aes(seats = Asientos, fill = Partidos), color = "black") + 
+  scale_fill_manual(values=1+seq_len(length(fe[fe$Metodo=="D´Hondt",]$Partidos))  , labels = fe[fe$Metodo=="D´Hondt",]$Partidos) +
+  coord_fixed() + 
+  theme_void()+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  facet_wrap(Metodo~.)+theme(legend.position = c(0.7, 0.1),
+                             legend.key.size = unit(.2, "cm"),
+  legend.key.width = unit(0.2,"cm") ,legend.text = element_text(size=6, face="bold"));hemiciclo;votos_recap
+```
+
+En estas elecciones de Abril de 2019 vemos como ya no existe el bipartidismo, este año podemos agrupar a los partidos políticos en cuatro categorías, la primera en donde hay un partido con muchos votos con una gran diferencia de escaños respecto a los demás, que es el *PSOE*, un segundo grupo en donde se encontrarían dos partidos con un número medio-alto de escaños, que son el *PP* y *Ciudadanos* respectivamente, un tercer grupo con un número mediano de escaños con *Podemos* y *Vox*, y un último grupo de pocos escaños con los demás partidos.
+Este año tampoco hay una diferencia significativa de haber utilizado un método de reparto respecto a otro, los partidos más perjudicados por la elección del método D´Hondt son *Vox* y *Podemos*, en ningún caso el partido más votado alcanza la mayoría absoluta. De haber utilizado el método Danish el partido que se vería más beneficiado sería *Vox* seguido de *Ciudadanos*, partido que superaría en escaños al *PP* y se convertiría en la segunda fuerza en el hemiciclo.
+
+### Desproporción
+```{r}
+
+
+disprop_2019_04 <- bind_cols(
+  "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
+  "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+
+
+disprop_2019_04 <- as.data.table(disprop_2019_04)
+dde <- as.data.table(gather(disprop_2019_04,all_of(metodos),key="Metodos",value = "Disprop"))
+ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
+  geom_col(position="dodge",aes(Metodos,fill=Comunidad),color="black")+
+   labs(title = "Desproporción por Comunidades ",subtitle = "Según método de reparto",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  theme(legend.position = "bottom")
+
+
+disprop_mean <- c(
+  mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
+  mean(disprop_modsainte), mean(disprop_adams),
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop),mean(disprop_imperialilr,na.rm = T)
+)
+Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
+
+Disproporc <- Disproporc[order(Disproporc$c), ]
+
+ggplot(Disproporc, aes(reorder(m, -c), c)) +
+  geom_col(aes(fill = disprop_mean)) +
+  coord_flip()+
+   labs(title = "Desproporción según método de reparto",caption = "Elaboración propia: Angel González",x="Métodos",y="Desproporción")+
+  guides(fill="none")
+```
+
+
+Este es un año en el que viendo la desproporción por comunidades es especialmente similar independientemente del método utilizado, siguen presentándose dos grupos de distinto comportamiento,  dentro de los dos grupos todos los métodos siguen un patrón de desproporción similar, sin olvidar el comportamiento habitual de las ciudades de Ceuta y Melilla y de la comunidad de Madrid como la provincia más proporcionada.
+
+Cuando comparamos la proporcionalidad según el método de reparto sucede algo que no se había visto hasta ahora, que un método que anteriormente a llegado a ser el más desproporcionado sucede que este año es el más proporcionado, este método es el Huntington-Hill, en el extremo opuesto está el método Imperiali con una diferencia bastante significativa respecto a las demás. El método utilizado en España vuelve a ser uno de los peores, en estas elecciones el cuarto peor, parece ser un método que no está preparado para ser óptimo en escenarios en donde no hay un bipartidismo claro.
+
+
+## Año 2019, Noviembre
+
+```{r }
+generardato(eleccion = 15)
+dhondt()
+sainte()
+modsainte()
+huntington()
+imperiali()
+adams()
+danish()
+hare()
+droop()
+imperialilr()
+```
+
+
+
+### Comparativa de asientos obtenidos
+
+```{r}
+
+
+fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
+fe <- full_join(fe, resul_sainte, by = "Partidos")
+fe <- full_join(fe, resul_modsainte, by = "Partidos")
+fe <- full_join(fe, resul_adams, by = "Partidos")
+fe <- full_join(fe, resul_huntington, by = "Partidos")
+fe <- full_join(fe, resul_imperiali, by = "Partidos");fe <- full_join(fe, resul_hare, by = "Partidos"); fe <- full_join(fe, resul_droop, by = "Partidos"); fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali")
+
+
+
+fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali","LR-Hare","LR-Droop","LR-Imperiali",
+  key = "Metodo", value = "Asientos"
+)
+fe$Asientos <- replace_na(fe$Asientos, 0)
+fe1 <- as.data.table(fe)
+Asientos_2019_11 <- fe1
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+
+filtro <- fe1[, sum(Asientos), by = Partidos][order(-V1)][1:6]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[fe$Partidos %in% filtro, ]
+
+#ggplot(fe, aes(Metodo, Asientos)) +
+#  geom_col(position = "dodge", aes(fill = Metodo)) +
+#facet_grid(~Partidos)+
+#  labs(title = "Asientos según método de reparto",subtitle = "En los 6 partidos más votados",caption = "Elaboración propia: Angel González",x=NULL)+
+#  guides(fill = "none")+theme(axis.text.x = element_text(angle = 45,hjust = 1))
+
+filtro <- fe1[, sum(Asientos), by = Partidos][V1 < 3]$Partidos
+fe <- as.data.frame(fe1)
+fe <- fe[!fe$Partidos %in% filtro, ]
+
+
+votos_recap <- ggplot(fe, aes(Partidos, Metodo)) +
+  geom_tile(aes(fill = Asientos)) +
+  scale_fill_gradient(low = "green", high = "red") +
+  coord_flip() +
+  geom_text(aes(label = Asientos))+theme(axis.text.x = element_text(size = 6))+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  guides(fill = "none")
+
+hemiciclo <- ggplot(fe) + 
+  geom_parliament(aes(seats = Asientos, fill = Partidos), color = "black") + 
+  scale_fill_manual(values=1+seq_len(length(fe[fe$Metodo=="D´Hondt",]$Partidos))  , labels = fe[fe$Metodo=="D´Hondt",]$Partidos) +
+  coord_fixed() + 
+  theme_void()+
+  labs(title = "Asientos según el método de reparto",subtitle = "En los partidos más votados",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  facet_wrap(Metodo~.)+theme(legend.position = c(0.7, 0.1),
+                             legend.key.size = unit(.2, "cm"),
+  legend.key.width = unit(0.2,"cm") ,legend.text = element_text(size=6, face="bold"));hemiciclo;votos_recap
+```
+
+En esta gráfica de las elecciones de Noviembre de 2019 podemos observar una ligera recuperación del bipartidismo en donde los dos principales partidos vuelven a aumentar el número de escaños obtenidos y también aumentar la diferencia en escaños respecto a los demás.
+Son unas elecciones en donde hay dos partidos principales, que son el *PSOE* y el *PP* respectivamente, uno medio en escaños, *Vox*, y tres partidos de un nivel medio-bajo de escaños, que son *Podemos*, *ERC* y *Ciudadanos* respectivamente.
+En el caso de optar por otro método en ninguno de ellos se alcanzaría la mayoría absoluta. Hay dos partidos perjudicados por utilizar el método D´Hondt en vez de otro más proporcional como pueda ser el Danish, son los partidos de *Podemos* que pasarían de obtener 26 escaños a 40 y el partido *Ciudadanos* que pasaría a duplicar su presencia de 10 escaños a 23.
+
+### Desproporción
+```{r}
+
+
+disprop_2019_11 <- bind_cols(
+  "D´Hondt"=disprop_dhondt, "Danish"=(disprop_danish), "Sainte-Lague"=(disprop_sainte),
+  "Modified Sainte-Lague"=(disprop_modsainte), "Adams"=(disprop_adams),
+  "Huntington-Hill"=(disprop_huntington), "Imperiali"=(disprop_imperiali),   "LR-Hare"=(disprop_hare),"LR-Droop"=(disprop_droop),"LR-Imperiali"=(disprop_imperialilr),"Comunidad"=datos$`Nombre de Comunidad`,"Provincia"=datos$`Nombre de Provincia`)
+
+
+disprop_2019_11 <- as.data.table(disprop_2019_11)
+dde <- as.data.table(gather(disprop_2019_11,all_of(metodos),key="Metodos",value = "Disprop"))
+ggplot(dde[,mean(Disprop),by=.(Metodos,Comunidad)],aes(Metodos,V1))+
+  geom_col(position="dodge",aes(Metodos,fill=Comunidad),color="black")+
+   labs(title = "Desproporción por Comunidades ",subtitle = "Según método de reparto",caption = "Elaboración propia: Angel González",x=NULL,y=NULL)+
+  theme(legend.position = "bottom")
+
+
+disprop_mean <- c(
+  mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
+  mean(disprop_modsainte), mean(disprop_adams),
+  mean(disprop_huntington), mean(disprop_imperiali),mean(disprop_hare),mean(disprop_droop,na.rm = T),mean(disprop_imperialilr,na.rm = T)
+)
+Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
+
+Disproporc <- Disproporc[order(Disproporc$c), ]
+
+ggplot(Disproporc, aes(reorder(m, -c), c)) +
+  geom_col(aes(fill = disprop_mean)) +
+  coord_flip()+
+   labs(title = "Desproporción según método de reparto",caption = "Elaboración propia: Angel González",x="Métodos",y="Desproporción")+
+  guides(fill="none")
+```
+
+En el gráfico por comunidades obtenemos el mismo comportamiento que en las elecciones anteriores sin obtener una diferencia significativa.
+Cuando comparamos la desproporción según el método de reparto el método de Imperiali sigue siendo el más desproporcionado mientras que el mejor método esta vez resulta ser el LR-Hare y Sainte-Lague, el método D´Hondt como hemos visto en anteriores elecciones sigue siendo el cuarto peor método posible entre todos los analizados.
+
+
+## Comparativa entre años
+
+En este apartado final procederemos a agrupar todos los resultados de la desproporción, los agruparemos por año y método. Con todo ello realizaremos dos gráficos, uno en el que muestre la desproporción a lo largo de los años distinguiendo el método de reparto utilizado y otro en el que muestre el promedio de la desproporción a lo largo de todos los años analizados para cada método.
+
+
+
+
+```{r}
+disprop_1977[,"Año":="1977"]
+disprop_1979[,"Año":="1979"]
+disprop_1982[,"Año":="1982"]
+disprop_1986[,"Año":="1986"]
+disprop_1989[,"Año":="1989"]
+disprop_1993[,"Año":="1993"]
+disprop_1996[,"Año":="1996"]
+disprop_2000[,"Año":="2000"]
+disprop_2004[,"Año":="2004"]
+disprop_2008[,"Año":="2008"]
+disprop_2011[,"Año":="2011"]
+disprop_2015[,"Año":="2015"]
+disprop_2016[,"Año":="2016"]
+disprop_2019_04[,"Año":="2019_04"]
+disprop_2019_11[,"Año":="2019_11"]
+dds <- rbind(disprop_1977,disprop_1979,disprop_1982,disprop_1986,disprop_1989,disprop_1993,disprop_1996,disprop_2000,disprop_2004,disprop_2008,disprop_2011,disprop_2015,disprop_2016,disprop_2019_04,disprop_2019_11)
+
+dds <- as.data.table(gather(dds, metodos,
+key = "Metodos", value = "Desproporción"))
+
+ggplot(dds[,mean(Desproporción,na.rm=T),by=.(Año,Metodos)],aes(Año,V1))+
+  geom_line(aes(group=Metodos,color=Metodos),size=1.2)+
+  geom_point(aes(color=Metodos))+
+  labs(title = "Desproporción media por año ",caption = "Elaboración propia: Angel González",y="Desproporción")+
+  theme(legend.position = "bottom")
+
+# ggplot(dds[,mean(Desproporción),by=.(Año,Metodos,Comunidad)][Metodos%in%"Adams"],aes(Año,V1))+
+#   geom_line(aes(group=Comunidad,color=Comunidad))+
+#   geom_point(aes(color=Comunidad,size=V1))+
+#   geom_label(aes(label=Comunidad),position="nudge")+
+#   labs(title = "Desproporción media por año ",caption = "Elaboración propia: Angel González",y="Desproporción")+
+#   theme(legend.position = "none")+
+#   facet_grid(rows = vars(Metodos))
+
+# ggplot(dds[,mean(Desproporción),by=.(Año,Metodos)],aes(Año,V1))+
+#   geom_line(aes(group=Metodos,color=Metodos),size=1.2)+
+#   geom_point(aes(color=Metodos,size=V1,shape=Metodos))+
+#   labs(title = "Desproporción media por año ",caption = "Elaboración propia: Angel González",y="Desproporción")+
+#   theme(legend.position = "bottom")
+
+ggplot(dds[,mean(Desproporción,na.rm=T),by=.(Metodos)], aes(reorder(Metodos, -V1), V1)) +
+  geom_col(aes(fill = Metodos)) +
+  coord_flip()+
+   labs(title = "Desproporción según método de reparto",caption = "Elaboración propia: Angel González",x="Métodos",y="Desproporción",subtitle = "Media de todos los años" )+
+  guides(fill="none")
+
+```
+
+En este gráfico comparando la desproporción media por año observamos como la desproporción desde las elecciones de 1977 hasta 1989 está en un nivel medio, a partir del año 1993 la desproporción baja, principalmente debido a un bipartidismo más marcado, esto se mantiene hasta el año de las elecciones de 2011, en donde empieza por primera vez a aparecer un tercer partido que debilita el bipartidismo por lo que la desproporción aumenta a los niveles de las primeras elecciones de 1977, desde el año 2011 hasta las últimas elecciones de 2019 la desproporción se mantiene sin mucha variación.
+
+En el gráfico de la desproporción según el método de reparto podemos extraer conclusiones para decidir cual método ha sido el mejor a lo largo de todas las elecciones realizadas en España a partir de 1977, por lo tanto sacamos estas conclusiones:  
+
+  * El mejor método es el Saint-Lague por parte de los métodos de promedio mayor y por los métodos de resto mayor el mejor método es el LR-Hare.
+  * El peor método entre todos los analizados es con diferencia el método Imperiali.
+  * El método utilizado en España, el método D´Hondt, es el sexto mejor método en términos de proporcionalidad.
+
+Por lo tanto al preguntarnos si el método utilizado en España es el mejor método en términos de desproporción que se puede utilizar para el reparto de los escaños podemos afirmar que no lo es, de hecho se sitúa en la mitad de la tabla entre todos los métodos analizados, la característica que tiene el método D´Hont es que se sitúa entre los métodos que benefician más a los partidos más votados y de entre ellos es el método más proporcional, por lo que se podría decir que es el método más proporcional entre los métodos que "facilitan la gobernanza". Si nuestro objetivo es obtener la máxima proporcionalidad en vez de facilitar la gobernanza deberíamos plantear un cambio de método, en primer lugar al Sainte-Lague o al Danish en el caso de los métodos de promedio mayor, ambos métodos son casi idénticos en términos de proporcionalidad pero el Sainte-Lague tiene una mejor característica que el Danish, que reparte los escaños de forma que es más fácil gobernar, o bien al método LR-Hare en el caso de los métodos de resto mayor.
+En cambio si queremos facilitar la gobernanza a la vez que tratamos de minimizar la desproporción entre los escaños y los votos, en este caso el método D´Hondt es donde muestra su valor, puesto que es como hemos comentado anteriormente, el método que entra dentro del grupo que benefician más a los partidos más votados y de entre ellos es el método más proporcional, por esta razón se puede considerar el método más equilibrado para el gobierno de una nación.
+
+
+
