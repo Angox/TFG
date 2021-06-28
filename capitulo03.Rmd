@@ -1642,7 +1642,14 @@ asientos_dhondt <- function(partidos, votos,
     seats <- o + rowSums(W)
     o <- seats
   }
-
+if (sum(o) > n_escannos) {
+    resto <- G - o
+    quitar <- sum(o) - n_escannos
+    cuota <- resto[order(resto, decreasing = F)][quitar]
+    W <- (resto <= cuota)
+    seats <- o - rowSums(W)
+    o <- seats
+  }
   # Resultados
   data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
