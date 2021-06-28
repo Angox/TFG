@@ -78,7 +78,7 @@ knitr::opts_chunk$set(
 
 ## Objetivos
 
-  El objetivo del presente trabajo será una pequeña introducción explicando el funcionamiento del sistema electoral español, analizar y comparar distintos sistemas de votación que existen en la actualidad, analizar su comportamiento en diferentes escenarios y aplicar estos sistemas a España, analizando sus ventajas e inconvenientes.
+  El objetivo del presente trabajo es explicar el funcionamiento del sistema electoral español, analizar y comparar distintos sistemas de votación que existen en la actualidad, analizar su comportamiento en diferentes escenarios y aplicar estos sistemas a España, analizando sus ventajas e inconvenientes.
 
 ## ¿Qué significa votar?
 

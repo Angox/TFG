@@ -903,54 +903,15 @@ asientos_dhondt <- function(partidos, votos,
   o <- seats
   # Fix seats
   if(sum(o)>n_escannos){
-    if(n_escannos==1) {
-      G <- cbind("n"=0,votos)
-      cuota <- G[,2][order(G[,2], decreasing = T)][n_escannos]
-      W1 <- (G[,2] >= cuota)
-      seats <- as.numeric(W1)
-      o <- seats
-    } else
-    cuota <- G[,2:n_escannos][order(G[,2:n_escannos], decreasing = T)][n_escannos]
-    W2 <- as.matrix(G[,2:n_escannos] >= cuota)
-    seats <- rowSums(W2)
+    if(n_escannos==1) {G <- cbind("n"=0,votos) }
+    cuota <- G[,2][order(G[,2], decreasing = T)][n_escannos]
+    W1 <- (G[,2] >= cuota)
+    seats <- as.numeric(W1)
     o <- seats
   }
   
   
-  ######
-  # # Cuota mínima
-  # nv <- sum(votos)
-  # vn <- votos
-  # vn[votos <= nv * couta_min] <- 0
-  # votos <- vn
-  # 
-  # # Escaños
-  # div <- sqrt((1:n_escannos) * ((1:n_escannos) - 1))
-  # G <- sapply(div, function(x) votos / x)
-  # cuota <- G[order(G, decreasing = T)][n_escannos]
-  # W <- (G >= cuota)
-  # seats <- rowSums(W)
-  # o <- seats
-  # # Fix seats
-  # if(sum(o)>n_escannos){
-  #   if(n_escannos==1) {
-  #     G <- cbind("n"=0,votos)
-  #     cuota <- G[,2][order(G[,2], decreasing = T)][n_escannos]
-  #     W <- (G[,2] >= cuota)
-  #     seats <- as.numeric(W)
-  #     o <- seats
-  #   } else
-  #     if(n_escannos==2) {
-  #     cuota <- G[,2:n_escannos][order(G[,2:n_escannos], decreasing = T)][n_escannos]
-  #   W <- (G[,2:n_escannos] >= cuota)
-  #   seats <- as.numeric(W)
-  #   o <- seats
-  #   } else
-  #   cuota <- G[,2:n_escannos][order(G[,2:n_escannos], decreasing = T)][n_escannos]
-  #   W <- (G[,2:n_escannos] >= cuota)
-  #   seats <- rowSums(W)
-  #   o <- seats
-  # }
+ 
   # Resultados
   data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
 }
@@ -1137,16 +1098,10 @@ asientos_dhondt <- function(partidos, votos,
   o <- seats
   # Fix seats
   if(sum(o)>n_escannos){
-    if(n_escannos==1) {
-      G <- cbind("n"=0,votos)
-      cuota <- G[,2][order(G[,2], decreasing = T)][n_escannos]
-      W1 <- (G[,2] >= cuota)
-      seats <- as.numeric(W1)
-      o <- seats
-    } else
-    cuota <- G[,2:n_escannos][order(G[,2:n_escannos], decreasing = T)][n_escannos]
-    W2 <- as.matrix(G[,2:n_escannos] >= cuota)
-    seats <- rowSums(W2)
+    if(n_escannos==1) {G <- cbind("n"=0,votos) }
+    cuota <- G[,2][order(G[,2], decreasing = T)][n_escannos]
+    W1 <- (G[,2] >= cuota)
+    seats <- as.numeric(W1)
     o <- seats
   }
   
@@ -1510,11 +1465,13 @@ asientos_dhondt <- function(partidos, votos,
   # Escaños
   div <- trunc(nv / n_escannos) # Parte entera
   G <- sapply(div, function(x) votos / x)
-  o <- trunc(G)
-  if (sum(o) != n_escannos) {
+  o <- as.vector(trunc(G))
+  # Fix
+  if (sum(o) < n_escannos) {
     resto <- G - o
-    cuota <- resto[order(resto, decreasing = T)][n_escannos - sum(o)]
-    W <- (resto >= cuota) & (cumsum(resto) <= n_escannos - sum(o))
+    repart <- n_escannos - sum(o)
+    cuota <- resto[order(resto, decreasing = T)][repart]
+    W <- (resto >= cuota) 
     seats <- o + rowSums(W)
     o <- seats
   }
@@ -2145,7 +2102,7 @@ fig <- fig %>% layout(title = "Desproporción: Variando el número de escaños a
 fig
 ```
 
-En este gráfico nos centramos en la desproporción para un número de escaños a repartir de entre 300 y 400 diputados, actualmente en España se reparten 350 diputados.
+En este gráfico nos centramos en la desproporción para un número de escaños a repartir de entre 300 y 400 diputados, actualmente en España se reparten 350 diputados. 
 El peor método entre los presentados es el método Imperiali, con una diferencia significativa respecto a los demás métodos.
 Podemos agrupar los métodos en dos grupos,un grupo que sería el de una desproporción alta, en el que se encontrarían los métodos de Imperiali, Adams y D´Hondt.
 Un segundo grupo que sería el que presentaría una desproporción baja o media, con los restantes métodos.

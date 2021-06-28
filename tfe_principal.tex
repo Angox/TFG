@@ -693,11 +693,11 @@ distribution of seats.
 \hypertarget{objetivos}{%
 \section{Objetivos}\label{objetivos}}
 
-El objetivo del presente trabajo será una pequeña introducción
-explicando el funcionamiento del sistema electoral español, analizar y
-comparar distintos sistemas de votación que existen en la actualidad,
-analizar su comportamiento en diferentes escenarios y aplicar estos
-sistemas a España, analizando sus ventajas e inconvenientes.
+El objetivo del presente trabajo es explicar el funcionamiento del
+sistema electoral español, analizar y comparar distintos sistemas de
+votación que existen en la actualidad, analizar su comportamiento en
+diferentes escenarios y aplicar estos sistemas a España, analizando sus
+ventajas e inconvenientes.
 
 \hypertarget{quuxe9-significa-votar}{%
 \section{¿Qué significa votar?}\label{quuxe9-significa-votar}}
@@ -1072,11 +1072,11 @@ de representantes de los Estados Unidos de América. El objetivo es
 mantener la relación de ``una persona un voto'' lo más cercana posible a
 1.
 
-\hypertarget{muxe9todo}{%
-\subsection{Método}\label{muxe9todo}}
+\hypertarget{cuxe1lculo}{%
+\subsubsection{Cálculo}\label{cuxe1lculo}}
 
 Para distribuir los asientos entre los distintos partidos se utiliza el
-divisor según \(\sqrt{n(n+1)}\). Los primeros divisores son 0, 1.41,
+divisor según \(\sqrt{n(n-1)}\). Los primeros divisores son 0, 1.41,
 2.45, 3.46, 4.47. La asignación de escaños se hace ordenando los
 cocientes de mayor a menor y asignando a cada uno un escaño hasta que
 estos se agoten.
@@ -1755,14 +1755,15 @@ escaños}\label{huntington-hill-variando-el-nuxfamero-de-escauxf1os}}
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, se empieza por repartir un único escaño hasta los 800
 posibles escaños. Observamos que la desproporción en el caso de repartir
-unos pocos escaños es muy alta,es interesante observar que para un
-número de escaños entre 1 y 20 la desproporción no cambia, es a partir
-de los 20 escaños y posteriores donde observamos el descenso de la
-desproporción, descenso rápido en los primeros escaños que tiende a
-estabilizarse cuanto mayor número de escaños se repartan. Este método de
-Huntington-Hill también es más lento en alcanzar una desproporción
-aceptable, podríamos decir que entre los 300 y 400 estaríamos en niveles
-de desproporción aceptables.
+unos pocos escaños es muy alta, desciende rápidamente en los primeros
+escaños hasta llegar alrededor de los 10 a 20 escaños, en donde se
+estabiliza temporalmente, a partir de los 20 escaños vuelve a descender
+rápidamente. Este comportamiento se entiende por el hecho de repartir
+más escaños que partidos se presentan a las elecciones. A partir de los
+50 escaños desciende lentamente y tiende a estabilizarse cuanto mayor
+número de escaños se reparten. Sería deseable elegir un número de
+escaños entre los 100 y 200, en donde ya parece que se estabiliza y
+presenta niveles muy bajos de desproporción.
 
 \hypertarget{huntington-hill-variando-el-nuxfamero-de-partidos}{%
 \subsection{Huntington-Hill variando el número de
@@ -1774,14 +1775,16 @@ En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 100
 partidos que se presentan a una elección ficticia.\\
 Observamos que cuando se presentan de 2 a 24 partidos a las elecciones
-la desproporción es bastante baja, va aumentando a medida que se
-presentan más partidos, alcanzando el máximo de desproporción con 50
-partidos que se presentan a las elecciones, a partir de 50 partidos la
-curva comienza a decrecer.\\
-Lo particular de este método respecto a otros métodos es que la menor
-desproporción se obtiene en el caso de que se presenten a las elecciones
-pocos partidos y no se alcanzan los bajos niveles de desproporción en el
-caso de que muchos partidos se presenten a las elecciones.
+la desproporción es bastante baja, va aumentando significativamente a
+medida que se presentan más partidos, alcanzando el máximo de
+desproporción con 50 partidos que se presentan a las elecciones, a
+partir de los 50 partidos la curva cambia drásticamente, baja la
+desproporción y comienza a decrecer. Esto es debido a que se reparten
+menos escaños que partidos se presentan a las elecciones. Lo particular
+de este método respecto a otros métodos es que la menor desproporción se
+obtiene en el caso de que se presenten a las elecciones pocos partidos o
+muchos partidos y que en los 50 partidos alcanza el máximo de
+desproporción.
 
 \hypertarget{huntington-hill-variando-la-concentraciuxf3n-del-voto}{%
 \subsection{Huntington-Hill variando la concentración del
@@ -1801,10 +1804,11 @@ partir de una concentración de votos media-alta la desproporción va
 aumentando cuanto más diferencia de votos entre partidos se presenten.\\
 Así podemos concluir que el reparto de escaños según la ley
 Huntington-Hill es mejor cuanto menor concentración de voto tengan los
-partidos entre ellos, presenta un comportamiento diferente respecto a
-los otros métodos en donde cuanto mayor concentración de votos menor
-desproporción. No es un buen método para el caso en que los votos estén
-concentrados en pocos partidos.
+partidos entre ellos o cuando la concentración de voto sea media,
+presenta un comportamiento diferente respecto a los otros métodos en
+donde cuanto mayor concentración de votos, menor desproporción. No es un
+buen método para el caso en que los votos estén concentrados en pocos
+partidos.
 
 \hypertarget{adams}{%
 \section{Adams}\label{adams}}
@@ -1818,16 +1822,16 @@ escaños}\label{adams-variando-el-nuxfamero-de-escauxf1os}}
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, se empieza por repartir un único escaño hasta los 800
 posibles escaños. Observamos que la desproporción en el caso de un
-escaño es muy alta, en este método también observamos que la
-desproporción se mantiene en un mismo nivel hasta los 20 escaños,
+escaño es muy alta, en este método también observamos una alta
+desproporción inicial que se mantiene hasta los 50 escaños,
 posteriormente cuanto mayor es el número de escaños a repartir la
-desproporción va bajando. La diferencia de desproporción en los casos en
-los que hay pocos escaños a repartir es alta, cuantos mas escaños a
-repartir la diferencia de desproporción entre sucesivos escaños va
-reduciéndose, a números altos de escaños a repartir la desproporción
-tiende a estabilizarse. Este método también presenta una desproporción
-que se reduce más lentamente que otros métodos, comenzando a ser
-aceptable a partir de los 500 escaños aproximadamente.
+desproporción va bajando. Sucede en este caso la misma situación que en
+el método Huntington-Hill, en donde el comportamiento difiere si se
+reparten más escaños que partidos se presentan a las elecciones. En
+nuestro caso sucede en los 20 escaños a repartir porque hay 20 partidos
+que se presentan a las elecciones. Este método presenta una
+desproporción que se reduce algo más lentamente que otros métodos,
+comenzando a ser aceptable a partir de los 100 escaños aproximadamente.
 
 \hypertarget{adams-variando-el-nuxfamero-de-partidos}{%
 \subsection{Adams variando el número de
@@ -1839,14 +1843,17 @@ En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 100
 partidos que se presentan a una elección ficticia.\\
 Observamos que cuando se presentan de 2 a 23 partidos a las elecciones
-la desproporción es baja y con una variabilidad alta, como sucedía con
-el método Huntington-Hill, va aumentando a medida que se presentan más
+la desproporción es baja con una variabilidad alta, como sucedía con el
+método Huntington-Hill, va aumentando a medida que se presentan más
 partidos, alcanzando el máximo de desproporción con 50 partidos que se
 presentan a las elecciones, a partir de los 50 partidos que se presentan
-a las elecciones la curva comienza a decrecer.\\
+a las elecciones sucede que se empiezan a repartir menos escaños que
+partidos se presentan a las elecciones, debido a ello baja la
+desproporción y la curva comienza a decrecer.\\
 En este método Adams obtenemos el mejor resultado cuanto menor número de
-partidos se presenten a las elecciones, no siendo aconsejable utilizar
-este método cuando se presenten más de 25 partidos a las elecciones.
+partidos se presenten a las elecciones o bien cuando se presenten muchos
+partidos, no siendo aconsejable utilizar este método cuando se presenten
+entre 25 a 50 partidos a las elecciones.
 
 \hypertarget{adams-variando-la-concentraciuxf3n-del-voto}{%
 \subsection{Adams variando la concentración del
@@ -1859,12 +1866,13 @@ elecciones ficticias, comenzamos con una concentración de votos baja, es
 decir, la diferencia de votos entre partidos es baja, hasta acabar con
 una concentración de votos alta, en donde la diferencia de votos entre
 partidos es muy grande.\\
-Observando el gráfico observamos que cuando la concentración del voto es
-muy baja la desproporción está en un nivel muy bajo, cuanto más
-concentración de voto entre los partidos comprobamos como la
-desproporción va aumentando cada vez más.\\
-Así podemos concluir que el reparto de escaños según la ley Adams es
-mejor cuanto menor concentración de voto los partidos entre ellos, y
+Según el gráfico observamos que cuando la concentración del voto es muy
+baja, la desproporción también está en un nivel bajo. Cuanto más
+concentración de voto se encuentren entre los partidos la desproporción
+va aumentando cada vez más, éste es un método que depende mucho de la
+concentración del voto.\\
+Podemos concluir que el reparto de escaños según la ley Adams es mejor
+cuanto menor concentración de voto tengan los partidos entre ellos, y
 será peor cuanto mayor concentración de voto se presente.
 
 \hypertarget{danish}{%
@@ -1926,6 +1934,14 @@ depende significativamente de la concentración del voto.
 \hypertarget{lr-hare}{%
 \section{LR Hare}\label{lr-hare}}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Para diferenciar entre los métodos de resto mayor y promedio mayor, }
+\NormalTok{procederemos a añadir el prefijo }\FunctionTok{LR}\NormalTok{ ( Largest Remainder ) }
+\NormalTok{a los métodos de resto mayor.}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{lr-hare-variando-el-nuxfamero-de-escauxf1os}{%
 \subsection{LR Hare variando el número de
 escaños}\label{lr-hare-variando-el-nuxfamero-de-escauxf1os}}
@@ -1950,11 +1966,11 @@ En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 100
 partidos que se presentan a una elección ficticia. Observamos que cuando
 se presentan un número bajo de partidos a las elecciones, entre 2 a 25,
-la desproporción es alta, va dispminuyendo a medida que se presentan más
+la desproporción es alta, va disminuyendo a medida que se presentan más
 partidos, alcanzando el mínimo de desproporción cuantos más partidos se
 presenten a las elecciones . Podemos apreciar en el gráfico que para un
 número bajo de partidos que se presentan a las elecciones ( de 2 a 25 )
-la variabilidad es alta pero decreciente, a partir de los 25 escaños la
+la dispersión es alta pero decreciente, a partir de los 25 escaños la
 variabilidad tiende a estabilizarse cuanto mayor número de partidos se
 presenten en las elecciones.\\
 Según el método LR Hare obtendremos el mejor resultado en términos de
@@ -1975,8 +1991,8 @@ Observando el gráfico comprobamos como la concentración del voto no es
 significativa para el nivel de desproporción, característica deseable.
 Puede apreciarse una leve tendencia descendiente al aumentar la
 concentración del voto, lo que podría dar a entender que a
-concentraciones del voto extremadamente altas, el de LR-Hare alcanzaría
-el mínimo nivel de desproporción.
+concentraciones del voto extremadamente altas, el método LR-Hare
+alcanzaría el mínimo nivel de desproporción.
 
 \hypertarget{lr-droop}{%
 \section{LR Droop}\label{lr-droop}}
@@ -1996,10 +2012,9 @@ La diferencia de desproporción entre los casos en los que hay pocos
 escaños a repartir es alta, cuantos mas escaños a repartir la diferencia
 de desproporción entre sucesivos escaños va reduciéndose, a números
 altos de escaños a repartir la desproporción tiende a estabilizarse.\\
-Este método LR-Droop presenta una curva con un descenso más acusado que
-otros métodos anteriormente analizados, alcanza niveles de desproporción
-aceptables a partir de los 50 escaños y niveles deseables alrededor de
-los 200 escaños.
+Este método LR-Droop alcanza niveles de desproporción aceptables a
+partir de los 50 escaños y niveles deseables alrededor de los 200
+escaños.
 
 \hypertarget{lr-droop-variando-el-nuxfamero-de-partidos}{%
 \subsection{LR Droop variando el número de
@@ -2011,10 +2026,11 @@ En el caso presente únicamente modificamos el número de partidos
 presentes en la elección, desde un único posible partido hasta 100
 partidos que se presentan a una elección ficticia. Gran variabilidad en
 el caso de que se presenten un número bajo de partidos, hasta los 25
-partidos, en esta zona la desproporción es alta. A partir de los 25
-partidos que se presentan a las elecciones la variabilidad cambia
-totalmente respecto a la zona anterior y se vuelve muy estable, la
-desproporción presenta un descenso paulatino y no muy acusado.\\
+partidos, en esta zona la desproporción es alta y se mueve en un mismo
+nivel. A partir de los 25 partidos que se presentan a las elecciones la
+variabilidad cambia totalmente respecto a la zona anterior y se vuelve
+estable, con un descenso paulatino y no muy acusado. Se empieza a tener
+desproporciones bajas a partir de los 50 partidos.\\
 Según lo visto, en el método LR-Droop obtendremos el mejor resultado
 cuanto más partidos se presenten a las elecciones.
 
@@ -2033,7 +2049,9 @@ Observando el gráfico observamos que ya sea la concentración del voto
 muy baja, media o muy alta,la desproporción se encuentra en un mismo
 nivel, nivel en términos de desproporción muy bajos, cercanos al 0.
 Dentro del rango entre que se encuentra la desproporción la variabilidad
-en alta para cualquier nivel de concentración.
+es alta para cualquier nivel de concentración.\\
+En este puede decirse que el método Droop posee una buena cualidad,
+puesto que su proporcionalidad no depende de la concentración del voto.
 
 \hypertarget{lr-imperiali}{%
 \section{LR Imperiali}\label{lr-imperiali}}
@@ -2046,11 +2064,12 @@ escaños}\label{lr-imperiali-variando-el-nuxfamero-de-escauxf1os}}
 
 En este caso se nos presenta la desproporción variando el número de de
 escaños posibles, en el presente caso se empieza por repartir un único
-escaño hasta los 800 posibles escaños. La desproporción en el caso que
-se repartan pocos escaños es muy alta, posteriormente cuanto mayor es el
-número de escaños a repartir la desproporción baja rápidamente hasta
-alcanzar niveles aceptables cuando se reparten 100 escaños y niveles
-deseables a partir de los 200 escaños. .
+escaño hasta los 800 posibles escaños. No hay diferencia en el
+comportamiento respecto a los otros métodos de restos mayores. La
+desproporción en el caso que se repartan pocos escaños es muy alta,
+posteriormente cuanto mayor es el número de escaños a repartir la
+desproporción baja rápidamente hasta alcanzar niveles aceptables cuando
+se reparten 100 escaños y niveles deseables a partir de los 200 escaños.
 
 \hypertarget{lr-imperiali-variando-el-nuxfamero-de-partidos}{%
 \subsection{LR Imperiali variando el número de
@@ -2070,7 +2089,8 @@ se presentan a las elecciones ( de 2 a 25 ) la variabilidad es alta pero
 decreciente, a partir de los 25 partidos la variabilidad se
 estabiliza.\\
 Concluimos que según el método LR-Imperiali obtenemos el mejor resultado
-cuanto más partidos se presenten a las elecciones.
+cuanto más partidos se presenten a las elecciones, empieza a presentar
+una desproporción menor alrededor de los 50 partidos.
 
 \hypertarget{lr-lmperiali-variando-la-concentraciuxf3n-del-voto}{%
 \subsection{LR Lmperiali variando la concentración del
@@ -2086,7 +2106,9 @@ partidos es muy grande.\\
 Observando el gráfico observamos que la desproporción está en un mismo
 nivel ya se encuentre con una concentración de voto alta o baja. El
 nivel de desproporción es muy bajo, por lo tanto muy deseable, con
-valores muy cercanos a 0.
+valores muy cercanos a 0. Es un método que también presenta una buena
+cualidad, puesto que su proporcionalidad es prácticamente
+independientemente de la concentración del voto.
 
 \hypertarget{comparaciones-entre-muxe9todos}{%
 \section{Comparaciones entre
@@ -2099,6 +2121,9 @@ los datos de los tres escenarios posibles, variando el número de
 escaños, el número de partidos que se presentan a las elecciones o bien
 la concentración de los votos entre los partidos.
 
+Se recomiendan visitar los gráficos interactivos en la siguiente
+dirección: \url{https://rpubs.com/angox/cap3int}
+
 \hypertarget{variando-el-nuxfamero-de-escauxf1os}{%
 \subsection{Variando el número de
 escaños}\label{variando-el-nuxfamero-de-escauxf1os}}
@@ -2108,9 +2133,10 @@ escaños}\label{variando-el-nuxfamero-de-escauxf1os}}
 En el presente gráfico comparamos en un mismo lugar los métodos
 anteriormente analizados individualmente.\\
 En esta comparación podemos observar que para todos los métodos a pocos
-escaños a repartir la desproporción es muy alta, la desproporción baja
-cuanto mayor número de escaños a repartir, a números altos de escaños no
-hay diferencia de desproporción entre métodos.\\
+escaños a repartir la desproporción es muy alta y no hay casi diferencia
+entre métodos, la desproporción baja cuanto mayor número de escaños a
+repartir, a números muy altos de escaños la desproporción está muy
+cercana al 0 y casi no hay diferencia de desproporción entre métodos.\\
 El peor métodos en este caso es el Imperiali, que presenta una curva con
 un descenso mucho más lento que los demás métodos. Todos los demás
 métodos presentan un comportamiento similar.
@@ -2121,25 +2147,26 @@ En este gráfico nos centramos en la desproporción para un número de
 escaños a repartir de entre 300 y 400 diputados, actualmente en España
 se reparten 350 diputados. El peor método entre los presentados es el
 método Imperiali, con una diferencia significativa respecto a los demás
-métodos. Los mejores métodos de reparto podemos agruparlos en un grupo
-de tres, que son el método de Sainte-Lague en primer lugar, el método
-Modified Sainte-Lague y el método Danish respectivamente. Podemos
-agrupar los métodos en tres grupos,un grupo que sería el de una
-desproporción baja, en el que se encontrarían los métodos de
-Sainte-Lague, Danish y Modified Sainte-Lague. Un segundo grupo que sería
-el que presentaría una desproporción media, con los métodos Adams,
-Huntington-Hill y D´Hondt, finalizando con un último grupo de
-desproporción alta, y debido a ello no deseable en el que estaría el
-método Imperiali.
+métodos. Podemos agrupar los métodos en dos grupos,un grupo que sería el
+de una desproporción alta, en el que se encontrarían los métodos de
+Imperiali, Adams y D´Hondt. Un segundo grupo que sería el que
+presentaría una desproporción baja o media, con los restantes métodos.
 
 Actualmente en España se reparten 350 escaños y se utiliza el método
-D´Hondt, según los datos obtenidos podemos decir que no es el mejor
+D´Hondt, según los datos obtenidos podemos concluir que no es el mejor
 método que se puede utilizar, es un método que está en el grupo de
-desproporción media, e incluso no es el mejor método dentro de ese
-subgrupo, sería interesante según lo observado en la gráfica plantearse
-un cambio de método a otro mejor, al menos a alguno dentro del subgrupo
-de desproporción baja, preferentemente el mejor método que podríamos
-utilizar, que sería el método de Sainte-Lague sin modificar.
+desproporción alta, e incluso no es siempre el mejor método dentro de
+ese subgrupo, sería interesante según lo observado en la gráfica
+plantearse un cambio de método a otro mejor, al menos, a alguno dentro
+del subgrupo de desproporción baja, preferentemente el mejor método que
+podríamos utilizar dentro de los métodos de promedio mayor, que sería el
+método de Sainte-Lague sin modificar. Hay que tener en cuenta también
+que debido a que en España no se reparten los 350 diputados por
+circunscripción única las conclusiones cambiarían levemente. En el caso
+de que se repartan de 1 a 20 escaños el método D´Hont sigue sin ser uno
+de los mejores métodos, pero su desproporción es muy similar a los demás
+métodos por lo que hace al método D´Hont aceptable cuando se trata de
+repartir pocos escaños.
 
 \hypertarget{variando-el-nuxfamero-de-partidos}{%
 \subsection{Variando el número de
@@ -2155,11 +2182,11 @@ Observamos que para un número de partidos bajo hasta los 25 partidos que
 se presentan a unas elecciones la desproporción es muy variable, a
 partir de los 25 partidos se estabiliza y podemos sacar algunas
 conclusiones, en primer lugar el peor método claramente en este caso es
-el método Adams, mientras que los demás métodos son muy similares en su
-desproporción, donde la menor desproporción la podemos encontrar entre
-los métodos Danish y LR-Hare. A continuación nos centraremos en la
-desproporción cuando se presentan pocos partidos para analizarlo más
-detenidamente.
+el método Imperiali y Huntington-Hill, mientras que los demás métodos
+son similares en su desproporción, donde la menor desproporción la
+podemos encontrar entre los métodos Sainte-Lague y LR-Hare. A
+continuación nos centraremos en la desproporción cuando se presentan
+pocos partidos para analizarlo más detenidamente.
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-67-1} \end{center}
 
@@ -2175,11 +2202,12 @@ desproporción va aumentando, que son los métodos de Adams y
 Huntington-Hill.\\
 En España se utiliza el método D´Hondt, según los datos obtenidos
 podemos concluir que el método d´Hondt no es el mejor método entre los
-analizados, se encontraría en un nivel medio entre los métodos posibles,
-es decir, sería deseable para obtener una mayor proporcionalidad que se
-cambiase el método de reparto a otro mejor, en este caso observamos que
-el mejor método dentro del grupo de promedios mayores es el Saint-Lague
-y dentro del grupo de resto mayor el mejor parado es el método LR-Hare.
+analizados, se encontraría en un nivel medio-alto entre los métodos
+posibles, es decir, sería deseable para obtener una mayor
+proporcionalidad que se cambiase el método de reparto a otro mejor, en
+este caso observamos que el mejor método dentro del grupo de promedios
+mayores es el Saint-Lague y dentro del grupo de resto mayor el mejor
+parado es el método LR-Hare.
 
 \hypertarget{variando-la-concentraciuxf3n-del-voto}{%
 \subsection{Variando la concentración del
@@ -2198,12 +2226,10 @@ Observamos que hay dos grupos diferenciados, uno de ellos en los que la
 desproporción es baja para una menor concentración de votos entre los
 partidos y que a medida que la concentración aumenta también va
 aumentando la desproporción, donde se encuentran los métodos de Adams y
-Huntington-Hill. El otro grupo se caracteriza por en cuanto la
-concentración del voto es muy baja la desproporción está en un nivel
-bajo, cuanto más concentración de voto podemos comprobar como la
-desproporción aumenta hasta que alcanza un punto en donde alcanza el
-máximo de desproporción y a partir de ese punto la desproporción va
-bajando alcanzando el mínimo de desproporción.
+Huntington-Hill, también se comporta así el método Imperiali hasta una
+concentración de votos media. El otro grupo se caracteriza por ya sea la
+concentración del voto muy baja o muy alta, la desproporción está en un
+nivel bajo y no varía significativamente.
 
 \begin{center}\includegraphics[width=0.95\linewidth]{figurasR/unnamed-chunk-69-1} \end{center}
 
@@ -2211,16 +2237,17 @@ En este gráfico nos centramos en los casos en que hay mayor
 concentración de votos de unos pocos partidos, lo que suele suceder
 habitualmente.\\
 Vemos que hay dos grupos diferenciados, uno en el que hay una alta
-desproporción, que serían los métodos Imperiali, Adams y Huntington-Hill
-y otro en el que la desproporción es baja. En España, la concentración
-de voto suele ser alta o medio-alta y se utiliza como método de reparto
-el método D´Hondt, por lo tanto observando el gráfico podemos decir que
-el método utilizado en España no es el más óptimo si se busca obtener un
-bajo índice de desproporción, sería conveniente realizar un cambio de
-método y cambiar el método D´Hondt preferentemente por el método
-Sainte-Lague, que es el mejor entre los métodos del grupo de promedio
-mayor con desproporción baja. Dentro del grupo de los métodos de resto
-mayor todos ellos se comportan con una desproporción muy baja.
+desproporción, que serían los métodos Imperiali, Adams, D´Hondt y
+Huntington-Hill y otro en el que la desproporción es baja. En España, la
+concentración de voto suele ser alta o medio-alta y se utiliza como
+método de reparto el método D´Hondt, por lo tanto observando el gráfico
+podemos decir que el método utilizado en España no es el más óptimo si
+se busca obtener un bajo índice de desproporción, sería conveniente
+realizar un cambio de método y cambiar el método D´Hondt preferentemente
+por el método Sainte-Lague o Danish, que son los mejores entre los
+métodos del grupo de promedio mayor con desproporción baja. Dentro del
+grupo de los métodos de resto mayor todos ellos se comportan con una
+desproporción muy baja.
 
 \hypertarget{conclusiones}{%
 \section{Conclusiones}\label{conclusiones}}
@@ -2371,8 +2398,9 @@ a los partidos grandes es el método imperiali, que beneficia mucho a los
 partidos más votados y penaliza mucho en escaños a los partidos tanto
 medianos como poco votados. El método actual en España también tiene un
 comportamiento similar al Imperiali aunque no tan acusado. En la otra
-parte de la balanza encontramos al método Adams, el cual da muy pocos
-escaños al partidos más votado y a los partidos medianos les beneficia.
+parte de la balanza nos encontramos con el método Adams, el cual da muy
+pocos escaños al partidos más votado y a los partidos medianos les
+beneficia.
 
 En estas elecciones no se obtiene la mayoría absoluta en ningún método
 excepto en el método Imperiali, en los demás métodos el partido ganador
@@ -2448,17 +2476,18 @@ hay una mayor diferencia de desproporción entre comunidades, las
 ciudades de Ceuta y Melilla siguen presentando la mayor desproporción
 como es habitual y la comunidad de Madrid la menor desproporción. El
 comportamiento de la desproporción en las comunidades se puede agrupar
-en dos grupos, un grupo compuesto por los métodos Huntington-Hill y
-Adams, y otro grupo con los restantes métodos.
+en dos grupos, un grupo compuesto por los métodos Imperiali,
+Huntington-Hill y Adams, y otro grupo con los restantes métodos.
 
 Según la desproporción media los peores métodos de reparto se pueden
-agrupar en tres, el método Imperiali, el Huntington-Hill, y el Adams, y
-los mejores métodos de reparto en tres métodos, el LR-Hare, Danish y el
-Sainte-Lague. En el caso del método D´Hondt se encuentra en un término
-medio, por lo que sería conveniente cambiar el método de reparto a uno
-más proporcional, que puede ser el Danish o el Sainte-Lague dentro de
-los métodos de promedio mayor o bien por el LR-Hare de entre los métodos
-de resto mayor.
+agrupar en un grupo de tres métodos, el método Imperiali,
+Huntington-Hill, y el Adams. Entre los mejores métodos de reparto se
+encuentran el LR-Hare, Danish y el Sainte-Lague. En el caso del método
+D´Hondt se encuentra en un término medio más próximo a los métodos más
+desproporcionados, por lo que sería conveniente cambiar el método de
+reparto a uno más proporcional, como puede ser el Danish o el
+Sainte-Lague dentro de los métodos de promedio mayor o bien por el
+LR-Hare de entre los métodos de resto mayor.
 
 \hypertarget{auxf1o-1982}{%
 \section{Año 1982}\label{auxf1o-1982}}
@@ -2471,16 +2500,16 @@ obtenidos}\label{comparativa-de-asientos-obtenidos-2}}
 
 \begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-82-2} \end{center}
 
-En estas elecciones de 1982 el partido más votado es el \emph{PSOE} el
+En estas elecciones de 1982 el partido más votado es el \emph{PSOE}, el
 cual según la mayoría de los métodos de reparto, incluido el método
 D´Hondt, alcanza la mayoría absoluta. Son unas elecciones en los que el
 voto se concentra únicamente en dos partidos, que son el \emph{PSOE} y
 \emph{Alianza Popular}, pero con una gran diferencia de asientos entre
 ellos, donde el \emph{PSOE} casi dobla en escaños a \emph{Alianza
-Popular}. El partido menos beneficiado en este año es \emph{UCD}, que
-según el método D´Hondt obtendría 11 escaños mientras que si se optase
-por otro método más proporcional como puede ser el método Danish o bien
-el Sainte-Lague podría multiplicar sus escaños por 3 o 4.
+Popular}. El partido menos beneficiado este año es \emph{UCD}, que según
+el método D´Hondt obtendría 11 escaños mientras que si se optase por
+otro método más proporcional como puede ser el método Danish o bien el
+Sainte-Lague podría multiplicar sus escaños por 3 o 4.
 
 \hypertarget{desproporciuxf3n-2}{%
 \subsection{Desproporción}\label{desproporciuxf3n-2}}
@@ -2490,17 +2519,18 @@ el Sainte-Lague podría multiplicar sus escaños por 3 o 4.
 \begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-83-2} \end{center}
 
 Según la gráfica de desproporción por comunidades es un año en el que
-generalmente no hay mucha diferencia de desproporción entre ellas, este
-año las comunidades más desproporcionadas son la comunidad Foral de
-Navarra y Cantabria sin contar las usuales de Ceuta y Melilla,mientras
-que las comunidades más proporcionadas son la comunidad de Madrid y la
-región de Murcia.
+todas ellas presentan un nivel de desproporción similar. Las comunidades
+más desproporcionadas son la comunidad Foral de Navarra y Cantabria sin
+contar las usuales de Ceuta y Melilla, mientras que las comunidades más
+proporcionadas son la comunidad de Madrid y la región de Murcia.
 
-Según la desproporción media, se reconocen tres grupos distintos, un
-grupo muy desproporcionado, con el método Adams como el más
-desproporcionado, otro grupo medio en donde se encontraría el método
-D´Hondt y un último grupo el cual sería el más proporcionado en el que
-se encontraría el método Danish, LR-Hare y el Saint-Lague.
+Según la desproporción media, se identifican tres grupos distintos, un
+grupo muy desproporcionado, con el método Imperiali como el más
+desproporcionado, seguido por el Adams y Huntington-Hill. Otro grupo de
+proporcionalidad media en donde se encuentra el método D´Hondt,
+LR-Imperiali y Modified Sainte-Lague y un último grupo el cual sería el
+más proporcionado, en el que se encuentra el método Danish, LR-Hare,
+LR-Droop y el Saint-Lague.
 
 \hypertarget{auxf1o-1986}{%
 \section{Año 1986}\label{auxf1o-1986}}
@@ -2527,8 +2557,8 @@ Danish como el Sainte-Lague.\\
 Este año también reconocemos un partido que podría decirse de nivel de
 votos medio que queda muy dañado por el método de reparto D´Hondt, es el
 partido \emph{Centro Democrático y Social}, el cual de utilizar los
-métodos más proporcionados podría hasta duplicar sus escaños en el caso
-de optar por el método Danish.
+métodos más proporcionales podría hasta duplicar sus escaños, por
+ejemplo en el caso de optar por el método Danish.
 
 \hypertarget{desproporciuxf3n-3}{%
 \subsection{Desproporción}\label{desproporciuxf3n-3}}
@@ -2548,7 +2578,7 @@ Según el método de reparto este año el método Imperiali es el más
 desproporcionado con una gran diferencia respecto a los restantes
 métodos, los demás métodos se sitúan en un mismo grupo, en donde los
 métodos más proporcionados este año son los métodos LR-Hare y Danish
-seguido muy de cerca por el Sainte-Lague.
+seguido muy de cerca por el LR-Hare y el Sainte-Lague.
 
 \hypertarget{auxf1o-1989}{%
 \section{Año 1989}\label{auxf1o-1989}}
@@ -2586,19 +2616,15 @@ de optar por los métodos más proporcionales.
 Este año aumenta ligeramente la diferencia de desproporción entre
 comunidades, sin encontrar novedades en las comunidades más
 proporcionales, Madrid, y las más desproporcionadas, las ciudades de
-Ceuta y Melilla. Observando los métodos de reparto hay dos grupos
-diferenciados, uno en el que se encuentran el método Adams, LR-Imperiali
-y el método de Huntington-Hill, en los cuales no se encuentran
-comunidades con picos de desproporción pero por el lado contrario su
-desproporción media es alta, y otro grupo que serían los restantes
-métodos los cuales todos presentan unos mismos picos máximos como
-míninos.
+Ceuta y Melilla. Observando los métodos de reparto, la comunidad que
+presenta especiales bajos niveles de desproporción en estas elecciones
+es la región de Murcia.
 
 Estas elecciones de 1989 la desproporción media se agrupa en tres
 grupos, de alta, media y baja desproporción, el más desproporcionado
-vuelve a ser el método Imperiali, el método D´Hondt sigue en el grupo
-medio y el método más proporcionado vuelve a ser el Danish aunque le
-sigue muy cerca el método Sainte-Lague.
+vuelve a ser el método Imperiali, el método D´Hondt sigue siendo el más
+desproporcionado en el grupo medio y el método más proporcionado vuelve
+a ser el Danish aunque le sigue muy cerca el método Sainte-Lague.
 
 \hypertarget{auxf1o-1993}{%
 \section{Año 1993}\label{auxf1o-1993}}
@@ -2613,19 +2639,19 @@ obtenidos}\label{comparativa-de-asientos-obtenidos-5}}
 
 En las elecciones de 1993 podemos observar como la fuerza del primer
 partido va decreciendo lentamente. Los dos partidos más votados son el
-\emph{PSOE} y el \emph{PP} respectivamente, la diferencia estas
-elecciones es que el PSOE ha perdido la mayoría absoluta según el método
-D´Hondt y en cambio el \emph{PP} ha aumentado su presencia
-significativamente y está ya relativamente cerca de alcanzar al
-\emph{PSOE}. De haber utilizado los métodos más proporcionales
-resultaría en una menor diferencia de escaños entre estos dos grandes
-partidos, el partido más castigado en estas elecciones sigue siendo
-\emph{IU}, el cual podría haber obtenido de 1.5 a 2 veces más asientos
-de haber cambiado de método de reparto. Son unas elecciones en donde hay
-dos partidos hegemónicos y dos partidos medianos que son \emph{IU} y
-\emph{CIU}, como hemos visto \emph{IU} es un partido muy castigado por
-el método de reparto actual, en cambio \emph{CIU} no se vería agraviado
-o beneficiado al cambiar el método de reparto.
+\emph{PSOE} y el \emph{PP} respectivamente. La diferencia de estas
+elecciones respecto a las anteriores es que el PSOE ha perdido la
+mayoría absoluta según el método D´Hondt y en cambio el \emph{PP} ha
+aumentado su presencia significativamente, y está ya relativamente cerca
+de alcanzar al \emph{PSOE}. De haber utilizado los métodos más
+proporcionales resultaría en una menor diferencia de escaños entre estos
+dos grandes partidos, el partido más castigado en estas elecciones sigue
+siendo \emph{IU}, el cual podría haber obtenido de 1.5 a 2 veces más
+asientos de haber cambiado de método de reparto. Son unas elecciones en
+donde hay dos partidos hegemónicos y dos partidos medianos, que son
+\emph{IU} y \emph{CIU}, como hemos visto \emph{IU} es un partido muy
+castigado por el método de reparto actual, en cambio \emph{CIU} no se
+vería agraviado o beneficiado al cambiar el método de reparto.
 
 \hypertarget{desproporciuxf3n-5}{%
 \subsection{Desproporción}\label{desproporciuxf3n-5}}
@@ -2636,9 +2662,9 @@ o beneficiado al cambiar el método de reparto.
 
 En estas elecciones se observan más picos de desproporción en
 comparación con las elecciones anteriores, especialmente aumenta su
-desproporción el Pais Vasco y Aragón, no hay novedades en los máximos ni
-en los mínimos. Siguen dos grupos con un comportamiento similar, en un
-grupo los métodos de Adams, Huntington-Hill y LR-Imperiali y los
+desproporción el Pais Vasco y Cantabria, no hay novedades en los máximos
+ni en los mínimos. Siguen dos grupos con un comportamiento similar, en
+un grupo los métodos de Adams, Huntington-Hill y LR-Imperiali y los
 restantes en el otro grupo.
 
 Este año en el caso de la desproporción media según el método de reparto
@@ -2646,8 +2672,8 @@ vemos que hay diferencias en los métodos más desproporcionales,
 usualmente el método más desproporcionado ha sido el Imperiali, en estas
 elecciones esto cambia, de hecho mejora en dos puestos. Los más
 desproporcionados este año entonces son los métodos Adams y de
-Huntington-Hill, en el caso de los más proporcionados no hay novedades,
-siguen siendo los métodos LR-Hare y Danish seguido muy de cerca por el
+Huntington-Hill, en el caso de los más proporcionados se encuentran los
+métodos LR-Imperiali, LR-Hare y Danish seguido muy de cerca por el
 Sainte-Lague.
 
 \hypertarget{auxf1o-1996}{%
@@ -2662,7 +2688,7 @@ obtenidos}\label{comparativa-de-asientos-obtenidos-6}}
 \begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-94-2} \end{center}
 
 En estas elecciones de 1996 son las primeras elecciones en donde el
-\emph{PP} son la fuerza más votada, el \emph{PSOE} que ya llevaba una
+\emph{PP} es la fuerza más votada, el \emph{PSOE} que ya llevaba una
 tendencia descendiente a lo largo de las últimas elecciones al final
 pierde el primer puesto a favor del \emph{PP}. Sigue presentandose un
 bipartidismo significativo, seguidamente de dos partidos medianos,
@@ -2681,9 +2707,10 @@ haber escogido otro método más proporcional.
 En estas elecciones de 1996 se observa una desproporción similar a las
 elecciones anteriores, en este año el comportamiento de la desproporción
 por provincias se puede agrupar en tres grupos, uno en el que estaría el
-método LR-Imperiali, con una desproporción muy marcada en la comunidad
-Foral de Navarra, otro en los que estarían los métodos Adams y
-Huntington-Hill, y el tercero con los métodos restantes.
+método LR-Imperiali, con una desproporción alta en la comunidad Foral de
+Navarra, otro en los que estarían los métodos Adams y Huntington-Hill,
+con una alta desproporción en la Rioja y un tercer grupo con los
+restantes métodos.
 
 Este año en el caso de la desproporción media según el método de reparto
 vemos que hay diferencias en los métodos con más desproporción respecto
@@ -2693,7 +2720,7 @@ método Danish pasa a un cuarto puesto superado por el método
 Sainte-Lague, los mejores son el método LR-Imperiali y LR-Hare. Los más
 desproporcionados este año son el método anteriormente citado,
 Imperiali, seguido muy de cerca por los métodos Adams y de
-Huntington-Hill, .
+Huntington-Hill.
 
 \hypertarget{auxf1o-2000}{%
 \section{Año 2000}\label{auxf1o-2000}}
@@ -2707,7 +2734,7 @@ obtenidos}\label{comparativa-de-asientos-obtenidos-7}}
 \begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-97-2} \end{center}
 
 En las elecciones del año 2000 el partido más votado vuelve a ser el
-\emph{Partido Popular} seguido del \emph{PSOE}, en estas elecciones
+\emph{Partido Popular} seguido del \emph{PSOE} .En estas elecciones,
 según el método D´Hondt utilizado en España el \emph{PP} conseguiría una
 mayoría absoluta holgada, es una elección con un claro bipartidismo
 donde se podría decir que no existen partidos medianos. Si optásemos por
@@ -2734,12 +2761,12 @@ anteriores elecciones.
 
 Si miramos la gráfica de la desproporción según el método de reparto se
 pueden agrupar los métodos en dos grupos, uno con gran desproporción en
-el que estarían incluidos los métodos Adams, Imperiali y
-Huntington-Hill, y el otro grupo restante con una desproporción media
-baja. Seguimos observando que el método D´Hont no es el mejor aunque en
-estas elecciones se puede considerar un método aceptable siendo los
-mejores el método LR-Hare, Danish y Saint-Lague, todos ellos con una
-desproporción muy similar.
+el que estarían incluidos los métodos Adams, Huntington-Hill e Imperiali
+respectivamente, y el otro grupo restante con una desproporción entre
+media y baja. Seguimos observando que el método D´Hont sigue en las
+peores posiciones dentro del grupo con desproporción media y baja,
+siendo los mejores el método LR-Hare, Danish y Saint-Lague, todos ellos
+con una desproporción muy similar.
 
 \hypertarget{auxf1o-2004}{%
 \section{Año 2004}\label{auxf1o-2004}}
@@ -2759,13 +2786,13 @@ vez menor, en estas elecciones el partido más votado cambia y el
 la mayoría absoluta según D´Hont que tenía en las anteriores elecciones.
 En ningún método el \emph{PSOE} alcanzaría la mayoría absoluta por lo
 que deberá de realizar alianzas con otros partidos para así alcanzar la
-mayoría absoluta, si optásemos por los métodos mas proporcionales
-veríamos una reducción muy significativa de la diferencia de escaños
-entre partidos que pasaría de una diferencia de 16 escaños a 6 escaños
-en el caso de optar por el método Danish, en cambio el partido más
+mayoría absoluta. En el caso de optar por los métodos mas proporcionales
+resultaría en una reducción muy significativa de la diferencia de
+escaños entre partidos que pasaría de una diferencia de 16 escaños a 6
+escaños en el caso de optar por el método Danish. El partido más
 castigado por el método D´Hondt es \emph{Izquierda Unida}, que hasta
 podría ver duplicado o triplicado su presencia en el congreso si se opta
-por utilizar un método de reparto distinto.
+por utilizar un método de reparto más proporcional.
 
 \hypertarget{desproporciuxf3n-8}{%
 \subsection{Desproporción}\label{desproporciuxf3n-8}}
@@ -2774,16 +2801,16 @@ por utilizar un método de reparto distinto.
 
 \begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-101-2} \end{center}
 
-Según el gráfico anterior por comunidades sigue la tónica general de las
+Según el gráfico por comunidades se sigue la tónica general de las
 anteriores elecciones, únicamente podemos apreciar en estas elecciones
 una reducción de la desproporción entre comunidades, es decir, una menor
 diferencia de desproporción entre ellas. Siguen dos grupos con
 comportamiento similar, un grupo donde se encuentran los métodos Adams,
 Huntington-Hill y LR-Imperiali, y en otro grupo los restantes. En el
-caso de agrupar la desproporción por métodos observamos que el método
-Imperiali vuelve a ser el más desproporcionado este año mientras que en
-la parte de los métodos mas proporcionados el método mejor sería el
-LR-Imperiali, LR-Hare y Sainte-Lague, el método D´Hondt utilizado en
+caso de agrupar la desproporción por métodos observamos que este año el
+método más desproporcionado es el Huntington-Hill, mientras que en la
+parte de los métodos mas proporcionados el método mejor sería el
+LR-Imperiali, LR-Hare y Sainte-Lague. El método D´Hondt utilizado en
 España sigue siendo un método que se encuentra en un nivel medio, sin
 destacar por una desproporción alta ni baja entre todos los métodos.
 
@@ -2826,13 +2853,14 @@ Este es un año que se puede observar una mayor igualdad en el caso de
 las desproporciones, las comunidades no tienen una gran diferencia de
 proporcionalidad entre ellas sin contar con las habituales de Ceuta y
 Melilla, además no encontramos grandes diferencias entre los métodos.\\
-Si observamos la gráfica de la desproporción según el método de reparto
-es llamativo este año que únicamente tenemos un método especialmente
-despropocionado que es el Imperiali, en cambio todos los demás métodos
-están en un mismo nivel con una baja diferencia entre ellos, el mejor
-método en estas elecciones es el método LR-Imperiali, el método D´Hont
-utilizado en España no presenta diferencias y se encuentra en un nivel
-medio-alto de desproporción entre todos los métodos analizados.
+Si observamos la gráfica de la desproporción según el método de reparto,
+el método más despropocionado es el Imperiali, seguido por los métodos
+Adams y Huntington-Hill respectivamente. Todos los demás métodos están
+en un mismo nivel, el mejor método en estas elecciones es el método
+LR-Imperiali, que presenta una muy baja desproporción respecto a los
+demás métodos. El método D´Hont utilizado en España no presenta
+diferencias y se encuentra en un nivel medio-alto de desproporción entre
+todos los métodos analizados.
 
 \hypertarget{auxf1o-2011}{%
 \section{Año 2011}\label{auxf1o-2011}}
@@ -2849,8 +2877,8 @@ Este año 2011 podemos considerarlo como el primer año en el que aunque
 continúe sucediendo un claro bipartidismo empiezan a surgir partidos
 medianos con cada vez más presencia en el congreso, en este año es la
 aparición de \emph{UPyD}. El partido más votado en estas elecciones es
-el Partido Popular, que además obtiene la mayoría absoluta de forma
-holgada según el método D´Hondt utilizado en España, le sigue el
+el \emph{Partido Popular}, que además obtiene la mayoría absoluta de
+forma holgada según el método D´Hondt utilizado en España, le sigue el
 \emph{PSOE} a una diferencia muy significativa, casi duplica la
 presencia en el congreso del \emph{PP} respecto al \emph{PSOE}. Si
 observamos los otros métodos propuestos vemos que el \emph{PP} en el
@@ -2864,9 +2892,10 @@ según el método Adams y Huntington-Hill, son métodos que dan escaños a
 los partidos con menos votos en detrimento de los partidos más votados,
 en estas elecciones vemos como el resultado cambiaría radicalmente, el
 \emph{PP} de ser el partido más votado con mucha diferencia pasaría a
-reducir la diferencia de escaños a la mitad pero la diferencia más
-notoria está en los partidos medianos \emph{UPyD} y \emph{IU}, que
-pasarían de 5 a 41 escaños y de 11 a 54 escaños respectivamente.
+reducir la diferencia de escaños respecto al \emph{PSOE} a la mitad
+según el método Adams, pero la diferencia más notoria está en los
+partidos medianos \emph{UPyD} y \emph{IU}, que pasarían de 5 a 30
+escaños y de 11 a 43 escaños respectivamente.
 
 \hypertarget{desproporciuxf3n-10}{%
 \subsection{Desproporción}\label{desproporciuxf3n-10}}
@@ -2876,19 +2905,19 @@ pasarían de 5 a 41 escaños y de 11 a 54 escaños respectivamente.
 \begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-107-2} \end{center}
 
 Observando el gráfico de la desproporción entre comunidades vemos como
-este año particularmente el comportamiento general de todos los métodos
-es similar a diferencia de las anteriores elecciones en donde los
-métodos Adams y Huntington-Hill presentaban un comportamiento claramente
-distinto respecto a los restantes métodos, este año el comportamiento de
-todos los métodos es similar.
+este año se aprecian claramente dos grupos distintos. Uno en el que se
+encuentran niveles similares de desproporción entre las comunidades y
+otro grupo en el que se encuentran los métodos Imperiali, Adams y
+Huntington-Hill, con grandes diferencias de desproporción entre
+comunidades.
 
-Si observamos la desproporción según el método de reparto volvemos a
-observar dos grupos bien diferenciados, uno en el que hay una gran
-desproporción, donde estarían los métodos Huntington-Hill, Adams e
-Imperiali, y otro grupo con los restantes métodos con una
-proporcionalidad baja. El método D´Hondt utilizado en España se
-encontraría en el grupo de desproporción media, los mejores métodos en
-estas elecciones son el método LR-Hare y Danish.
+En la desproporción media según el método de reparto volvemos a observar
+dos grupos bien diferenciados, uno en el que hay una gran desproporción,
+donde estarían los métodos Huntington-Hill, Adams e Imperiali, y otro
+grupo con los restantes métodos con una proporcionalidad baja. El método
+D´Hondt utilizado en España se encontraría en el grupo de desproporción
+media, pero dentro del grupo es el más desproporcionado. Los mejores
+métodos en estas elecciones son el método LR-Hare y Danish.
 
 \hypertarget{auxf1o-2015}{%
 \section{Año 2015}\label{auxf1o-2015}}
@@ -2901,24 +2930,24 @@ obtenidos}\label{comparativa-de-asientos-obtenidos-11}}
 
 \begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-109-2} \end{center}
 
-En estas elecciones del 2014 ya vemos que el bipartidismo que veíamos
+En estas elecciones del 2014 observamos que el bipartidismo que veíamos
 omnipresente en todas las elecciones anteriores ahora ya no ocurre, es
 el primer año en el que se puede afirmar que ya no hay un bipartidismo
 claro. El partido más votado es el \emph{Partido Popular} seguido por el
 \emph{PSOE}, pero ya vemos que este año aparecen dos nuevos partidos
 medianos, que son \emph{Podemos} y \emph{Ciudadanos.} El partido más
-votado no obtiene la mayoría absoluta en ningún método, es interesante
-observar como entre Podemos y Ciudadanos en el caso de utilizar el
-método D´Hondt el primero superaría en dos escaños al segundo, mientras
-que de haber utilizado el método Danish, Ciudadanos superaría a Podemos
-en dos escaños. En el caso de optar por el método Danish, el partido más
-votado, el \emph{PP}, perdería bastantes escaños y su diferencia
-respecto al segundo se vería reducida significativamente. En el caso de
-los partidos medianos verían su presencia en el congreso aumentar
-levemente pero en ningún caso supondría un cambio significativo. El
-partido más perjudicado este año vuelve a ser \emph{Izquierda Unida},
-que podría pasar de obtener 2 escaños con el método D´Hondt a 11 escaños
-con el Danish.
+votado no obtiene la mayoría absoluta en ningún método. Es interesante
+observar como entre \emph{Podemos} y \emph{Ciudadanos} en el caso de
+utilizar el método D´Hondt, el primero superaría en dos escaños al
+segundo, mientras que de haber utilizado el método Danish,
+\emph{Ciudadanos} superaría a \emph{Podemos} en dos escaños. En el caso
+de optar por el método Danish, el partido más votado, el \emph{PP},
+perdería bastantes escaños y su diferencia respecto al segundo se vería
+reducida significativamente. En el caso de los partidos medianos verían
+su presencia en el congreso aumentar levemente pero en ningún caso
+supondría un cambio significativo. El partido más perjudicado este año
+vuelve a ser \emph{Izquierda Unida}, que podría pasar de obtener 2
+escaños con el método D´Hondt a 11 escaños con el Danish.
 
 \hypertarget{desproporciuxf3n-11}{%
 \subsection{Desproporción}\label{desproporciuxf3n-11}}
@@ -2928,19 +2957,21 @@ con el Danish.
 \begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-110-2} \end{center}
 
 Según el gráfico por comunidades volvemos a ver un comportamiento
-claramente distinto de los demás de los métodos Adams y Huntington-Hill,
-es un año en el que la diferencia de desproporción entre las distintas
-comunidades aumentan. Siguen presentandose las mayores desproporciones
-en Ceuta y Melilla y la menor desproporción en la comunidad de Madrid.
+similar entre los distintos métodos, con pequeñas diferencias en el
+grupo de los métodos Imperiali, Adams y Huntington-Hill. Es un año en el
+que la diferencia de desproporción entre las distintas comunidades
+aumentan. Siguen presentándose las mayores desproporciones en Ceuta y
+Melilla y la menor desproporción en la comunidad de Madrid.
 
 En el caso de la desproporción según el método de reparto este año
-tenemos nuevamente dos grupos diferenciados, en un grupo con una
-desproporción alta estaría el método Imperiali, LR-Droop y LR-Imperiali,
-respectivamente, y todos los métodos restantes se encontrarían en el
-grupo de desproporción baja, el mejor método este año es el LR-Hare y el
-Sainte-Lague, encontramos que el método D´Hondt utilizado en España es
-el peor método posible dentro del grupo con baja desproporción, por lo
-tanto sería conveniente plantear el cambio a otro método mejor.
+tenemos nuevamente dos grupos diferenciados, un grupo con una
+desproporción alta en el que se encontraría el método Imperiali,
+Huntington-Hill y Adams, respectivamente, y todos los métodos restantes
+se encontrarían en el grupo de desproporción media o baja, el mejor
+método este año es el LR-Hare y el Sainte-Lague, encontramos que el
+método D´Hondt utilizado en España es el peor método posible dentro del
+grupo con baja desproporción, por lo tanto sería conveniente plantear el
+cambio a otro método mejor.
 
 \hypertarget{auxf1o-2016}{%
 \section{Año 2016}\label{auxf1o-2016}}
@@ -2957,14 +2988,16 @@ En las elecciones del año 2016 vemos como se va consolidando el modelo
 de las anteriores elecciones, con dos grandes partidos y dos partidos
 medianos. La fuerza política más votada este año es el \emph{Partido
 Popular} seguido del \emph{PSOE}, en ningún método el \emph{PP}
-alcanzaría la mayoría absoluta, son unas elecciones que no presentan
-diferencias significativas al cambiar de método de reparto, en el caso
-de utilizar el método Danish respecto al D´Hondt resultaría en un menor
+alcanzaría la mayoría absoluta. Son unas elecciones que presentan
+similares resultados sea cual sea el método de reparto, en el caso de
+utilizar el método Danish respecto al D´Hondt resultaría en un menor
 número de escaños para el \emph{PP} y una ligera subida de escaños de
-\emph{Podemos} y \emph{Ciudadanos.} Son las primeras elecciones en donde
-el método de reparto no cambia significativamente el reparto de escaños,
-es notorio que en este año el \emph{PSOE} obtenga casi los mismos votos
-independientemente del método utilizado.
+\emph{Podemos} y \emph{Ciudadanos}.
+
+Son las primeras elecciones en donde el método de reparto no cambia
+significativamente el reparto de escaños, es notorio que en este año el
+\emph{PSOE} obtenga casi los mismos votos independientemente del método
+de reparto utilizado.
 
 \hypertarget{desproporciuxf3n-12}{%
 \subsection{Desproporción}\label{desproporciuxf3n-12}}
@@ -2973,18 +3006,19 @@ independientemente del método utilizado.
 
 \begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-113-2} \end{center}
 
-En la desproporción por comunidades vemos el habitual comportamiento
-entre los métodos, con el método Adams y el Huntington-Hill
-comportándose diferente a los demás. Respecto a las diferencias de
-desproporción entre comunidades este año es especialmente similar el
-comportamiento aunque con distinta magnitud entre los distintos métodos.
+En la desproporción por comunidades vemos un comportamiento similar
+entre los distintos métodos, únicamente el método Imperiali tiene un
+comportamiento levemente diferente a los demás. Este año es
+especialmente alta la desproporción de la ciudad de Ceuta y
+especialmente baja la desproporción del principado de Asturias.
+
 En el gráfico en que comparamos los métodos de reparto el comportamiento
 es similar al anterior año, con un método que es significativamente
 desproporcionado respecto a los demás, el método Imperiali, y los demás
-métodos muy similares entre ellos siendo el mejor el método LR-Hare y
-Sainte-Lague, el método utilizado en España, el D´Hondt, vuelve a ser de
-los peores por lo que cada vez sería más necesario proponer un cambio de
-método de reparto a otro más proporcional.
+métodos similares entre ellos, siendo el mejor método el LR-Hare y
+Sainte-Lague. El método utilizado en España, el D´Hondt, vuelve a ser de
+los peores, por lo que sería necesario proponer un cambio de método de
+reparto a otro más proporcional.
 
 \hypertarget{auxf1o-2019-abril}{%
 \section{Año 2019, Abril}\label{auxf1o-2019-abril}}
@@ -3005,14 +3039,15 @@ con una gran diferencia de escaños respecto a los demás, que es el
 un número medio-alto de escaños, que son el \emph{PP} y
 \emph{Ciudadanos} respectivamente, un tercer grupo con un número mediano
 de escaños con \emph{Podemos} y \emph{Vox}, y un último grupo de pocos
-escaños con los demás partidos. Este año tampoco hay una diferencia
-significativa de haber utilizado un método de reparto respecto a otro,
-los partidos más perjudicados por la elección del método D´Hondt son
+escaños con los demás partidos. Este año tampoco hay diferencias de
+escaños de haber utilizado un método de reparto respecto a otro, los
+partidos más perjudicados por la elección del método D´Hondt son
 \emph{Vox} y \emph{Podemos}, en ningún caso el partido más votado
 alcanza la mayoría absoluta. De haber utilizado el método Danish el
 partido que se vería más beneficiado sería \emph{Vox} seguido de
 \emph{Ciudadanos}, partido que superaría en escaños al \emph{PP} y se
-convertiría en la segunda fuerza en el hemiciclo.
+convertiría en la segunda fuerza en el hemiciclo, igualmente sucedería
+con los métodos Adams y Huntington-Hill.
 
 \hypertarget{desproporciuxf3n-13}{%
 \subsection{Desproporción}\label{desproporciuxf3n-13}}
@@ -3022,21 +3057,17 @@ convertiría en la segunda fuerza en el hemiciclo.
 \begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-116-2} \end{center}
 
 Este es un año en el que viendo la desproporción por comunidades es
-especialmente similar independientemente del método utilizado, siguen
-presentándose dos grupos de distinto comportamiento, dentro de los dos
-grupos todos los métodos siguen un patrón de desproporción similar, sin
-olvidar el comportamiento habitual de las ciudades de Ceuta y Melilla y
-de la comunidad de Madrid como la provincia más proporcionada.
-
+especialmente similar independientemente del método utilizado. En las
+ciudades de Ceuta y Melilla es donde encontramos la mayor desproporción,
+por otra parte la comunidad de Madrid es la provincia más
+proporcionada.\\
 Cuando comparamos la proporcionalidad según el método de reparto sucede
-algo que no se había visto hasta ahora, que un método que anteriormente
-a llegado a ser el más desproporcionado sucede que este año es el más
-proporcionado, este método es el Huntington-Hill, en el extremo opuesto
-está el método Imperiali con una diferencia bastante significativa
-respecto a las demás. El método utilizado en España vuelve a ser uno de
-los peores, en estas elecciones el cuarto peor, parece ser un método que
-no está preparado para ser óptimo en escenarios en donde no hay un
-bipartidismo claro.
+algosimilar a las anteriores elecciones, en donde el método Imperiali se
+encuentra con una diferencia bastante significativa respecto a las
+demás. El método utilizado en España vuelve a ser uno de los peores, en
+estas elecciones baja hasta ser el segundo peor en términos de
+proporcionalidad, es un método que no está preparado para ser óptimo en
+escenarios en donde no hay un bipartidismo claro.
 
 \hypertarget{auxf1o-2019-noviembre}{%
 \section{Año 2019, Noviembre}\label{auxf1o-2019-noviembre}}
@@ -3052,14 +3083,15 @@ obtenidos}\label{comparativa-de-asientos-obtenidos-14}}
 En esta gráfica de las elecciones de Noviembre de 2019 podemos observar
 una ligera recuperación del bipartidismo en donde los dos principales
 partidos vuelven a aumentar el número de escaños obtenidos y también
-aumentar la diferencia en escaños respecto a los demás. Son unas
-elecciones en donde hay dos partidos principales, que son el \emph{PSOE}
-y el \emph{PP} respectivamente, uno medio en escaños, \emph{Vox}, y tres
-partidos de un nivel medio-bajo de escaños, que son \emph{Podemos},
-\emph{ERC} y \emph{Ciudadanos} respectivamente. En el caso de optar por
-otro método en ninguno de ellos se alcanzaría la mayoría absoluta. Hay
-dos partidos perjudicados por utilizar el método D´Hondt en vez de otro
-más proporcional como pueda ser el Danish, son los partidos de
+aumentar la diferencia en escaños respecto a los demás.\\
+Son unas elecciones en donde hay dos partidos principales, que son el
+\emph{PSOE} y el \emph{PP} respectivamente, uno medio en escaños,
+\emph{Vox}, y tres partidos de un nivel medio-bajo de escaños, que son
+\emph{Podemos}, \emph{ERC} y \emph{Ciudadanos} respectivamente.\\
+En el caso de optar por otro método de reparto de escaños no se
+alcanzaría la mayoría absoluta en ninguno de ellos. Hay dos partidos
+perjudicados por utilizar el método D´Hondt en vez de otro más
+proporcional como pueda ser el Danish, son los partidos de
 \emph{Podemos} que pasarían de obtener 26 escaños a 40 y el partido
 \emph{Ciudadanos} que pasaría a duplicar su presencia de 10 escaños a
 23.
@@ -3072,11 +3104,13 @@ más proporcional como pueda ser el Danish, son los partidos de
 \begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-119-2} \end{center}
 
 En el gráfico por comunidades obtenemos el mismo comportamiento que en
-las elecciones anteriores sin obtener una diferencia significativa.
-Cuando comparamos la desproporción según el método de reparto el método
-de Imperiali sigue siendo el más desproporcionado mientras que el mejor
+las elecciones anteriores sin observar diferencias notables. Siguen
+siendo Ceuta y Melilla las regiones mas desproporcionadas y Madrid la
+más proporcionada.\\
+Cuando comparamos la desproporción según el método de reparto, el método
+Imperiali sigue siendo el más desproporcionado mientras que el mejor
 método esta vez resulta ser el LR-Hare y Sainte-Lague, el método D´Hondt
-como hemos visto en anteriores elecciones sigue siendo el cuarto peor
+como hemos visto en la anterior elección sigue siendo el segundo peor
 método posible entre todos los analizados.
 
 \hypertarget{comparativa-entre-auxf1os}{%
@@ -3091,17 +3125,17 @@ años analizados para cada método.
 
 \begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-120-1} \end{center}
 
-\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-120-2} \end{center}
-
 En este gráfico comparando la desproporción media por año observamos
 como la desproporción desde las elecciones de 1977 hasta 1989 está en un
-nivel medio, a partir del año 1993 la desproporción baja, principalmente
-debido a un bipartidismo más marcado, esto se mantiene hasta el año de
-las elecciones de 2011, en donde empieza por primera vez a aparecer un
-tercer partido que debilita el bipartidismo por lo que la desproporción
-aumenta a los niveles de las primeras elecciones de 1977, desde el año
-2011 hasta las últimas elecciones de 2019 la desproporción se mantiene
-sin mucha variación.
+nivel medio o alto. A partir del año 1993 la desproporción es baja,
+principalmente debido a un bipartidismo más marcado, esto se mantiene
+hasta el año de las elecciones de 2011, en donde empieza por primera vez
+a aparecer un tercer partido que debilita el bipartidismo, por lo que la
+desproporción aumenta a los niveles de las primeras elecciones de 1977,
+desde el año 2011 hasta las últimas elecciones de 2019 la desproporción
+se mantiene sin mucha variación.
+
+\begin{center}\includegraphics[width=1\linewidth]{figurasR/unnamed-chunk-121-1} \end{center}
 
 En el gráfico de la desproporción según el método de reparto podemos
 extraer conclusiones para decidir cual método ha sido el mejor a lo
@@ -3112,25 +3146,25 @@ lo tanto sacamos estas conclusiones:
 \tightlist
 \item
   El mejor método es el Saint-Lague por parte de los métodos de promedio
-  mayor y por los métodos de resto mayor el mejor método es el LR-Hare.
+  mayor y por los métodos de resto mayor el mejor método es el LR-Hare,
+  que también es el mejor método entre todos los analizados.
 \item
-  El peor método entre todos los analizados es con diferencia el método
-  Imperiali.
+  El peor método entre todos los analizados es el método Imperiali.
 \item
-  El método utilizado en España, el método D´Hondt, es el sexto mejor
-  método en términos de proporcionalidad.
+  El método utilizado en España, el método D´Hondt, es el séptimo mejor
+  método en términos de proporcionalidad o bien el cuarto peor método.
 \end{itemize}
 
-Por lo tanto al preguntarnos si el método utilizado en España es el
-mejor método en términos de desproporción que se puede utilizar para el
-reparto de los escaños podemos afirmar que no lo es, de hecho se sitúa
-en la mitad de la tabla entre todos los métodos analizados, la
+Por lo tanto al preguntarnos si el método utilizado en España, método
+D´Hont, es el mejor método de reparto de escaños en términos de
+desproporción, podemos afirmar que no lo es, de hecho se sitúa en la
+mitad alta de la tabla entre todos los métodos analizados. La
 característica que tiene el método D´Hont es que se sitúa entre los
 métodos que benefician más a los partidos más votados y de entre ellos
 es el método más proporcional, por lo que se podría decir que es el
 método más proporcional entre los métodos que ``facilitan la
 gobernanza''. Si nuestro objetivo es obtener la máxima proporcionalidad
-en vez de facilitar la gobernanza deberíamos plantear un cambio de
+en vez de facilitar la gobernanza, deberíamos plantear un cambio de
 método, en primer lugar al Sainte-Lague o al Danish en el caso de los
 métodos de promedio mayor, ambos métodos son casi idénticos en términos
 de proporcionalidad pero el Sainte-Lague tiene una mejor característica
@@ -3197,13 +3231,13 @@ para compararlos entre sí y analizando el nivel de proporcionalidad de
 los distintos métodos. Los métodos más proporcionados resultaron ser el
 Saint-Lague por parte de los métodos de promedio mayor y por los métodos
 de resto mayor el mejor método es el LR-Hare. El método que se desempeña
-peor es el método Imperiali. Es interesante observar el método D´Hondt,
-método utilizado actualmente en España para el reparto de escaños al
-congreso. En el caso de que nuestro objetivo sea la pura
-proporcionalidad escaños-votos es claro que no es el método más óptimo,
-pero en cambio sí que por otra parte se observa que tiene una cualidad
-particular que lo hace atractivo como método de reparto, esto es, a
-pesar de no ser el método más proporcional sí que facilita la
+peor es el método Imperiali. Al observar el método D´Hondt, método
+utilizado actualmente en España para el reparto de escaños al congreso,
+vemos que es el cuarto peor método. En el caso de que nuestro objetivo
+sea la pura proporcionalidad escaños-votos es claro que no es el método
+óptimo, pero en cambio sí que por otra parte se observa que tiene una
+cualidad particular que lo hace atractivo como método de reparto, esto
+es, a pesar de no ser el método más proporcional sí que facilita la
 gobernanza, siendo posible en varias elecciones alcanzar la mayoría
 absoluta. Por este motivo se comprende la elección de este método de
 reparto de escaños en España, puesto que entre todos los métodos
@@ -3392,8 +3426,10 @@ kableExtra & 1.3.4 & 2021-02-20\\
 \addlinespace
 knitr & 1.33 & 2021-04-24\\
 openxlsx & 4.2.3 & 2020-10-27\\
+plotly & 4.9.3 & 2021-01-10\\
 tibble & 3.1.1 & 2021-04-18\\
 tidyr & 1.1.3 & 2021-03-03\\
+\addlinespace
 usethis & 2.0.1 & 2021-02-10\\
 \bottomrule
 \end{tabular}

@@ -153,9 +153,9 @@ Método utilizado en Bélgica en las elecciones municipales.[^5]
 Método creado en 1920 por Joseph Hill y corregido por el compañero de escuela de Hill, Edward Huntington. Actualmente se utiliza para distribuir los asientos que les corresponde a cada estado en la cámara de representantes de los Estados Unidos de América.
 El objetivo es mantener la relación de "una persona un voto" lo más cercana posible a 1.
 
-### Método
+#### Cálculo
 
-Para distribuir los asientos entre los distintos partidos se utiliza el divisor según $\sqrt{n(n+1)}$. Los primeros divisores son 0, 1.41, 2.45, 3.46, 4.47. La asignación de escaños se hace ordenando los cocientes de mayor a menor y asignando a cada uno un escaño hasta que estos se agoten.
+Para distribuir los asientos entre los distintos partidos se utiliza el divisor según $\sqrt{n(n-1)}$. Los primeros divisores son 0, 1.41, 2.45, 3.46, 4.47. La asignación de escaños se hace ordenando los cocientes de mayor a menor y asignando a cada uno un escaño hasta que estos se agoten.
 
 Para repartir los asientos por estado se utiliza el siguiente método:
 
