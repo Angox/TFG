@@ -84,7 +84,7 @@ Los archivos necesarios para generar el trabajo ha sido publicado para su acceso
 
 ``` {.R}
 +-- abstract.Rmd
-+-- acm-sig-proceedings-long-author-list.csl
++-- apendice01.pdf
 +-- apendice01.Rmd
 +-- apendice02.Rmd
 +-- a_NEWS.Rmd
@@ -93,43 +93,62 @@ Los archivos necesarios para generar el trabajo ha sido publicado para su acceso
 +-- bib
 |   +-- library.bib
 |   +-- Mibiblioteca.bib
-|   +-- paquetemio.bib
 |   \-- paquetes.bib
-+-- capitulo01.aux
-+-- capitulo01.log
-+-- capitulo01.out
++-- Cap3Interact.html
++-- Cap3Interact.Rmd
 +-- capitulo01.pdf
 +-- capitulo01.Rmd
-+-- capitulo01.toc
 +-- capitulo02.pdf
 +-- capitulo02.Rmd
 +-- capitulo03.pdf
 +-- capitulo03.Rmd
-+-- capitulo03.tex
++-- capitulo04.pdf
 +-- capitulo04.Rmd
 +-- capitulo05.log
 +-- capitulo05.pdf
 +-- capitulo05.Rmd
-+-- cpimod.sty
++-- Capitulo06.pdf
++-- Capitulo06.Rmd
 +-- Datos
 |   +-- Congreso
+|   |   +-- PROV_02_197706_1.xlsx
+|   |   +-- PROV_02_197903_1.xlsx
+|   |   +-- PROV_02_198210_1.xlsx
+|   |   +-- PROV_02_198606_1.xlsx
+|   |   +-- PROV_02_198910_1.xlsx
+|   |   +-- PROV_02_199306_1.xlsx
+|   |   +-- PROV_02_199603_1.xlsx
+|   |   +-- PROV_02_200003_1.xlsx
+|   |   +-- PROV_02_200403_1.xlsx
+|   |   +-- PROV_02_200803_1.xlsx
+|   |   +-- PROV_02_201111_1.xlsx
+|   |   +-- PROV_02_201512_1.xlsx
+|   |   +-- PROV_02_201606_1.xlsx
+|   |   +-- PROV_02_201904_1.xlsx
+|   |   \-- PROV_02_201911_1.xlsx
+|   \-- Senado
+|       +-- PROV_03_197706_1.xlsx
+|       +-- PROV_03_197903_1.xlsx
+|       +-- PROV_03_198210_1.xlsx
+|       +-- PROV_03_201606_1.xlsx
+|       +-- PROV_03_201904_1.xlsx
+|       \-- PROV_03_201911_1.xlsx
 +-- figurasR
 +-- graficos
-+-- latex
-+-- logo.png
-+-- methods-in-ecology-and-evolution.csl
-+-- modelos
 +-- portadas
 +-- prologo.Rmd
 +-- README.md
 +-- references.bib
 +-- resumen.Rmd
++-- rsconnect
+|   \-- documents
+|       \-- Cap3Interact.Rmd
++-- tfe_principal.knit.md
 +-- tfe_principal.log
 +-- tfe_principal.pdf
 +-- tfe_principal.Rmd
 +-- tfe_principal.tex
-+-- tfe_principal_imprimir2caras.pdf
-+-- tfe_principal_librodigital.pdf
++-- tfe_principal.utf8.md
 \-- TFG_Git.Rproj
 ```
 
@@ -140,9 +159,12 @@ Los archivos necesarios para generar el trabajo ha sido publicado para su acceso
   - Capítulo 1: *capitulo01.Rmd*
   - Capítulo 2: *capitulo02.Rmd*
   - Capítulo 3: *capitulo03.Rmd*
+    -   Capítulo 3 Interactivo: *cap3Interact.Rmd*
   - Capítulo 4: *capitulo04.Rmd*
   - Capítulo 5: *capitulo05.Rmd*
-  - Apéndice: *apendice01.Rmd*
+  - Capítulo 6: *capitulo06.Rmd*
+  - Apéndice 1: *apendice01.Rmd*
+  - Apéndice 2: *apendice02.Rmd*
   
   
 - Bibliografía: Se utilizan los archivos que se encuentran en la carpeta *+-- bib*
@@ -156,7 +178,7 @@ Los archivos necesarios para generar el trabajo ha sido publicado para su acceso
 ### Librerías utilizadas
 
 
-\renewcommand{\arraystretch}{0.6} <!-- decrease line spacing for the table -->
+\renewcommand{\arraystretch}{0.6}
 ```{r Reproducibility-SessionInfo-R-packages, echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", out.width='100%', results='asis'}
 
 library("knitr")

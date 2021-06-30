@@ -32,11 +32,12 @@ output:
 
 
 ```{r include=FALSE}
-knitr::opts_chunk$set(fig.path = 'figurasR/',
-                      echo = FALSE, warning = FALSE, message = FALSE,
-                      fig.pos="H",fig.align="center",out.width="95%",
-                      cache=FALSE)
-
+knitr::opts_chunk$set(
+  fig.path = "figurasR/",
+  echo = FALSE, warning = FALSE, message = FALSE,
+  fig.pos = "H", fig.align = "center", out.width = "95%",
+  cache = FALSE
+)
 ```
 
 
@@ -70,9 +71,1145 @@ knitr::opts_chunk$set(fig.path = 'figurasR/',
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
-# Apéndice: Título del Apéndice
+# Apéndice 2: Resultados de las elecciones del capítulo 5
+
+  
+
+  
+```{r}
+library(data.table)
+# Variables
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 1:n_escannos
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_sainte <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 2 * (1:n_escannos) - 1
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_modsainte <- function(partidos, votos,
+                               n_escannos,
+                               couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- c(1, (10 * (2:n_escannos) - 5) / 7)
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_imperiali <- function(partidos, votos,
+                               n_escannos,
+                               couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- ((1:n_escannos) + 1) / 2
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_huntington <- function(partidos, votos,
+                                n_escannos,
+                                couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- sqrt((1:n_escannos) * ((1:n_escannos) - 1))
+  G <- sapply(div, function(x) votos / x)
+  G[is.na(G)] <- 0
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Fix seats
+  if (sum(o) > n_escannos) {
+    if (n_escannos == 1) {
+      G <- cbind("n" = 0, votos)
+    }
+    cuota <- G[, 2][order(G[, 2], decreasing = T)][n_escannos]
+    W1 <- (G[, 2] >= cuota)
+    seats <- as.numeric(W1)
+    o <- seats
+  }
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_adams <- function(partidos, votos,
+                           n_escannos,
+                           couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 1:n_escannos - 1
+  div[is.na(div)] <- 0
+  G <- sapply(div, function(x) votos / x)
+  G[is.na(G)] <- 0
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+
+  # Fix seats
+  if (sum(o) > n_escannos) {
+    if (n_escannos == 1) {
+      G <- cbind("n" = 0, votos)
+    }
+    cuota <- G[, 2][order(G[, 2], decreasing = T)][n_escannos]
+    W1 <- (G[, 2] >= cuota)
+    seats <- as.numeric(W1)
+    o <- seats
+  }
+
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_danish <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 3 * (1:n_escannos) - 2
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_hare <- function(partidos, votos,
+                          n_escannos,
+                          couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- trunc(nv / n_escannos) # Parte entera
+  G <- sapply(div, function(x) votos / x)
+  o <- as.vector(trunc(G))
+  # Fix
+  if (sum(o) < n_escannos) {
+    resto <- G - o
+    repart <- n_escannos - sum(o)
+    cuota <- resto[order(resto, decreasing = T)][repart]
+    W <- (resto >= cuota)
+    seats <- o + rowSums(W)
+    o <- seats
+  }
+  if (sum(o) > n_escannos) {
+    resto <- G - o
+    quitar <- sum(o) - n_escannos
+    cuota <- resto[order(resto, decreasing = F)][quitar]
+    W <- (resto <= cuota)
+    seats <- o - rowSums(W)
+    o <- seats
+  }
+
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_droop <- function(partidos, votos,
+                           n_escannos,
+                           couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- trunc(nv / (n_escannos + 1)) # Parte entera
+  G <- sapply(div, function(x) votos / x)
+  o <- trunc(G)
+  # Fix
+  while (sum(o) < n_escannos) {
+    resto <- G - o
+    faltan <- n_escannos - sum(o)
+    cuota <- resto[order(resto, decreasing = T)][faltan]
+    W <- (resto >= cuota)
+    seats <- rowSums(W)
+    o <- o + seats
+  }
+
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_imperialilr <- function(partidos, votos,
+                                 n_escannos,
+                                 couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- trunc(nv / (n_escannos + 2)) # Parte entera
+  G <- sapply(div, function(x) votos / x)
+  o <- trunc(G)
+  while (sum(o) < n_escannos) {
+    resto <- G - o
+    faltan <- n_escannos - sum(o)
+    cuota <- resto[order(resto, decreasing = T)][faltan]
+    W <- (resto >= cuota)
+    seats <- rowSums(W)
+    o <- o + seats
+  }
+
+  # if(sum(o)!=n_escannos){
+  #   resto <- G-o
+  #   cuota <- resto[order(resto, decreasing = T)][n_escannos-sum(o)]
+  #   W <- (resto >= cuota)&(cumsum(resto)<=(n_escannos-sum(o)))
+  #   seats <- o+rowSums(W)
+  #   o <- seats}
+
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+```
+
+```{r }
+
+desproporción <- function(s, v) {
+  s <- as.vector(s)
+  v <- as.vector(v)
+  l_s <- length(s)
+  s_s <- sum(s)
+  s_v <- sum(v)
+  p_s <- s / s_s
+  p_v <- v / s_v
+  o <- (1 / l_s) * sum(abs(p_s - p_v))
+  o
+}
+```
+
+```{r }
+# Datos elecciones
+library(openxlsx)
+library(electoral)
+setwd("~/Universidad/TFG/TFG_Git")
+
+generardato <- function(eleccion) {
+  # Cámbiese la ruta del archivo si da error
+  datos <- read.xlsx(xlsxFile = paste("Datos/Congreso/", list.files(path = "~/Universidad/TFG/TFG_Git/Datos/Congreso")[eleccion], sep = ""))
+  # Eliminar fila con nombres y sustituirlos por las siglas
+  datos[3, ][!is.na(datos[1, ])] <- datos[1, ][!is.na(datos[1, ])]
+  datos <- datos[-nrow(datos), ]
+  colnames(datos) <- datos[3, ]
+  datos <- datos[-c(1, 2, 3), ]
+  # Columnas como números
+  datos[, 4:ncol(datos)] <- apply(datos[, 4:ncol(datos)], 2, as.numeric)
+  row.names(datos) <- NULL
+  # Quedarnos con las columnas deseadas
+  datos$asientos <- rowSums(datos[, (colnames(datos) %in% c("Diputados"))])
+  datos <- datos[, !(colnames(datos) %in% c("Diputados"))]
+  if (eleccion == 1) datos[15, 15] <- 23866 # Rectificar votos mal contados
+  datos <<- datos
+}
+```
 
 
-## Primera sección
+```{r }
+sindelim3 <- function(cuota = .03) {
+  # Datos para España en su conjunto
+  # Escoger columnas que nos interesan
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)))
+  # Sumar para toda España
+  datosesp <- apply(datos[, colum], 2, sum)
+  # Partidos que se presentan a las elecciones
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  # Crear vector con votos
+  votos <- datosesp[-length(datosesp)]
+  # Número escaños
+  escannos <- last(datosesp)
+  # Aplicar método
+  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = cuota)
+  # Calcular desprop
+  disprop <- desproporción(s = asientos$Escanos, v = votos)
+  # Eliminar partidos sin representación
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  # Guardar datos
+  resul_sindelim3 <<- asientos
+  disprop_sindelim3 <<- disprop
+}
+
+sindelim0 <- function(cuota = 0) {
+  # Datos para España en su conjunto
+  # Escoger columnas que nos interesan
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)))
+  # Sumar para toda España
+  datosesp <- apply(datos[, colum], 2, sum)
+  # Partidos que se presentan a las elecciones
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  # Crear vector con votos
+  votos <- datosesp[-length(datosesp)]
+  # Número escaños
+  escannos <- last(datosesp)
+  # Aplicar método
+  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = cuota)
+  # Calcular desprop
+  disprop <- desproporción(s = asientos$Escanos, v = votos)
+  # Eliminar partidos sin representación
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  # Guardar datos
+  resul_sindelim0 <<- asientos
+  disprop_sindelim0 <<- disprop
+}
+
+dhondt <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_dhondt <<- asientos
+  disprop_dhondt <<- disprop
+}
+# sainte
+sainte <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_sainte <<- asientos
+  disprop_sainte <<- disprop
+}
+# modsainte
+modsainte <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_modsainte <<- asientos
+  disprop_modsainte <<- disprop
+}
+# huntington
+huntington <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+    asientos$Escanos[is.na(asientos$Escanos)] <- 0
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_huntington <<- asientos
+  disprop_huntington <<- disprop
+}
+# imperiali
+imperiali <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_imperiali <<- asientos
+  disprop_imperiali <<- disprop
+}
+# adams
+adams <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+    asientos$Escanos[is.na(asientos$Escanos)] <- 0
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_adams <<- asientos
+  disprop_adams <<- disprop
+}
+# danish
+danish <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_danish <<- asientos
+  disprop_danish <<- disprop
+}
+# hare
+hare <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_hare(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_hare <<- asientos
+  disprop_hare <<- disprop
+}
+# droop
+droop <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_droop(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_droop <<- asientos
+  disprop_droop <<- disprop
+}
+# imperialilr
+imperialilr <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_imperialilr(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_imperialilr <<- asientos
+  disprop_imperialilr <<- disprop
+}
+```
 
 
+
+
+
+
+
+
+
+```{r }
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(ggpol)
+
+Asientos <- NULL
+anno <- c("1977", "1979", "1982", "1986", "1989", "1993", "1996", "2000", "2004", "2008", "2011", "2015", "2016", "2019_04", "2019_10")
+metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali", "LR-Hare", "LR-Droop", "LR-Imperiali", "Sin Delim 3%", "Sin Delim")
+Disproporcion <- NULL
+
+for (i in seq_len(15)) {
+  generardato(eleccion = i)
+  dhondt()
+  sainte()
+  modsainte()
+  huntington()
+  imperiali()
+  adams()
+  danish()
+  hare()
+  droop()
+  imperialilr()
+  sindelim3()
+  sindelim0()
+
+
+  # Calcular asientos
+  fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
+  fe <- full_join(fe, resul_sainte, by = "Partidos")
+  fe <- full_join(fe, resul_modsainte, by = "Partidos")
+  fe <- full_join(fe, resul_adams, by = "Partidos")
+  fe <- full_join(fe, resul_huntington, by = "Partidos")
+  fe <- full_join(fe, resul_imperiali, by = "Partidos")
+  fe <- full_join(fe, resul_hare, by = "Partidos")
+  fe <- full_join(fe, resul_droop, by = "Partidos")
+  fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+  fe <- full_join(fe, resul_sindelim3, by = "Partidos")
+  fe <- full_join(fe, resul_sindelim0, by = "Partidos")
+  colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali", "LR-Hare", "LR-Droop", "LR-Imperiali", "Sin Delim 3%", "Sin Delim")
+
+  fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali", "LR-Hare", "LR-Droop", "LR-Imperiali", "Sin Delim 3%", "Sin Delim",
+    key = "Metodo", value = "Asientos"
+  )
+  fe$Asientos <- replace_na(fe$Asientos, 0)
+  fe$anno <- anno[i]
+  fe1 <- as.data.table(fe)
+
+  Asientos[[i]] <- fe1
+
+
+  # Desprop
+
+  disprop_mean <- c(
+    mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
+    mean(disprop_modsainte), mean(disprop_adams),
+    mean(disprop_huntington), mean(disprop_imperiali), mean(disprop_hare), mean(disprop_droop), mean(disprop_imperialilr), disprop_sindelim3, disprop_sindelim0
+  )
+  Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
+  Disproporc$anno <- anno[i]
+  Disproporcion[[i]] <- Disproporc
+}
+
+# Agruparlos
+asientosfinal <- rbindlist(Asientos)
+asientosfinal$anno <- as.factor(asientosfinal$anno)
+Disproporcion1 <- rbindlist(Disproporcion)
+Disproporcion1$anno <- as.factor(Disproporcion1$anno)
+Disproporcion1$m <- as.factor(Disproporcion1$m)
+
+library(kableExtra)
+ko <- 0
+```
+
+
+```{r}
+
+
+# Elegir métodos y año
+ko <- ko + 1
+asientos1 <- asientosfinal[Metodo %in% c("D´Hondt", "Sin Delim", "Sin Delim 3%") & anno == levels(asientosfinal$anno)[ko] & Asientos >= 1, -"anno"]
+asientos1$Metodo <- as.factor(asientos1$Metodo)
+asientos1 <- spread(asientos1, Metodo, Asientos)
+asientos1[is.na(asientos1)] <- 0
+asientos1 <- asientos1[order(-`Sin Delim`)]
+colnames(asientos1) <- c("Partidos", "DHondt", "SinDelim", "SinDelim3")
+
+
+# Crear tabla
+asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
+  cell_spec(x,
+    bold = T,
+    color = spec_color(x, end = .95)
+  )
+})
+asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
+
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+  kable_styling(latex_options = c("striped", "scale_down")) %>%
+  add_header_above(c("", "Métodos" = 3), bold = T)
+```
+
+
+\FloatBarrier
+
+
+```{r}
+
+
+# Elegir métodos y año
+ko <- ko + 1
+asientos1 <- asientosfinal[Metodo %in% c("D´Hondt", "Sin Delim", "Sin Delim 3%") & anno == levels(asientosfinal$anno)[ko] & Asientos >= 1, -"anno"]
+asientos1$Metodo <- as.factor(asientos1$Metodo)
+asientos1 <- spread(asientos1, Metodo, Asientos)
+asientos1[is.na(asientos1)] <- 0
+asientos1 <- asientos1[order(-`Sin Delim`)]
+colnames(asientos1) <- c("Partidos", "DHondt", "SinDelim", "SinDelim3")
+
+
+# Crear tabla
+asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
+  cell_spec(x,
+    bold = T,
+    color = spec_color(x, end = .95)
+  )
+})
+asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
+
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+  kable_styling(latex_options = c("striped", "scale_down")) %>%
+  add_header_above(c("", "Métodos" = 3), bold = T)
+```
+
+
+\FloatBarrier
+
+
+```{r}
+
+
+# Elegir métodos y año
+ko <- ko + 1
+asientos1 <- asientosfinal[Metodo %in% c("D´Hondt", "Sin Delim", "Sin Delim 3%") & anno == levels(asientosfinal$anno)[ko] & Asientos >= 1, -"anno"]
+asientos1$Metodo <- as.factor(asientos1$Metodo)
+asientos1 <- spread(asientos1, Metodo, Asientos)
+asientos1[is.na(asientos1)] <- 0
+asientos1 <- asientos1[order(-`Sin Delim`)]
+colnames(asientos1) <- c("Partidos", "DHondt", "SinDelim", "SinDelim3")
+
+
+# Crear tabla
+asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
+  cell_spec(x,
+    bold = T,
+    color = spec_color(x, end = .95)
+  )
+})
+asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
+
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+  kable_styling(latex_options = c("striped", "scale_down")) %>%
+  add_header_above(c("", "Métodos" = 3), bold = T)
+```
+
+
+\FloatBarrier
+
+
+```{r}
+
+
+# Elegir métodos y año
+ko <- ko + 1
+asientos1 <- asientosfinal[Metodo %in% c("D´Hondt", "Sin Delim", "Sin Delim 3%") & anno == levels(asientosfinal$anno)[ko] & Asientos >= 1, -"anno"]
+asientos1$Metodo <- as.factor(asientos1$Metodo)
+asientos1 <- spread(asientos1, Metodo, Asientos)
+asientos1[is.na(asientos1)] <- 0
+asientos1 <- asientos1[order(-`Sin Delim`)]
+colnames(asientos1) <- c("Partidos", "DHondt", "SinDelim", "SinDelim3")
+
+
+# Crear tabla
+asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
+  cell_spec(x,
+    bold = T,
+    color = spec_color(x, end = .95)
+  )
+})
+asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
+
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+  kable_styling(latex_options = c("striped", "scale_down")) %>%
+  add_header_above(c("", "Métodos" = 3), bold = T)
+```
+
+
+\FloatBarrier
+
+
+```{r}
+
+
+# Elegir métodos y año
+ko <- ko + 1
+asientos1 <- asientosfinal[Metodo %in% c("D´Hondt", "Sin Delim", "Sin Delim 3%") & anno == levels(asientosfinal$anno)[ko] & Asientos >= 1, -"anno"]
+asientos1$Metodo <- as.factor(asientos1$Metodo)
+asientos1 <- spread(asientos1, Metodo, Asientos)
+asientos1[is.na(asientos1)] <- 0
+asientos1 <- asientos1[order(-`Sin Delim`)]
+colnames(asientos1) <- c("Partidos", "DHondt", "SinDelim", "SinDelim3")
+
+
+# Crear tabla
+asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
+  cell_spec(x,
+    bold = T,
+    color = spec_color(x, end = .95)
+  )
+})
+asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
+
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+  kable_styling(latex_options = c("striped", "scale_down")) %>%
+  add_header_above(c("", "Métodos" = 3), bold = T)
+```
+
+
+\FloatBarrier
+
+
+```{r}
+
+
+# Elegir métodos y año
+ko <- ko + 1
+asientos1 <- asientosfinal[Metodo %in% c("D´Hondt", "Sin Delim", "Sin Delim 3%") & anno == levels(asientosfinal$anno)[ko] & Asientos >= 1, -"anno"]
+asientos1$Metodo <- as.factor(asientos1$Metodo)
+asientos1 <- spread(asientos1, Metodo, Asientos)
+asientos1[is.na(asientos1)] <- 0
+asientos1 <- asientos1[order(-`Sin Delim`)]
+colnames(asientos1) <- c("Partidos", "DHondt", "SinDelim", "SinDelim3")
+
+
+# Crear tabla
+asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
+  cell_spec(x,
+    bold = T,
+    color = spec_color(x, end = .95)
+  )
+})
+asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
+
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+  kable_styling(latex_options = c("striped", "scale_down")) %>%
+  add_header_above(c("", "Métodos" = 3), bold = T)
+```
+
+
+\FloatBarrier
+
+
+```{r}
+
+
+# Elegir métodos y año
+ko <- ko + 1
+asientos1 <- asientosfinal[Metodo %in% c("D´Hondt", "Sin Delim", "Sin Delim 3%") & anno == levels(asientosfinal$anno)[ko] & Asientos >= 1, -"anno"]
+asientos1$Metodo <- as.factor(asientos1$Metodo)
+asientos1 <- spread(asientos1, Metodo, Asientos)
+asientos1[is.na(asientos1)] <- 0
+asientos1 <- asientos1[order(-`Sin Delim`)]
+colnames(asientos1) <- c("Partidos", "DHondt", "SinDelim", "SinDelim3")
+
+
+# Crear tabla
+asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
+  cell_spec(x,
+    bold = T,
+    color = spec_color(x, end = .95)
+  )
+})
+asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
+
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+  kable_styling(latex_options = c("striped", "scale_down")) %>%
+  add_header_above(c("", "Métodos" = 3), bold = T)
+```
+
+
+\FloatBarrier
+
+
+```{r}
+
+
+# Elegir métodos y año
+ko <- ko + 1
+asientos1 <- asientosfinal[Metodo %in% c("D´Hondt", "Sin Delim", "Sin Delim 3%") & anno == levels(asientosfinal$anno)[ko] & Asientos >= 1, -"anno"]
+asientos1$Metodo <- as.factor(asientos1$Metodo)
+asientos1 <- spread(asientos1, Metodo, Asientos)
+asientos1[is.na(asientos1)] <- 0
+asientos1 <- asientos1[order(-`Sin Delim`)]
+colnames(asientos1) <- c("Partidos", "DHondt", "SinDelim", "SinDelim3")
+
+
+# Crear tabla
+asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
+  cell_spec(x,
+    bold = T,
+    color = spec_color(x, end = .95)
+  )
+})
+asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
+
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+  kable_styling(latex_options = c("striped", "scale_down")) %>%
+  add_header_above(c("", "Métodos" = 3), bold = T)
+```
+
+
+\FloatBarrier
+
+
+```{r}
+
+
+# Elegir métodos y año
+ko <- ko + 1
+asientos1 <- asientosfinal[Metodo %in% c("D´Hondt", "Sin Delim", "Sin Delim 3%") & anno == levels(asientosfinal$anno)[ko] & Asientos >= 1, -"anno"]
+asientos1$Metodo <- as.factor(asientos1$Metodo)
+asientos1 <- spread(asientos1, Metodo, Asientos)
+asientos1[is.na(asientos1)] <- 0
+asientos1 <- asientos1[order(-`Sin Delim`)]
+colnames(asientos1) <- c("Partidos", "DHondt", "SinDelim", "SinDelim3")
+
+
+# Crear tabla
+asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
+  cell_spec(x,
+    bold = T,
+    color = spec_color(x, end = .95)
+  )
+})
+asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
+
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+  kable_styling(latex_options = c("striped", "scale_down")) %>%
+  add_header_above(c("", "Métodos" = 3), bold = T)
+```
+
+
+\FloatBarrier
+
+
+```{r}
+
+
+# Elegir métodos y año
+ko <- ko + 1
+asientos1 <- asientosfinal[Metodo %in% c("D´Hondt", "Sin Delim", "Sin Delim 3%") & anno == levels(asientosfinal$anno)[ko] & Asientos >= 1, -"anno"]
+asientos1$Metodo <- as.factor(asientos1$Metodo)
+asientos1 <- spread(asientos1, Metodo, Asientos)
+asientos1[is.na(asientos1)] <- 0
+asientos1 <- asientos1[order(-`Sin Delim`)]
+colnames(asientos1) <- c("Partidos", "DHondt", "SinDelim", "SinDelim3")
+
+
+# Crear tabla
+asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
+  cell_spec(x,
+    bold = T,
+    color = spec_color(x, end = .95)
+  )
+})
+asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
+
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+  kable_styling(latex_options = c("striped", "scale_down")) %>%
+  add_header_above(c("", "Métodos" = 3), bold = T)
+```
+
+  
+\FloatBarrier
+  
+
+```{r}
+
+
+# Elegir métodos y año
+ko <- ko + 1
+asientos1 <- asientosfinal[Metodo %in% c("D´Hondt", "Sin Delim", "Sin Delim 3%") & anno == levels(asientosfinal$anno)[ko] & Asientos >= 1, -"anno"]
+asientos1$Metodo <- as.factor(asientos1$Metodo)
+asientos1 <- spread(asientos1, Metodo, Asientos)
+asientos1[is.na(asientos1)] <- 0
+asientos1 <- asientos1[order(-`Sin Delim`)]
+colnames(asientos1) <- c("Partidos", "DHondt", "SinDelim", "SinDelim3")
+
+
+# Crear tabla
+asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
+  cell_spec(x,
+    bold = T,
+    color = spec_color(x, end = .95)
+  )
+})
+asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
+
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+  kable_styling(latex_options = c("striped", "scale_down")) %>%
+  add_header_above(c("", "Métodos" = 3), bold = T)
+```
+
+  
+\FloatBarrier
+  
+
+```{r}
+
+
+# Elegir métodos y año
+ko <- ko + 1
+asientos1 <- asientosfinal[Metodo %in% c("D´Hondt", "Sin Delim", "Sin Delim 3%") & anno == levels(asientosfinal$anno)[ko] & Asientos >= 1, -"anno"]
+asientos1$Metodo <- as.factor(asientos1$Metodo)
+asientos1 <- spread(asientos1, Metodo, Asientos)
+asientos1[is.na(asientos1)] <- 0
+asientos1 <- asientos1[order(-`Sin Delim`)]
+colnames(asientos1) <- c("Partidos", "DHondt", "SinDelim", "SinDelim3")
+
+
+# Crear tabla
+asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
+  cell_spec(x,
+    bold = T,
+    color = spec_color(x, end = .95)
+  )
+})
+asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
+
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+  kable_styling(latex_options = c("striped", "scale_down")) %>%
+  add_header_above(c("", "Métodos" = 3), bold = T)
+```
+
+  
+\FloatBarrier
+  
+
+```{r}
+
+
+# Elegir métodos y año
+ko <- ko + 1
+asientos1 <- asientosfinal[Metodo %in% c("D´Hondt", "Sin Delim", "Sin Delim 3%") & anno == levels(asientosfinal$anno)[ko] & Asientos >= 1, -"anno"]
+asientos1$Metodo <- as.factor(asientos1$Metodo)
+asientos1 <- spread(asientos1, Metodo, Asientos)
+asientos1[is.na(asientos1)] <- 0
+asientos1 <- asientos1[order(-`Sin Delim`)]
+colnames(asientos1) <- c("Partidos", "DHondt", "SinDelim", "SinDelim3")
+
+
+# Crear tabla
+asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
+  cell_spec(x,
+    bold = T,
+    color = spec_color(x, end = .95)
+  )
+})
+asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
+
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+  kable_styling(latex_options = c("striped", "scale_down")) %>%
+  add_header_above(c("", "Métodos" = 3), bold = T)
+```
+
+
+  
+\FloatBarrier
+  
+
+
+```{r}
+
+
+# Elegir métodos y año
+ko <- ko + 1
+asientos1 <- asientosfinal[Metodo %in% c("D´Hondt", "Sin Delim", "Sin Delim 3%") & anno == levels(asientosfinal$anno)[ko] & Asientos >= 1, -"anno"]
+asientos1$Metodo <- as.factor(asientos1$Metodo)
+asientos1 <- spread(asientos1, Metodo, Asientos)
+asientos1[is.na(asientos1)] <- 0
+asientos1 <- asientos1[order(-`Sin Delim`)]
+colnames(asientos1) <- c("Partidos", "DHondt", "SinDelim", "SinDelim3")
+
+
+# Crear tabla
+asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
+  cell_spec(x,
+    bold = T,
+    color = spec_color(x, end = .95)
+  )
+})
+asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
+
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+  kable_styling(latex_options = c("striped", "scale_down")) %>%
+  add_header_above(c("", "Métodos" = 3), bold = T)
+```
+
+  
+
+\FloatBarrier
+  
+
+
+```{r}
+
+
+# Elegir métodos y año
+ko <- ko + 1
+asientos1 <- asientosfinal[Metodo %in% c("D´Hondt", "Sin Delim", "Sin Delim 3%") & anno == levels(asientosfinal$anno)[ko] & Asientos >= 1, -"anno"]
+asientos1$Metodo <- as.factor(asientos1$Metodo)
+asientos1 <- spread(asientos1, Metodo, Asientos)
+asientos1[is.na(asientos1)] <- 0
+asientos1 <- asientos1[order(-`Sin Delim`)]
+colnames(asientos1) <- c("Partidos", "DHondt", "SinDelim", "SinDelim3")
+
+
+# Crear tabla
+asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
+  cell_spec(x,
+    bold = T,
+    color = spec_color(x, end = .95)
+  )
+})
+asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
+
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+  kable_styling(latex_options = c("striped", "scale_down")) %>%
+  add_header_above(c("", "Métodos" = 3), bold = T)
+```
+
+
+
+
+\FloatBarrier

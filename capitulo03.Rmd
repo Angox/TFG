@@ -2352,7 +2352,7 @@ ggplot(data = var_par, mapping = aes(Escannos, Desproporción)) +
 
 En el presente gráfico comparamos la desproporción variando el número de partidos en un mismo lugar con los métodos anteriormente analizados individualmente.
 
-Observamos que para un número de partidos bajo hasta los 25 partidos que se presentan a unas elecciones la desproporción es muy variable, a partir de los 25 partidos se estabiliza y podemos sacar algunas conclusiones, en primer lugar el peor método claramente en este caso es el método Imperiali y Huntington-Hill, mientras que los demás métodos son similares en su desproporción, donde la menor desproporción la podemos encontrar entre los métodos Sainte-Lague y LR-Hare. A continuación nos centraremos en la desproporción cuando se presentan pocos partidos para analizarlo más detenidamente.
+Observamos que para un número de partidos bajo hasta los 25 partidos que se presentan a unas elecciones la desproporción es muy variable, a partir de los 25 partidos se estabiliza y podemos sacar algunas conclusiones, en primer lugar los peores métodos claramente son en este caso los métodos Adams y Huntington-Hill, mientras que los demás métodos son similares en su desproporción, donde la menor desproporción la podemos encontrar entre los métodos Sainte-Lague y LR-Hare. A continuación nos centraremos en la desproporción cuando se presentan pocos partidos para analizarlo más detenidamente.
 
 
 ```{r}

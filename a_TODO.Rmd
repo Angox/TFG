@@ -14,5 +14,4 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # TODO o tareas por realizar
-Explicar que a todos los métodos se les aplica el 3%
 
