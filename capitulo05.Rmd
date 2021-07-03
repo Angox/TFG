@@ -1,6 +1,6 @@
 ---
-author: "Angel Gonzalez Rizo"
-date: "2021"
+author: "Nombre Completo Autor"
+date: "27/10/2017"
 documentclass: book
 forprint: true  # true: imprime a dos caras, false: libro digital
 fontsize: 12pt # 10pt,11pt
@@ -16,17 +16,15 @@ csl: methods-in-ecology-and-evolution.csl      # no numera mejor en las citas
 #csl: acm-sig-proceedings-long-author-list.csl  # numera peor en las citas
 link-citations: yes
 output: 
-  pdf_document:
-    keep_tex: no
+  pdf_document: 
+    keep_tex: yes
     number_sections: yes
-    citation_package: natbib  # comentado usa: pandoc-citeproc
-    #toc: yes
+    citation_package: natbib
     fig_caption: yes
     template: latex/templateMemoriaTFE.tex
-    includes:
-      #before_body: portadas/latex_paginatitulo_modTFE.tex
-      #in_header: latex/latex_preambulo.tex
-      #after_body: latex/latex_antes_enddoc.tex
+    includes: null
+    fig_width: 12
+    fig_height: 5
 editor_options: 
   chunk_output_type: inline
 ---
@@ -37,7 +35,7 @@ editor_options:
 knitr::opts_chunk$set(
   fig.path = "figurasR/",
   echo = FALSE, warning = FALSE, message = FALSE,
-  fig.pos = "H", fig.align = "center", out.width = "95%",
+  fig.pos = "H", out.width = "100%",
   cache = FALSE
 )
 ```
@@ -73,21 +71,825 @@ knitr::opts_chunk$set(
 \renewcommand{\footrulewidth}{0.4pt}
 
 
+# Influencia de las delimitaciones de las circunscripciones
 
-# Conclusiones finales
+En este apartado procederemos a analizar la influencia en la proporcionalidad escaños-votos que resulta de repartir los escaños en un distrito único, España, y el reparto actual de votos que se realiza por provincias.\
+Procederemos de la siguiente forma:
 
-  A lo largo de este trabajo hemos analizado los distintos métodos de reparto de escaños para un reparto proporcional de los mismos. En el primer bloque hemos analizado los distintos métodos de escaños modificando tanto el número de escaños a repartir, el número de partidos que se presentan a la elección y la concentración de los votos. En general todos los métodos siguen un mismo comportamiento y no se aprecia una gran diferencia entre los distintos métodos de reparto, únicamente difieren del comportamiento habitual los métodos  Imperiali, Huntington-Hill y Adams. Una vez analizados todos ellos el grupo que es más proporcional es el del método del resto mayor, en los que se encuentran el cociente Droop, Hare e Imperiali. En el grupo de los métodos de resto mayores el más proporcional es el método de Saint-Lague. El método D´Hondt, utilizado en España, no se encuentra entre los métodos más proporcionales por lo que no sería el método más deseable para utilizar en España, siendo conveniente debatir un cambio de método si lo que se busca es una mayor proporcionalidad entre los votos y escaños obtenidos.  
-  En el segundo bloque hemos analizado las distintas elecciones en España a partir del 1977, aplicando los distintos métodos de reparto de escaños para compararlos entre sí y analizando el nivel de proporcionalidad de los distintos métodos. Los métodos más proporcionados resultaron ser el Saint-Lague por parte de los métodos de promedio mayor y por los métodos de resto mayor el mejor método es el LR-Hare. El método que se desempeña peor es el método Imperiali. Es interesante observar el método D´Hondt, método utilizado actualmente en España para el reparto de escaños al congreso. En el caso de que nuestro objetivo sea la pura proporcionalidad escaños-votos es claro que no es el método más óptimo, pero en cambio sí que por otra parte se observa que tiene una cualidad particular que lo hace atractivo como método de reparto, esto es, a pesar de no ser el método más proporcional sí que facilita la gobernanza, siendo posible en varias elecciones alcanzar la mayoría absoluta. Por este motivo se comprende la elección de este método de reparto de escaños en España, puesto que entre todos los métodos analizados éste es dentro de los más proporcionales el que más facilita la gobernanza.
-  
-## Líneas futuras
+-   Con los datos obtenidos en el capítulo 4, crearemos para cada año una tabla con los votos resultantes de que los escaños se repartan en un único distrito.
 
-  Para un trabajo posterior, en el apartado de análisis de los distintos métodos de reparto de escaños sería conveniente analizar los distintos métodos utilizando distintos índices de desproporcionalidad, como por ejemplo la desviación de Loosemore y Harby o bien la de mínimos cuadrados de Gallagher entre otros. En este trabajo únicamente hemos modificando tanto el número de escaños a repartir, el número de partidos que se presentan a la elección y la concentración de los votos, sería conveniente un análisis modificando las tres variables a la vez así como añadir nuevos métodos de reparto de escaños. Para el análisis de las elecciones en España también se podrían utilizar distintos índices de desproporcionalidad y añadir nuevos métodos de reparto de escaños.
+-   Crearemos dos funciones adicionales para calcular tanto los escaños obtenidos como la desproporción.
+
+    -   Función sindelim0: Aplica el método D\`Hondt para España como distrito único, en esta función no hay un mínimo de porcentaje para poder ser elegido.
+
+    -   Función sindelim3: Aplica el método D\`Hondt para España como distrito único, pero con un porcentaje mínimo del 3% para poder ser elegido.
+
+-   Una vez obtenidos los escaños correspondientes los comparamos con el método D\`Hondt utilizado actualmente en España. Para evitar que sea muy extenso el análisis de todas las elecciones nos centraremos en tres de ellas, los resultados de las restantes elecciones se pueden encontrar en el Anexo 2.
+
+-   Para analizar la desproporción agruparemos los resultados de todos los métodos analizados anteriormente en el capítulo 4 y los compararemos.
+
   
   
   
+
   
+```{r}
+library(data.table)
+# Variables
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 1:n_escannos
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_sainte <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 2 * (1:n_escannos) - 1
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_modsainte <- function(partidos, votos,
+                               n_escannos,
+                               couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- c(1, (10 * (2:n_escannos) - 5) / 7)
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_imperiali <- function(partidos, votos,
+                               n_escannos,
+                               couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- ((1:n_escannos) + 1) / 2
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_huntington <- function(partidos, votos,
+                                n_escannos,
+                                couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- sqrt((1:n_escannos) * ((1:n_escannos) - 1))
+  G <- sapply(div, function(x) votos / x)
+  G[is.na(G)] <- 0
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Fix seats
+  if (sum(o) > n_escannos) {
+    if (n_escannos == 1) {
+      G <- cbind("n" = 0, votos)
+    }
+    cuota <- G[, 2][order(G[, 2], decreasing = T)][n_escannos]
+    W1 <- (G[, 2] >= cuota)
+    seats <- as.numeric(W1)
+    o <- seats
+  }
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_adams <- function(partidos, votos,
+                           n_escannos,
+                           couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 1:n_escannos - 1
+  div[is.na(div)] <- 0
+  G <- sapply(div, function(x) votos / x)
+  G[is.na(G)] <- 0
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+
+  # Fix seats
+  if (sum(o) > n_escannos) {
+    if (n_escannos == 1) {
+      G <- cbind("n" = 0, votos)
+    }
+    cuota <- G[, 2][order(G[, 2], decreasing = T)][n_escannos]
+    W1 <- (G[, 2] >= cuota)
+    seats <- as.numeric(W1)
+    o <- seats
+  }
+
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_danish <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 3 * (1:n_escannos) - 2
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_hare <- function(partidos, votos,
+                          n_escannos,
+                          couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- trunc(nv / n_escannos) # Parte entera
+  G <- sapply(div, function(x) votos / x)
+  o <- as.vector(trunc(G))
+  # Fix
+  if (sum(o) < n_escannos) {
+    resto <- G - o
+    repart <- n_escannos - sum(o)
+    cuota <- resto[order(resto, decreasing = T)][repart]
+    W <- (resto >= cuota)
+    seats <- o + rowSums(W)
+    o <- seats
+  }
+  if (sum(o) > n_escannos) {
+    resto <- G - o
+    quitar <- sum(o) - n_escannos
+    cuota <- resto[order(resto, decreasing = F)][quitar]
+    W <- (resto <= cuota)
+    seats <- o - rowSums(W)
+    o <- seats
+  }
+
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_droop <- function(partidos, votos,
+                           n_escannos,
+                           couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- trunc(nv / (n_escannos + 1)) # Parte entera
+  G <- sapply(div, function(x) votos / x)
+  o <- trunc(G)
+  # Fix
+  while (sum(o) < n_escannos) {
+    resto <- G - o
+    faltan <- n_escannos - sum(o)
+    cuota <- resto[order(resto, decreasing = T)][faltan]
+    W <- (resto >= cuota)
+    seats <- rowSums(W)
+    o <- o + seats
+  }
+
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+asientos_imperialilr <- function(partidos, votos,
+                                 n_escannos,
+                                 couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- trunc(nv / (n_escannos + 2)) # Parte entera
+  G <- sapply(div, function(x) votos / x)
+  o <- trunc(G)
+  while (sum(o) < n_escannos) {
+    resto <- G - o
+    faltan <- n_escannos - sum(o)
+    cuota <- resto[order(resto, decreasing = T)][faltan]
+    W <- (resto >= cuota)
+    seats <- rowSums(W)
+    o <- o + seats
+  }
+
+  # if(sum(o)!=n_escannos){
+  #   resto <- G-o
+  #   cuota <- resto[order(resto, decreasing = T)][n_escannos-sum(o)]
+  #   W <- (resto >= cuota)&(cumsum(resto)<=(n_escannos-sum(o)))
+  #   seats <- o+rowSums(W)
+  #   o <- seats}
+
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+```
+
+```{r }
+
+desproporción <- function(s, v) {
+  s <- as.vector(s)
+  v <- as.vector(v)
+  l_s <- length(s)
+  s_s <- sum(s)
+  s_v <- sum(v)
+  p_s <- s / s_s
+  p_v <- v / s_v
+  o <- (1 / l_s) * sum(abs(p_s - p_v))
+  o
+}
+```
+
+```{r }
+# Datos elecciones
+library(openxlsx)
+library(electoral)
+setwd("~/Universidad/TFG/TFG_Git")
+
+generardato <- function(eleccion) {
+  # Cámbiese la ruta del archivo si da error
+  datos <- read.xlsx(xlsxFile = paste("Datos/Congreso/", list.files(path = "~/Universidad/TFG/TFG_Git/Datos/Congreso")[eleccion], sep = ""))
+  # Eliminar fila con nombres y sustituirlos por las siglas
+  datos[3, ][!is.na(datos[1, ])] <- datos[1, ][!is.na(datos[1, ])]
+  datos <- datos[-nrow(datos), ]
+  colnames(datos) <- datos[3, ]
+  datos <- datos[-c(1, 2, 3), ]
+  # Columnas como números
+  datos[, 4:ncol(datos)] <- apply(datos[, 4:ncol(datos)], 2, as.numeric)
+  row.names(datos) <- NULL
+  # Quedarnos con las columnas deseadas
+  datos$asientos <- rowSums(datos[, (colnames(datos) %in% c("Diputados"))])
+  datos <- datos[, !(colnames(datos) %in% c("Diputados"))]
+  if (eleccion == 1) datos[15, 15] <- 23866 # Rectificar votos mal contados
+  datos <<- datos
+}
+```
+
+
+```{r }
+sindelim3 <- function(cuota = .03) {
+  # Datos para España en su conjunto
+  # Escoger columnas que nos interesan
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)))
+  # Sumar para toda España
+  datosesp <- apply(datos[, colum], 2, sum)
+  # Partidos que se presentan a las elecciones
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  # Crear vector con votos
+  votos <- datosesp[-length(datosesp)]
+  # Número escaños
+  escannos <- last(datosesp)
+  # Aplicar método
+  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = cuota)
+  # Calcular desprop
+  disprop <- desproporción(s = asientos$Escanos, v = votos)
+  # Eliminar partidos sin representación
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  # Guardar datos
+  resul_sindelim3 <<- asientos
+  disprop_sindelim3 <<- disprop
+}
+
+sindelim0 <- function(cuota = 0) {
+  # Datos para España en su conjunto
+  # Escoger columnas que nos interesan
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)))
+  # Sumar para toda España
+  datosesp <- apply(datos[, colum], 2, sum)
+  # Partidos que se presentan a las elecciones
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  # Crear vector con votos
+  votos <- datosesp[-length(datosesp)]
+  # Número escaños
+  escannos <- last(datosesp)
+  # Aplicar método
+  asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = cuota)
+  # Calcular desprop
+  disprop <- desproporción(s = asientos$Escanos, v = votos)
+  # Eliminar partidos sin representación
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  # Guardar datos
+  resul_sindelim0 <<- asientos
+  disprop_sindelim0 <<- disprop
+}
+
+dhondt <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_dhondt(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_dhondt <<- asientos
+  disprop_dhondt <<- disprop
+}
+# sainte
+sainte <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_sainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_sainte <<- asientos
+  disprop_sainte <<- disprop
+}
+# modsainte
+modsainte <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_modsainte(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_modsainte <<- asientos
+  disprop_modsainte <<- disprop
+}
+# huntington
+huntington <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_huntington(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+    asientos$Escanos[is.na(asientos$Escanos)] <- 0
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_huntington <<- asientos
+  disprop_huntington <<- disprop
+}
+# imperiali
+imperiali <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_imperiali(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_imperiali <<- asientos
+  disprop_imperiali <<- disprop
+}
+# adams
+adams <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_adams(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+    asientos$Escanos[is.na(asientos$Escanos)] <- 0
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_adams <<- asientos
+  disprop_adams <<- disprop
+}
+# danish
+danish <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_danish(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_danish <<- asientos
+  disprop_danish <<- disprop
+}
+# hare
+hare <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_hare(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_hare <<- asientos
+  disprop_hare <<- disprop
+}
+# droop
+droop <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_droop(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_droop <<- asientos
+  disprop_droop <<- disprop
+}
+# imperialilr
+imperialilr <- function() {
+  partidos <- colnames(datos)[(1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)]
+  colum <- (1 + grep(pattern = "nulos", x = colnames(datos))):(length(colnames(datos)) - 1)
+
+  escanos <- numeric(length = length(colum))
+  disprop <- numeric(length = nrow(datos))
+
+  for (provincia in seq_len(nrow(datos))) {
+    votos <- unlist(datos[provincia, colum])
+    escannos <- datos[provincia, ncol(datos)]
+
+    asientos <- asientos_imperialilr(partidos = partidos, votos = votos, n_escannos = escannos, couta_min = .03)
+
+    disprop[provincia] <- desproporción(s = asientos$Escanos, v = votos)
+
+    escanos <- asientos$Escanos + escanos
+  }
+  asientos$Escanos <- escanos
+  asientos <- asientos[asientos$Escanos >= 1, ]
+  resul_imperialilr <<- asientos
+  disprop_imperialilr <<- disprop
+}
+```
+
+
+
+
+
+
+
+
+
+```{r }
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(ggpol)
+
+Asientos <- NULL
+anno <- c("1977", "1979", "1982", "1986", "1989", "1993", "1996", "2000", "2004", "2008", "2011", "2015", "2016", "2019_04", "2019_10")
+metodos <- c("D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali", "LR-Hare", "LR-Droop", "LR-Imperiali", "Sin Delim 3%", "Sin Delim")
+Disproporcion <- NULL
+
+for (i in seq_len(15)) {
+  generardato(eleccion = i)
+  dhondt()
+  sainte()
+  modsainte()
+  huntington()
+  imperiali()
+  adams()
+  danish()
+  hare()
+  droop()
+  imperialilr()
+  sindelim3()
+  sindelim0()
+
+
+  # Calcular asientos
+  fe <- full_join(resul_dhondt, resul_danish, by = "Partidos")
+  fe <- full_join(fe, resul_sainte, by = "Partidos")
+  fe <- full_join(fe, resul_modsainte, by = "Partidos")
+  fe <- full_join(fe, resul_adams, by = "Partidos")
+  fe <- full_join(fe, resul_huntington, by = "Partidos")
+  fe <- full_join(fe, resul_imperiali, by = "Partidos")
+  fe <- full_join(fe, resul_hare, by = "Partidos")
+  fe <- full_join(fe, resul_droop, by = "Partidos")
+  fe <- full_join(fe, resul_imperialilr, by = "Partidos")
+  fe <- full_join(fe, resul_sindelim3, by = "Partidos")
+  fe <- full_join(fe, resul_sindelim0, by = "Partidos")
+  colnames(fe) <- c("Partidos", "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali", "LR-Hare", "LR-Droop", "LR-Imperiali", "Sin Delim 3%", "Sin Delim")
+
+  fe <- gather(fe, "D´Hondt", "Danish", "Sainte-Lague", "Modified Sainte-Lague", "Adams", "Huntington-Hill", "Imperiali", "LR-Hare", "LR-Droop", "LR-Imperiali", "Sin Delim 3%", "Sin Delim",
+    key = "Metodo", value = "Asientos"
+  )
+  fe$Asientos <- replace_na(fe$Asientos, 0)
+  fe$anno <- anno[i]
+  fe1 <- as.data.table(fe)
+
+  Asientos[[i]] <- fe1
+
+
+  # Desprop
+
+  disprop_mean <- c(
+    mean(disprop_dhondt), mean(disprop_danish), mean(disprop_sainte),
+    mean(disprop_modsainte), mean(disprop_adams),
+    mean(disprop_huntington), mean(disprop_imperiali), mean(disprop_hare), mean(disprop_droop), mean(disprop_imperialilr), disprop_sindelim3, disprop_sindelim0
+  )
+  Disproporc <- data.frame("m" = metodos, "c" = disprop_mean)
+  Disproporc$anno <- anno[i]
+  Disproporcion[[i]] <- Disproporc
+}
+
+# Agruparlos
+asientosfinal <- rbindlist(Asientos)
+asientosfinal$anno <- as.factor(asientosfinal$anno)
+Disproporcion1 <- rbindlist(Disproporcion)
+Disproporcion1$anno <- as.factor(Disproporcion1$anno)
+Disproporcion1$m <- as.factor(Disproporcion1$m)
+```
+
+\newpage
+
+## Escaños
+
+
+```{r}
+library(kableExtra)
+
+ko <- 1
+# Elegir métodos y año
+
+asientos1 <- asientosfinal[Metodo %in% c("D´Hondt", "Sin Delim", "Sin Delim 3%") & anno == levels(asientosfinal$anno)[ko] & Asientos >= 1, -"anno"]
+asientos1$Metodo <- as.factor(asientos1$Metodo)
+asientos1 <- spread(asientos1, Metodo, Asientos)
+asientos1[is.na(asientos1)] <- 0
+asientos1 <- asientos1[order(-`Sin Delim`)]
+colnames(asientos1) <- c("Partidos", "DHondt", "SinDelim", "SinDelim3")
+
+
+# Crear tabla
+asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
+  cell_spec(x,
+    bold = T,
+    color = spec_color(x, end = .95)
+  )
+})
+asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
+
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+  kable_styling(latex_options = c("striped", "scale_down")) %>%
+  add_header_above(c("", "Métodos" = 3), bold = T)
+```
+
+
+  Comenzamos analizando el resultado de la elección de 1977, recordamos que en todas las columnas se utiliza el método D´Hondt, se diferencian en que en la columna *DHondt* se aplica el método tal y como se utiliza actualmente en España y en las columnas *SinDelim3* y *Sindelim* se aplica el mismo método pero sin delimitación, es decir, considerando España como un distrito único, uno de ellos con un mínimo de votos para tener representación y otro sin un mínimo de votos.  
+  Una vez aclarado este punto vemos como en el caso de que existan una delimitación por provincias el método D´Hont beneficia en gran medida a los partidos mayoritarios, por ejemplo en este año el partido más votado resultó ser *UCD*, el cual obtiene según D´Hondt 165 escaños, si lo comparamos con el resultado que obtendría en el caso de ser una circunscripción única obtendría muchos menos escaños, 141 escaños en el caso de tener un mínimo entrada y 128 en el caso de no tener un mínimo de entrada. Para el partido mas votado resulta de una pérdida notoria de escaños, en cambio para el segundo partido mas votado, *PSOE*, la diferencia de escaños es mucho menor y de resultados distintos, perdería 9 escaños si no se aplica un límite de votos e incluso gana 2 escaños en el caso de que se aplique la limitación del 3%. Para los partidos medianos es beneficioso eliminar las delimitaciones puesto que obtienen mayores escaños, por ejemplo *Alianza Popular* pasaría de 16 escaños a 33 en el caso de que se exija un mínimo de porcentaje de votos.  
+  En el número de partidos que son representados en el congreso según el método D´Hondt estarían presentes 12 partidos, mientras que en el caso Sindelim serían 16 partidos los que estarían presentes, en el extremo opuesto se encontraría Sindelim3, que al limitar la presencia en el congreso a un mínimo de un 3% de los votos totales únicamente estarían presentes 5 partidos.
   
-  
+
+\newpage
+
+```{r}
+ko <- 10
+# Elegir métodos y año
+asientosfinal$anno <- as.factor(asientosfinal$anno)
+asientos1 <- asientosfinal[Metodo %in% c("D´Hondt", "Sin Delim", "Sin Delim 3%") & anno == levels(asientosfinal$anno)[ko] & Asientos >= 1, -"anno"]
+asientos1$Metodo <- as.factor(asientos1$Metodo)
+asientos1 <- spread(asientos1, Metodo, Asientos)
+asientos1[is.na(asientos1)] <- 0
+asientos1 <- asientos1[order(-`Sin Delim`)]
+colnames(asientos1) <- c("Partidos", "DHondt", "SinDelim", "SinDelim3")
+
+
+# Crear tabla
+asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
+  cell_spec(x,
+    bold = T,
+    color = spec_color(x, end = .95)
+  )
+})
+asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
+
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+  kable_styling(latex_options = c("striped", "scale_down")) %>%
+  add_header_above(c("", "Métodos" = 3), bold = T)
+```
+
+En el año 2008 se nos presenta un bipartidismo muy marcado, en donde los dos partidos más votados son el *PSOE* y el *PP*, podemos observar que en este año la influencia de la delimitación en los resultados electorales es baja para los dos partidos mayoritarios, a ambos partidos les beneficia levemente el presentarse por distrito único con mínimo de votos, en donde ambos aumentarían en un escaño su presencia en el congreso. Para los partidos medianos o bajos de presencia nacional también sería beneficioso el presentarse a unas elecciones por circunscripción única, en el caso de *IU* pasaría de obtener 2 votos a 13 o 14. Para aquellos partidos que tienen presencia regional y pocos escaños la diferencia en escaños no sería notable en el caso SinDelim, de no tener un mínimo de porcentaje de votos, en cambio si se requiriese un mínimo de votos del 3% todos estos partidos con pocos escaños no entrarían en el congreso.
+
+
+\newpage
+
+```{r}
+ko <- 15
+# Elegir métodos y año
+
+asientos1 <- asientosfinal[Metodo %in% c("D´Hondt", "Sin Delim", "Sin Delim 3%") & anno == levels(asientosfinal$anno)[ko] & Asientos >= 1, -"anno"]
+asientos1$Metodo <- as.factor(asientos1$Metodo)
+asientos1 <- spread(asientos1, Metodo, Asientos)
+asientos1[is.na(asientos1)] <- 0
+asientos1 <- asientos1[order(-`Sin Delim`)]
+colnames(asientos1) <- c("Partidos", "DHondt", "SinDelim", "SinDelim3")
+
+
+# Crear tabla
+asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
+  cell_spec(x,
+    bold = T,
+    color = spec_color(x, end = .95)
+  )
+})
+asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
+
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año: ", "Noviembre 2019"), ) %>%
+  kable_styling(latex_options = c("striped", "scale_down")) %>%
+  add_header_above(c("", "Métodos" = 3), bold = T)
+```
+
+  En esta tabla se analizan los resultados de las elecciones de Noviembre de 2019, son unas elecciones en donde la representación está especialmente fragmentada. El partido más votado este año, el *PSOE*, obtiene 120 escaños según el método D´Hondt habitual, en el caso de realizar las elecciones por circunscripción única pierde 18 escaños en el caso SinDelim y  3 escaños en el caso SinDelim3%. En los partidos medianos observamos que el *PP* resultaría levemente perjudicado, en cambio *VOX* aumentaría su presencia en el caso SinDelim, 3 escaños, y en el caso SinDelim3% 11 escaños. Los partidos regionalistas y minoritarios obtendrían una representación similar en el caso de una circunscripción única sin mínimo de votos, y en el caso contrario, en donde se exige un mínimo de un 3% de los votos, todos estos partidos regionalistas desaparecerían del congreso.
+
+
+## Desproporción
+
+En este apartado procederemos a agrupar todos los resultados de la desproporción tal y como lo hemos realizado en el capítulo 4, los agruparemos por año y método. Con todo ello realizaremos dos gráficos, uno en el que muestre la desproporción a lo largo de los años distinguiendo el método de reparto utilizado y otro en el que muestre el promedio de la desproporción a lo largo de todos los años analizados para cada método. Analizaremos los resultados centrándonos en los dos casos en donde las delimitaciones por provincias se eliminan.
+
+
+
+
+```{r}
+
+ggplot(Disproporcion1[, mean(c, na.rm = T), by = .(anno, m)], aes(anno, V1)) +
+  geom_line(aes(group = m, color = m), size = 1.2) +
+  geom_point(aes(color = m)) +
+  labs(title = "Desproporción media por año ", caption = "Elaboración propia: Angel González", y = "Desproporción", x = "Año") +
+  theme(legend.position = "bottom")
+```
+
+En este gráfico comparando la desproporción media por año observamos como la desproporción desde las elecciones de 1977 hasta 1989 está en un nivel medio o alto. A partir del año 1993 la desproporción es baja, principalmente debido a un bipartidismo más marcado, se mantiene hasta el año de las elecciones de 2011, en donde empieza por primera vez a aparecer un tercer partido que debilita el bipartidismo, por lo que la desproporción aumenta a los niveles de las primeras elecciones de 1977, desde el año 2011 hasta las últimas elecciones de 2019 la desproporción se mantiene sin mucha variación.  
+Los dos casos que nos interesan en este capítulo son *Sin Delim* y *Sin Delim 3%*, ambos métodos utilizan una circunscripción única en España, *Sin Delim* no impone un mínimo de votos para verse representado en el congreso y *Sin Delim 3%* impone un mínimo de un 3% de los votos para poder estar representado en el congreso. De los dos métodos vemos como es *Sin Delim 3%* el método que más se asemeja en comportamiento respecto a los demás métodos analizados, es un método que en la mayoría de los años supera en proporcionalidad a los demás métodos, únicamente en los años 1979 y 2004, año de un fuerte bipartidismo, no alcanza a ser el mejor método. Mención aparte merece el método *Sin Delim*, el más proporcionado con diferencia entre todos los métodos, apenas se ve afectado por la concentración del voto a lo largo de los años, éste sería el método más aconsejable entre todos los propuestos, puesto que es el más proporcionado y además a la vez consigue que en el congreso estén representados partidos muy diversos.
+
+
+
+```{r}
+
+
+ggplot(Disproporcion1[, mean(c, na.rm = T), by = .(m)], aes(reorder(m, -V1), V1)) +
+  geom_col(aes(fill = m)) +
+  coord_flip() +
+  labs(title = "Desproporción según método de reparto", caption = "Elaboración propia: Angel González", x = "Métodos", y = "Desproporción", subtitle = "Media de todos los años") +
+  guides(fill = "none")
+```
+
+  Según el siguiente gráfico observamos que los métodos que se han analizado por circunscripción única presentan una desproporción menor que todos los demás métodos, en donde *Sin Delim 3%*, con una desproporción de 0.03, es el método que más se acerca en términos de desproporción a los demás. *Sin Delim* es el método más proporcional de todos los analizados, su nivel de desproporción presenta una diferencia respecto al siguiente muy significativa, si se buscase alcanzar la mínima desproporción posible se debería considerar eliminar las delimitaciones por provincias en las elecciones.
   
   
   

@@ -1,0 +1,99 @@
+---
+author: "Angel Gonzalez Rizo"
+date: "2021"
+documentclass: book
+forprint: true  # true: imprime a dos caras, false: libro digital
+fontsize: 12pt # 10pt,11pt
+geometry: margin = 2.5cm 
+bibliography: ["bib/library.bib", "bib/paquetes.bib"]
+# metodobib -> true: natbib (descomentar: citation_package: natbib) 
+#           -> false: pandoc (comentar: citation_package: natbib)
+metodobib: true
+#natbib: plainnat, abbrvnat, unsrtnat
+biblio-style: "plainnat"
+#Método 2 (pandoc): descomente una línea de las 2 siguientes en caso de usarlo
+csl: methods-in-ecology-and-evolution.csl      # no numera mejor en las citas
+#csl: acm-sig-proceedings-long-author-list.csl  # numera peor en las citas
+link-citations: yes
+output: 
+  pdf_document:
+    keep_tex: no
+    number_sections: yes
+    citation_package: natbib  # comentado usa: pandoc-citeproc
+    #toc: yes
+    fig_caption: yes
+    template: latex/templateMemoriaTFE.tex
+    includes:
+      #before_body: portadas/latex_paginatitulo_modTFE.tex
+      #in_header: latex/latex_preambulo.tex
+      #after_body: latex/latex_antes_enddoc.tex
+editor_options: 
+  chunk_output_type: inline
+---
+
+
+
+```{r include=FALSE}
+knitr::opts_chunk$set(
+  fig.path = "figurasR/",
+  echo = FALSE, warning = FALSE, message = FALSE,
+  fig.pos = "H", fig.align = "center", out.width = "95%",
+  cache = FALSE
+)
+```
+
+
+<!-- \setcounter{chapter}{2} -->
+<!-- \setcounter{chapter}{2} escribir 2 para capítulo 3  -->
+<!-- \pagenumbering{arabic} -->
+
+\ifdefined\ifprincipal
+\else
+\setlength{\parindent}{1em}
+\pagestyle{fancy}
+\setcounter{tocdepth}{4}
+\tableofcontents
+<!-- \nocite{*} -->
+\fi
+
+\ifdefined\ifdoblecara
+\fancyhead{}{}
+\fancyhead[LE,RO]{\scriptsize\rightmark}
+\fancyfoot[LO,RE]{\scriptsize\slshape \leftmark}
+\fancyfoot[C]{}
+\fancyfoot[LE,RO]{\footnotesize\thepage}
+\else
+\fancyhead{}{}
+\fancyhead[RO]{\scriptsize\rightmark}
+\fancyfoot[LO]{\scriptsize\slshape \leftmark}
+\fancyfoot[C]{}
+\fancyfoot[RO]{\footnotesize\thepage}
+\fi
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+
+# Conclusiones finales
+
+  A lo largo de este trabajo hemos analizado los distintos métodos de reparto de escaños para un reparto proporcional de los mismos. En el primer bloque hemos analizado los distintos métodos de escaños modificando el número de escaños a repartir, el número de partidos que se presentan a la elección y la concentración de los votos. En general todos los métodos siguen un mismo comportamiento y no se aprecia una gran diferencia entre los distintos métodos de reparto, únicamente difieren del comportamiento habitual los métodos Imperiali, Huntington-Hill y Adams. Una vez analizados todos ellos el grupo que es más proporcional es el del resto mayor, en los que se encuentran el cociente Droop, Hare e Imperiali. En el grupo de los métodos de resto mayores el más proporcional es el método de Saint-Lague. El método D´Hondt, utilizado en España, no se encuentra entre los métodos más proporcionales por lo que no sería el método más deseable para utilizar en España, siendo conveniente debatir un cambio de método si lo que se busca es una mayor proporcionalidad entre los votos y escaños obtenidos.  
+  En el segundo bloque hemos analizado las distintas elecciones en España a partir del 1977, aplicando los distintos métodos de reparto de escaños para compararlos entre sí y analizando el nivel de proporcionalidad de los distintos métodos. Los métodos más proporcionados resultaron ser el Saint-Lague por parte de los métodos de promedio mayor y por los métodos de resto mayor el mejor método es el LR-Hare. El método que se desempeña peor es el método Imperiali. Al observar el método D´Hondt, método utilizado actualmente en España para el reparto de escaños al congreso, resulta que es el cuarto peor método en términos de desproporción entre todos los métodos analizados. En el caso de que nuestro objetivo sea la pura proporcionalidad escaños-votos es claro que no es el método óptimo, pero en cambio sí que por otra parte se observa que tiene una cualidad particular que lo hace atractivo como método de reparto, esto es, a pesar de no ser el método más proporcional sí que facilita la gobernanza, siendo posible en varias elecciones alcanzar la mayoría absoluta. Por este motivo se comprende la elección de este método de reparto de escaños en España, puesto que entre todos los métodos analizados éste es dentro de los más proporcionales el que más facilita la gobernanza.  
+  
+  En un tercer bloque hemos analizado la influencia que tiene la delimitación de las circunscripciones por provincias en las elecciones, hemos enfrentado éstos resultados con un escenario en el que las delimitaciones por provincias desaparecen y los partidos políticos se reparten los escaños por una circunscripción única para toda España. Dentro de este escenario hemos impuesto en uno de los métodos un límite de un 3% de votos para poder optar a un escaño y en el otro no hemos impuesto ningún mínimo de votos para obtener representación. Las conclusiones son muy claras en términos de desproporción, ambos métodos superan claramente en proporcionalidad al método D´Hondt con las delimitaciones por provincias, siendo el método que no impone un mínimo de porcentaje de votos el que presenta una mejor proporcionalidad con una muy clara diferencia. Al observar los escaños resultantes, si llamamos D´Hont al método actual de reparto de escaños con las delimitaciones por provincias, SinDelim3% al método de reparto utilizando D´Hondt que elimina las delimitaciones por provincias y que exige un mínimo de votos de un 3% para obtener escaños, y por último SinDelim al método de reparto que elimina las delimitaciones por provincias y que no exige un mínimo de votos, sacamos las siguientes conclusiones: El método que beneficia más a los grandes partidos es el método D´Hondt, tanto el método D´Hondt como el SinDelim consiguen que haya una presencia muy diversa de partidos en el congreso, la diferencia entre ellos es que los grandes partidos reciben menos escaños, por lo que raramente en el método SinDelim se alcanza la mayoría absoluta respecto al método D´Hondt. El método SinDelim3% da como resultado un número de escaños similar al método D´Hondt para los partidos más votados, el hecho significativo de este método es que los partidos se reducen a un número muy reducido, no superan los 5 partidos que están representados en el congreso, en este método es algo más habitual alcanzar mayorías absolutas.
+Entre los tres métodos, el que obtiene una mejor proporcionalidad y consigue que una gran diversidad de partidos estén presentes en el congreso es el método SinDelim, la parte negativa de este método es que no alcanza mayorías claras, por lo que sería complicado gobernar, debiendo de buscar alianzas para poder alcanzar una mayoría. Por otra parte nos encontraríamos con los métodos D´Hondt y SinDelim3%, ambos consiguen en ciertas ocasiones alcanzar mayorías absolutas, SinDelim3% con más dificultad aunque por otra parte es un método mejor en términos de proporcionalidad. El hecho diferencial de SinDelim3% es la poca presencia de partidos, circunstancia que da una estabilidad al gobierno ya que cuando no alcanza por sí mismo la mayoría absoluta, una alianza con otro partido es suficiente para alcanzarla.
+  
+## Líneas futuras
+
+  Para un trabajo posterior, en el apartado de análisis de los distintos métodos de reparto de escaños sería conveniente analizar los distintos métodos utilizando distintos índices de desproporcionalidad, como por ejemplo la desviación de Loosemore y Harby o bien la de mínimos cuadrados de Gallagher entre otros. En este trabajo únicamente hemos modificado el número de escaños a repartir, el número de partidos que se presentan a la elección y la concentración de los votos, sería conveniente un análisis modificando las tres variables a la vez así como añadir nuevos métodos de reparto de escaños. Para el análisis de las elecciones en España también se podrían utilizar distintos índices de desproporcionalidad y añadir nuevos métodos de reparto de escaños. En el apartado de las delimitaciones podría ser útil crear nuevas delimitaciones utilizando como base los distritos censales y comprobar que resultados se obtendrían. 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

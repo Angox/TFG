@@ -155,6 +155,11 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
 ```{r child = 'capitulo05.Rmd'}
 ```
 
+\FloatBarrier
+
+```{r child = 'capitulo06.Rmd'}
+```
+
 <!-- \FloatBarrier -->
 
 <!-- <!-- Borrarlo o comentarlo para obtener la versión final: contiene utilidades --> 
@@ -171,8 +176,8 @@ knitr::write_bib(c("knitr","rmarkdown","dplyr","ggplot2","xtable",
 
 
 
-<!-- ```{r child = 'apendice02.Rmd'} -->
-<!-- ``` -->
+```{r child = 'apendice02.Rmd'}
+```
 
 
 \FloatBarrier

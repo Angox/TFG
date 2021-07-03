@@ -2,5 +2,5 @@
 output: pdf_document
 ---
 
-En este trabajo de fin de grado se han tratado de analizar los distintos métodos de repartición de escaños, enfocándolo desde una perspectiva en donde cada métodos se analiza variando experimentalmente los escaños a repartir, el número de partidos que se presentan a la elección o la concentración del voto.
-En otro bloque se analiza el grado de desproporción y los distintos escaños obtenidos que resultan de haber realizado las elecciones en España según los distintos métodos de reparto de escaños.
+En este trabajo de fin de grado se han tratado de analizar los distintos métodos de reparto de escaños, enfocándolo desde una perspectiva en donde cada método se analiza variando experimentalmente los escaños a repartir, el número de partidos que se presentan a la elección o la concentración del voto.
+En un segundo bloque se analiza el grado de desproporción y los distintos escaños obtenidos que resultan de haber realizado las elecciones en España según los distintos métodos de reparto de escaños. En el último bloque se analiza la influencia de la delimitación por provincias en las elecciones respecto a que las elecciones se realicen por circunscripción única.
