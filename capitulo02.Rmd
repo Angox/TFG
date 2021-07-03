@@ -88,7 +88,7 @@ Dentro de los llamados métodos de los restos mayores, se encuentran el método 
 
 El método D´Hondt lleva el nombre del matemático y jurista belga Victor D´Hondt , el cual describió la metodología en el año 1878 en su libro *"La représentation proportionnelle des partis par un électeur"*. [^3.1]
 
-[^3.1]: Puede leerse el línea el segundo libro del autor: *"Système pratique et raisonné de représentation proportionelle"* en  http://mat.uab.cat/~xmora/bibliografia/DHondt1882.pdf
+[^3.1]: Puede leerse en línea el segundo libro del autor: *"Système pratique et raisonné de représentation proportionelle"* en  http://mat.uab.cat/~xmora/bibliografia/DHondt1882.pdf
 
   Se trata de un método de promedio mayor, utilizado para asignar los escaños usualmente en sistemas de listas. Es un sistema que trata de asignar los escaños aproximados al número de votos recibidos y que incentiva las coaliciones de partidos.  
 
@@ -135,7 +135,7 @@ El número de votos recibidos por cada lista se divide sucesivamente por cada un
 
 ### Método Sainte-Laguë modificado
 
-  Método utilizado en algunos países como Nepal o Suecia. Consiste en utilizar una fórmula distinta para el primer escaño y a partir del segundo utilizar el método habitual.Así, el método modificado cambia la secuencia de divisores de (1, 3, 5, 7, ...) a (1.4, 3, 5, 7, ...). Esto da una preferencia ligeramente mayor a los partidos más grandes sobre los partidos más pequeños que ganarían, por un pequeño margen, un solo escaño si se utilizara el método de Sainte-Laguë sin modificar. Con el método modificado, estos partidos pequeños no obtienen representación, en cambio, estos escaños se le otorgan a un partido más grande. La forma para el primer escaño es:
+  Método utilizado en algunos países como Nepal o Suecia. Consiste en utilizar una fórmula distinta para el primer escaño y a partir del segundo utilizar el método habitual. Así, el método modificado cambia la secuencia de divisores de (1, 3, 5, 7, ...) a (1.4, 3, 5, 7, ...). Esto da una preferencia ligeramente mayor a los partidos más grandes sobre los partidos más pequeños que ganarían, por un pequeño margen, un solo escaño si se utilizara el método de Sainte-Laguë sin modificar. Con el método modificado, estos partidos pequeños no obtienen representación, en cambio, estos escaños se le otorgan a un partido más grande. La forma para el primer escaño es:
 
 $\textrm{Cociente[s=0]} = \frac{V}{1.4}$ donde:  
 
@@ -143,7 +143,7 @@ $V$: Representa el número total de votos recibidos por la lista.
 
 ### Método Imperiali
 
-Otro método de promedio mayor se llama Imperiali ( no debe confundirse con la cuota Imperiali, que es un método del resto mayor). Los divisores son 1, 1,5, 2, 2,5, 3, 3,5 y así sucesivamente. Está diseñado para desfavorecer a los partidos más pequeños, se utiliza solo en las elecciones municipales belgas. Este método (a diferencia de otros métodos enumerados) no es estrictamente proporcional, si es que existe una asignación perfectamente proporcional, mediante este método no se garantiza encontrarla. 
+Otro método de promedio mayor se llama Imperiali  (no debe confundirse con la cuota Imperiali, que es un método del resto mayor). Los divisores son 1, 1.5, 2, 2.5, 3, 3.5 y así sucesivamente. Está diseñado para desfavorecer a los partidos más pequeños. Este método (a diferencia de otros métodos enumerados) no es estrictamente proporcional, si es que existe una asignación perfectamente proporcional, mediante este método no se garantiza encontrarla. 
 Método utilizado en Bélgica en las elecciones municipales.[^5]
 
 [^5]: *BJPS1992.pdf* , \<<https://www.tcd.ie/Political_Science/people/michael_gallagher/BJPS1992.pdf>\> [accessed 4 May 2021]
@@ -230,7 +230,7 @@ Si la i-ésima lista de I listas inscritas obtiene ${m_{i}}$ votos, esta lista t
 
 ${e_{i}=\left\lfloor {\frac {m_{i}}{q}}\right\rfloor ,r_{i}=m_{i}-qe_{i}}$
 
-Definimos k como el número de escaños restantes no son obtenidos por el cociente:
+Definimos k como el número de escaños restantes que no son obtenidos por el cociente:
 
 ${k=n-\sum _{i=1}^{I}e_{i}}$
 
@@ -313,7 +313,7 @@ Puede que no siempre exista un ganador del premio Condorcet en una elección par
 
 ### Método Schulze
 
-Método por el cual se selecciona un ganador a partir de las preferencias de los votantes, fue creado en 1997 por Markus Schulze 
+Método por el cual se selecciona un ganador a partir de las preferencias de los votantes, fue creado en 1997 por Markus Schulze.
 
 - Método
 

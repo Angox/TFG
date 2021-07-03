@@ -125,7 +125,7 @@ En el artículo 161.2 se nos añade otra excepción para la elección de Senador
 #### Número diputados
 
 - El congreso está formado por un número fijo de diputados, 350.
-- Cada una de las provincias les corresponden inicialmente al menos dos diputados, excepto las excepciones anteriormente anunciadas, donde Ceuta y Melilla están representadas por un diputado cada una de ellas.
+- Cada una de las provincias les corresponden inicialmente al menos dos diputados, menos las excepciones anteriormente anunciadas, donde Ceuta y Melilla están representadas por un diputado cada una de ellas.
 - Los 248 diputados restantes se distribuyen entre las provincias proporcionalmente a su  población según el siguiente método:
 
     1. $\textrm{Cuota de Reparto} = \frac{248}{\text{Total de la poblaci\'{o}n de derecho de las provincias peninsulares e insulares}}$
@@ -140,7 +140,7 @@ En el artículo 161.2 se nos añade otra excepción para la elección de Senador
 
 #### Reparto de Escaños
 
-- Se aplica la llamada ley D´Hondt
+- Se aplica la llamada ley D´Hondt.
 
 - No se tienen en cuenta aquellas candidaturas que no hubieran obtenido, al menos, el 3% de los votos válidos emitidos en la circunscripción.
 

@@ -1,0 +1,1859 @@
+---
+title: "R Notebook"
+output: html_notebook
+editor_options: 
+  chunk_output_type: inline
+---
+
+
+
+
+```{r }
+
+setwd("Datos/3dData/")
+## Comparaciones variando escaños y nº partidos a la vez
+
+desproporción <-
+  function(s, v) {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s / s_s
+    p_v <- v / s_v
+
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
+    o
+  }
+
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 3 * (1:n_escannos) - 2
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+
+
+# Crear lista con partidos
+partidos <- NULL
+for (i in (seq_len(100) + 1)) {
+  partidos[[i - 1]] <- paste("Partido_", seq_len(i), sep = "")
+}
+
+# Fijar el número de escaños
+n_escannos <- seq_len(800)
+
+# Nivel de concentración del voto, 1 igualado, 1000 desigualdad máxima
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+
+
+# Crear lista con Votos modificado
+# Cambiar expon para la distrubución de los votos, por igualdad baja a alta
+votos_alto <- NULL
+votos_medio <- NULL
+votos_bajo <- NULL
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos_alto[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[500])
+  votos_medio[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+  votos_bajo[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[1])
+}
+
+## Diferencia votos alto ####
+
+# Cálculo de los escaños y de la desproporción
+iter <- 1
+resul_alto <- NULL
+dis_alto <- numeric()
+resul_medio <- NULL
+dis_medio <- numeric()
+resul_bajo <- NULL
+dis_bajo <- numeric()
+
+for (j in n_escannos) {
+  for (i in seq_len(length(partidos))) {
+    # Alto
+    resul_alto[[iter]] <- asientos_dhondt(partidos[[i]], votos_alto[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_alto[iter] <- desproporción(s = resul_alto[[iter]], v = votos_alto[[i]])
+    # Bajo
+    resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+    # Medio
+    resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+    iter <- iter + 1
+  }
+}
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_alto, sum)
+num_partidos <- sapply(resul_alto, length)
+
+despro_alto <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_alto)
+
+
+graf_alto <- ggplot(data = despro_alto, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos alta", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+### Distribución media ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_medio <- NULL
+# iter <- 1
+# dis_medio <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_medio, sum)
+num_partidos <- sapply(resul_medio, length)
+
+despro_media <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_medio)
+
+
+graf_medio <- ggplot(data = despro_media, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos media", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+## Diferencia votos bajo ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_bajo <- NULL
+# iter <- 1
+# dis_bajo <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_bajo, sum)
+num_partidos <- sapply(resul_bajo, length)
+
+despro_bajo <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_bajo)
+
+
+graf_bajo <- ggplot(data = despro_bajo, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# labs(subtitle = "Diferencia entre votos baja", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+# 
+# library(grid)
+# grid.newpage()
+# grid.draw(rbind(ggplotGrob(graf_bajo), ggplotGrob(graf_medio), ggplotGrob(graf_alto), size = "last"))
+
+# 
+library(plotly)
+fig <- plot_ly(despro_media, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion),
+               marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE))
+fig <- fig %>% add_markers()
+fig
+
+# Guardar plot como imagen estática
+
+
+
+
+save.image(file = "danish.RData")
+```
+
+
+
+```{r }
+
+## Comparaciones variando escaños y nº partidos a la vez
+
+desproporción <-
+  function(s, v) {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s / s_s
+    p_v <- v / s_v
+
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
+    o
+  }
+
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- trunc(nv / n_escannos) # Parte entera
+  G <- sapply(div, function(x) votos / x)
+  o <- as.vector(trunc(G))
+  # Fix
+  if (sum(o) < n_escannos) {
+    resto <- G - o
+    repart <- n_escannos - sum(o)
+    cuota <- resto[order(resto, decreasing = T)][repart]
+    W <- (resto >= cuota)
+    seats <- o + rowSums(W)
+    o <- seats
+  }
+  if (sum(o) > n_escannos) {
+    resto <- G - o
+    quitar <- sum(o) - n_escannos
+    cuota <- resto[order(resto, decreasing = F)][quitar]
+    W <- (resto <= cuota)
+    seats <- o - rowSums(W)
+    o <- seats
+  }
+
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+
+
+# Crear lista con partidos
+partidos <- NULL
+for (i in (seq_len(100) + 1)) {
+  partidos[[i - 1]] <- paste("Partido_", seq_len(i), sep = "")
+}
+
+# Fijar el número de escaños
+n_escannos <- seq_len(800)
+
+# Nivel de concentración del voto, 1 igualado, 1000 desigualdad máxima
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+
+
+# Crear lista con Votos modificado
+# Cambiar expon para la distrubución de los votos, por igualdad baja a alta
+votos_alto <- NULL
+votos_medio <- NULL
+votos_bajo <- NULL
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos_alto[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[500])
+  votos_medio[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+  votos_bajo[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[1])
+}
+
+## Diferencia votos alto ####
+
+# Cálculo de los escaños y de la desproporción
+iter <- 1
+resul_alto <- NULL
+dis_alto <- numeric()
+resul_medio <- NULL
+dis_medio <- numeric()
+resul_bajo <- NULL
+dis_bajo <- numeric()
+
+for (j in n_escannos) {
+  for (i in seq_len(length(partidos))) {
+    # Alto
+    resul_alto[[iter]] <- asientos_dhondt(partidos[[i]], votos_alto[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_alto[iter] <- desproporción(s = resul_alto[[iter]], v = votos_alto[[i]])
+    # Bajo
+    resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+    # Medio
+    resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+    iter <- iter + 1
+  }
+}
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_alto, sum)
+num_partidos <- sapply(resul_alto, length)
+
+despro_alto <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_alto)
+
+
+graf_alto <- ggplot(data = despro_alto, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos alta", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+### Distribución media ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_medio <- NULL
+# iter <- 1
+# dis_medio <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_medio, sum)
+num_partidos <- sapply(resul_medio, length)
+
+despro_media <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_medio)
+
+
+graf_medio <- ggplot(data = despro_media, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos media", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+## Diferencia votos bajo ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_bajo <- NULL
+# iter <- 1
+# dis_bajo <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_bajo, sum)
+num_partidos <- sapply(resul_bajo, length)
+
+despro_bajo <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_bajo)
+
+
+graf_bajo <- ggplot(data = despro_bajo, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# labs(subtitle = "Diferencia entre votos baja", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+# 
+# library(grid)
+# grid.newpage()
+# grid.draw(rbind(ggplotGrob(graf_bajo), ggplotGrob(graf_medio), ggplotGrob(graf_alto), size = "last"))
+
+# 
+library(plotly)
+fig <- plot_ly(despro_media, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion),
+               marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE))
+fig <- fig %>% add_markers()
+fig
+
+# Guardar plot como imagen estática
+
+
+
+
+save.image(file = "lrhare.RData")
+```
+
+
+```{r }
+
+## Comparaciones variando escaños y nº partidos a la vez
+
+desproporción <-
+  function(s, v) {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s / s_s
+    p_v <- v / s_v
+
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
+    o
+  }
+
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- trunc(nv / (n_escannos + 1)) # Parte entera
+  G <- sapply(div, function(x) votos / x)
+  o <- trunc(G)
+  # Fix
+  while (sum(o) < n_escannos) {
+    resto <- G - o
+    faltan <- n_escannos - sum(o)
+    cuota <- resto[order(resto, decreasing = T)][faltan]
+    W <- (resto >= cuota)
+    seats <- rowSums(W)
+    o <- o + seats
+  }
+
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+
+
+# Crear lista con partidos
+partidos <- NULL
+for (i in (seq_len(100) + 1)) {
+  partidos[[i - 1]] <- paste("Partido_", seq_len(i), sep = "")
+}
+
+# Fijar el número de escaños
+n_escannos <- seq_len(800)
+
+# Nivel de concentración del voto, 1 igualado, 1000 desigualdad máxima
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+
+
+# Crear lista con Votos modificado
+# Cambiar expon para la distrubución de los votos, por igualdad baja a alta
+votos_alto <- NULL
+votos_medio <- NULL
+votos_bajo <- NULL
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos_alto[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[500])
+  votos_medio[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+  votos_bajo[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[1])
+}
+
+## Diferencia votos alto ####
+
+# Cálculo de los escaños y de la desproporción
+iter <- 1
+resul_alto <- NULL
+dis_alto <- numeric()
+resul_medio <- NULL
+dis_medio <- numeric()
+resul_bajo <- NULL
+dis_bajo <- numeric()
+
+for (j in n_escannos) {
+  for (i in seq_len(length(partidos))) {
+    # Alto
+    resul_alto[[iter]] <- asientos_dhondt(partidos[[i]], votos_alto[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_alto[iter] <- desproporción(s = resul_alto[[iter]], v = votos_alto[[i]])
+    # Bajo
+    resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+    # Medio
+    resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+    iter <- iter + 1
+  }
+}
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_alto, sum)
+num_partidos <- sapply(resul_alto, length)
+
+despro_alto <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_alto)
+
+
+graf_alto <- ggplot(data = despro_alto, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos alta", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+### Distribución media ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_medio <- NULL
+# iter <- 1
+# dis_medio <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_medio, sum)
+num_partidos <- sapply(resul_medio, length)
+
+despro_media <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_medio)
+
+
+graf_medio <- ggplot(data = despro_media, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos media", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+## Diferencia votos bajo ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_bajo <- NULL
+# iter <- 1
+# dis_bajo <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_bajo, sum)
+num_partidos <- sapply(resul_bajo, length)
+
+despro_bajo <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_bajo)
+
+
+graf_bajo <- ggplot(data = despro_bajo, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# labs(subtitle = "Diferencia entre votos baja", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+# 
+# library(grid)
+# grid.newpage()
+# grid.draw(rbind(ggplotGrob(graf_bajo), ggplotGrob(graf_medio), ggplotGrob(graf_alto), size = "last"))
+
+# 
+library(plotly)
+fig <- plot_ly(despro_media, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion),
+               marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE))
+fig <- fig %>% add_markers()
+fig
+
+# Guardar plot como imagen estática
+
+
+
+
+save.image(file = "lrdroop.RData")
+```
+
+
+```{r }
+
+## Comparaciones variando escaños y nº partidos a la vez
+
+desproporción <-
+  function(s, v) {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s / s_s
+    p_v <- v / s_v
+
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
+    o
+  }
+
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- trunc(nv / (n_escannos + 2)) # Parte entera
+  G <- sapply(div, function(x) votos / x)
+  o <- trunc(G)
+  while (sum(o) < n_escannos) {
+    resto <- G - o
+    faltan <- n_escannos - sum(o)
+    cuota <- resto[order(resto, decreasing = T)][faltan]
+    W <- (resto >= cuota)
+    seats <- rowSums(W)
+    o <- o + seats
+  }
+
+  # if(sum(o)!=n_escannos){
+  #   resto <- G-o
+  #   cuota <- resto[order(resto, decreasing = T)][n_escannos-sum(o)]
+  #   W <- (resto >= cuota)&(cumsum(resto)<=(n_escannos-sum(o)))
+  #   seats <- o+rowSums(W)
+  #   o <- seats}
+
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+
+
+# Crear lista con partidos
+partidos <- NULL
+for (i in (seq_len(100) + 1)) {
+  partidos[[i - 1]] <- paste("Partido_", seq_len(i), sep = "")
+}
+
+# Fijar el número de escaños
+n_escannos <- seq_len(800)
+
+# Nivel de concentración del voto, 1 igualado, 1000 desigualdad máxima
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+
+
+# Crear lista con Votos modificado
+# Cambiar expon para la distrubución de los votos, por igualdad baja a alta
+votos_alto <- NULL
+votos_medio <- NULL
+votos_bajo <- NULL
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos_alto[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[500])
+  votos_medio[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+  votos_bajo[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[1])
+}
+
+## Diferencia votos alto ####
+
+# Cálculo de los escaños y de la desproporción
+iter <- 1
+resul_alto <- NULL
+dis_alto <- numeric()
+resul_medio <- NULL
+dis_medio <- numeric()
+resul_bajo <- NULL
+dis_bajo <- numeric()
+
+for (j in n_escannos) {
+  for (i in seq_len(length(partidos))) {
+    # Alto
+    resul_alto[[iter]] <- asientos_dhondt(partidos[[i]], votos_alto[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_alto[iter] <- desproporción(s = resul_alto[[iter]], v = votos_alto[[i]])
+    # Bajo
+    resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+    # Medio
+    resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+    iter <- iter + 1
+  }
+}
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_alto, sum)
+num_partidos <- sapply(resul_alto, length)
+
+despro_alto <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_alto)
+
+
+graf_alto <- ggplot(data = despro_alto, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos alta", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+### Distribución media ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_medio <- NULL
+# iter <- 1
+# dis_medio <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_medio, sum)
+num_partidos <- sapply(resul_medio, length)
+
+despro_media <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_medio)
+
+
+graf_medio <- ggplot(data = despro_media, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos media", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+## Diferencia votos bajo ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_bajo <- NULL
+# iter <- 1
+# dis_bajo <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_bajo, sum)
+num_partidos <- sapply(resul_bajo, length)
+
+despro_bajo <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_bajo)
+
+
+graf_bajo <- ggplot(data = despro_bajo, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# labs(subtitle = "Diferencia entre votos baja", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+# 
+# library(grid)
+# grid.newpage()
+# grid.draw(rbind(ggplotGrob(graf_bajo), ggplotGrob(graf_medio), ggplotGrob(graf_alto), size = "last"))
+
+# 
+library(plotly)
+fig <- plot_ly(despro_media, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion),
+               marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE))
+fig <- fig %>% add_markers()
+fig
+
+# Guardar plot como imagen estática
+
+
+
+
+save.image(file = "lrimperiali.RData")
+```
+
+
+
+
+```{r }
+
+## Comparaciones variando escaños y nº partidos a la vez
+
+desproporción <-
+  function(s, v) {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s / s_s
+    p_v <- v / s_v
+
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
+    o
+  }
+
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 1:n_escannos
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+
+
+# Crear lista con partidos
+partidos <- NULL
+for (i in (seq_len(100) + 1)) {
+  partidos[[i - 1]] <- paste("Partido_", seq_len(i), sep = "")
+}
+
+# Fijar el número de escaños
+n_escannos <- seq_len(800)
+
+# Nivel de concentración del voto, 1 igualado, 1000 desigualdad máxima
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+
+
+# Crear lista con Votos modificado
+# Cambiar expon para la distrubución de los votos, por igualdad baja a alta
+votos_alto <- NULL
+votos_medio <- NULL
+votos_bajo <- NULL
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos_alto[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[500])
+  votos_medio[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+  votos_bajo[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[1])
+}
+
+## Diferencia votos alto ####
+
+# Cálculo de los escaños y de la desproporción
+iter <- 1
+resul_alto <- NULL
+dis_alto <- numeric()
+resul_medio <- NULL
+dis_medio <- numeric()
+resul_bajo <- NULL
+dis_bajo <- numeric()
+
+for (j in n_escannos) {
+  for (i in seq_len(length(partidos))) {
+    # Alto
+    resul_alto[[iter]] <- asientos_dhondt(partidos[[i]], votos_alto[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_alto[iter] <- desproporción(s = resul_alto[[iter]], v = votos_alto[[i]])
+    # Bajo
+    resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+    # Medio
+    resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+    iter <- iter + 1
+  }
+}
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_alto, sum)
+num_partidos <- sapply(resul_alto, length)
+
+despro_alto <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_alto)
+
+
+graf_alto <- ggplot(data = despro_alto, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos alta", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+### Distribución media ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_medio <- NULL
+# iter <- 1
+# dis_medio <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_medio, sum)
+num_partidos <- sapply(resul_medio, length)
+
+despro_media <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_medio)
+
+
+graf_medio <- ggplot(data = despro_media, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos media", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+## Diferencia votos bajo ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_bajo <- NULL
+# iter <- 1
+# dis_bajo <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_bajo, sum)
+num_partidos <- sapply(resul_bajo, length)
+
+despro_bajo <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_bajo)
+
+
+graf_bajo <- ggplot(data = despro_bajo, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# labs(subtitle = "Diferencia entre votos baja", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+# 
+# library(grid)
+# grid.newpage()
+# grid.draw(rbind(ggplotGrob(graf_bajo), ggplotGrob(graf_medio), ggplotGrob(graf_alto), size = "last"))
+
+# 
+# library(plotly)
+# fig <- plot_ly(despro_alto, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion),
+#                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE))
+# fig <- fig %>% add_markers()
+# fig
+
+save.image(file = "dont.RData")
+```
+
+```{r }
+
+## Comparaciones variando escaños y nº partidos a la vez
+
+desproporción <-
+  function(s, v) {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s / s_s
+    p_v <- v / s_v
+
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
+    o
+  }
+
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 2 * (1:n_escannos) - 1
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+
+
+# Crear lista con partidos
+partidos <- NULL
+for (i in (seq_len(100) + 1)) {
+  partidos[[i - 1]] <- paste("Partido_", seq_len(i), sep = "")
+}
+
+# Fijar el número de escaños
+n_escannos <- seq_len(800)
+
+# Nivel de concentración del voto, 1 igualado, 1000 desigualdad máxima
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+
+
+# Crear lista con Votos modificado
+# Cambiar expon para la distrubución de los votos, por igualdad baja a alta
+votos_alto <- NULL
+votos_medio <- NULL
+votos_bajo <- NULL
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos_alto[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[500])
+  votos_medio[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+  votos_bajo[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[1])
+}
+
+## Diferencia votos alto ####
+
+# Cálculo de los escaños y de la desproporción
+iter <- 1
+resul_alto <- NULL
+dis_alto <- numeric()
+resul_medio <- NULL
+dis_medio <- numeric()
+resul_bajo <- NULL
+dis_bajo <- numeric()
+
+for (j in n_escannos) {
+  for (i in seq_len(length(partidos))) {
+    # Alto
+    resul_alto[[iter]] <- asientos_dhondt(partidos[[i]], votos_alto[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_alto[iter] <- desproporción(s = resul_alto[[iter]], v = votos_alto[[i]])
+    # Bajo
+    resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+    # Medio
+    resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+    iter <- iter + 1
+  }
+}
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_alto, sum)
+num_partidos <- sapply(resul_alto, length)
+
+despro_alto <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_alto)
+
+
+graf_alto <- ggplot(data = despro_alto, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos alta", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+### Distribución media ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_medio <- NULL
+# iter <- 1
+# dis_medio <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_medio, sum)
+num_partidos <- sapply(resul_medio, length)
+
+despro_media <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_medio)
+
+
+graf_medio <- ggplot(data = despro_media, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos media", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+## Diferencia votos bajo ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_bajo <- NULL
+# iter <- 1
+# dis_bajo <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_bajo, sum)
+num_partidos <- sapply(resul_bajo, length)
+
+despro_bajo <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_bajo)
+
+
+graf_bajo <- ggplot(data = despro_bajo, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# labs(subtitle = "Diferencia entre votos baja", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+# 
+# library(grid)
+# grid.newpage()
+# grid.draw(rbind(ggplotGrob(graf_bajo), ggplotGrob(graf_medio), ggplotGrob(graf_alto), size = "last"))
+
+# 
+# library(plotly)
+# fig <- plot_ly(despro_alto, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion),
+#                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE))
+# fig <- fig %>% add_markers()
+# fig
+
+save.image(file = "sainte.RData")
+```
+
+```{r }
+
+## Comparaciones variando escaños y nº partidos a la vez
+
+desproporción <-
+  function(s, v) {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s / s_s
+    p_v <- v / s_v
+
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
+    o
+  }
+
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- c(1, (10 * (2:n_escannos) - 5) / 7)
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+
+
+# Crear lista con partidos
+partidos <- NULL
+for (i in (seq_len(100) + 1)) {
+  partidos[[i - 1]] <- paste("Partido_", seq_len(i), sep = "")
+}
+
+# Fijar el número de escaños
+n_escannos <- seq_len(800)
+
+# Nivel de concentración del voto, 1 igualado, 1000 desigualdad máxima
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+
+
+# Crear lista con Votos modificado
+# Cambiar expon para la distrubución de los votos, por igualdad baja a alta
+votos_alto <- NULL
+votos_medio <- NULL
+votos_bajo <- NULL
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos_alto[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[500])
+  votos_medio[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+  votos_bajo[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[1])
+}
+
+## Diferencia votos alto ####
+
+# Cálculo de los escaños y de la desproporción
+iter <- 1
+resul_alto <- NULL
+dis_alto <- numeric()
+resul_medio <- NULL
+dis_medio <- numeric()
+resul_bajo <- NULL
+dis_bajo <- numeric()
+
+for (j in n_escannos) {
+  for (i in seq_len(length(partidos))) {
+    # Alto
+    resul_alto[[iter]] <- asientos_dhondt(partidos[[i]], votos_alto[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_alto[iter] <- desproporción(s = resul_alto[[iter]], v = votos_alto[[i]])
+    # Bajo
+    resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+    # Medio
+    resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+    iter <- iter + 1
+  }
+}
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_alto, sum)
+num_partidos <- sapply(resul_alto, length)
+
+despro_alto <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_alto)
+
+
+graf_alto <- ggplot(data = despro_alto, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos alta", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+### Distribución media ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_medio <- NULL
+# iter <- 1
+# dis_medio <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_medio, sum)
+num_partidos <- sapply(resul_medio, length)
+
+despro_media <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_medio)
+
+
+graf_medio <- ggplot(data = despro_media, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos media", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+## Diferencia votos bajo ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_bajo <- NULL
+# iter <- 1
+# dis_bajo <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_bajo, sum)
+num_partidos <- sapply(resul_bajo, length)
+
+despro_bajo <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_bajo)
+
+
+graf_bajo <- ggplot(data = despro_bajo, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# labs(subtitle = "Diferencia entre votos baja", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+# 
+# library(grid)
+# grid.newpage()
+# grid.draw(rbind(ggplotGrob(graf_bajo), ggplotGrob(graf_medio), ggplotGrob(graf_alto), size = "last"))
+
+# 
+# library(plotly)
+# fig <- plot_ly(despro_alto, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion),
+#                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE))
+# fig <- fig %>% add_markers()
+# fig
+
+save.image(file = "modsainte.RData")
+```
+
+```{r }
+
+## Comparaciones variando escaños y nº partidos a la vez
+
+desproporción <-
+  function(s, v) {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s / s_s
+    p_v <- v / s_v
+
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
+    o
+  }
+
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+ # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- ((1:n_escannos) + 1) / 2
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+
+
+# Crear lista con partidos
+partidos <- NULL
+for (i in (seq_len(100) + 1)) {
+  partidos[[i - 1]] <- paste("Partido_", seq_len(i), sep = "")
+}
+
+# Fijar el número de escaños
+n_escannos <- seq_len(800)
+
+# Nivel de concentración del voto, 1 igualado, 1000 desigualdad máxima
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+
+
+# Crear lista con Votos modificado
+# Cambiar expon para la distrubución de los votos, por igualdad baja a alta
+votos_alto <- NULL
+votos_medio <- NULL
+votos_bajo <- NULL
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos_alto[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[500])
+  votos_medio[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+  votos_bajo[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[1])
+}
+
+## Diferencia votos alto ####
+
+# Cálculo de los escaños y de la desproporción
+iter <- 1
+resul_alto <- NULL
+dis_alto <- numeric()
+resul_medio <- NULL
+dis_medio <- numeric()
+resul_bajo <- NULL
+dis_bajo <- numeric()
+
+for (j in n_escannos) {
+  for (i in seq_len(length(partidos))) {
+    # Alto
+    resul_alto[[iter]] <- asientos_dhondt(partidos[[i]], votos_alto[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_alto[iter] <- desproporción(s = resul_alto[[iter]], v = votos_alto[[i]])
+    # Bajo
+    resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+    # Medio
+    resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+    iter <- iter + 1
+  }
+}
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_alto, sum)
+num_partidos <- sapply(resul_alto, length)
+
+despro_alto <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_alto)
+
+
+graf_alto <- ggplot(data = despro_alto, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos alta", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+### Distribución media ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_medio <- NULL
+# iter <- 1
+# dis_medio <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_medio, sum)
+num_partidos <- sapply(resul_medio, length)
+
+despro_media <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_medio)
+
+
+graf_medio <- ggplot(data = despro_media, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos media", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+## Diferencia votos bajo ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_bajo <- NULL
+# iter <- 1
+# dis_bajo <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_bajo, sum)
+num_partidos <- sapply(resul_bajo, length)
+
+despro_bajo <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_bajo)
+
+
+graf_bajo <- ggplot(data = despro_bajo, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# labs(subtitle = "Diferencia entre votos baja", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+# 
+# library(grid)
+# grid.newpage()
+# grid.draw(rbind(ggplotGrob(graf_bajo), ggplotGrob(graf_medio), ggplotGrob(graf_alto), size = "last"))
+
+# 
+# library(plotly)
+# fig <- plot_ly(despro_alto, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion),
+#                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE))
+# fig <- fig %>% add_markers()
+# fig
+
+save.image(file = "imperiali.RData")
+```
+
+```{r }
+
+## Comparaciones variando escaños y nº partidos a la vez
+
+desproporción <-
+  function(s, v) {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s / s_s
+    p_v <- v / s_v
+
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
+    o
+  }
+
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- sqrt((1:n_escannos) * ((1:n_escannos) - 1))
+  G <- sapply(div, function(x) votos / x)
+  G[is.na(G)] <- 0
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Fix seats
+  if(sum(o)>n_escannos){
+    if(n_escannos==1) {G <- cbind("n"=0,votos) }
+    cuota <- G[,2][order(G[,2], decreasing = T)][n_escannos]
+    W1 <- (G[,2] >= cuota)
+    seats <- as.numeric(W1)
+    o <- seats
+  }
+  
+  
+  
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+
+
+# Crear lista con partidos
+partidos <- NULL
+for (i in (seq_len(100) + 1)) {
+  partidos[[i - 1]] <- paste("Partido_", seq_len(i), sep = "")
+}
+
+# Fijar el número de escaños
+n_escannos <- seq_len(800)
+
+# Nivel de concentración del voto, 1 igualado, 1000 desigualdad máxima
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+
+
+# Crear lista con Votos modificado
+# Cambiar expon para la distrubución de los votos, por igualdad baja a alta
+votos_alto <- NULL
+votos_medio <- NULL
+votos_bajo <- NULL
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos_alto[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[500])
+  votos_medio[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+  votos_bajo[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[1])
+}
+
+## Diferencia votos alto ####
+
+# Cálculo de los escaños y de la desproporción
+iter <- 1
+resul_alto <- NULL
+dis_alto <- numeric()
+resul_medio <- NULL
+dis_medio <- numeric()
+resul_bajo <- NULL
+dis_bajo <- numeric()
+
+for (j in n_escannos) {
+  for (i in seq_len(length(partidos))) {
+    # Alto
+    resul_alto[[iter]] <- asientos_dhondt(partidos[[i]], votos_alto[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_alto[iter] <- desproporción(s = resul_alto[[iter]], v = votos_alto[[i]])
+    # Bajo
+    resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+    # Medio
+    resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+    iter <- iter + 1
+  }
+}
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_alto, sum)
+num_partidos <- sapply(resul_alto, length)
+
+despro_alto <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_alto)
+
+
+graf_alto <- ggplot(data = despro_alto, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos alta", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+### Distribución media ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_medio <- NULL
+# iter <- 1
+# dis_medio <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_medio, sum)
+num_partidos <- sapply(resul_medio, length)
+
+despro_media <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_medio)
+
+
+graf_medio <- ggplot(data = despro_media, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos media", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+## Diferencia votos bajo ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_bajo <- NULL
+# iter <- 1
+# dis_bajo <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_bajo, sum)
+num_partidos <- sapply(resul_bajo, length)
+
+despro_bajo <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_bajo)
+
+
+graf_bajo <- ggplot(data = despro_bajo, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# labs(subtitle = "Diferencia entre votos baja", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+# 
+# library(grid)
+# grid.newpage()
+# grid.draw(rbind(ggplotGrob(graf_bajo), ggplotGrob(graf_medio), ggplotGrob(graf_alto), size = "last"))
+
+# 
+# library(plotly)
+# fig <- plot_ly(despro_alto, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion),
+#                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE))
+# fig <- fig %>% add_markers()
+# fig
+
+save.image(file = "hh.RData")
+```
+
+```{r }
+
+## Comparaciones variando escaños y nº partidos a la vez
+
+desproporción <-
+  function(s, v) {
+    s <- as.vector(s)
+    v <- as.vector(v)
+    l_s <- length(s)
+    s_s <- sum(s)
+    s_v <- sum(v)
+    p_s <- s / s_s
+    p_v <- v / s_v
+
+    o <- (1 / l_s) * sum(abs(p_s - p_v))
+    o
+  }
+
+
+asientos_dhondt <- function(partidos, votos,
+                            n_escannos,
+                            couta_min = 0) {
+  # Cuota mínima
+  nv <- sum(votos)
+  vn <- votos
+  vn[votos <= nv * couta_min] <- 0
+  votos <- vn
+
+  # Escaños
+  div <- 1:n_escannos - 1
+  div[is.na(div)] <- 0
+  G <- sapply(div, function(x) votos / x)
+  cuota <- G[order(G, decreasing = T)][n_escannos]
+  W <- (G >= cuota)
+  seats <- rowSums(W)
+  o <- seats
+  # Fix seats
+  if(sum(o)>n_escannos){
+    if(n_escannos==1) {G <- cbind("n"=0,votos) }
+    cuota <- G[,2][order(G[,2], decreasing = T)][n_escannos]
+    W1 <- (G[,2] >= cuota)
+    seats <- as.numeric(W1)
+    o <- seats
+  }
+  
+  # Resultados
+  data.frame("Partidos" = partidos, "Escanos" = as.numeric(o))
+}
+
+
+
+# Crear lista con partidos
+partidos <- NULL
+for (i in (seq_len(100) + 1)) {
+  partidos[[i - 1]] <- paste("Partido_", seq_len(i), sep = "")
+}
+
+# Fijar el número de escaños
+n_escannos <- seq_len(800)
+
+# Nivel de concentración del voto, 1 igualado, 1000 desigualdad máxima
+expon <- seq(from = 0.001, to = 1, length.out = 1000)
+
+
+# Crear lista con Votos modificado
+# Cambiar expon para la distrubución de los votos, por igualdad baja a alta
+votos_alto <- NULL
+votos_medio <- NULL
+votos_bajo <- NULL
+votos <- NULL
+for (i in seq_len(100)) {
+  votos[[i]] <- trunc(rep(x = 10e5, length(partidos[[i]])))
+  votos_alto[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[500])
+  votos_medio[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[100])
+  votos_bajo[[i]] <- votos[[i]] * dexp(seq_len(length(partidos[[i]])), rate = expon[1])
+}
+
+## Diferencia votos alto ####
+
+# Cálculo de los escaños y de la desproporción
+iter <- 1
+resul_alto <- NULL
+dis_alto <- numeric()
+resul_medio <- NULL
+dis_medio <- numeric()
+resul_bajo <- NULL
+dis_bajo <- numeric()
+
+for (j in n_escannos) {
+  for (i in seq_len(length(partidos))) {
+    # Alto
+    resul_alto[[iter]] <- asientos_dhondt(partidos[[i]], votos_alto[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_alto[iter] <- desproporción(s = resul_alto[[iter]], v = votos_alto[[i]])
+    # Bajo
+    resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+    # Medio
+    resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+    dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+    iter <- iter + 1
+  }
+}
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_alto, sum)
+num_partidos <- sapply(resul_alto, length)
+
+despro_alto <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_alto)
+
+
+graf_alto <- ggplot(data = despro_alto, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos alta", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+### Distribución media ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_medio <- NULL
+# iter <- 1
+# dis_medio <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_medio[[iter]] <- asientos_dhondt(partidos[[i]], votos_medio[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_medio[iter] <- desproporción(s = resul_medio[[iter]], v = votos_medio[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_medio, sum)
+num_partidos <- sapply(resul_medio, length)
+
+despro_media <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_medio)
+
+
+graf_medio <- ggplot(data = despro_media, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# scale_fill_gradient(low = "red", high = "yellow") +
+# labs(subtitle = "Diferencia entre votos media", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+
+## Diferencia votos bajo ####
+
+# Cálculo de los escaños y de la desproporción
+# resul_bajo <- NULL
+# iter <- 1
+# dis_bajo <- numeric()
+# for (j in n_escannos) {
+#   for (i in seq_len(length(partidos))) {
+#     resul_bajo[[iter]] <- asientos_dhondt(partidos[[i]], votos_bajo[[i]], n_escannos[[j]], couta_min = 0)$Escanos
+#     dis_bajo[iter] <- desproporción(s = resul_bajo[[iter]], v = votos_bajo[[i]])
+#     iter <- iter + 1
+#   }
+# }
+
+# Saber el núm de escaños y partidos para cada desproporción
+num_escannos <- sapply(resul_bajo, sum)
+num_partidos <- sapply(resul_bajo, length)
+
+despro_bajo <- data.table("Escaños" = num_escannos, "Partidos" = num_partidos, "Desproporcion" = dis_bajo)
+
+
+graf_bajo <- ggplot(data = despro_bajo, mapping = aes(Escaños, Partidos)) +
+  geom_raster(aes(fill = log(Desproporcion))) +
+  theme(legend.position = "none")
+# labs(subtitle = "Diferencia entre votos baja", title = "Desproporción según LR imperialilr", caption = "Elaboración propia: Angel González", x = "Escaños")
+
+# 
+# library(grid)
+# grid.newpage()
+# grid.draw(rbind(ggplotGrob(graf_bajo), ggplotGrob(graf_medio), ggplotGrob(graf_alto), size = "last"))
+
+# 
+library(plotly)
+fig <- plot_ly(despro_media, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion),
+               marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE))
+fig <- fig %>% add_markers()
+fig
+
+# Guardar plot como imagen estática
+
+
+
+
+save.image(file = "adams.RData")
+```

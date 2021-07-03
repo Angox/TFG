@@ -71,7 +71,7 @@ knitr::opts_chunk$set(
 \renewcommand{\footrulewidth}{0.4pt}
 
 
-# Influencia de las delimitaciones de las circunscripciones en los resultados electorales
+# Influencia de las delimitaciones de las circunscripciones
 
 En este apartado procederemos a analizar la influencia en la proporcionalidad escaños-votos que resulta de repartir los escaños en un distrito único, España, y el reparto actual de votos que se realiza por provincias.\
 Procederemos de la siguiente forma:
@@ -824,7 +824,7 @@ kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", an
   add_header_above(c("", "Métodos" = 3), bold = T)
 ```
 
-En el año 2008 se nos presenta un bipartidismo muy marcado, en donde los dos partidos más votado son el *PSOE* y el *PP*, podemos observar que en este año la influencia de la delimitación en los resultados electorales es baja para los dos partidos mayoritarios, a ambos partidos les beneficia levemente el presentarse por distrito único con mínimo de votos, en donde ambos aumentarían en un escaño su presencia en el congreso. Para los partidos medianos o bajos de presencia nacional también sería beneficioso el presentarse a unas elecciones por circunscripción única, en el caso de *IU* pasaría de obtener 2 votos a 13 o 14. Para aquellos partidos que tienen presencia regional y pocos escaños la diferencia en escaños no sería notable en el caso SinDelim, de no tener un mínimo de porcentaje de votos, en cambio si se requiriese un mínimo de votos del 3% todos estos partidos con pocos escaños no entrarían en el congreso.
+En el año 2008 se nos presenta un bipartidismo muy marcado, en donde los dos partidos más votados son el *PSOE* y el *PP*, podemos observar que en este año la influencia de la delimitación en los resultados electorales es baja para los dos partidos mayoritarios, a ambos partidos les beneficia levemente el presentarse por distrito único con mínimo de votos, en donde ambos aumentarían en un escaño su presencia en el congreso. Para los partidos medianos o bajos de presencia nacional también sería beneficioso el presentarse a unas elecciones por circunscripción única, en el caso de *IU* pasaría de obtener 2 votos a 13 o 14. Para aquellos partidos que tienen presencia regional y pocos escaños la diferencia en escaños no sería notable en el caso SinDelim, de no tener un mínimo de porcentaje de votos, en cambio si se requiriese un mínimo de votos del 3% todos estos partidos con pocos escaños no entrarían en el congreso.
 
 
 \newpage

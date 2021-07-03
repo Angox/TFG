@@ -1,0 +1,266 @@
+---
+title: "Capítulo 3 Métodos en 3D"
+author: "Angel González "
+date: "2021"
+output: html_document
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE, warning = FALSE, message = FALSE,
+  fig.pos = "H", out.width = "100%",
+  cache = FALSE
+)
+```
+
+<!-- # 3D Adams -->
+
+<!-- ```{r} -->
+<!-- load("~/Universidad/TFG/TFG_Git/Datos/3dData/adams.RData") -->
+
+<!-- library(plotly) -->
+<!-- fig <- plot_ly(despro_bajo, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+<!-- fig <- plot_ly(despro_media, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+<!-- fig <- plot_ly(despro_alto, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+
+<!-- ``` -->
+
+
+<!-- # 3D Danish -->
+
+<!-- ```{r} -->
+<!-- load("~/Universidad/TFG/TFG_Git/Datos/3dData/danish.RData") -->
+
+<!-- library(plotly) -->
+<!-- fig <- plot_ly(despro_bajo, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+<!-- fig <- plot_ly(despro_media, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+<!-- fig <- plot_ly(despro_alto, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+
+<!-- ``` -->
+
+
+# 3D D´Hondt
+
+## Concentración baja del voto 
+```{r}
+load("~/Universidad/TFG/TFG_Git/Datos/3dData/dont.RData")
+
+library(plotly)
+fig <- plot_ly(despro_bajo, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion),
+               marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE))
+fig <- fig %>% add_markers()
+fig
+```
+
+## Concentración del voto media
+
+```{r}
+fig <- plot_ly(despro_media, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion),
+               marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE))
+fig <- fig %>% add_markers()
+fig
+```
+
+## Concentración del voto alta
+
+```{r}
+fig <- plot_ly(despro_alto, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion),
+               marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE))
+fig <- fig %>% add_markers()
+fig
+
+
+```
+
+<!-- # 3D Huntington-Hill -->
+
+<!-- ```{r} -->
+<!-- load("~/Universidad/TFG/TFG_Git/Datos/3dData/hh.RData") -->
+
+<!-- library(plotly) -->
+<!-- fig <- plot_ly(despro_bajo, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+<!-- fig <- plot_ly(despro_media, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+<!-- fig <- plot_ly(despro_alto, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+
+<!-- ``` -->
+
+<!-- # 3D Imperiali -->
+
+<!-- ```{r} -->
+<!-- load("~/Universidad/TFG/TFG_Git/Datos/3dData/imperiali.RData") -->
+
+<!-- library(plotly) -->
+<!-- fig <- plot_ly(despro_bajo, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+<!-- fig <- plot_ly(despro_media, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+<!-- fig <- plot_ly(despro_alto, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+
+<!-- ``` -->
+
+<!-- # 3D Sainte-Lague -->
+
+<!-- ```{r} -->
+<!-- load("~/Universidad/TFG/TFG_Git/Datos/3dData/sainte.RData") -->
+
+<!-- library(plotly) -->
+<!-- fig <- plot_ly(despro_bajo, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+<!-- fig <- plot_ly(despro_media, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+<!-- fig <- plot_ly(despro_alto, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+
+<!-- ``` -->
+
+<!-- # 3D Modified Sainte-Lague -->
+
+<!-- ```{r} -->
+<!-- load("~/Universidad/TFG/TFG_Git/Datos/3dData/modsainte.RData") -->
+
+<!-- library(plotly) -->
+<!-- fig <- plot_ly(despro_bajo, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+<!-- fig <- plot_ly(despro_media, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+<!-- fig <- plot_ly(despro_alto, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+
+<!-- ``` -->
+
+
+<!-- # 3D LR Droop -->
+
+<!-- ```{r} -->
+<!-- load("~/Universidad/TFG/TFG_Git/Datos/3dData/lrdroop.RData") -->
+
+<!-- library(plotly) -->
+<!-- fig <- plot_ly(despro_bajo, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+<!-- fig <- plot_ly(despro_media, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+<!-- fig <- plot_ly(despro_alto, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+
+<!-- ``` -->
+
+<!-- # 3D LR Hare -->
+
+<!-- ```{r} -->
+<!-- load("~/Universidad/TFG/TFG_Git/Datos/3dData/lrhare.RData") -->
+
+<!-- library(plotly) -->
+<!-- fig <- plot_ly(despro_bajo, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+<!-- fig <- plot_ly(despro_media, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+<!-- fig <- plot_ly(despro_alto, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+
+<!-- ``` -->
+
+<!-- # 3D LR Imperiali -->
+
+<!-- ```{r} -->
+<!-- load("~/Universidad/TFG/TFG_Git/Datos/3dData/lrimperiali.RData") -->
+
+<!-- library(plotly) -->
+<!-- fig <- plot_ly(despro_bajo, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+<!-- fig <- plot_ly(despro_media, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+<!-- fig <- plot_ly(despro_alto, x = ~Escaños, y = ~Partidos, z = ~log(Desproporcion), -->
+<!--                marker = list(color = ~Escaños, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) -->
+<!-- fig <- fig %>% add_markers() -->
+<!-- fig -->
+
+
+<!-- ``` -->

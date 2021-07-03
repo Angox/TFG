@@ -71,7 +71,7 @@ knitr::opts_chunk$set(
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
-# Apéndice 2: Resultados de las elecciones del capítulo 5
+# Resultados de las elecciones del capítulo 5
 
   
 
@@ -1109,7 +1109,7 @@ asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T
 
 kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
   kable_styling(latex_options = c("striped", "scale_down")) %>%
-  add_header_above(c("", "Métodos" = 3), bold = T)
+  add_header_above(c("", "Métodos" = 3), bold = T)   
 ```
 
   
@@ -1141,12 +1141,16 @@ asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T
 kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
   kable_styling(latex_options = c("striped", "scale_down")) %>%
   add_header_above(c("", "Métodos" = 3), bold = T)
+
+
+
 ```
 
 
   
 \FloatBarrier
   
+
 
 
 ```{r}
@@ -1171,15 +1175,17 @@ asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
 })
 asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
 
-kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año: 2019, Mes: 4"), ) %>%
   kable_styling(latex_options = c("striped", "scale_down")) %>%
-  add_header_above(c("", "Métodos" = 3), bold = T)
+  add_header_above(c("", "Métodos" = 3), bold = T)  
+
+
+
 ```
 
   
 
 \FloatBarrier
-  
 
 
 ```{r}
@@ -1204,9 +1210,12 @@ asientos1[, 2:4] <- lapply(asientos1[, 2:4], function(x) {
 })
 asientos1[, 1] <- cell_spec(asientos1[[1]], color = "blue", bold = T, italic = T)
 
-kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año", anno[ko]), ) %>%
+kbl(asientos1, booktabs = T, escape = F, align = "l", caption = paste("Año: 2019, Mes: 10"), ) %>%
   kable_styling(latex_options = c("striped", "scale_down")) %>%
   add_header_above(c("", "Métodos" = 3), bold = T)
+
+
+
 ```
 
 
